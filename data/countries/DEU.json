@@ -1,0 +1,130 @@
+{
+  "iso3": "DEU",
+  "name": "Germany",
+  "official_name": "Federal Republic of Germany",
+  "government": "democracy",
+  "head_of_state": "Chancellor",
+  "population": 84482267,
+  "capital": "Berlin",
+
+  "geography": {
+    "land_area_km2": 348672,
+    "coastline_km": 2389,
+    "borders": ["AUT", "BEL", "CZE", "DNK", "FRA", "LUX", "NLD", "POL", "CHE"],
+    "num_regions": 3,
+    "terrain_defense_modifier": 1.0,
+    "strategic_chokepoints": []
+  },
+
+  "economy": {
+    "gdp_billion_usd": 4526,
+    "gdp_growth_rate": 0.003,
+    "gdp_per_capita_usd": 53571,
+    "government_debt_pct_gdp": 63.7,
+    "inflation_rate": 0.025,
+    "unemployment_rate": 0.058,
+    "trade_openness": 91.0,
+    "credit_rating_score": 98,
+    "rd_expenditure_pct_gdp": 3.13,
+    "fdi_billion_usd": 36,
+    "budget_military": 0.021,
+    "budget_infrastructure": 0.025,
+    "budget_social": 0.25,
+    "budget_rd": 0.031
+  },
+
+  "military": {
+    "active_personnel": 183,
+    "reserve_personnel": 30,
+    "paramilitary": 0,
+    "tanks": 339,
+    "armored_vehicles": 4918,
+    "artillery": 194,
+    "fighter_aircraft": 128,
+    "attack_aircraft": 0,
+    "transport_aircraft": 122,
+    "helicopters_attack": 51,
+    "helicopters_total": 266,
+    "aircraft_carriers": 0,
+    "submarines": 6,
+    "destroyers": 0,
+    "frigates": 11,
+    "patrol_vessels": 6,
+    "defense_budget_billion_usd": 97,
+    "defense_budget_pct_gdp": 2.1,
+    "technology_level": 82,
+    "logistics_capacity": 75,
+    "morale": 72,
+
+    "nuclear": {
+      "total_warheads": 0,
+      "deployed_strategic": 0,
+      "deployed_nonstrategic": 0,
+      "stockpiled_reserve": 0,
+      "icbm_launchers": 0,
+      "slbm_launchers": 0,
+      "strategic_bombers": 0,
+      "doctrine": "none",
+      "has_second_strike": false,
+      "max_range_km": 0
+    }
+  },
+
+  "resources": {
+    "oil_production_bpd": 30000,
+    "oil_reserves_billion_bbl": 0.115,
+    "natural_gas_bcm": 4.8,
+    "coal_mt": 131,
+    "uranium_tonnes": 0,
+    "rare_earth_tonnes": 0,
+    "steel_mt": 36,
+    "semiconductor_capability": 45,
+    "food_self_sufficiency": 0.88,
+    "renewable_energy_pct": 0.46
+  },
+
+  "alliances": [
+    {
+      "name": "NATO",
+      "alliance_type": "military",
+      "mutual_defense": true,
+      "year_joined": 1955
+    },
+    {
+      "name": "EU",
+      "alliance_type": "economic",
+      "mutual_defense": false,
+      "year_joined": 1957
+    }
+  ],
+
+  "trade_partners": [
+    {
+      "partner_iso3": "USA",
+      "exports_billion_usd": 146,
+      "imports_billion_usd": 76,
+      "trade_balance": 70,
+      "key_exports": ["vehicles", "machinery", "pharmaceuticals", "chemicals"],
+      "key_imports": ["aircraft", "vehicles", "pharmaceuticals", "LNG"],
+      "dependency_score": 0.20
+    },
+    {
+      "partner_iso3": "CHN",
+      "exports_billion_usd": 115,
+      "imports_billion_usd": 107,
+      "trade_balance": 8,
+      "key_exports": ["vehicles", "machinery", "chemicals"],
+      "key_imports": ["electronics", "machinery", "textiles"],
+      "dependency_score": 0.25
+    },
+    {
+      "partner_iso3": "FRA",
+      "exports_billion_usd": 120,
+      "imports_billion_usd": 82,
+      "trade_balance": 38,
+      "key_exports": ["vehicles", "machinery", "chemicals"],
+      "key_imports": ["aircraft", "food", "pharmaceuticals"],
+      "dependency_score": 0.15
+    }
+  ]
+}

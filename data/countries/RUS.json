@@ -1,0 +1,136 @@
+{
+  "iso3": "RUS",
+  "name": "Russia",
+  "official_name": "Russian Federation",
+  "government": "authoritarian",
+  "head_of_state": "President",
+  "population": 143826130,
+  "capital": "Moscow",
+
+  "geography": {
+    "land_area_km2": 16377742,
+    "coastline_km": 37653,
+    "borders": ["AZE", "BLR", "CHN", "EST", "FIN", "GEO", "KAZ", "PRK", "LVA", "LTU", "MNG", "NOR", "POL", "UKR"],
+    "num_regions": 8,
+    "terrain_defense_modifier": 1.8,
+    "strategic_chokepoints": ["Bosphorus (dependency)", "GIUK Gap"]
+  },
+
+  "economy": {
+    "gdp_billion_usd": 2021,
+    "gdp_growth_rate": 0.036,
+    "gdp_per_capita_usd": 14403,
+    "government_debt_pct_gdp": 18.9,
+    "inflation_rate": 0.074,
+    "unemployment_rate": 0.028,
+    "trade_openness": 46.0,
+    "credit_rating_score": 35,
+    "rd_expenditure_pct_gdp": 1.10,
+    "fdi_billion_usd": 8,
+    "budget_military": 0.059,
+    "budget_infrastructure": 0.02,
+    "budget_social": 0.12,
+    "budget_rd": 0.011
+  },
+
+  "military": {
+    "active_personnel": 1320,
+    "reserve_personnel": 2000,
+    "paramilitary": 554,
+    "tanks": 12420,
+    "armored_vehicles": 36000,
+    "artillery": 14564,
+    "fighter_aircraft": 772,
+    "attack_aircraft": 739,
+    "transport_aircraft": 445,
+    "helicopters_attack": 544,
+    "helicopters_total": 1543,
+    "aircraft_carriers": 1,
+    "submarines": 65,
+    "destroyers": 15,
+    "frigates": 11,
+    "patrol_vessels": 59,
+    "defense_budget_billion_usd": 109,
+    "defense_budget_pct_gdp": 5.9,
+    "technology_level": 72,
+    "logistics_capacity": 55,
+    "morale": 60,
+
+    "nuclear": {
+      "total_warheads": 5580,
+      "deployed_strategic": 1549,
+      "deployed_nonstrategic": 1558,
+      "stockpiled_reserve": 2889,
+      "icbm_launchers": 326,
+      "slbm_launchers": 176,
+      "strategic_bombers": 68,
+      "doctrine": "first_use",
+      "has_second_strike": true,
+      "max_range_km": 16000
+    }
+  },
+
+  "resources": {
+    "oil_production_bpd": 10700000,
+    "oil_reserves_billion_bbl": 80.0,
+    "natural_gas_bcm": 701,
+    "coal_mt": 439,
+    "uranium_tonnes": 2846,
+    "rare_earth_tonnes": 2600,
+    "steel_mt": 76,
+    "semiconductor_capability": 15,
+    "food_self_sufficiency": 0.85,
+    "renewable_energy_pct": 0.06
+  },
+
+  "alliances": [
+    {
+      "name": "CSTO",
+      "alliance_type": "military",
+      "mutual_defense": true,
+      "year_joined": 1992
+    },
+    {
+      "name": "SCO",
+      "alliance_type": "political",
+      "mutual_defense": false,
+      "year_joined": 2001
+    },
+    {
+      "name": "BRICS",
+      "alliance_type": "economic",
+      "mutual_defense": false,
+      "year_joined": 2006
+    }
+  ],
+
+  "trade_partners": [
+    {
+      "partner_iso3": "CHN",
+      "exports_billion_usd": 114,
+      "imports_billion_usd": 111,
+      "trade_balance": 3,
+      "key_exports": ["oil", "natural gas", "metals", "timber"],
+      "key_imports": ["electronics", "machinery", "vehicles"],
+      "dependency_score": 0.40
+    },
+    {
+      "partner_iso3": "IND",
+      "exports_billion_usd": 61,
+      "imports_billion_usd": 4,
+      "trade_balance": 57,
+      "key_exports": ["oil", "fertilizers", "arms"],
+      "key_imports": ["pharmaceuticals", "textiles"],
+      "dependency_score": 0.15
+    },
+    {
+      "partner_iso3": "TUR",
+      "exports_billion_usd": 42,
+      "imports_billion_usd": 10,
+      "trade_balance": 32,
+      "key_exports": ["oil", "natural gas", "metals"],
+      "key_imports": ["food", "textiles", "vehicles"],
+      "dependency_score": 0.10
+    }
+  ]
+}

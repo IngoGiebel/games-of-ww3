@@ -1,0 +1,124 @@
+{
+  "iso3": "CHN",
+  "name": "China",
+  "official_name": "People's Republic of China",
+  "government": "authoritarian",
+  "head_of_state": "President",
+  "population": 1425178782,
+  "capital": "Beijing",
+
+  "geography": {
+    "land_area_km2": 9388211,
+    "coastline_km": 14500,
+    "borders": ["AFG", "BTN", "IND", "KAZ", "PRK", "KGZ", "LAO", "MNG", "MMR", "NPL", "PAK", "RUS", "TJK", "VNM"],
+    "num_regions": 6,
+    "terrain_defense_modifier": 1.4,
+    "strategic_chokepoints": ["South China Sea", "Strait of Malacca (dependency)"]
+  },
+
+  "economy": {
+    "gdp_billion_usd": 18533,
+    "gdp_growth_rate": 0.049,
+    "gdp_per_capita_usd": 13000,
+    "government_debt_pct_gdp": 83.6,
+    "inflation_rate": 0.002,
+    "unemployment_rate": 0.052,
+    "trade_openness": 37.0,
+    "credit_rating_score": 78,
+    "rd_expenditure_pct_gdp": 2.55,
+    "fdi_billion_usd": 163,
+    "budget_military": 0.016,
+    "budget_infrastructure": 0.06,
+    "budget_social": 0.10,
+    "budget_rd": 0.025
+  },
+
+  "military": {
+    "active_personnel": 2035,
+    "reserve_personnel": 510,
+    "paramilitary": 1500,
+    "tanks": 5800,
+    "armored_vehicles": 35000,
+    "artillery": 5782,
+    "fighter_aircraft": 1200,
+    "attack_aircraft": 371,
+    "transport_aircraft": 286,
+    "helicopters_attack": 281,
+    "helicopters_total": 912,
+    "aircraft_carriers": 3,
+    "submarines": 78,
+    "destroyers": 50,
+    "frigates": 52,
+    "patrol_vessels": 150,
+    "defense_budget_billion_usd": 296,
+    "defense_budget_pct_gdp": 1.6,
+    "technology_level": 78,
+    "logistics_capacity": 72,
+    "morale": 75,
+
+    "nuclear": {
+      "total_warheads": 500,
+      "deployed_strategic": 350,
+      "deployed_nonstrategic": 0,
+      "stockpiled_reserve": 150,
+      "icbm_launchers": 350,
+      "slbm_launchers": 72,
+      "strategic_bombers": 20,
+      "doctrine": "no_first_use",
+      "has_second_strike": true,
+      "max_range_km": 15000
+    }
+  },
+
+  "resources": {
+    "oil_production_bpd": 4200000,
+    "oil_reserves_billion_bbl": 26.0,
+    "natural_gas_bcm": 230,
+    "coal_mt": 4500,
+    "uranium_tonnes": 1885,
+    "rare_earth_tonnes": 210000,
+    "steel_mt": 1019,
+    "semiconductor_capability": 55,
+    "food_self_sufficiency": 0.82,
+    "renewable_energy_pct": 0.30
+  },
+
+  "alliances": [
+    {
+      "name": "SCO",
+      "alliance_type": "political",
+      "mutual_defense": false,
+      "year_joined": 2001
+    }
+  ],
+
+  "trade_partners": [
+    {
+      "partner_iso3": "USA",
+      "exports_billion_usd": 427,
+      "imports_billion_usd": 148,
+      "trade_balance": 279,
+      "key_exports": ["electronics", "machinery", "furniture"],
+      "key_imports": ["semiconductors", "soybeans", "aircraft", "LNG"],
+      "dependency_score": 0.30
+    },
+    {
+      "partner_iso3": "JPN",
+      "exports_billion_usd": 157,
+      "imports_billion_usd": 175,
+      "trade_balance": -18,
+      "key_exports": ["electronics", "machinery", "textiles"],
+      "key_imports": ["vehicles", "electronics", "chemicals"],
+      "dependency_score": 0.15
+    },
+    {
+      "partner_iso3": "DEU",
+      "exports_billion_usd": 107,
+      "imports_billion_usd": 115,
+      "trade_balance": -8,
+      "key_exports": ["electronics", "machinery", "textiles"],
+      "key_imports": ["vehicles", "machinery", "chemicals"],
+      "dependency_score": 0.10
+    }
+  ]
+}

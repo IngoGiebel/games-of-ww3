@@ -1,0 +1,136 @@
+{
+  "iso3": "IND",
+  "name": "India",
+  "official_name": "Republic of India",
+  "government": "democracy",
+  "head_of_state": "Prime Minister",
+  "population": 1428627663,
+  "capital": "New Delhi",
+
+  "geography": {
+    "land_area_km2": 2973190,
+    "coastline_km": 7516,
+    "borders": ["BGD", "BTN", "MMR", "CHN", "NPL", "PAK"],
+    "num_regions": 5,
+    "terrain_defense_modifier": 1.3,
+    "strategic_chokepoints": ["Strait of Malacca (dependency)"]
+  },
+
+  "economy": {
+    "gdp_billion_usd": 3937,
+    "gdp_growth_rate": 0.067,
+    "gdp_per_capita_usd": 2730,
+    "government_debt_pct_gdp": 83.0,
+    "inflation_rate": 0.047,
+    "unemployment_rate": 0.078,
+    "trade_openness": 48.0,
+    "credit_rating_score": 62,
+    "rd_expenditure_pct_gdp": 0.65,
+    "fdi_billion_usd": 49,
+    "budget_military": 0.024,
+    "budget_infrastructure": 0.04,
+    "budget_social": 0.08,
+    "budget_rd": 0.007
+  },
+
+  "military": {
+    "active_personnel": 1455,
+    "reserve_personnel": 1155,
+    "paramilitary": 2527,
+    "tanks": 4614,
+    "armored_vehicles": 12000,
+    "artillery": 4158,
+    "fighter_aircraft": 564,
+    "attack_aircraft": 130,
+    "transport_aircraft": 250,
+    "helicopters_attack": 37,
+    "helicopters_total": 814,
+    "aircraft_carriers": 2,
+    "submarines": 18,
+    "destroyers": 11,
+    "frigates": 13,
+    "patrol_vessels": 22,
+    "defense_budget_billion_usd": 75,
+    "defense_budget_pct_gdp": 2.4,
+    "technology_level": 58,
+    "logistics_capacity": 52,
+    "morale": 76,
+
+    "nuclear": {
+      "total_warheads": 172,
+      "deployed_strategic": 0,
+      "deployed_nonstrategic": 0,
+      "stockpiled_reserve": 172,
+      "icbm_launchers": 12,
+      "slbm_launchers": 4,
+      "strategic_bombers": 0,
+      "doctrine": "no_first_use",
+      "has_second_strike": true,
+      "max_range_km": 8000
+    }
+  },
+
+  "resources": {
+    "oil_production_bpd": 774000,
+    "oil_reserves_billion_bbl": 4.6,
+    "natural_gas_bcm": 33,
+    "coal_mt": 893,
+    "uranium_tonnes": 600,
+    "rare_earth_tonnes": 2900,
+    "steel_mt": 140,
+    "semiconductor_capability": 25,
+    "food_self_sufficiency": 0.90,
+    "renewable_energy_pct": 0.28
+  },
+
+  "alliances": [
+    {
+      "name": "Quad",
+      "alliance_type": "political",
+      "mutual_defense": false,
+      "year_joined": 2007
+    },
+    {
+      "name": "SCO",
+      "alliance_type": "political",
+      "mutual_defense": false,
+      "year_joined": 2017
+    },
+    {
+      "name": "BRICS",
+      "alliance_type": "economic",
+      "mutual_defense": false,
+      "year_joined": 2006
+    }
+  ],
+
+  "trade_partners": [
+    {
+      "partner_iso3": "USA",
+      "exports_billion_usd": 87,
+      "imports_billion_usd": 50,
+      "trade_balance": 37,
+      "key_exports": ["pharmaceuticals", "IT services", "textiles", "gems"],
+      "key_imports": ["oil", "electronics", "machinery", "aircraft"],
+      "dependency_score": 0.20
+    },
+    {
+      "partner_iso3": "CHN",
+      "exports_billion_usd": 17,
+      "imports_billion_usd": 101,
+      "trade_balance": -84,
+      "key_exports": ["iron ore", "cotton", "pharmaceuticals"],
+      "key_imports": ["electronics", "machinery", "chemicals"],
+      "dependency_score": 0.30
+    },
+    {
+      "partner_iso3": "RUS",
+      "exports_billion_usd": 4,
+      "imports_billion_usd": 61,
+      "trade_balance": -57,
+      "key_exports": ["pharmaceuticals", "textiles"],
+      "key_imports": ["oil", "fertilizers", "arms"],
+      "dependency_score": 0.20
+    }
+  ]
+}

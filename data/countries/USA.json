@@ -1,0 +1,142 @@
+{
+  "iso3": "USA",
+  "name": "United States",
+  "official_name": "United States of America",
+  "government": "democracy",
+  "head_of_state": "President",
+  "population": 334914895,
+  "capital": "Washington, D.C.",
+
+  "geography": {
+    "land_area_km2": 9147420,
+    "coastline_km": 19924,
+    "borders": ["CAN", "MEX"],
+    "num_regions": 5,
+    "terrain_defense_modifier": 1.3,
+    "strategic_chokepoints": ["Panama Canal (influence)"]
+  },
+
+  "economy": {
+    "gdp_billion_usd": 28781,
+    "gdp_growth_rate": 0.028,
+    "gdp_per_capita_usd": 85370,
+    "government_debt_pct_gdp": 123.0,
+    "inflation_rate": 0.029,
+    "unemployment_rate": 0.037,
+    "trade_openness": 27.0,
+    "credit_rating_score": 92,
+    "rd_expenditure_pct_gdp": 3.46,
+    "fdi_billion_usd": 285,
+    "budget_military": 0.034,
+    "budget_infrastructure": 0.02,
+    "budget_social": 0.15,
+    "budget_rd": 0.035
+  },
+
+  "military": {
+    "active_personnel": 1328,
+    "reserve_personnel": 799,
+    "paramilitary": 0,
+    "tanks": 5500,
+    "armored_vehicles": 45193,
+    "artillery": 3461,
+    "fighter_aircraft": 1854,
+    "attack_aircraft": 783,
+    "transport_aircraft": 982,
+    "helicopters_attack": 967,
+    "helicopters_total": 5584,
+    "aircraft_carriers": 11,
+    "submarines": 68,
+    "destroyers": 72,
+    "frigates": 0,
+    "patrol_vessels": 13,
+    "defense_budget_billion_usd": 886,
+    "defense_budget_pct_gdp": 3.4,
+    "technology_level": 95,
+    "logistics_capacity": 98,
+    "morale": 78,
+
+    "nuclear": {
+      "total_warheads": 5044,
+      "deployed_strategic": 1670,
+      "deployed_nonstrategic": 100,
+      "stockpiled_reserve": 1938,
+      "icbm_launchers": 400,
+      "slbm_launchers": 280,
+      "strategic_bombers": 66,
+      "doctrine": "first_use",
+      "has_second_strike": true,
+      "max_range_km": 13000
+    }
+  },
+
+  "resources": {
+    "oil_production_bpd": 13200000,
+    "oil_reserves_billion_bbl": 68.8,
+    "natural_gas_bcm": 1035,
+    "coal_mt": 445,
+    "uranium_tonnes": 0,
+    "rare_earth_tonnes": 43000,
+    "steel_mt": 80,
+    "semiconductor_capability": 85,
+    "food_self_sufficiency": 0.95,
+    "renewable_energy_pct": 0.22
+  },
+
+  "alliances": [
+    {
+      "name": "NATO",
+      "alliance_type": "military",
+      "mutual_defense": true,
+      "year_joined": 1949
+    },
+    {
+      "name": "Five Eyes",
+      "alliance_type": "intelligence",
+      "mutual_defense": false,
+      "year_joined": 1946
+    },
+    {
+      "name": "AUKUS",
+      "alliance_type": "military",
+      "mutual_defense": true,
+      "year_joined": 2021
+    },
+    {
+      "name": "Quad",
+      "alliance_type": "political",
+      "mutual_defense": false,
+      "year_joined": 2007
+    }
+  ],
+
+  "trade_partners": [
+    {
+      "partner_iso3": "CHN",
+      "exports_billion_usd": 148,
+      "imports_billion_usd": 427,
+      "trade_balance": -279,
+      "key_exports": ["semiconductors", "soybeans", "aircraft", "LNG"],
+      "key_imports": ["electronics", "machinery", "furniture", "toys"],
+      "dependency_score": 0.35
+    },
+    {
+      "partner_iso3": "CAN",
+      "exports_billion_usd": 352,
+      "imports_billion_usd": 421,
+      "trade_balance": -69,
+      "key_exports": ["vehicles", "machinery", "electronics"],
+      "key_imports": ["oil", "vehicles", "machinery"],
+      "dependency_score": 0.25
+    },
+    {
+      "partner_iso3": "DEU",
+      "exports_billion_usd": 76,
+      "imports_billion_usd": 146,
+      "trade_balance": -70,
+      "key_exports": ["aircraft", "vehicles", "pharmaceuticals"],
+      "key_imports": ["vehicles", "machinery", "pharmaceuticals"],
+      "dependency_score": 0.12
+    }
+  ]
+}
