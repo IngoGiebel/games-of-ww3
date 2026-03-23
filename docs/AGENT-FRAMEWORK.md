@@ -1,49 +1,49 @@
 # GWW3 — Development Agent Framework
 
-**Zweck:** Wer baut das Spiel, mit welchen Rollen, LLMs und Workflows?
+**Purpose:** Who builds the game, with which roles, LLMs, and workflows?
 
 ---
 
-## 1. Entwicklungs-Agenten (wer baut GWW3)
+## 1. Development Agents
 
-### Tier 1: Entscheider & Koordination
+### Tier 1: Decision Makers & Coordination
 
-| Agent | Rolle | LLM/Plattform | Zuständigkeit |
-|-------|-------|---------------|---------------|
-| **Ingo** | Product Owner | Mensch | Finale Entscheidungen, Architektur, Code-Review |
-| **Dione 🌙** | Projektleiterin & Koordinatorin | Claude Opus (OpenClaw) | Gesamtkoordination, Aufgabenverteilung, Review aller Outputs, Moltbook-Community, Finanzdaten-Integration, Entscheidungen bei Agenten-Dissens |
+| Agent | Role | LLM/Platform | Responsibilities |
+|-------|------|--------------|------------------|
+| **Ingo** | Product Owner | Human | Final decisions, architecture, code review |
+| **Dione 🌙** | Project Lead & Coordinator | Claude Opus (OpenClaw, Claude Max 20x subscription) | Overall coordination, task assignment, review of all outputs, Moltbook community, financial data integration, dispute resolution between agents |
 
-### Tier 2: Spezialisten
+### Tier 2: Specialists
 
-| Agent | Rolle | LLM/Plattform | Zuständigkeit |
-|-------|-------|---------------|---------------|
-| **Inanna ⚔️** | Military & Security Architect | Claude (OpenClaw, Inanna-Instanz) | Militärmodelle, Konfliktsimulation, Balancing, Threat Modeling, PoW-Security-Expertise übertragen auf Spielmechanik |
-| **Archon** (neu) | Lead Engineer | Google ADK (Gemini 2.5 Pro, OAuth) | Game Engine, Neo4j Schema, FastAPI, Data Pipeline — der Code-Agent |
-| **Sentinel** (neu) | Data & Intelligence Analyst | Google ADK (Gemini 2.5 Pro, OAuth) | Datenquellen-Integration, Validierung, Länderdaten-Pipeline, Lückenanalyse |
-| **Herald** (neu) | Community & Communications | Codex (GPT-4.1) oder Claude Sonnet | Moltbook-Feedback-Monitoring, X-Posts, Community-Engagement, Spieler-Rekrutierung |
+| Agent | Role | LLM/Platform | Responsibilities |
+|-------|------|--------------|------------------|
+| **Inanna ⚔️** | Military & Security Architect | Claude (OpenClaw, Claude Max 20x subscription) | Military models, conflict simulation, balancing, threat modeling, PoW security expertise applied to game mechanics |
+| **Archon** | Lead Engineer | Google ADK (Gemini 2.5 Pro, OAuth) | Game engine, Neo4j schema, FastAPI, data pipeline — the primary code author |
+| **Sentinel** | Data & Intelligence Analyst | Google ADK (Gemini 2.5 Pro, OAuth) | Data source integration, validation, country data pipeline, gap analysis |
+| **Herald** | Community & Communications | Gemini CLI (OAuth) | Moltbook feedback monitoring, X posts, community engagement, player recruitment |
 
-### Tier 3: On-Demand (für spezifische Tasks)
+### Tier 3: On-Demand (for specific tasks)
 
-| Agent | Rolle | LLM | Wann |
-|-------|-------|-----|------|
-| **Gemini Deep Think** | Strategic Analyst | Gemini 2.5 Pro (manuell, Ingo) | Tiefe Designfragen, Balancing, komplexe Analysen |
-| **Codex** | Coding Tasks | GPT-4.1 | Spezifische Implementierungsaufgaben |
-| **Claude Code** | Coding Tasks | Claude Opus/Sonnet | Alternativ für Code-Review, Refactoring |
+| Agent | Role | LLM | When |
+|-------|------|-----|------|
+| **Gemini Deep Think** | Strategic Analyst | Gemini 3.1 Pro (manual, by Ingo) | Deep design questions, balancing, complex analyses |
+| **Codex** | Coding Tasks | GPT-5.3 Codex | Specific implementation tasks |
+| **Claude Code** | Coding Tasks | Claude Opus/Sonnet | Alternative for code review, refactoring |
 
 ---
 
-## 2. Informationsfluss & Entscheidungsstruktur
+## 2. Information Flow & Decision Structure
 
 ```
                     Ingo (Product Owner)
                         │
-                        │ Grundsatzentscheidungen
+                        │ Strategic decisions
                         ▼
                 ┌───────────────────┐
                 │   Dione 🌙        │
-                │   (Projektleiterin)│
-                │   ENTSCHEIDET bei │
-                │   Agenten-Dissens │
+                │  (Project Lead)   │
+                │  DECIDES on agent │
+                │     disputes      │
                 └───┬───┬───┬───┬──┘
                     │   │   │   │
           ┌─────────┘   │   │   └──────────┐
@@ -55,7 +55,7 @@
     └──────────┘  └────────┘ └──────────┘ └────────┘
          │              │          │            │
          └──────────────┴──────────┘            │
-              gegenseitiges Review              │
+              Cross-agent review                │
               (Checks & Balances)               │
                                                 │
                                     Moltbook, X, GitHub Issues
@@ -63,49 +63,54 @@
 
 ### Checks & Balances
 
-| Situation | Wer prüft wen |
-|-----------|---------------|
-| Archon schreibt Neo4j Schema | Inanna prüft Militärmodell-Vollständigkeit, Sentinel prüft Datenquellen-Kompatibilität |
-| Sentinel liefert Länderdaten | Archon prüft Schema-Konformität, Inanna prüft Militärdaten-Plausibilität |
-| Inanna entwirft Kampfsystem | Archon prüft Implementierbarkeit, Dione prüft Balancing-Philosophie |
-| Herald formuliert Post | Dione prüft Inhalt + Ton vor Veröffentlichung |
-| Dissens zwischen Agenten | **Dione entscheidet** (bei Grundsatzfragen → Ingo eskalieren) |
+| Situation | Who reviews whom |
+|-----------|-----------------|
+| Archon writes Neo4j schema | Inanna reviews military model completeness, Sentinel checks data source compatibility |
+| Sentinel delivers country data | Archon checks schema conformity, Inanna validates military data plausibility |
+| Inanna designs combat system | Archon checks implementability, Dione validates balancing philosophy |
+| Herald drafts a post | Dione reviews content + tone before publication |
+| Dispute between agents | **Dione decides** (strategic questions → escalate to Ingo) |
 
-### Informationsaustausch
+### Information Exchange
 
-| Von → An | Kanal | Inhalt |
-|----------|-------|--------|
-| Alle → Dione | OpenClaw (sessions_send) | Status-Updates, Ergebnisse, Fragen |
-| Dione → Alle | Task-Zuweisung (sessions_spawn) | Aufgaben mit klarem Scope + Deadline |
-| Archon ↔ Sentinel | Shared files in `/tmp/games-of-ww3/` | Schema-Entwürfe, Daten-Samples |
-| Archon ↔ Inanna | Shared files | Modell-Specs, Implementierungs-Fragen |
-| Herald → Dione | Zusammenfassung | Moltbook-Feedback, Community-Stimmung |
-| Ingo → Dione | Telegram | Entscheidungen, Richtungsänderungen |
+| From → To | Channel | Content |
+|-----------|---------|---------|
+| All → Dione | OpenClaw (sessions_send) | Status updates, results, questions |
+| Dione → All | Task assignment (sessions_spawn) | Tasks with clear scope + deadline |
+| Archon ↔ Sentinel | Shared files in repo | Schema drafts, data samples |
+| Archon ↔ Inanna | Shared files | Model specs, implementation questions |
+| Herald → Dione | Summary reports | Moltbook feedback, community sentiment |
+| Ingo → Dione | Telegram | Decisions, direction changes |
 
 ---
 
-## 3. LLM-Strategie & Kosten
+## 3. LLM Strategy & Costs
 
-### Prinzip: Ingos Gemini Ultra Flatrate maximal nutzen!
+### Principle: All agents run on flat-rate subscriptions — zero API costs!
 
-| Agent | LLM | Kosten | Begründung |
-|-------|-----|--------|------------|
-| **Dione** | Claude Opus (OpenClaw) | API-Kosten | Koordination braucht Langzeit-Kontext + Tool-Zugriff |
-| **Inanna** | Claude (OpenClaw) | API-Kosten | Eigenständige Instanz, Security-Expertise |
-| **Archon** | Gemini 2.5 Pro via ADK (OAuth) | **Flatrate!** | Hauptlast der Code-Generierung → Flatrate nutzen |
-| **Sentinel** | Gemini 2.5 Pro via ADK (OAuth) | **Flatrate!** | Daten-Recherche, API-Tests → Flatrate nutzen |
-| **Herald** | Gemini 2.5 Pro via Gemini CLI (OAuth) | **Flatrate!** | Text-Generierung → Flatrate nutzen |
-| **Deep Think** | Gemini 2.5 Pro (manuell) | **Flatrate!** | Ingo startet bei Bedarf |
-| **Codex** | GPT-4.1 | API-Kosten | Nur für spezifische Tasks wo GPT besser passt |
+| Agent | LLM | Subscription | Notes |
+|-------|-----|-------------|-------|
+| **Dione** | Claude Opus 4 (OpenClaw) | **Claude Max 20x** (OAuth, flat rate) | Long-context coordination + tool access |
+| **Inanna** | Claude (OpenClaw) | **Claude Max 20x** (OAuth, flat rate) | Autonomous instance, security expertise |
+| **Archon** | Gemini 2.5 Pro via ADK (OAuth) | **Google One AI Ultra** (flat rate) | Primary code generation workload |
+| **Sentinel** | Gemini 2.5 Pro via ADK (OAuth) | **Google One AI Ultra** (flat rate) | Data research, API testing |
+| **Herald** | Gemini 2.5 Pro via Gemini CLI (OAuth) | **Google One AI Ultra** (flat rate) | Text generation, community drafts |
+| **Deep Think** | Gemini 3.1 Pro (manual) | **Google One AI Ultra** (flat rate) | Ingo triggers manually for deep analysis |
+| **Codex** | GPT-5.3 Codex | **ChatGPT subscription** (flat rate) | Specific tasks where GPT excels |
 
-**Ergebnis:** 4 von 6 Agenten laufen über Gemini-Flatrate. Nur Dione + Inanna brauchen Claude-API.
+**Result: 100% flat-rate operation.** No per-token API costs for any agent.
 
-### Google ADK Setup (OAuth, keine API-Keys!)
+- Dione + Inanna → Anthropic Claude Max 20x subscription
+- Archon + Sentinel + Herald + Deep Think → Google One AI Ultra subscription
+- Codex → ChatGPT subscription
+- Only constraint: throughput/rate limits of each subscription tier
+
+### Google ADK Setup (OAuth — no API keys!)
 
 ```python
-# ADK nutzt OAuth Credentials von Gemini CLI
-# ~/.gemini/oauth_creds.json wird automatisch gefunden
-# Kein GOOGLE_API_KEY nötig!
+# ADK uses OAuth credentials from Gemini CLI
+# ~/.gemini/oauth_creds.json is auto-discovered
+# No GOOGLE_API_KEY needed!
 
 from google.adk import Agent
 
@@ -117,82 +122,83 @@ archon = Agent(
 )
 ```
 
-**Wichtig:** ADK mit `adk web` oder programmatisch starten — OAuth-Flow nutzt die existierenden Credentials aus `~/.gemini/oauth_creds.json`.
+**Important:** Start ADK with `adk web` or programmatically — the OAuth flow uses existing credentials from `~/.gemini/oauth_creds.json`.
 
 ---
 
-## 4. Aktivitäts-Zyklen
+## 4. Activity Cycles
 
-### Regelmäßig (automatisiert via Cron/Heartbeat)
+### Regular (automated via Cron/Heartbeat)
 
-| Agent | Frequenz | Aufgabe |
-|-------|----------|---------|
-| **Herald** | Alle 6h | Moltbook-Feedback checken (Kommentare auf GWW3-Posts), zusammenfassen für Dione |
-| **Dione** | Bei jedem Heartbeat | Herald-Zusammenfassung prüfen, ggf. auf Moltbook antworten |
-| **Sentinel** | 1x täglich | Datenquellen-Status prüfen (APIs erreichbar? Neue Datasets?) |
+| Agent | Frequency | Task |
+|-------|-----------|------|
+| **Herald** | Every 6h | Check Moltbook feedback (comments on GWW3 posts), summarize for Dione |
+| **Dione** | Every heartbeat | Review Herald's summary, respond on Moltbook if needed |
+| **Sentinel** | Once daily | Check data source status (APIs reachable? New datasets?) |
 
-### Sprint-basiert (Task-gesteuert durch Dione)
+### Sprint-based (task-driven by Dione)
 
-| Phase | Agenten aktiv | Dauer | Deliverable |
-|-------|---------------|-------|-------------|
-| **Sprint 1: Schema** | Archon (lead), Inanna (review), Sentinel (data-mapping) | 1 Woche | Neo4j Cypher Schema v1 |
-| **Sprint 2: Pipeline** | Sentinel (lead), Archon (integration) | 1 Woche | World Bank + V-Dem → Neo4j Import |
-| **Sprint 3: Engine** | Archon (lead), Inanna (combat model) | 2 Wochen | Pulse Engine + Rules Engine MVP |
-| **Sprint 4: Agents** | Archon (ADK setup), Dione (prompt engineering) | 1 Woche | 6 Game-Agenten (Strategist etc.) als ADK Agents |
-| **Sprint 5: UI** | Archon (API), Herald (testing/feedback) | 2 Wochen | React + Globe MVP |
+| Phase | Active agents | Duration | Deliverable |
+|-------|---------------|----------|-------------|
+| **Sprint 1: Schema** | Archon (lead), Inanna (review), Sentinel (data mapping) | 1 week | Neo4j Cypher Schema v1 |
+| **Sprint 2: Pipeline** | Sentinel (lead), Archon (integration) | 1 week | World Bank + V-Dem → Neo4j import |
+| **Sprint 3: Engine** | Archon (lead), Inanna (combat model) | 2 weeks | Pulse Engine + Rules Engine MVP |
+| **Sprint 4: Agents** | Archon (ADK setup), Dione (prompt engineering) | 1 week | 6 game agents (Strategist etc.) as ADK agents |
+| **Sprint 5: UI** | Archon (API), Herald (testing/feedback) | 2 weeks | React + Globe MVP |
 
-### Kontrolle & Reporting
+### Control & Reporting
 
-| Was | Wer | Wann |
-|-----|-----|------|
-| Sprint-Planung | Dione (mit Ingo-Approval) | Montags |
-| Daily Status | Alle aktiven Agenten → Dione | Bei Task-Abschluss oder Blocker |
-| Sprint-Review | Dione → Ingo (Telegram) | Freitags |
-| Moltbook-Update | Herald (Dione-approved) | Bei Meilensteinen |
-| Code-Review | Cross-Agent (Archon↔Inanna) | Bei jedem PR/Merge |
-
----
-
-## 5. Aufgaben & Meilensteine (nächste 4 Wochen)
-
-### Woche 1: Foundation
-- [ ] **ADK-Setup:** Archon + Sentinel als ADK-Agents konfigurieren (OAuth!)
-- [ ] **Neo4j Schema v1:** Nodes, Relationships, Temporal Model (Archon + Inanna)
-- [ ] **Daten-Mapping:** Welche Source → welcher Node/Edge (Sentinel)
-- [ ] **Moltbook-Feedback:** Erste Reaktionen sammeln (Herald)
-
-### Woche 2: Data Pipeline
-- [ ] **World Bank Importer:** Top 50 Indikatoren → Neo4j (Sentinel + Archon)
-- [ ] **V-Dem Importer:** Governance-Daten → Neo4j (Sentinel)
-- [ ] **SIPRI Importer:** Militärausgaben → Neo4j (Sentinel + Inanna-Review)
-- [ ] **Country Nodes:** Alle ~195 Nationen mit Basisdaten geladen
-
-### Woche 3: Game Engine Core
-- [ ] **Pulse Engine:** Multi-Resolution Tick System (Archon)
-- [ ] **Rules Engine:** Deterministische Zustandsänderungen (Archon + Inanna)
-- [ ] **Temporal Model:** State Snapshots als Tick-Kette in Neo4j (Archon)
-- [ ] **Combat Prototype:** Vereinfachtes Kampfmodell (Inanna)
-
-### Woche 4: Agent Integration
-- [ ] **ADK Game Agents:** Strategist + Economist als ADK-Agents (Archon)
-- [ ] **Cabinet Protocol:** Briefing → Debate → Resolution (Archon + Dione)
-- [ ] **First Game:** 2-Nationen Test (USA vs China, vereinfacht)
-- [ ] **Moltbook Milestone Post:** "Erste Partie gespielt!" (Herald)
+| What | Who | When |
+|------|-----|------|
+| Sprint planning | Dione (with Ingo approval) | Mondays |
+| Status updates | All active agents → Dione | On task completion or blocker |
+| Sprint review | Dione → Ingo (Telegram) | Fridays |
+| Moltbook update | Herald (Dione-approved) | On milestones |
+| Code review | Cross-agent (Archon ↔ Inanna) | On every PR/merge |
 
 ---
 
-## 6. Entscheidungen (Ingo, 23.03.2026)
+## 5. Tasks & Milestones (next 4 weeks)
 
-1. **Moltbook:** Alle Posts über Dione oder Inanna — keine weiteren Accounts
-2. **ADK-Agents:** Persistent (mit State)
-3. **Inanna:** Handelt eigenständig auf GWW3-Tasks
-4. **Sprint-Start:** Sobald Projektstruktur steht
-5. **Budget:** Alle Agenten auf Flatrates:
-   - Dione + Inanna: **Claude Max 20x** (OAuth, Flatrate)
-   - Archon + Sentinel + Herald: **Gemini Ultra** (OAuth, Flatrate)
-   - → **Keine API-Kosten**, nur Durchsatz-Limits beachten
+### Week 1: Foundation
+- [ ] **ADK setup:** Configure Archon + Sentinel as persistent ADK agents (OAuth!)
+- [ ] **Neo4j Schema v1:** Nodes, relationships, temporal model (Archon + Inanna)
+- [ ] **Data mapping:** Which source → which node/edge (Sentinel)
+- [ ] **Moltbook feedback:** Collect initial reactions (Herald)
+
+### Week 2: Data Pipeline
+- [ ] **World Bank importer:** Top 50 indicators → Neo4j (Sentinel + Archon)
+- [ ] **V-Dem importer:** Governance data → Neo4j (Sentinel)
+- [ ] **SIPRI importer:** Military expenditure → Neo4j (Sentinel + Inanna review)
+- [ ] **Country nodes:** All ~195 nations loaded with baseline data
+
+### Week 3: Game Engine Core
+- [ ] **Pulse Engine:** Multi-resolution tick system (Archon)
+- [ ] **Rules Engine:** Deterministic state transitions (Archon + Inanna)
+- [ ] **Temporal model:** State snapshots as tick chain in Neo4j (Archon)
+- [ ] **Combat prototype:** Simplified combat model (Inanna)
+
+### Week 4: Agent Integration
+- [ ] **ADK game agents:** Strategist + Economist as ADK agents (Archon)
+- [ ] **Cabinet protocol:** Briefing → Debate → Resolution (Archon + Dione)
+- [ ] **First game:** 2-nation test (USA vs China, simplified)
+- [ ] **Moltbook milestone post:** "First match played!" (Herald)
 
 ---
 
-*"Edges > Properties" — auch in der Projektorganisation.*
-*Erstellt: 2026-03-23 von Dione 🌙*
+## 6. Decisions (Ingo, 2026-03-23)
+
+1. **Moltbook:** All posts through Dione or Inanna — no additional accounts
+2. **ADK agents:** Persistent (with state)
+3. **Inanna:** Acts autonomously on GWW3 tasks
+4. **Sprint start:** Once project structure is finalized
+5. **Budget:** All agents on flat-rate subscriptions:
+   - Dione + Inanna: **Anthropic Claude Max 20x** (OAuth, flat rate)
+   - Archon + Sentinel + Herald: **Google One AI Ultra** (OAuth, flat rate)
+   - Codex: **ChatGPT subscription** (flat rate)
+   - → **Zero API costs**, only throughput limits apply
+
+---
+
+*"Edges > Properties" — in project organization too.*
+*Created: 2026-03-23 by Dione 🌙*
