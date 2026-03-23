@@ -124,6 +124,8 @@ archon = Agent(
 
 **Important:** Start ADK with `adk web` or programmatically — the OAuth flow uses existing credentials from `~/.gemini/oauth_creds.json`.
 
+**Note on Gemini CLI:** When using `gemini` CLI in one-shot mode, the model defaults to Gemini 2.5 Pro regardless of newer models available. Gemini 3.1 Pro is only accessible through the web UI (for Deep Think/Deep Research) or when explicitly supported by ADK. This is a current CLI limitation (v0.34).
+
 ---
 
 ## 4. Activity Cycles

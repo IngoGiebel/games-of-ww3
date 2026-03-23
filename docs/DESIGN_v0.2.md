@@ -2,7 +2,7 @@
 
 **Date:** 2026-03-23
 **Authors:** Ingo Giebel (Lead), Dione 🌙 (Coordination), Gemini Deep Think, Codex
-**Status:** Draft Feinkonzept — basis for Neo4j schema design
+**Status:** Draft fine concept — basis for Neo4j schema design
 
 ---
 

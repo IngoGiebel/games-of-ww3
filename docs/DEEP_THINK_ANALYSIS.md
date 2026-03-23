@@ -1,7 +1,7 @@
 # Gemini Deep Think — Critical Design Analysis Results
 
 **Date:** 2026-03-23
-**Source:** Gemini 2.5 Pro Deep Think (Ingo's Ultra subscription)
+**Source:** Gemini 3.1 Pro Deep Think (Ingo's Google One AI Ultra subscription)
 **Status:** Reviewed by Dione, annotated by Ingo
 
 ---
@@ -22,7 +22,7 @@
 
 ### Q3: Real-Time Model — Multi-Resolution Time Architecture
 - **Ingo Override:** 1 tick = 1 MINUTE minimum (not 1 second) for agent reaction time
-- **Multi-resolution loops:** Tactical (daily), Diplomatic (weekly), Economic (monthly), Epoch (annual)
+- **Multi-resolution loops:** Tactical (hourly), Diplomatic (weekly), Economic (monthly), Epoch (annual)
 - **Decision Latency:** Bureaucracy engine with regime-dependent delays
 - **Event-Driven Interrupts:** Emergency Cabinet for critical state changes
 
@@ -42,7 +42,7 @@
 
 ---
 
-## Ingo's Design Decisions (23.03.2026)
+## Ingo's Design Decisions (2026-03-23)
 
 1. **Tick = 1 Minute minimum** (game may run longer, that's fine)
 2. **Top 20 nations by concrete players**, others auto-simulated; ideally ALL played
@@ -53,4 +53,4 @@
 
 ---
 
-*Saved for reference. Consolidated into design-v0.2.md by Dione.*
+*Saved for reference. Consolidated into DESIGN_v0.2.md by Dione.*
