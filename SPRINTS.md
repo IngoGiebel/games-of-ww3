@@ -19,26 +19,31 @@
 
 ---
 
-## Sprint 1: Neo4j Schema & Foundation
-**Goal:** Complete graph schema, load first country data
+## Sprint 1: Schema, ID Harmonization & Mock Data
+**Goal:** Finalized graph schema, master ID crosswalk, validated with mock data for 2 nations
 **Duration:** 1 week
-**Lead:** Archon (code), Inanna (military model review), Sentinel (data mapping)
+**Lead:** Archon (schema + mock data), Sentinel (ID crosswalk + data mapping), Inanna (military model review)
 
 ### Tasks
-- [ ] Neo4j Cypher schema v1 (all node types, relationship types)
-- [ ] Temporal model implementation (Tick chain, STATE_AT edges)
-- [ ] Nation node: core properties from World Bank + V-Dem
-- [ ] Commodity nodes + DEPENDS_ON edges
-- [ ] Alliance/diplomacy edges from ATOP + COW
-- [ ] Chokepoint + infrastructure nodes from Natural Earth
-- [ ] Data validation + integration tests
-- [ ] Schema documentation
+- [ ] Master ID Crosswalk (`data/id_crosswalk.json`): ISO-3 ↔ COW ↔ UN M49 ↔ source-native IDs for all ~195 nations (Sentinel, FIRST deliverable)
+- [ ] Neo4j Cypher schema v1 finalized (all node types, relationship types, constraints)
+- [ ] Commodity-centric trade model (PRODUCES/CONSUMES/TRADES through Commodity nodes)
+- [ ] Sparse temporal model (STATE_AT only on Monthly/Epoch, Event nodes for intra-month)
+- [ ] Mock data: 2 nations (USA + CHN) with full graph topology as static JSON
+- [ ] Mock data loaded into local Neo4j and validated via Cypher queries
+- [ ] Missing data strategy documented (imputation hierarchy, estimated flags)
+- [ ] DomesticFaction synthesis strategy from V-Dem proxies (documented, not yet coded)
+- [ ] Neo4j Docker Compose with APOC plugin
+- [ ] Schema documentation + data mapping table (which source → which node/edge)
+- [ ] Integration tests validating mock graph structure
 
 ### Acceptance Criteria
-- `MATCH (n:Nation) RETURN count(n)` → 195
-- Each nation has >100 properties loaded
-- Temporal model: can create + query state snapshots
-- Inanna approves military node completeness
+- `data/id_crosswalk.json` maps all ~195 nations across 4+ ID systems
+- Mock graph for USA + CHN passes all topology tests (nations, commodities, alliances, factions, chokepoints connected)
+- Sparse temporal model: Monthly snapshot creates STATE_AT, daily does NOT
+- Inanna approves military node/edge completeness for mock nations
+- Neo4j starts cleanly via Docker Compose with APOC installed
+- No live API calls in Sprint 1 (all mock/static data)
 
 ---
 

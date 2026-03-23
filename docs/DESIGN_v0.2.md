@@ -383,5 +383,105 @@ No global "world conquest" victory. Each nation has contextual goals based on st
 
 ---
 
-*Games of World War 3 — Design v0.2*
+## 11. Architectural Decisions (Post-Review, 2026-03-23)
+
+These decisions were made after the Gemini 3.1 Deep Think project review.
+
+### 11.1 Scope Boundary: What GWW3 Provides vs. What Players Bring
+
+**GWW3 provides:**
+- The game server: FastAPI REST/WebSocket API for player participation
+- The rules engine: deterministic, programmatic computation of next game state
+- The Neo4j world model: initial state seeded from real data
+- The Pulse Engine: time management, event system, snapshot scheduling
+- A reference AI player implementation (ADK-based, for testing and AI-vs-AI demos)
+
+**GWW3 does NOT provide or control:**
+- Players' LLM configurations — each player chooses their own model, provider, and budget
+- Players' agent architectures — they can use any framework (ADK, LangChain, custom, or even manual HTTP calls)
+- Players' compute resources — their agents run on their own infrastructure
+
+**Implication:** The "6 agents per nation" (Strategist, General, etc.) is a *recommended architecture* and a reference implementation. The game API accepts structured JSON actions regardless of how the player arrived at them. A human typing curl commands is as valid as a 6-agent LLM cabinet.
+
+The flat-rate LLM subscriptions (Claude Max 20x, Google One AI Ultra) are for the **development team** building GWW3 — not for game runtime. Runtime LLM costs are each player's responsibility.
+
+### 11.2 Temporal Graph Strategy (Sparse Snapshots)
+
+**Problem:** At 1 tick = 1 minute, one game-year = 525,600 ticks. Creating STATE_AT nodes for 195 nations per tick would generate >100M edges/year, causing Neo4j OOM.
+
+**Solution:**
+- **Current state** lives directly on Entity nodes as mutable properties (e.g., `nation.gdp`, `nation.stability`)
+- **STATE_AT snapshots** are created ONLY on Monthly (Economic) and Annual (Epoch) ticks — ~12-13 snapshots per nation per game-year
+- **Intra-month changes** are logged as lightweight (:Event) nodes with the affected entity and delta values
+- **Tick nodes** are only created for Monthly + Epoch boundaries, not every minute
+
+This keeps the graph manageable (~50K nodes/year) while preserving full replay capability.
+
+### 11.3 Agent Output Contract
+
+Game agents (whether our reference implementation or external players) MUST output structured JSON conforming to Pydantic-validated action schemas. Agents NEVER write raw Cypher.
+
+```python
+# Example: Agent action output
+{
+    "action": "declare_sanctions",
+    "target_nation": "RUS",
+    "sectors": ["energy", "finance"],
+    "severity": 0.8
+}
+```
+
+Actions map to predefined Python backend functions that validate inputs and execute deterministic state transitions. This prevents schema hallucination and database corruption.
+
+### 11.4 Trade Model (Commodity-Centric)
+
+Trade flows route THROUGH Commodity nodes, not directly between nations:
+
+```cypher
+// Correct (edges > properties):
+(USA)-[:CONSUMES {volume: 50M, dependency: 0.9}]->(Oil:Commodity)
+(SAU)-[:PRODUCES {volume: 200M, capacity: 250M}]->(Oil:Commodity)
+(USA)-[:TRADES {commodity: "Oil", volume: 50M, route_via: "Hormuz"}]->(SAU)
+
+// NOT this (property-stuffed):
+(USA {oil_dependency: "high"})
+```
+
+This enables graph-based sanction modeling: severing a TRADES edge forces shortest-path rerouting through intermediaries, each extracting an evasion premium.
+
+### 11.5 Entity Resolution (ID Harmonization)
+
+All data sources MUST map through a master crosswalk table before Neo4j ingestion:
+
+| Source | ID System | Example |
+|--------|-----------|---------|
+| World Bank | ISO-3 (alpha) | USA, CHN, DEU |
+| Correlates of War | Numeric COW code | 2, 710, 255 |
+| UN | M49 numeric | 840, 156, 276 |
+| ACLED | Text name | "United States", "China" |
+| V-Dem | Country-text + V-Dem ID | — |
+
+The master crosswalk (`data/id_crosswalk.json`) is the **first deliverable** of Sprint 1, before any data ingestion.
+
+### 11.6 Missing Data Strategy
+
+For parameters with no open data source (military readiness, faction influence, espionage capabilities):
+
+1. **Imputation hierarchy:** IMF → World Bank → CIA Factbook → Regional Average
+2. **Procedural synthesis:** Generate DomesticFaction nodes from V-Dem macro-polarization proxies
+3. **Explicit nulls:** Missing values default to regional/income-group averages, flagged with `data_quality: "estimated"`
+4. **Never crash on None:** Rules engine handles missing data gracefully with fallback defaults
+
+### 11.7 Neo4j APOC Requirement
+
+The APOC (Awesome Procedures on Cypher) plugin is REQUIRED for:
+- Shortest-path algorithms (sanction evasion routing)
+- Graph algorithms (centrality, community detection)
+- Data import utilities (JSON/CSV batch loading)
+- Periodic commit for large data loads
+
+---
+
+*Games of World War 3 — Design v0.2.1*
 *"Properties define state. Edges define power."*
+*Updated: 2026-03-23 — Post-review architectural decisions added*

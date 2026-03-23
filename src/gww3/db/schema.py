@@ -6,6 +6,17 @@ instance to set up all constraints and indexes.
 
 Design Principle: Edges > Properties.
 Power is defined by network position, not isolated attributes.
+
+Temporal Strategy (per Deep Think review):
+- Current state lives directly on Entity nodes as properties.
+- STATE_AT snapshots are created ONLY on Monthly (Economic) and Epoch (Annual) ticks.
+- Intra-month changes are logged as lightweight (:Event) nodes.
+- This prevents graph explosion (525,600 Tick nodes/year would OOM).
+
+Agent Output Strategy:
+- Game agents output structured JSON (Pydantic-validated), NEVER raw Cypher.
+- JSON actions map to predefined Python backend functions.
+- This prevents schema hallucination and database corruption.
 """
 
 from __future__ import annotations
@@ -19,6 +30,7 @@ NODE_LABELS = [
     "Nation",           # Sovereign state (~195)
     "NonStateActor",    # Insurgencies, PMCs, cartels, terrorist orgs
     "DomesticFaction",  # Internal power groups (military, oligarchs, opposition...)
+    "Alliance",         # NATO, CSTO, AUKUS, SCO, BRICS, AU, ASEAN, etc.
 
     # Geographic & Infrastructure
     "Region",           # Sub-national regions / territories
@@ -39,9 +51,9 @@ NODE_LABELS = [
     "MilitaryUnit",     # Divisions, fleets, squadrons
     "OrbitalNetwork",   # GPS, recon satellites
 
-    # Temporal
-    "Tick",             # Time node — forms a linked list
-    "Event",            # Discrete occurrences (war declaration, election, disaster)
+    # Temporal (sparse — snapshots only on Monthly/Epoch ticks)
+    "Tick",             # Sparse time nodes (Monthly + Epoch only, NOT per-minute)
+    "Event",            # Discrete occurrences (war, election, disaster, state changes)
     "ActionIntent",     # Queued agent decision awaiting execution
 
     # Game
@@ -63,12 +75,15 @@ RELATIONSHIP_TYPES = {
     "SECRET_TREATY":    "(Nation)-[:SECRET_TREATY {type, terms}]->(Nation)",
     "MEMBER_OF":        "(Nation)-[:MEMBER_OF {since, role}]->(Alliance)",
 
-    # Economic
-    "EXPORTS":          "(Nation)-[:EXPORTS {commodity, volume, value, criticality}]->(Nation)",
-    "IMPORTS":          "(Nation)-[:IMPORTS {commodity, volume, dependency_score}]->(Nation)",
+    # Economic — trade routes through Commodity nodes (edges > properties!)
+    # (Nation)-[:EXPORTS_TO {volume, value}]->(Nation) via (:Commodity)
+    # Full pattern: (Exporter)-[:PRODUCES {volume}]->(:Commodity)<-[:CONSUMES {volume}]-(Importer)
+    # Simplified bilateral: (Nation)-[:TRADES {commodity, volume, value}]->(Nation)
+    "PRODUCES":         "(Nation)-[:PRODUCES {volume, annual_capacity}]->(Commodity)",
+    "CONSUMES":         "(Nation)-[:CONSUMES {volume, dependency_score}]->(Commodity)",
+    "TRADES":           "(Nation)-[:TRADES {commodity_type, volume, value, route_via}]->(Nation)",
     "USES_CURRENCY":    "(Nation)-[:USES_CURRENCY]->(Currency)",
     "OWNS_BOND":        "(Nation)-[:OWNS_BOND {amount, yield_pct}]->(Nation)",
-    "DEPENDS_ON":       "(Nation)-[:DEPENDS_ON {criticality}]->(Commodity)",
 
     # Military & Logistics
     "DEPLOYED_AT":      "(MilitaryUnit)-[:DEPLOYED_AT]->(Region|MilitaryBase)",
@@ -76,6 +91,7 @@ RELATIONSHIP_TYPES = {
     "CONTROLS":         "(Nation)-[:CONTROLS]->(Region)",
     "BLOCKADES":        "(Nation|NonStateActor)-[:BLOCKADES]->(Chokepoint)",
     "COMMANDS":         "(Nation)-[:COMMANDS]->(MilitaryUnit)",
+    "ROUTE_THROUGH":    "(SupplyRoute)-[:ROUTE_THROUGH]->(Chokepoint|Port)",
 
     # Internal politics
     "DEPENDS_ON_FACTION": "(Nation)-[:DEPENDS_ON_FACTION {approval}]->(DomesticFaction)",
@@ -85,7 +101,7 @@ RELATIONSHIP_TYPES = {
     # Intelligence & Belief
     "BELIEVES":         "(AgentRole)-[:BELIEVES {value, confidence}]->(target)",
 
-    # Temporal
+    # Temporal (sparse snapshots — Monthly/Epoch only)
     "NEXT":             "(Tick)-[:NEXT]->(Tick)",
     "STATE_AT":         "(Entity)-[:STATE_AT {properties...}]->(Tick)",
     "OCCURRED_AT":      "(Event)-[:OCCURRED_AT]->(Tick)",
@@ -106,6 +122,7 @@ SCHEMA_CONSTRAINTS = [
     # Uniqueness
     "CREATE CONSTRAINT nation_iso3 IF NOT EXISTS FOR (n:Nation) REQUIRE n.iso3 IS UNIQUE",
     "CREATE CONSTRAINT nation_name IF NOT EXISTS FOR (n:Nation) REQUIRE n.name IS UNIQUE",
+    "CREATE CONSTRAINT alliance_name IF NOT EXISTS FOR (a:Alliance) REQUIRE a.name IS UNIQUE",
     "CREATE CONSTRAINT commodity_type IF NOT EXISTS FOR (c:Commodity) REQUIRE c.type IS UNIQUE",
     "CREATE CONSTRAINT currency_code IF NOT EXISTS FOR (c:Currency) REQUIRE c.code IS UNIQUE",
     "CREATE CONSTRAINT tick_id IF NOT EXISTS FOR (t:Tick) REQUIRE t.id IS UNIQUE",
@@ -117,8 +134,19 @@ SCHEMA_CONSTRAINTS = [
     "CREATE INDEX nation_cow_code IF NOT EXISTS FOR (n:Nation) ON (n.cow_code)",
     "CREATE INDEX nation_un_m49 IF NOT EXISTS FOR (n:Nation) ON (n.un_m49)",
     "CREATE INDEX tick_game_time IF NOT EXISTS FOR (t:Tick) ON (t.game_time)",
+    "CREATE INDEX tick_type IF NOT EXISTS FOR (t:Tick) ON (t.tick_type)",
     "CREATE INDEX event_type IF NOT EXISTS FOR (e:Event) ON (e.type)",
+    "CREATE INDEX event_game_tick IF NOT EXISTS FOR (e:Event) ON (e.game_tick)",
     "CREATE INDEX military_unit_nation IF NOT EXISTS FOR (u:MilitaryUnit) ON (u.nation_iso3)",
+]
+
+# ──────────────────────────────────────────────
+# Required plugins
+# ──────────────────────────────────────────────
+
+REQUIRED_PLUGINS = [
+    "apoc",  # Awesome Procedures on Cypher — needed for shortest-path algorithms
+             # (e.g., sanction evasion routing, supply chain analysis)
 ]
 
 
