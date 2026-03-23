@@ -81,7 +81,10 @@ RELATIONSHIP_TYPES = {
     # Simplified bilateral: (Nation)-[:TRADES {commodity, volume, value}]->(Nation)
     "PRODUCES":         "(Nation)-[:PRODUCES {volume, annual_capacity}]->(Commodity)",
     "CONSUMES":         "(Nation)-[:CONSUMES {volume, dependency_score}]->(Commodity)",
-    "TRADES":           "(Nation)-[:TRADES {commodity_type, volume, value, route_via}]->(Nation)",
+    "TRADES":           "(Nation)-[:TRADES {commodity_type, volume, value, route_via, friction}]->(Nation)",
+    # NOTE: friction (float, 0.0-1.0) is REQUIRED for APOC shortest-path algorithms.
+    # Pathfinding for sanction evasion MUST traverse TRADES/SUPPLY_ROUTE/ROUTE_THROUGH only.
+    # NEVER traverse PRODUCES/CONSUMES edges — Commodity nodes are NOT transit hubs.
     "USES_CURRENCY":    "(Nation)-[:USES_CURRENCY]->(Currency)",
     "OWNS_BOND":        "(Nation)-[:OWNS_BOND {amount, yield_pct}]->(Nation)",
 

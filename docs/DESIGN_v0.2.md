@@ -482,6 +482,63 @@ The APOC (Awesome Procedures on Cypher) plugin is REQUIRED for:
 
 ---
 
-*Games of World War 3 — Design v0.2.1*
+### 11.8 Pathfinding Constraints (Sanction Evasion Routing)
+
+APOC shortest-path algorithms MUST only traverse bilateral/geographic edges:
+- ✅ TRADES, SUPPLY_ROUTE, ROUTE_THROUGH, BORDERS
+- ❌ PRODUCES, CONSUMES (Commodity nodes are NOT transit hubs)
+
+The `friction` property (float, 0.0–1.0) on TRADES edges is the cost parameter for pathfinding. Sanctions set friction to infinity (or sever the edge), forcing rerouting through intermediaries.
+
+**Route Caching:** Global trade routes are calculated on the Economic (Monthly) pulse and cached. Only invalidated/recalculated when a SANCTION or BLOCKADE event occurs.
+
+### 11.9 Event Sourcing & Rollback
+
+Because STATE_AT snapshots are sparse (monthly), reconstructing mid-month state requires event replay:
+
+```python
+def rebuild_state(nation_iso3: str, target_tick: int) -> dict:
+    """Load nearest preceding STATE_AT snapshot, then replay all
+    Event nodes up to target_tick to reconstruct exact state."""
+    # 1. Find nearest STATE_AT before target_tick
+    # 2. Load snapshot properties
+    # 3. Apply all Event deltas in tick order
+    # 4. Return reconstructed state
+```
+
+Event nodes MUST store deterministic deltas (e.g., `{"gdp_delta": -500000}`) rather than absolute values. This ensures the Rules Engine (Sprint 3) uses idempotent delta-applications (`gdp *= 0.9`) rather than absolute recalculations, preserving interrupt effects through scheduled pulses.
+
+### 11.10 Action Dictionary (Player API Contract)
+
+The game API defines a bounded set of ~30 action verbs. Players submit structured JSON conforming to OpenAPI 3.1 schemas. Examples:
+
+```json
+{"action": "DECLARE_WAR", "target": "RUS", "casus_belli": "territorial_aggression"}
+{"action": "SET_TAX_RATE", "rate": 0.35}
+{"action": "DEPLOY_UNIT", "unit_id": "usa-3rd-infantry", "target_region": "eastern-europe"}
+{"action": "IMPOSE_SANCTIONS", "target": "IRN", "sectors": ["energy"], "severity": 0.8}
+{"action": "PROPOSE_ALLIANCE", "target": "GBR", "type": "mutual_defense"}
+```
+
+The full Action Dictionary will be defined in Sprint 3/4. The engine is framework-agnostic: a curl command, a Python script, or a 6-agent LLM cabinet all submit the same JSON.
+
+### 11.11 Framework Agnosticism
+
+The FastAPI game server MUST remain entirely blind to the client's underlying agent framework. No ADK-specific payloads, headers, or communication patterns in the API.
+
+Documentation MUST include raw curl/Python requests examples proving any generic script can play:
+
+```bash
+curl -X POST https://api.gww3.example/v1/games/{game_id}/actions \
+  -H "Authorization: Bearer {player_token}" \
+  -H "Content-Type: application/json" \
+  -d '{"action": "SET_TAX_RATE", "rate": 0.30}'
+```
+
+The reference ADK agents are a convenience, not a requirement.
+
+---
+
+*Games of World War 3 — Design v0.2.2*
 *"Properties define state. Edges define power."*
-*Updated: 2026-03-23 — Post-review architectural decisions added*
+*Updated: 2026-03-23 — Round 2 review recommendations integrated*
