@@ -1,0 +1,1332 @@
+# • V Dem VARIETIES OF DEMOCRACY
+
+# Country Coding Units
+
+Suggested citation: Coppedge, Michael, John Gerring, Carl Henrik Knutsen, Staffan I. Lindberg, Jan Teorell, and Lisa Gastaldi. 2021. ”V-Dem Country Coding Units v11.1” Varieties of Democracy (V-Dem) Project.
+
+Funders: We are very grateful for our funders’ support over the years, which has made this venture possible. To learn more about our funders, please visit: [https://www.v-dem.net/en/about/](https://www.v-dem.net/en/about/) funders/
+
+For questions: [contact@v-dem.net](mailto:contact@v-dem.net)
+
+# Contents
+
+Suggested citation: .
+
+# 1 Notes
+
+7
+
+1.1 ”Country” 7
+
+2 Africa 9
+
+2.1 Central Africa . 9
+
+2.1.1 Cameroon (108) 9
+
+2.1.2 Central African Republic (71) 9
+
+2.1.3 Chad (109) 9
+
+2.1.4 Democratic Republic of the Congo (111) 9
+
+2.1.5 Equatorial Guinea (160) 9
+
+2.1.6 Gabon (116) . . . 9
+
+2.1.7 Republic of the Congo (112) . 10
+
+2.1.8 Sao Tome and Principe (196) 10
+
+2.2 East/Horn of Africa 10
+
+2.2.1 Burundi (69) 10
+
+2.2.2 Comoros (153) 10
+
+2.2.3 Djibouti (113) 10
+
+2.2.4 Eritrea (115) 10
+
+2.2.5 Ethiopia (38) 10
+
+2.2.6 Kenya (40) 11
+
+2.2.7 Malawi (87) . 11
+
+2.2.8 Mauritius (180) 11
+
+2.2.9 Rwanda (129) . 11
+
+2.2.10 Seychelles (199) 11
+
+2.2.11 Somalia (130) . . 11
+
+2.2.12 Somaliland (139) 11
+
+2.2.13 South Sudan (32) 11
+
+2.2.14 Sudan (33) 12
+
+2.2.15 Tanzania (47) . 12
+
+2.2.16 Uganda (50) 12
+
+2.2.17 Zanzibar (236) 12
+
+2.3 Southern Africa . 12
+
+2.3.1 Angola (104) 12
+
+2.3.2 Botswana (68) 12
+
+2.3.3 Lesotho (85) 12
+
+2.3.4 Madagascar (125) 12
+
+2.3.5 Namibia (127) 13
+
+2.3.6 Mozambique (57) 13
+
+2.3.7 South Africa (8) 13
+
+2.3.8 Swaziland (132) . 13
+
+2.3.9 Zambia (61) . . 13
+
+2.3.10 Zimbabwe (62) 13
+
+2.4 West Africa . . 13
+
+2.4.1 Benin (52) . 13
+
+2.4.2 Burkina Faso (54) 14
+
+2.4.3 Cape Verde (70) 14
+
+2.4.4 Ivory Coast (64) 14
+
+2.4.5 Ghana (7) . . 14
+
+2.4.6 Guinea (63) . 14
+
+2.4.7 Guinea-Bissau (119) 14
+
+2.4.8 Liberia (86) 14
+
+2.4.9 Mali (28) 14
+
+2.4.10 Mauritania (65) . 15
+
+2.4.11 Niger (60) 15
+
+2.4.12 Nigeria (45) . . 15
+
+2.4.13 Senegal (31) . . 15
+
+2.4.14 Sierra Leone (95) 15
+
+2.4.15 The Gambia (117) 15
+
+2.4.16 Togo (134) 15
+
+# 3 Americas
+
+# 3.1 Caribbean 16
+
+3.1.1 Barbados (147) 16
+
+3.1.2 Cuba (155) 16
+
+3.1.3 Dominican Republic (114) 16
+
+3.1.4 Guyana (166) 16
+
+3.1.5 Haiti (26) . 16
+
+3.1.6 Jamaica (120) . 16
+
+3.1.7 Suriname (4) 16
+
+3.1.8 Trinidad and Tobago (135) 17
+
+3.2 Central America 17
+
+3.2.1 Costa Rica (73) . 17
+
+3.2.2 El Salvador (22) 17
+
+3.2.3 Guatemala (78) 17
+
+3.2.4 Honduras (27) 17
+
+3.2.5 Nicaragua (59) 17
+
+3.2.6 Panama (92) 17
+
+3.3 North America . 17
+
+3.3.1 Canada (66) 17
+
+3.3.2 Mexico (3) 18
+
+3.3.3 United States of America (20) . 18
+
+3.4 South America . 18
+
+3.4.1 Argentina (37) 18
+
+3.4.2 Bolivia (25) 18
+
+3.4.3 Brazil (19) 18
+
+3.4.4 Chile (72) . 19
+
+3.4.5 Colombia (15) 19
+
+3.4.6 Ecuador (75) 19
+
+3.4.7 Paraguay (189) 19
+
+3.4.8 Peru (30) 19
+
+3.4.9 Uruguay (102) 19
+
+3.4.10 Venezuela (51) 19
+
+# 4 Asia 20
+
+# 4.1 Caucasus 20
+
+4.1.1 Armenia (105) 20
+
+4.1.2 Azerbaijan (106) 20
+
+4.1.3 Georgia (118) . 20
+
+4.2 Central Asia . . . 20
+
+4.2.1 Afghanistan (36) 20
+
+4.2.2 Kazakhstan (121) . 20
+
+4.2.3 Kyrgyzstan (122) 21
+
+4.2.4 Tajikistan (133) 21
+
+4.2.5 Turkmenistan (136) 21
+
+4.2.6 Uzbekistan (140) 21
+
+4.3 East Asia . 21
+
+4.3.1 China (110) . . 21
+
+4.3.2 Hong Kong (167) 21
+
+4.3.3 Japan (9) . . 21
+
+4.3.4 South Korea (42) 21
+
+4.3.5 Mongolia (89) . . 22
+
+4.3.6 North Korea (41) 22
+
+4.3.7 Taiwan (48) . . . 22
+
+# 4.4 South Asia 22
+
+4.4.1 Bangladesh (24) 22
+
+4.4.2 Bhutan (53) . . 22
+
+4.4.3 India (39) . . 22
+
+4.4.4 Maldives (88) 22
+
+4.4.5 Nepal (58) . . 23
+
+4.4.6 Pakistan (29) 23
+
+4.4.7 Sri Lanka (131) 23
+
+4.5 Southeast Asia . 23
+
+4.5.1 Burma/Myanmar (10) 23
+
+4.5.2 Cambodia (55) 23
+
+4.5.3 Indonesia (56) 23
+
+4.5.4 Laos (123) . . 23
+
+4.5.5 Malaysia (177) 24
+
+4.5.6 Philippines (46) . 24
+
+4.5.7 Thailand (49) . . 24
+
+4.5.8 Timor-Leste (74) 24
+
+4.5.9 Singapore (200) . . 24
+
+4.5.10 Republic of Vietnam (35) 24
+
+4.5.11 Vietnam (34) . . 25
+
+# 5 Europe 26
+
+# 5.1 Balkans 26
+
+5.1.1 Albania (12) . 26
+
+5.1.2 Bosnia and Herzegovina (150) 26
+
+5.1.3 Bulgaria (152) 26
+
+5.1.4 Kosovo (43) . . 26
+
+5.1.5 North Macedonia (176) 26
+
+5.1.6 Montenegro (183) 26
+
+5.1.7 Romania (190) 27
+
+5.1.8 Serbia (198) . . 27
+
+5.2 East-Central Europe 28
+
+5.2.1 Belarus (107) 28
+
+5.2.2 Croatia (154) 28
+
+5.2.3 Czech Republic (157) 28
+
+5.2.4 German Democratic Republic (137) 28
+
+5.2.5 Estonia (161) . 28
+
+5.2.6 Hungary (210) 28
+
+5.2.7 Latvia (84) 29
+
+5.2.8 Lithuania (173) 29
+
+5.2.9 Moldova (126) 29
+
+5.2.10 Poland (17) . 29
+
+5.2.11 Russia (11) 29
+
+5.2.12 Slovakia (201) . 29
+
+5.2.13 Slovenia (202) . 30
+
+5.2.14 Ukraine (100) 30
+
+5.3 Nordic Countries . 30
+
+5.3.1 Denmark (158) 30
+
+5.3.2 Finland (163) 30
+
+5.3.3 Iceland (168) 30
+
+5.3.4 Norway (186) 30
+
+5.3.5 Sweden (5) . 30
+
+5.4 Southern Europe . . 30
+
+5.4.1 Cyprus (156) 30
+
+5.4.2 Greece (164) 31
+
+5.4.3 Italy (82) . 31
+
+5.4.4 Malta (178) . 31
+
+5.4.5 Modena (351) . 31
+
+5.4.6 Papal States (361) 31
+
+5.4.7 Parma (352) 32
+
+5.4.8 Piedmont-Sardinia (373) 32
+
+5.4.9 Portugal (21) 32
+
+5.4.10 Spain (96) . . 32
+
+5.4.11 Tuscany (354) . 32
+
+5.4.12 Two Sicilies (356) 32
+
+5.5 Western Europe . . 32
+
+5.5.1 Austria (144) 32
+
+5.5.2 Baden (349) . 33
+
+5.5.3 Bavaria (350) . 33
+
+5.5.4 Belgium (148) . 33
+
+5.5.5 Brunswick (363) 33
+
+5.5.6 France (76) . . 33
+
+5.5.7 Germany (77) . 33
+
+5.5.8 Hamburg (362) 34
+
+5.5.9 Hanover (357) 34
+
+5.5.10 Hesse-Darmstadt (359) . 34
+
+5.5.11 Hesse-Kassel (358) 34
+
+5.5.12 Ireland (81) . 34
+
+5.5.13 Luxembourg (174) 34
+
+5.5.14 Mecklenburg-Schwerin (360) 35
+
+5.5.15 Nassau (366) . . 35
+
+5.5.16 Netherlands (91) 35
+
+5.5.17 Oldenburg (364) 35
+
+5.5.18 Saxe-Weimar-Eisenach (365) 35
+
+5.5.19 Saxony (353) 35
+
+5.5.20 Switzerland (6) . . 35
+
+5.5.21 United Kingdom (101) 36
+
+5.5.22 W¨urtemberg (355) 36
+
+# 6 Middle East and North Africa (MENA) 37
+
+6.0.1 Algeria (103) 37
+
+6.0.2 Bahrain (146) 37
+
+6.0.3 Egypt (13) 37
+
+6.0.4 Iran (79) 37
+
+6.0.5 Iraq (80) 37
+
+6.0.6 Israel (169) 37
+
+6.0.7 Jordan (83) 37
+
+6.0.8 Kuwait (171) 38
+
+6.0.9 Lebanon (44) 38
+
+6.0.10 Libya (124) . 38
+
+6.0.11 Morocco (90) 38
+
+6.0.12 Oman (187) . 38
+
+6.0.13 Palestine/British Mandate (209) 39
+
+6.0.14 Palestine/Gaza (138) . 39
+
+6.0.15 Palestine/West Bank (128) 39
+
+6.0.16 South Yemen (23) 39
+
+6.0.17 Syria (97) . . 39
+
+6.0.18 Qatar (94) 39
+
+6.0.19 Saudi Arabia (197) 40
+
+6.0.20 Tunisia (98) . 40
+
+6.0.21 Turkey (99) . 40
+
+6.0.22 United Arab Emirates (207) 40
+
+6.0.23 Yemen (14) . . 40
+
+# 7 Oceania 41
+
+7.0.1 Australia (67) . 41
+
+7.0.2 Fiji (162) 41
+
+7.0.3 New Zealand (185) 41
+
+7.0.4 Papua New Guinea (93) 41
+
+7.0.5 Solomon Islands (203) 41
+
+7.0.6 Vanuatu (206) 41
+
+# 8 Other Political Units (Not coded) 42
+
+8.1 Africa . . 42
+
+8.1.1 Western Sahara . 42
+
+8.2 Americas 42
+
+8.2.1 Antigua and Barbuda 42
+
+8.2.2 Bahamas 42
+
+8.2.3 Dominica 42
+
+8.2.4 Grenada . 42
+
+8.2.5 Saint Kitts and Nevis 42
+
+8.2.6 Saint Lucia . 43
+
+8.2.7 Saint Vincent and the Grenadines 43
+
+8.2.8 Belize (149) . 43
+
+8.3 Asia 43
+
+8.3.1 Abkhazia 43
+
+8.3.2 Nagorno-Karabakh Republic 43
+
+8.3.3 Tskhinvali (so called South Ossetia) 43
+
+8.3.4 Macau (175) 44
+
+8.3.5 Manchukuo 44
+
+8.3.6 Tibet 44
+
+8.3.7 Brunei (151) 44
+
+8.4 Europe . . . 44
+
+8.4.1 Transnistria . 44
+
+8.4.2 Faroe Islands 44
+
+8.4.3 Greenland . . 44
+
+8.4.4 Andorra (142) 45
+
+8.4.5 Northern Cyprus, Turkish Republic of 45
+
+8.4.6 San Marino (195) . . 45
+
+8.4.7 Vatican City (208) 45
+
+8.4.8 Liechtenstein (172) 45
+
+8.4.9 Monaco (182) . 45
+
+8.5 Middle East and North Africa (MENA) 45
+
+8.5.1 Cyrenaica . . 45
+
+8.5.2 Fezzan 45
+
+8.6 Oceania 45
+
+8.6.1 Federated States of Micronesia 45
+
+8.6.2 Kiribati . 46
+
+8.6.3 Marshall Islands 46
+
+8.6.4 Nauru 46
+
+8.6.5 Palau 46
+
+8.6.6 Samoa . 46
+
+8.6.7 Territory of New Guinea . 46
+
+8.6.8 Tonga . 47
+
+8.6.9 Tuvalu . . 47
+
+# 1 Notes
+
+This document lists (a) every country in the envisioned V-Dem database, (b) the numeric country code assigned to each coded country (in parentheses following the country name), (c) the identities of each polity that comprises a country’s history; (d) the year coverage for which we have collected data or plan to collect data; and (e) the borders of each country, wherever this might be unclear.
+
+Many dates are approximate due to the inconclusive nature of country histories. Note that changes in sovereignty often occur by stages, and marking these stages with specific dates can be challenging.
+
+Coding periods do not include the ”start year” of a coding gap but do include the ”end year” of a coding gap. For example, Germany is coded 1789–1945 and 1949–2020, which means that the years 1945, 1946, 1947, and 1948 are not coded.
+
+The assignment of country codes, and hence of a continuous ”country” in the V-Dem dataset, is somewhat arbitrary. For example, we treat Russia and the Soviet Union as the same entity, even though the geographic shape and population of that entity changes. However, since we list the polities that comprise a continuous country over time, we believe that it should be clear to users (and more importantly to our coders) what the specific geographic boundaries of that unit entail at any point in time. Furthermore, users may also disaggregate these entities following the dates provided in each entry.
+
+# 1.1 ”Country”
+
+A V-Dem country is a political unit enjoying at least some degree of functional and/or formal sovereignty.
+
+Generally, wherever countries are formally sovereign (in international law) they are treated as countries in V-Dem. However, the recognized sovereignty of a country in international law is sometimes more extensive than the definition of a country in V-Dem. For example, China claims formal sovereignty over Hong Kong, Macau, and Taiwan (at least, according to the PRC), while we regard these entities as separate countries because they enjoy a good deal of autonomy and their polities work differently than the PRC’s.
+
+It is important to note that judgments concerning which territories that qualify as countries should not be interpreted as judgments about sovereign claims to disputed territories. V-Dem does not take a position on whether Taiwan is part of China, whether the Western Sahara belongs to Morocco, or whether Somaliland should be recognized as an independent state. Our decisions are based on criteria specific to this project, as explained herein.
+
+In determining V-Dem countries, the following criteria are considered:
+
+• Formal (legal) sovereignty, or at least claims to sovereignty (e.g., present-day Somaliland, Hungary within the Austro-Hungarian Empire).
+
+• Continuity with a contemporary nation-state.
+
+• Defined borders (even if imprecise or under dispute).
+
+• A capital, e.g., a single locus of claimed sovereignty.
+
+• A person or body that exercises executive powers — e.g., a head of state and/or head of government.
+
+• Self-rule, at least with respect to domestic affairs.
+
+• A distinct governing style and/or quality of democracy relative to surrounding territories.
+
+• A distinct constitution from the surrounding territories or the wider polity the country might be subservient to.
+
+• Lacking (equal) representation at the central level of the wider polity it might be subservient to.
+
+This means that fully sovereign nation-states as well as colonies and protectorates and semi-autonomous administrative districts may qualify as V-Dem countries if they are an ”effective governance unit.” Indeed, most overseas holdings of an empire are considered as countries prior to independence. It would make no sense to arrive at a single
+# 5.4.9 Portugal (21)
+
+Coded: 1789–
+
+History: Kingdom of Portugal (1789–1807); Kingdom of Portugal under French occupation (1807– 1808); Kingdom of Portugal (1808–1910); Portuguese Republic (1910– ).
+
+Note: The Kingdom of Portugal was also known as the Kingdom of Portugal and the Algarves, and from 1815–1822 as the United Kingdom of Portugal, Brazil and the Algarves, but the coding includes only the European possessions of Portugal.
+
+# 5.4.10 Spain (96)
+
+Coded: 1789–
+
+History: Kingdom of Spain (1789–1808); Kingdom of Spain under French occupation (1808–1812); Catalonia annexed by France (1812–1813); Kingdom of Spain under French occupation (1813); Kingdom of Spain (1813–1873); Spanish Republic (1873); Kingdom of Spain (1873–1931); Second Spanish Republic (1931–1939); Spanish State (1939–1975); Kingdom of Spain (1975– ).
+
+Note: Only includes the European possessions of Spain and the Canary Islands. Does not include Catalonia 1812–1813. The Second Spanish Republic is coded until the end of the Civil War in 1939.
+
+# 5.4.11 Tuscany (354)
+
+Coded: 1789–1807; 1814–1861
+
+History: Grand Duchy of Tuscany (1789–1799); Etruscan Republic under French occupation(1799); Grand Duchy of Tuscany (1799–1801); Kingdom of Etruria (1801–1807); Kingdom of Etruria annexed to France (1807–1814); Grand Duchy of Tuscany (1814–1847); Grand Duchy of Tuscany \[incorporates Lucca\] (1847); Grand Duchy of Tuscany (1847–1859); Grand Duchy of Tuscany joins Modena, Parma and Piacenza to form United Provinces of Central Italy (1859–1860); annexed by Piedmont-Sardinia (1860-1861).
+
+# 5.4.12 Two Sicilies (356)
+
+Coded: 1789–1860
+
+History: Kingdom of Naples (1789–1816); united with Sicily to form the Kingdom of the Two Sicilies (1816–1848); Kingdom of Sicily breaks away (1848–1849); Kingdom of the Two Sicilies (1849–1860); Two Sicilies annexed by Piedmont-Sardinia (1860).
+
+# 5.5 Western Europe
+
+# 5.5.1 Austria (144)
+
+Coded: 1789–1938; 1945– History: Austrian hereditary lands (1789–1867); Austrian ”half” of the Habsburg Empire - Cisleithania (1867–1918); Republic of German-Austria (1918–1919); Republic of Austria (1919–1938); German state of Ostmark (1938–1939); Ostmark as an integral part of Third Reich \[dissolved into Reichsgaue\] (1939–1945); Republic of Austria under Allied occupation (1945–1955); Republic of Austria (1955– ). Note: Between 1789 and 1867, includes only present-day Austria, Czech Republic, Slovenia,Italian Tyrol and Herzegovina. Between 1867 and 1918, includes present-day Austria, Czech Republic, Slovenia Italian Tyrol, and does not include Bosnia and Herzegovina. For the years 1900–1917, Austria is coded by Historical V-Dem only.
+
+# 5.5.2 Baden (349)
+
+Coded: 1789–1871
+
+History: Margraviate of Baden (1789–1803); Electorate of Baden (1803–1806); Grand Duchy of Baden (1806–1871).
+
+# 5.5.3 Bavaria (350)
+
+Coded: 1789–1871
+
+History: Electorate of Bavaria (1789–1803); Electorate of Bavaria \[incorporates Palatinate\] (1803); Electorate of Bavaria (1803–1806); Kingdom of Bavaria (1806–1871).
+
+# 5.5.4 Belgium (148)
+
+Coded: 1789–1795; 1830–
+
+History: Austrian Netherlands (1789–1795); Austrian Netherlands annexed by France (1795–1814); Belgian Provinces under Allied administration (1814–1815); Belgian Provinces incorporated into the Kingdom of the Netherlands (1815–1830); Kingdom of Belgium (1830–1914); Kingdom of Belgium under German occupation (1914–1918); Kingdom of Belgium (1918–1940); Kingdom of Belgium under German occupation (1940–1944); Kingdom of Belgium (1944– )
+
+Note: Only includes European possessions of Belgium.
+
+# 5.5.5 Brunswick (363)
+
+Coded: 1789–1807; 1813–1867
+
+History: Duchy of Brunswick (1789–1807); Duchy of Brunswick incorporated into Kingdom of Westphalia (1807–1813); Duchy of Brunswick (1813–1867); part of North German Confederation (1867– 1871).
+
+# 5.5.6 France (76)
+
+Coded: 1789–
+
+History: Kingdom of France (1789–1792); French First Republic (1792–1804); French Empire (1804– 1814; 1815); Kingdom of France (1815–1848); French Second Republic (1848–1852); French Empire (1852–1870); French Third Republic (1870–1940); French State \[”Vichy regime”\] (1940–1944); French Third Republic (1944–1947); French Fourth Republic (1947–1958); French Fifth Republic (1958– ). Note: Includes only the European possessions of France. This includes: Luxembourg and Belgium (1795–1814); Aachen (1797–1813); Salm-Salm, Salm-Grumbach, Mainz, Speyer, Trier (1801–1814); Kniphausen (1807–1814); Catalonia (1808–1813); The Netherlands L¨ubeck, Bremen, Oldenburg, Westphalian departments of Elbe-Inf´erieure, Nord, Weser, and Aller (1810–1813); and Hamburg (1813–1814). Does not include Lorraine and Alsace (1871–1918). Does not include overseas departments and territories. Between 1940 and 1944, the Vichy regime is understood to be the government of France — not the Free French under De Gaulle.
+
+# 5.5.7 Germany (77)
+
+Coded: 1789–1945; 1949–
+
+History: Kingdom of Prussia (1789–1812); Kingdom of Prussia under French occupation (1812–1813); Kingdom of Prussia (1813–1867); North German Confederation (1867–1871); German Empire (1871– 1918); Weimar Republic (1918–1933); Third Reich (1933–1945); Third Reich under Allied occupation (1945–1949); Federal Republic of Germany (1949– ).
+
+Note: Covers the state of Prussia from 1789–1867, and the areas under the North German Confederation from 1867–1871. Includes Austria during the Anschluss (1938–1945). Does not include other areas conquered and occupied during (and in the years leading up to) WWI and WWII. East Germany is coded separately from 1949–1990.
+
+# 5.5.8 Hamburg (362)
+
+Coded: 1789–1810; 1813–1867 History: Free Imperial City of Hamburg (1789–1806); Free Imperial City of Hamburg under French occupation (1806–1813); Free Imperial City of Hamburg annexed by France (1813–1814); Free and Hanseatic City of Hamburg (1814–1867); part of North German Confederation (1867–1871).
+
+# 5.5.9 Hanover (357)
+
+Coded: 1789–1810; 1813–1866
+
+History: Electorate of Hanover (1789–1803); Electorate of Hanover under French occupation (1803– 1805); Electorate of Hanover under Prussian occupation (1805–1806); Electorate of Hanover under French occupation (1806–1810); Electorate of Hanover incorporated into Kingdom of Westphalia (1810–1813); Electorate of Hanover (1813–1814); Kingdom of Hanover (1814–1866); annexed by Prussia (1866–1867); part of North German Confederation (1867–1871).
+
+Note: Personal union with Great Britain (1714–1837).
+
+# 5.5.10 Hesse-Darmstadt (359)
+
+Coded: 1789–1871 History: Landgraviate of Hesse-Darmstadt (1789–1806); Grand Duchy of Hesse-Darmstadt (1806– 1867); Grand Duchy of Hesse-Darmstadt as part of North German Confederation (1867–1871).
+
+# 5.5.11 Hesse-Kassel (358)
+
+Coded: 1789–1866
+
+History: Landgraviate of Hesse-Kassel (1789–1803); Electorate of Hesse-Kassel (1803–1806); Electorate of Hesse-Kassel under French Occupation (1806–1807); Kingdom of Westphalia (1807–1810); departments of Elbe-Inf´erieure, Nord, Weser, and part of Aller are annexed to France (1810); Kingdom of Westphalia (1810–1813); Kingdom of Westphalia \[dissolved\] (1813); Electorate of Hesse-Kassel (1813–1866); Electorate of Hesse-Kassel incorporated into Prussia (1866–1867); Part of North German Confederation (1867–1871).
+
+# 5.5.12 Ireland (81)
+
+Coded: 1919–
+
+History: Part of the United Kingdom (1900–1919); Ireland \[independence declared\] (1919); Ireland as part of the United Kingdom (1919–1923); Ireland \[independence recognized\] (1923– ). Note: Does not include Northern Ireland.
+
+# 5.5.13 Luxembourg (174)
+
+Coded: 1815–
+
+History: Grand Duchy of Luxemburg \[personal union with the Kingdom of the Netherlands\] (1815); Grand Duchy of Luxemburg \[personal union with the Kingdom of the Netherlands\] with Prussian soldiers stationed in Luxembourg City (1815–1830); Grand Duchy of Luxemburg \[personal union with the Kingdom of the Netherlands\] with Prussian soldiers stationed in Luxembourg City under Belgium occupation (1830–1831); Luxembourg province annexed by Belgium (1831); Grand Duchy of Luxemburg \[personal union with the Kingdom of the Netherlands\] with Prussian soldiers stationed in Luxembourg City under Belgium occupation (1831–1839); Grand Duchy of Luxemburg \[personal union with the Kingdom of the Netherlands\] with Prussian soldiers stationed in Luxembourg City (1839–1842); Grand Duchy of Luxembourg joins German customs union \[Zollverein\] (1842); Grand Duchy of Luxemburg \[personal union with the Kingdom of the Netherlands\] with Prussian soldiers stationed in Luxembourg City (1842–1867); Grand Duchy of Luxemburg \[personal union with the Kingdom of the Netherlands\] (1867–1890); Grand Duchy of Luxembourg (1890–1914); Grand Duchy of Luxembourg under German occupation (1914–1918); Grand Duchy of Luxembourg (1918–1919); Grand Duchy of Luxembourg leaves Zollverein (1919); Grand Duchy of Luxembourg (1919–1940); Grand Duchy of Luxembourg under German occupation (1940–1944); Grand Duchy of Luxembourg (1944– ).
+
+# 5.5.14 Mecklenburg-Schwerin (360)
+
+Coded: 1789–1867
+
+History: Duchy of Mecklenburg-Schwerin (1789–1815); Grand Duchy of Mecklenburg-Schwerin (1815– 1867); part of North German Confederation (1867–1871).
+
+# 5.5.15 Nassau (366)
+
+Coded: 1806–1866
+
+History: Principalities of Nassau-Weilburg and Nassau-Usingen united into the Duchy of Nassau (1806–1866); Duchy of Nassau annexed by Prussia (1866); part of North German Confederation (1867–1871).
+
+# 5.5.16 Netherlands (91)
+
+Coded: 1789–1810; 1813–
+
+History: Republic of the United Netherlands (1789–1795); Republic of the United Netherlands under French occupation (1795–1796); Batavian Republic (1796); Batavian Republic under French occupation (1796–1805); Batavian Commonwealth (1805); Batavian Commonwealth under French occupation (1805–1806); Kingdom of Holland (1806); Kingdom of Holland under French occupation (1806–1810); Kingdom of Holland annexed by France (1810–1813); Republic of the United Netherlands (1813–1815); Kingdom of the Netherlands (1815–1940); Kingdom of the Netherlands under German occupation (1940–1945); Kingdom of the Netherlands (1945– ).
+
+Note: Only includes European possessions of the Netherlands. Does not include overseas colonies and protectorates. Between 1815 and 1830 also includes Belgium. Includes Boinare, Sint Eustatius and Saba after 2010.
+
+# 5.5.17 Oldenburg (364)
+
+Coded: 1789–1810; 1813–1867
+
+History: Duchy of Oldenburg (1789–1810); Duchy of Oldenburg incorporated into France (1810– 1813); Duchy of Oldenburg (1813–1829); Grand Duchy of Oldenburg (1829–1867); part of North German Confederation (1867–1871).
+
+# 5.5.18 Saxe-Weimar-Eisenach (365)
+
+Coded: 1809–1867
+
+History: Duchies of Saxe-Weimar and Saxe-Eisenach enter a personal union (1809–1867); part of North German Confederation (1867–1871).
+
+# 5.5.19 Saxony (353)
+
+Coded: 1789–1867
+
+History: Electorate of Saxony (1789–1806); Kingdom of Saxony (1806-1867); part of North German Confederation (1867–1871).
+
+# 5.5.20 Switzerland (6)
+
+Coded: 1789—
+
+History: Swiss Confederation \[no central government\] (1789–1798); Helvetic Republic under French occupation (1798–1803); Swiss Confederation (1803); Swiss Confederation under French occupation (1803–1814); Swiss Confederation (1814– ).
+
+# 5.5.21 United Kingdom (101)
+
+Coded: 1789–
+
+History: Great Britain (1789–1801); United Kingdom of Great Britain and Ireland (1801–1922); United Kingdom of Great Britain and Northern Ireland (1922– ).
+
+Note: Includes England, Scotland, Wales, and Northern Ireland (1801– ). Includes Ireland (1801– 1923). Does not include overseas colonies and protectorates.
+
+# 5.5.22 Wurtemberg (355) ¨
+
+Coded: 1789–1871
+
+History: Duchy of W¨urtemberg (1789–1803); Electorate W¨urtemberg (1803–1806); Kingdom of W¨urtemberg (1806–1871).
+
+# 6 Middle East and North Africa (MENA)
+
+# 6.0.1 Algeria (103)
+
+Coded: 1900– History: French colony (1900–1962) \[three departments of France, but should be coded as a single unit, i.e., as single colony\]; People’s Democratic Republic of Algeria \[independent state\] (1962– ).
+
+# 6.0.2 Bahrain (146)
+
+Coded: 1900– History: British protectorate (1900–1971); Kingdom of Bahrain \[independent state\] (1971– ).
+
+# 6.0.3 Egypt (13)
+
+Coded: 1789–
+
+History: Ottoman Eyalet of Egypt (1789–1799); Ottoman Eyalet of Egypt under French occupation (1799–1801); Ottoman Eyalet of Egypt under British occupation (1801–1803); Ottoman Eyalet of Egypt (1803–1805); Ottoman Eyalet \[nominally under Ottoman suzerainty\] (1805–1866); Khedivate of Egypt (1866); Khedivate of Egypt within Ottoman Eyalet (1866–1867); Khedivate of Egypt (1867– 1882); Khedivate of Egypt under British occupation (1882–1900); part of Ottoman Empire (1900); part of Ottoman Empire under British influence (1900–1914); Sultanate of Egypt (1914); Sultanate of Egypt under British protectorate (1914–1922); Egyptian Kingdom \[nominally an independent state\] (1922); Egyptian Kingdom under British military presence (1922–1953); Republic of Egypt (1953– 1954); Republic of Egypt after British military presence ends (1954); Republic of Egypt (1954–1958); Egypt \[part of the United Arab Republic\] (1958–1961); Arab Republic of Egypt (1961–1967); Arab Republic of Egypt under Israeli occupation of the Sinai Peninsula (1967–1982); Arab Republic of Egypt (1982– ).
+
+Note: Includes Hejaz, Syria, Lebanon, Palestine (1831–1841). Does not include Sudan (coded separately).
+
+# 6.0.4 Iran (79)
+
+Coded: 1789– History: Persia (1789–1935); Iran (1935–1979); Islamic Republic of Iran (1979– ). Note: Does not include Khorasan (1789–1803). Includes Azerbaijan (1791–1813).
+
+# 6.0.5 Iraq (80)
+
+Coded: 1920–
+
+History: Ottoman Empire (1900–1917); Ottoman Empire under British occupation (1917–1920); State of Iraq \[British-led League of Nations Mandate territory\] (1920–1932); the Kingdom of Iraq \[independent state\] (1932); the Kingdom of Iraq (1932–1941); the Kingdom of Iraq under British occupation (1941); the Kingdom of Iraq (1941–1958); Republic of Iraq (1958–2003); Republic of Iraq under US occupation (2003–2012); Republic of Iraq (2012– ).
+
+# 6.0.6 Israel (169)
+
+Coded: 1948–
+
+History: British-led League of Nations mandate (1922–1948); State of Israel \[independent state\] (1948– ).
+
+Note:Includes East Jerusalem and Golan Heights (1967– ). Does not include Sinai Peninsula (occupied 1967–1982). Does not include South Lebanon (occupied 1978, 1982-2000, 2006). Does not Include West Bank, nor Gaza (coded separately).
+
+# 6.0.7 Jordan (83)
+
+Coded: 1922–
+
+History: Emirate of Transjordan (1922–1946); the Hashemite Kingdom of Jordan \[independent state\] (1946– ).
+
+Note: Includes West Bank between 1950 and 1967.
+
+# 6.0.8 Kuwait (171)
+
+Coded: 1789–
+
+History: Sheikhdom of Kuwait (1789–1871); Sheikhdom of Kuwait \[under nominal Ottoman suzerainty\] (1871–1899); Kuwait under informal protectorate of Britain (1899–1961); State of Kuwait \[independent state\] (1961–1990); State of Kuwait under Iraqi occupation (1990–1991); State of Kuwait (1991– ).
+
+# 6.0.9 Lebanon (44)
+
+Coded: 1918–
+
+History: Syrian province of the Ottoman Empire (1900–1918); Syrian province of the Ottoman Empire under French influence (1918–1920); State of Greater Lebanon (1920); State of Greater Lebanon under French influence (1920–1923); State of Greater Lebanon under French protectorate (1923–1926); Republic of Lebanon (1926); Republic of Lebanon under French protectorate (1926–1943); Republic of Lebanon \[independent state\] (1943); Republic of Lebanon under French influence (1943–1946); Republic of Lebanon after last French troops withdrawal (1946); Republic of Lebanon (1946–1991); Republic of Lebanon and occupied Southern Lebanon (1992– ).
+
+# 6.0.10 Libya (124)
+
+Coded: 1789–1834; 1911–1933; 1934–1942, 1951–
+
+History: Sultanate of Tripoli (1789–1834); Ottoman Eyalet of Tripolitania (1835–1911); Ottoman Eyalet of Tripolitania under Italian occupation (1911); Italian protectorate of Tripolitania (1912– 1918); Tripolitanian Republic (1918–1922); Italian colony of Tripolitania (1922–1933); Tripolitania united with Fezzan and Cyrenaica as the Italian colony of Libya (1934–1942); Tripolitania and Cyrenaica under British occupation \[administered separately\] (1942–1943); Tripolitania and Cyrenaica under British occupation \[administered separately\] and Fezzan occupied by France (1943–1950); Tripolitania, Cyrenaica and Fezzan under UN supervision \[separate British and French administration, with a UN commissioner in Tripoli\] (1950–1951); United Kingdom of Libya \[consolidated as a unified independent state\] (1951–1963); Libyan Kingdom (1963–1968); Libyan Arab Republic (1968–1973); Socialist People’s Libyan Arab Jamahiriya (1973–1986); Great Socialist People’s Libyan Arab Jamahiriya (1986–2011); Libya (2011–2012); State of Libya (2012– ).
+
+Note: Before 1934, only the present-day Libyan region of Tripolitania is coded. Tripolitania, Cyrenaica and Fezzan enjoy a large degree of autonomy up to 1963. For the years 1911–1933, Libya is coded by Historical V-Dem only.
+
+# 6.0.11 Morocco (90)
+
+Coded: 1789–
+
+History: Kingdom of Morocco (1789–1900); Kingdom of Morocco under French and Spanish sphere of influence (1900–1907); Kingdom of Morocco under French occupation (1907–1910); northern Kingdom of Morocco under Spanish occupation (1910); Kingdom of Morocco under French occupation (1910– 1912); Kingdom of Morocco under French protectorate \[though not integrated into France to the degree that other French colonies were\] (1912–1956); Kingdom of Morocco [independent state](https://v-dem.net/static/website/img/refs/1956%E2%80%93).
+
+Note: Does not include the Spanish protectorate (1912–1956) or the Western Sahara, but please note that for the Historical V-Dem coding the Spanish protectorate was included for 1912–1920. For the years 1900–1911, Morocco is coded by Historical V-Dem only.
+
+# 6.0.12 Oman (187)
+
+Coded: 1789–
+
+History: Sultanate of Muscat (1789–1820); Sultanate of Muscat and Oman (1820–1920); Sultanate of Muscat (1920–1955); Sultanate of Muscat and Oman (1955–1970); Sultanate of Oman (1970– ). Note:Includes Zanzibar (1789–1855) and Gwadar (1792–1920). Imamate of Oman (1789–1820 and 1920–1955) is excluded from the coding.
+
+# 6.0.13 Palestine/British Mandate (209)
+
+Coded: 1918–1948.
+
+# 6.0.14 Palestine/Gaza (138)
+
+Coded: 1948–1967, 2007–
+
+History: British mandate (1918–1948); Gaza Strip under Egyptian occupation (1948–1967); Gaza Strip under Israeli occupation \[military rule\] (1967–1981); Gaza Strip under Israeli occupation \[civil administration\] (1981–1994); most of Gaza Strip and the city of Jericho in the West Bank under Palestinian Authority rule \[subsequently expanded to other territories\] (1994–2007); Gaza Strip under Hamas control (2007– ).
+
+Note: This coding unit refers to the present-day territory of Gaza. It does not include areas in Gaza that Israel controls entirely in the present era (i.e., Area C).
+
+# 6.0.15 Palestine/West Bank (128)
+
+Coded: 1948–1950; 1967–
+
+History: British mandate (1918–1948); West Bank under Jordanian occupation \[unrecognized annexation in 1950\] (1948–1967); West Bank under Israeli occupation \[military rule\] (1967–1981); West Bank under Israeli occupation \[civil administration\] (1981–1994); the city of Jericho in the West Bank and most of the Gaza Strip under Palestinian Authority rule \[subsequently expanded to other territories\] (1994).
+
+Note: This coding unit refers to the present-day territories of Gaza and the West Bank (not East Jerusalem) except for 1948–1967 and 2007– , when it refers to West Bank only (Gaza is coded separately when Hamas gains control in 2007). From 1994, this does not include areas in Gaza and the West Bank that Israel controls entirely (i.e., Area C).
+
+# 6.0.16 South Yemen (23)
+
+Coded: 1900–1990.
+
+History: Aden, part of British India (1900–1937); British colony of Aden (1937–1963); Federation of South Arabia (1963–1967); People’s Republic of South Yemen (1967–1970); People’s Democratic Republic of Yemen (1970–1990).
+
+Note: Up to 1963 only includes the city of Aden and its immediate surroundings. Between 1963 and 1967 does not include the Protectorate of South Arabia.
+
+# 6.0.17 Syria (97)
+
+Coded: 1918–1920; 1922–
+
+History: Syrian province of the Ottoman Empire (1900–1918); Syrian province of the Ottoman Empire under British and French occupation (1918–1920); Arab Kingdom of Syria (1920); Arab Kingdom of Syria divided into separate ”Levant States” by France (1920–1922); Syrian Federation (1922–1924); Syrian Federation under French protectorate (1923–1924); State of Syria (1924); State of Syria under French protectorate (1924–1930); Syrian Republic (1930); Syrian Republic under French protectorate (1930–1943); Syrian Republic \[achieves independence\] (1943); Syrian Republic under French protectorate (1943–1946); Syrian Republic \[independence recognized, last French troops depart\] (1946); Syrian Republic (1946–1958); part of United Arab Republic (1958–1961); Syrian Arab Republic (1961– ).
+
+Note: Between 1922 and 1924 only includes the State of Damascus, Alawite State and State of Aleppo. Does not include Jabal al Druze State. Between 1924 and 1930 only includes the State of Damascus and State of Aleppo. Does not include Jabal al Druze State nor the Alawite State. Between 1958 and 1961 only code the Syrian part of the United Arab Republic. After 1967, do not include the Golan Heights.
+
+# 6.0.18 Qatar (94)
+
+Coded: 1900–
+
+History: Unofficial British protectorate (1900–1916); British protectorate (1916–1971); State of Qatar \[independent state\] (1971– ).
+
+# 6.0.19 Saudi Arabia (197)
+
+Coded: 1789–1818; 1822– History: Al-Diriyah Emirate (1789–1818); Al-Diriyah Emirate under Egyptian occupation (1818– 1822); Al-Diriyah Emirate \[restored\] (1822–1887); Al-Diriyah Emirate under Jebel Shammar occupation (1887–1902); Emirate of Nejd (1902–1913); Emirate of Nejd \[incorporates al-Hasa\] (1913); Emirate of Nejd (1913–1925); Emirate of Nejd \[occupies and incorporates Hejaz\] (1925); Emirate of Nejd (1925–1932); Nejd and Hejaz formally united as Kingdom of Saudi Arabia (1932– ). Note: For the years 1900–1931, Saudi Arabia is coded by Historical V-Dem only.
+
+# 6.0.20 Tunisia (98)
+
+Coded: 1789– History: Beylik of Tunis \[autonomous under nominal Ottoman suzerainty\] (1789–1881); French protectorate of Tunisia (1881–1956); Tunisian Republic \[independent state\] (1956– ).
+
+# 6.0.21 Turkey (99)
+
+Coded: 1789– History: Ottoman Empire (1789); Ottoman Empire \[includes Hejaz, Syria, Lebanon, Palestine, Serbia, Samos, Greece, Bosnia, Bulgaria, Eastern Rumelia and Crete\] (1789–1804); Ottoman Empire \[includes Hejaz, Syria, Lebanon, Palestine, Samos, Greece, Bosnia, Bulgaria, Eastern Rumelia and Crete\] (1804–1813); Ottoman Empire \[includes Hejaz, Syria, Lebanon, Palestine, Serbia, Samos, Greece, Bosnia, Bulgaria, Eastern Rumelia and Crete\] (1813–1815); Ottoman Empire \[includes Hejaz, Syria, Lebanon, Palestine, Greece, Samos, Bosnia, Bulgaria, Eastern Rumelia and Crete\] (1815– 1821); Ottoman Empire \[includes Hejaz, Syria, Lebanon, Palestine, Greece, Bosnia, Bulgaria, Eastern Rumelia and Crete\] (1821–1822); Ottoman Empire \[includes Hejaz, Syria, Lebanon, Palestine, Bosnia, Bulgaria, Eastern Rumelia, Crete\] (1822–1830); Ottoman Empire \[includes Bosnia, Bulgaria, Eastern Rumelia, Crete\] (1830–1831); Ottoman Empire \[includes Bosnia, Bulgaria, Eastern Rumelia, Crete, Iraq (Baghdad)\] (1831–1841); Ottoman Empire \[includes Hejaz, Syria, Lebanon, Palestine, Bosnia, Bulgaria, Eastern Rumelia, Crete, Iraq (Baghdad)\] (1841–1850); Ottoman Empire \[includes Hejaz, Syria, Lebanon, Palestine, Bosnia, Bulgaria, Eastern Rumelia, Crete, Iraq (Baghdad), Yemen (North)\] (1850–1859); Ottoman Empire \[includes Hejaz, Syria, Lebanon, Palestine, Bosnia, Bulgaria, Eastern Rumelia, Crete, Iraq (Baghdad), Yemen (North), Baban (Kurdistan)\] (1859–1878); Ottoman Empire \[includes Hejaz, Syria, Lebanon, Palestine, Eastern Rumelia, Crete, Iraq (Baghdad), Yemen (North), Baban (Kurdistan)\] (1878–1885); Ottoman Empire \[includes Hejaz, Syria, Lebanon, Palestine, Crete, Iraq (Baghdad), Yemen (North), Baban (Kurdistan)\] (1885–1897); Ottoman Empire \[includes Hejaz, Syria, Lebanon, Palestine, Iraq (Baghdad), Yemen (North), Baban (Kurdistan)\] (1897–1918); Ottoman Empire \[transition phase\] (1918–1923); Republic of Turkey (1923– ). Note: Does not include Algeria, Tunisia, Egypt, Cyprus, Kuwait nor Bahrain (coded separately).
+
+# 6.0.22 United Arab Emirates (207)
+
+Coded: 1971– History: British sphere of influence (1900–1971); independent state formed from seven emirates: Abu Dhabi, Ajman, Dubai, Fujairah, Ras al-Khaimah, Sharjah, Umm al-Quwain (1971– ).
+
+# 6.0.23 Yemen (14)
+
+Coded: 1789–1850; 1918–
+
+History: Yemen (1789–1850); part of the Ottoman Empire \[varying degrees of control/direct rule\] (1850–1918); Mutawakkilite Kingdom of Yemen (1918–1962); the Yemen Arab Republic \[”North Yemen”\] (1962–1990); Republic of Yemen (1990– ).
+
+# 7 Oceania
+
+# 7.0.1 Australia (67)
+
+Coded: 1789– History: British colony of New South Wales (1789–1901); Commonwealth of Australia (1901– ).
+
+7.0.2 Fiji (162)
+
+Coded: 1900–
+
+History: British colony (1900–1970); Dominion of Fiji \[independent state\] (1970–1987); Republic of Fiji (1987–1990); Sovereign Democratic Republic of Fiji (1990–1998); Republic of the Fiji Islands (1998–2011); Republic of Fiji (2011– ).
+
+# 7.0.3 New Zealand (185)
+
+Coded: 1841– History: New Zealand Colony (1841–1907); Dominion of New Zealand (1907– ).
+
+# 7.0.4 Papua New Guinea (93)
+
+Coded: 1900–
+
+History: British protectorate of British New Guinea (1900–1902); British New Guinea under the authority of the Commonwealth of Australia (1902–1906); Territory of Papua (1906); Territory of Papua under the authority of the Commonwealth of Australia (1906–1945); Territory of Papua after union with the Territory of New Guinea (1945); Territory of Papua and New Guinea under the authority of the Commonwealth of Australia (1945–1975); Independent State of Papua New Guinea (1975– ).
+
+# 7.0.5 Solomon Islands (203)
+
+Coded: 1900–
+
+History: Solomon Islands as a British colony or protectorate (1900–1942); Solomon Islands as a British colony under Japanese occupation (1942–1943); Solomon Islands as a British colony (1943–1976); Solomon Islands with self-rule within the Commonwealth (1976–1978); Solomon Islands \[independent state\] (1978– ).
+
+# 7.0.6 Vanuatu (206)
+
+Coded: 1906– History: Vanuatu under joint French and British control by British-French Condominium \[separate governing systems\] (1906–1980); Republic of Vanuatu \[independent state\] (1980– ).
+
+# 8 Other Political Units (Not coded)
+
+# 8.1 Africa
+
+# 8.1.1 Western Sahara
+
+Years: 1900–
+
+Status: Not coded
+
+History: Spanish West Africa (1900–1976); Sahrawi Arab Democratic Republic \[proclaimed\]\[area partitioned by Mauritania and Morocco\] (1976); Western Sahara \[partitioned\] (1976–1979); Western Sahara \[evacuated by Mauritania\]\[former Mauritanian areas occupied by Morocco\] (1979); Western Sahara \[disputed sovereignty\] (1979– ).
+
+# 8.2 Americas
+
+# 8.2.1 Antigua and Barbuda
+
+Years: 1900–
+
+Status: Not coded
+
+History: Antigua and Barbuda as a British colony (1900–1981); Antigua and Barbuda \[independent state\] (1981– ).
+
+# 8.2.2 Bahamas
+
+Years: 1900–
+
+Status: Not coded
+
+History: Bahamas as a British colony (1900–1973); Commonwealth of the Bahamas \[independent state\] (1973– ).
+
+# 8.2.3 Dominica
+
+Years: 1900–
+
+Status: Not coded
+
+History: Dominica as a British colony (1900–1958); West Indies Federation (1958–1962); British colony (1962–1967); Dominica \[associated state of the UK with self-determination over domestic policy\] (1967–1978); Dominica \[independent state\] (1978– ).
+
+Note: Includes only Dominica during period of federation (1958–1962).
+
+# 8.2.4 Grenada
+
+Years: 1900–
+
+Status: Not coded
+
+History: Grenada as a British colony (1900–1958); British colony under the West Indies Federation (1958–1962); Grenada as a British colony (1962–1967); Grenada \[associated state of the UK with selfdetermination over domestic policy\] (1967–1974); Grenada \[independent state\] (1974–1983); Grenada under US occupation (1983); Grenada \[independent state\] (1983– ).
+
+Note: Includes only Grenada during period of federation (1958–1962).
+
+# 8.2.5 Saint Kitts and Nevis
+
+Years: 1900–
+
+Status: Not coded
+
+History: Saint Kitts and Nevis as a British colony (1900–1967); Saint Kitts and Nevis \[associated state of the UK with self-determination over domestic policy\] (1967–1971); Saint Kitts and Nevis \[Anguilla separates\] (1971); Saint Kitts and Nevis (1971–1983); Saint Kitts and Nevis \[independent state\] (1983– ).
+
+# 8.2.6 Saint Lucia
+
+Years: 1900–
+
+Status: Not coded
+
+History: Saint Lucia as a British colony (1900–1958); West Indies Federation (1958–1962); Saint Lucia as a British colony (1962–1967); Saint Lucia \[associated state of the UK with self-determination over domestic policy\] (1967–1979); Saint Lucia \[independent state\] (1979– ).
+
+Note: Includes only St Lucia during period of federation (1958–1962).
+
+# 8.2.7 Saint Vincent and the Grenadines
+
+Years: 1900–
+
+Status: Not coded
+
+History: Saint Vincent and the Grenadines as a British colony (1900–1958); West Indies Federation (1958–1962); Saint Vincent and the Grenadines as a British colony (1962–1969); Saint Vincent and the Grenadines \[associated state of the UK with self-determination over domestic policy\] (1969–1979); Saint Vincent and the Grenadines \[independent state\] (1979– ).
+
+Note: Includes only St Vincent/Grenadines during period of federation (1958–1962).
+
+# 8.2.8 Belize (149)
+
+Years: 1900–
+
+Status: Not coded
+
+History: British colony of British Honduras (1900–1964); British colony of British Honduras \[granted self-government\] (1964); British colony of British Honduras (1964–1973); Belize (1973–1981); Belize \[independent state\] (1981– ).
+
+# 8.3 Asia
+
+# 8.3.1 Abkhazia
+
+Years: 1993–
+
+Status: Not coded
+
+History: Russian Empire (1900–1917); part of Georgia (1917–1921); under Soviet rule (1921–1922); part of Transcaucasian Soviet Federative Socialist Republic (1922–1936); part of Georgia Soviet Socialist Republic (1936–1990); declaration of sovereignty within USSR (1990); part of Georgia Soviet Socialist Republic (1990–1991); part of independent Republic of Georgia (1991–1992); declaration of independence (1992); part of independent Republic of Georgia (1992–1993); Republic of Abkhazia \[semi-autonomous break-away region\] (1993– ).
+
+Note: In 1993, the Russian-brokered ceasefire permitted the resurgence of self-rule. Short episodes of Georgian-Abkhaz violence did occur after 1993, but Abkhazia maintained autonomy. After the 2008 Russo-Georgian war, Abkhazia and so called South Ossetia was recognized by Russia and Nicaragua, and in 2009 by Venezuela.
+
+# 8.3.2 Nagorno-Karabakh Republic
+
+Years: 1992–
+
+Status: Not coded
+
+History: Russian Empire (1900–1917); autonomous part of Azerbaijan (1917–1920); Declared part of Armenia (1920); occupied by Soviet Russia \[incorporated into Azerbaijan Soviet Socialist Republic\] (1921–1991); part of independent Azerbaijan (1991–1992); Republic of Nagorno-Karabakh \[semiautonomous break-away region\] (1992– ).
+
+Note: A semi-constant state of conflict is present between 1988 and 1994. Political ties between N-K and Armenia are very tight and it is difficult to argue the extent to which N-K is truly self-governing.
+
+# 8.3.3 Tskhinvali (so called South Ossetia)
+
+Years: 1991– Status: Not coded
+
+History: Russian Empire (1900–1917); part of Georgia (1918–1921); Georgia under Soviet rule (1921– 1922); autonomous oblast of Transcaucasian Soviet Federative Socialist Republic (1922–1936); part of Georgian Soviet Socialist Republic (1936–1991); war with Georgia (1991–1992); declaration of sovereignty within USSR (1991); Republic of South Ossetia \[declaration of independence\] (1991); Republic of South Ossetia \[semi-autonomous break-away region\] (1992– ).
+
+Note: After the 2008 Russo-Georgian war, Abkhazia and so called South Ossetia was recognized by Russia and Nicaragua, and in 2009 by Venezuela.
+
+# 8.3.4 Macau (175)
+
+Years: 1900–
+
+Status: Not coded
+
+History: Macau as a Portuguese colony (1900–1999); Macau as a special administrative region of China (1999– ).
+
+# 8.3.5 Manchukuo
+
+Years: 1932–1945 Status: Not coded
+
+# 8.3.6 Tibet
+
+Years: 1913–1950 Status: Not coded
+
+# 8.3.7 Brunei (151)
+
+Years: 1900–
+
+Status: Not coded
+
+History: Brunei under British protectorate (1900–1941); Brunei under Japanese occupation (1941– 1945); Brunei under British protectorate (1945–1984); State of Brunei Darussalam \[independent state\] (1984– ).
+
+# 8.4 Europe
+
+# 8.4.1 Transnistria
+
+Years: 1990–
+
+Status: Not coded
+
+History: Russian Empire (1900–1917); part of Soviet Russia (1917–1919); occupied by ”White” Russian forces under Denikin (1919–1920); part of Ukraine (1920–1941); annexed by Romania (1941– 1944); part of Moldavian Soviet Socialist Republic within U.S.S.R. (1944–1991); Transnitria declares sovereignty (1990–1991); Transnitria declares independence (1991); Transnitria/ Pridnestrovian Moldavian Republic \[unrecognized autonomous state\] (1991– ).
+
+# 8.4.2 Faroe Islands
+
+Years: 1900–
+
+Status: Not coded
+
+History: Danish possession (1900–1948); Faroe Islands \[self-government\] (1948– ).
+
+# 8.4.3 Greenland
+
+Years: 1900–
+
+Status: Not coded
+
+History: Danish possession (1900–1953); Greenland under US protectorate (1941–1945); Danish province (1953–1979); Greenland \[self-government\] (1979–2009); Greenland \[expanded autonomy\] (2009– ).
+
+# 8.4.4 Andorra (142)
+
+Years: 1900– Status: Not coded
+
+# 8.4.5 Northern Cyprus, Turkish Republic of
+
+Years: 1974–
+
+Status: Not coded
+
+History: Ottoman Empire \[not ruled directly\], under British sphere of influence (1900–1918); Cyprus under British sphere of influence (1918–1925); Cyprus as a British crown colony (1925–1960);part of Cyprus (1960–1974); Turkish Republic of Northern Cyprus (1974– ).
+
+# 8.4.6 San Marino (195)
+
+Years: 1900– Status: Not coded
+
+# 8.4.7 Vatican City (208)
+
+Years: 1900– Status: Not coded
+
+# 8.4.8 Liechtenstein (172)
+
+Years: 1900– Status: Not coded
+
+# 8.4.9 Monaco (182)
+
+Years: 1900– Status: Not coded
+
+# 8.5 Middle East and North Africa (MENA)
+
+# 8.5.1 Cyrenaica
+
+Years: 1900–1934, 1942–1951
+
+Status: Not coded
+
+History: Ottoman province (1900–1911); Italian colony (1911–1934); part of unified Italian colony of (1934–1942); under British occupation (1942–1951); incorporated into unified independent Kingdom of Libya (1951).
+
+# 8.5.2 Fezzan
+
+Years: 1900–1934, 1942-1951
+
+Status: Not coded
+
+History: Ottoman province (1900–1911); Italian colony (1911–1934); part of unified Italian colony of Libya (1934–1942); Italian colony of Libya under French occupation (1942–1951); incorporated into unified independent Kingdom of Libya (1951– ).
+
+Note: Loose Italian control (1911–1923).
+
+# 8.6 Oceania
+
+# 8.6.1 Federated States of Micronesia
+
+Years: 1900–
+
+Status: Not coded
+
+History: German colony (1900–1914); Japanese colony (1914–1944); Federated States of Micronesia under US occupation and trusteeship (1944–1986); Federated States of Micronesia \[independent state\] (1986– ).
+
+# 8.6.2 Kiribati
+
+Years: 1900–
+
+Status: Not coded
+
+History: British protectorate over Gilbert and Ellice Islands \[administered by Western Pacific High Commission in Fiji\] (1900–1916); Crown Colony of Gilbert and Ellice Islands (1916–1919); Crown Colony of Gilbert and Ellice Islands joined by Christmas Island/Kiritimati (1919); Crown Colony of Gilbert and Ellice Islands (1919–1937); Crown Colony of Gilbert and Ellice Islands joined by Phoenix Islands (1937); Crown Colony of Gilbert and Ellice Islands (1937–1941); Crown Colony of Gilbert and Ellice Islands under Japanese occupation (1941–1943); Crown Colony of Gilbert and Ellice Islands (1943–1971); Crown Colony of Gilbert and Ellice Islands with self-rule (1971–1975); Crown Colony of Gilbert and Ellice Islands with self-determination over domestic affairs (1975–1979); Kiribati \[independent state\] (1979– ).
+
+# 8.6.3 Marshall Islands
+
+Years: 1900–
+
+Status: Not coded
+
+History: German protectorate \[part of German New Guinea\] (1900–1914); German protectorate under Japanese occupation (1914–1920); Japanese colony (1920–1944); Japanese colony under US occupation (1944–1979); Marshall Islands with self-rule (1979–1986); Marshall Islands \[independent state\] (1986– ).
+
+# 8.6.4 Nauru
+
+Years: 1900–
+
+Status: Not coded
+
+History: Nauru as German colony (1900–1914); Nauru under Australian occupation (1914–1923); Nauru under League of Nations trustee mandate \[held jointly by Australia, New Zealand, and UK\] (1923–1942); Nauru under Japanese occupation (1942–1945); Nauru under Australian occupation (1945–1947); Nauru under UN trustee mandate \[held jointly by Australia, New Zealand, and UK\] (1947–1966); Republic of Nauru \[self-governing\] (1966–1968); Republic of Nauru \[independent state\] (1968– ).
+
+# 8.6.5 Palau
+
+Years: 1900–
+
+Status: Not coded History: Palau as a German colony (1900–1914); Palau under Japanese occupation (1914–1944); Palau under US occupation (1944–1947); Palau as a US trust territory (1947–1994); Republic of Palau with self-rule (1978–1994); Republic of Palau \[independent state\] (1994– ).
+
+# 8.6.6 Samoa
+
+Years: 1900–
+
+Status: Not coded
+
+History: German colony of German Samoa (1900–1914); Samoa under New Zealand mandate \[territory granted by League of Nations\] (1914–1962); Western Samoa \[independent state\] (1962–1997); Samoa (1997– ).
+
+# 8.6.7 Territory of New Guinea
+
+Years: 1900–
+
+Status: Not coded
+
+History: German colony of German New Guinea \[includes territories of Boku and Bouganville\] (1900– 1914); German New Guinea under Australian occupation (1914–1920); Territory of New Guinea under League of Nations mandate \[governed by Australia\] (1920–1942); Territory of New Guinea under Japanese occupation (1942–1945).
+
+# 8.6.8 Tonga
+
+Years: 1900–
+
+Status: Not coded
+
+History: British protectorate (1900–1901); part of the British Western Pacific Territories under a colonial High Commissioner residing in Fiji (1901–1952); Kingdom of Tonga under British protectorate (1952–1970); Kingdom of Tonga with self-rule within the Commonwealth (1970–1999); Kingdom of Tonga \[independent state\] (1999– ).
+
+# 8.6.9 Tuvalu
+
+Years: 1900–
+
+Status: Not coded
+
+History: Part of Ellice Islands British protectorate \[British Western Pacific Territories\] (1900–1916); part of Gilbert and Ellice Islands colony (1916–1974); Tuvalu after separation from Gilbert Islands \[British dependency status\] (1974–1978); Tuvalu with self-rule within the Commonwealth (1978-2000); Tuvalu \[independent state\] (2000– ).
+
+# 9 Appendix A: List of countries
+
+The following table contains all country units (and their year coverage) that are included in the VDem Dataset. Some countries are coded prior to independence, and some have gaps in their coding periods.
+
+| | | | | | |
+| --- | --- | --- | --- | --- | --- |
+| Name | ID | Coverage | Name | ID | Coverage |
+| Afghanistan | 36 | 1789-2020 | Egypt | 13 | 1789-2020 |
+| Albania | 12 | 19122020 | El Salvador | 22 | 18382020 |
+| Algeria | 103 | 1900-2020 | Equatorial Guinea | 160 | 1900-2020 |
+| Angola | 104 | 1900-2020 | Eritrea | 115 | 1900-2020 |
+| Argentina | 37 | 17892020 | Estonia | 161 | 1918-2020 |
+| Armenia | 105 | 1990-2020 | Eswatini | 132 | 1900-2020 |
+| Australia | 67 | 17892020 | Ethiopia | 38 | 17892020 |
+| Austria | 144 | 17892020 | Fiji | 162 | 1900-2020 |
+| Azerbaijan | 106 | 19902020 | Finland | 163 | 1809-2020 |
+| Baden | 349 | 17891871 | France | 76 | 17892020 |
+| Bahrain | 146 | 1900-2020 | Gabon | 116 | 1910-2020 |
+| Bangladesh | 24 | 1971-2020 | Georgia | 118 | 1990-2020 |
+| Barbados | 147 | 1900-2020 | German Democratic Republic | 137 | 19491990 |
+| Bavaria | 350 | 17891871 | Germany | 77 | 17892020 |
+| Belarus | 107 | 1990-2020 | Ghana | 7 | 19022020 |
+| Belgium | 148 | 17892020 | Greece | 164 | 18222020 |
+| Benin | 52 | 1900-2020 | Guatemala | 78 | 17892020 |
+| Bhutan | 53 | 1900-2020 | Guinea | 63 | 1900-2020 |
+| Bolivia | 25 | 18252020 | Guinea-Bissau | 119 | 1900-2020 |
+| Bosnia and Herzegovina | 150 | 19922020 | Guyana | 166 | 1900-2020 |
+| Botswana | 68 | 1900-2020 | Haiti | 26 | 17892020 |
+| Brazil | 19 | 17892020 | Hamburg | 362 | 17891867 |
+| Brunswick | 363 | 17891867 | Hanover | 357 | 17891866 |
+| Bulgaria | 152 | 18782020 | Hesse-Darmstadt | 359 | 17891866 |
+| Burkina Faso | 54 | 1919-2020 | Hesse-Kassel | 358 | 17891866 |
+| Burma/Myanmar | 10 | 17892020 | Honduras | 27 | 18382020 |
+| Burundi | 69 | 19162020 | Hong Kong | 167 | 1900-2020 |
+| Cambodia | 55 | 1900-2020 | Hungary | 210 | 17892020 |
+| Cameroon | 108 | 19612020 | Iceland | 168 | 1900-2020 |
+| Canada | 66 | 18412020 | India | 39 | 17892020 |
+| Cape Verde | 70 | 1900-2020 | Indonesia | 56 | 1800-2020 |
+| Central African Republic | 71 | 1920-2020 | Iran | 79 | 17892020 |
+| Chad | 109 | 19202020 | Iraq | 80 | 1920-2020 |
+| Chile | 72 | 17892020 | Ireland | 81 | 19192020 |
+| China | 110 | 17892020 | Israel | 169 | 19482020 |
+| Colombia | 15 | 17892020 | Italy | 82 | 18612020 |
+| Comoros | 153 | 1900-2020 | Ivory Coast | 64 | 1900-2020 |
+| Costa Rica | 73 | 18382020 | Jamaica | 120 | 1900-2020 |
+| Croatia | 154 | 19412020 | Japan | 9 | 17892020 |
+| Cuba | 155 | 17892020 | Jordan | 83 | 19222020 |
+| Cyprus | 156 | 1900-2020 | Kazakhstan | 121 | 1990-2020 |
+| Czech Republic | 157 | 1918-2020 | Kenya | 40 | 1900-2020 |
+| Democratic Republic of the Congo | 111 | 1900-2020 | Kosovo | 43 | 19992020 |
+| Denmark | 158 | 17892020 | Kuwait | 171 | 17892020 |
+| Djibouti | 113 | 1900-2020 | Kyrgyzstan | 122 | 19902020 |
+| Dominican Republic | 114 | 17892020 | Laos | 123 | 1900-2020 |
+| Ecuador | 75 | 18302020 | Latvia | 84 | 1920-2020 |
+| Lebanon | 44 | 1918-2020 | Sao Tome and Principe | 196 | 1900-2020 |
+| Lesotho | 85 | 1900-2020 | Saudi Arabia | 197 | 17892020 |
+| Liberia | 86 | 1821-2020 | Saxe-Weimar-Eisenach | 365 | 18091867 |
+| Libya | 124 | 1789-2020 | Saxony | 353 | 17891867 |
+| Lithuania | 173 | 1918-2020 | Senegal | 31 | 19042020 |
+| Luxembourg | 174 | 1815-2020 | Serbia | 198 | 18042020 |
+| Madagascar | 125 | 1817-2020 | Seychelles | 199 | 19032020 |
+| Malawi | 87 | 1900-2020 | Sierra Leone | 95 | 1900-2020 |
+| Malaysia | 177 | 1900-2020 | Singapore | 200 | 1867-2020 |
+| Maldives | 88 | 1900-2020 | Slovakia | 201 | 1939-2020 |
+| Mali | 28 | 1900-2020 | Slovenia | 202 | 19892020 |
+| Malta | 178 | 1900-2020 | Solomon Islands | 203 | 1900-2020 |
+| Mauritania | 65 | 1904-2020 | Somalia | 130 | 1900-2020 |
+| Mauritius | 180 | 1900-2020 | Somaliland | 139 | 1900-2020 |
+| Mecklenburg-Schwerin | 360 | 17891867 | South Africa | 8 | 1900-2020 |
+| Mexico | 3 | 17892020 | South Korea | 42 | 17892020 |
+| Modena | 351 | 17891859 | South Sudan | 32 | 2011-2020 |
+| Moldova | 126 | 1990-2020 | South Yemen | 23 | 1900-1990 |
+| Mongolia | 89 | 1911-2020 | Spain | 96 | 1789-2020 |
+| Montenegro | 183 | 1789-2020 | Sri Lanka | 131 | 1900-2020 |
+| Morocco | 90 | 17892020 | Sudan | 33 | 1900-2020 |
+| Mozambique | 57 | 1900-2020 | Suriname | 4 | 1900-2020 |
+| Namibia | 127 | 1900-2020 | Sweden | 5 | 1789-2020 |
+| Nassau | 366 | 18061866 | Switzerland | 6 | 1789-2020 |
+| Nepal | 58 | 1789-2020 | Syria | 97 | 19182020 |
+| Netherlands | 91 | 1789-2020 | Taiwan | 48 | 1900-2020 |
+| New Zealand | 185 | 18412020 | Tajikistan | 133 | 19902020 |
+| Nicaragua | 59 | 18382020 | Tanzania | 47 | 1914-2020 |
+| Niger | 60 | 1922-2020 | Thailand | 49 | 17892020 |
+| Nigeria | 45 | 1914-2020 | The Gambia | 117 | 1900-2020 |
+| North Korea | 41 | 1945-2020 | Timor-Leste | 74 | 1900-2020 |
+| North Macedonia | 176 | 19912020 | Togo | 134 | 1916-2020 |
+| Norway | 186 | 1789-2020 | Trinidad and Tobago | 135 | 1900-2020 |
+| Oldenburg | 364 | 17891867 | Tunisia | 98 | 17892020 |
+| Oman | 187 | 1789-2020 | Turkey | 99 | 17892020 |
+| Pakistan | 29 | 1947-2020 | Turkmenistan | 136 | 19902020 |
+| Palestine/British Mandate | 209 | 19181948 | Tuscany | 354 | 17891861 |
+| Palestine/Gaza | 138 | 1948-2020 | Two Sicilies | 356 | 17891860 |
+| Palestine/West Bank | 128 | 19482020 | Uganda | 50 | 1900-2020 |
+| Panama | 92 | 19032020 | Ukraine | 100 | 1990-2020 |
+| Papal States | 361 | 17891870 | United Arab Emirates | 207 | 19712020 |
+| Papua New Guinea | 93 | 1900-2020 | United Kingdom | 101 | 17892020 |
+| Paraguay | 189 | 1811-2020 | United States of America | 20 | 17892020 |
+| Parma | 352 | 17891859 | Uruguay | 102 | 1825-2020 |
+| Peru | 30 | 1789-2020 | Uzbekistan | 140 | 1789-2020 |
+| Philippines | 46 | 1900-2020 | Vanuatu | 206 | 1906-2020 |
+| Piedmont-Sardinia | 373 | 17891861 | Venezuela | 51 | 17892020 |
+| Poland | 17 | 17892020 | Vietnam | 34 | 19452020 |
+| Portugal | 21 | 1789-2020 | Würtemberg | 355 | 17891871 |
+| Qatar | 94 | 1900-2020 | Yemen | 14 | 17892020 |
+| Republic of the Congo | 112 | 1903-2020 | Zambia | 61 | 1911-2020 |
+| Republic of Vietnam | 35 | 18021975 | Zanzibar | 236 | 18562020 |
+| Romania | 190 | 1789-2020 | Zimbabwe | 62 | 1900-2020 |
+| Russia | 11 | 1789-2020 | | : | |
+| Rwanda | 129 | 1916-2020 | Total number of countries | 202 | |
