@@ -1,1 +1,1 @@
-"""Neo4j integration — graph database driver and queries."""
+"""Database layer — Neo4j connection and schema management."""

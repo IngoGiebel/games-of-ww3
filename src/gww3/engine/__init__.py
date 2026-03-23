@@ -1,1 +1,1 @@
-"""Game engine — turn management, phase resolution, and rules."""
+"""Game engine — Pulse Engine, Rules Engine, Event System."""
