@@ -1,92 +1,100 @@
-# Gemini 3.1 Deep Think — Project Structure & Definition Review
+# Gemini 3.1 Deep Think — Project Review Round 2 (Post-Fix Validation)
 
-You are a senior software architect and project manager specializing in large-scale multi-agent systems and real-time simulation engines. You have been given the complete project documentation for **Games of World War 3 (GWW3)** — a hyper-realistic geopolitical real-time simulation.
+You are a senior software architect and project manager specializing in large-scale multi-agent systems and real-time simulation engines. You previously reviewed the *Games of World War 3* (GWW3) project and identified 5 critical blockers. The team has addressed all 5. 
 
-Your task: **Critically review the entire project structure and definition for completeness, consistency, and readiness to begin Sprint 1 (Neo4j Schema + first data load).**
-
----
-
-## Documents to Review
-
-Please review all attached documents holistically:
-
-1. **DESIGN_v0.2.md** — Consolidated fine concept (vision, entity model, conflict systems, time model, agent architecture, scoring, tech stack)
-2. **AGENT-FRAMEWORK.md** — Development team: who builds what, with which LLMs, decision structure, checks & balances, sprint plan
-3. **SPRINTS.md** — Sprint 0-5 planning with tasks and acceptance criteria
-4. **AGENTS.md** — Team roles, directory ownership, commit rules
-5. **DATA_SOURCES_CATALOG.md** — 30+ open data sources with API details
-6. **DEEP_THINK_ANALYSIS.md** — Earlier analysis of balancing, war financing, time model, agent consensus, gap synthesis
-7. **GAME_DESIGN_v0.1.md** — Original game design document
-8. **db/schema.py** — Neo4j schema definition (Python code)
-9. **engine/pulse.py** — Multi-Resolution Pulse Engine (Python code)
+Your task: **Validate that the fixes are correct and complete, identify any remaining gaps, and give a final GO / NO-GO for Sprint 1.**
 
 ---
 
-## Review Criteria
+## Context: What Was Fixed Since Round 1
 
-### A. Architecture Consistency
+### Fix 1: Scope Boundary (LLM Strategy)
+- New Section 11.1 in DESIGN_v0.2.md clarifies: GWW3 provides the game server, rules engine, and Neo4j world model. Players bring their own LLMs and agent architectures. The flat-rate subscriptions are for the development team only, not game runtime. The API accepts structured JSON actions — a human with curl is as valid as a 6-agent LLM cabinet.
 
-1. Does the Neo4j schema (`schema.py`) fully reflect the entity model in DESIGN_v0.2.md?
-   - Are all node types present?
-   - Are all relationship types present?
-   - Are there entities mentioned in the design doc but missing from the schema?
-   - Are the temporal model nodes (Tick, STATE_AT, etc.) correctly defined?
+### Fix 2: Temporal Graph Strategy
+- STATE_AT snapshots now only created on Monthly (Economic) and Annual (Epoch) ticks (~13 snapshots/nation/year instead of 525,600).
+- Intra-month changes logged as lightweight Event nodes.
+- `should_snapshot()` method added to Pulse Engine.
+- Documented in schema.py header + DESIGN_v0.2.md Section 11.2.
 
-2. Does the Pulse Engine (`pulse.py`) match the time model specification?
-   - Are the tick intervals correct (1 tick = 1 minute)?
-   - Do the multi-resolution loops (tactical/operational/diplomatic/economic/epoch) align?
-   - Is the event-driven interrupt system addressed?
+### Fix 3: Schema & Engine Code Fixes
+- Alliance node added to NODE_LABELS (was referenced in MEMBER_OF but missing).
+- Trade model refactored: PRODUCES/CONSUMES through Commodity nodes + bilateral TRADES edge (per "edges > properties" principle).
+- Event-driven interrupt system added to pulse.py: `trigger_interrupt()`, priority queue, processed before regular pulse handlers.
+- APOC plugin documented as requirement.
+- 9 tests passing (4 new: interrupt trigger, priority ordering, snapshot monthly, no-snapshot daily).
 
-3. Is the agent architecture (game agents: Strategist, General, etc.) consistent across DESIGN_v0.2.md, AGENT-FRAMEWORK.md, and the ADK agent definitions?
+### Fix 4: Sprint 1 Rescoped
+- Renamed to "Schema, ID Harmonization & Mock Data".
+- No live API calls — all mock/static data.
+- First deliverable: master ID crosswalk (`data/id_crosswalk.json`).
+- Mock data for 2 nations (USA + CHN) to validate full graph topology.
+- DomesticFaction synthesis strategy documented (not yet coded).
+- Neo4j Docker Compose with APOC.
 
-### B. Data Pipeline Readiness
+### Fix 5: Entity Resolution
+- ID harmonization (ISO-3 ↔ COW ↔ UN M49 ↔ source-native) is Sentinel's first task.
+- Missing data strategy: imputation hierarchy (IMF → World Bank → CIA Factbook → regional average), explicit `data_quality: "estimated"` flags.
+- Documented in DESIGN_v0.2.md Section 11.5 + 11.6.
 
-4. Does DATA_SOURCES_CATALOG.md cover all parameter categories needed by the schema?
-   - Map each node type to its data sources — are there gaps?
-   - Which node types have NO identified data source?
-   - Are the listed API endpoints, formats, and rate limits sufficient for Sprint 2?
+---
 
-5. Is the proposed ingestion order (World Bank → V-Dem → SIPRI → WPP → ACLED → Comtrade → Natural Earth) optimal, or should it be reordered?
+## Documents to Review (all updated)
 
-### C. Development Process
+1. **DESIGN_v0.2.md** — Now includes Section 11: Architectural Decisions (7 subsections addressing all review findings)
+2. **AGENT-FRAMEWORK.md** — Development team definition with scope boundary clarification
+3. **SPRINTS.md** — Sprint 1 rescoped to schema + mock data + ID crosswalk
+4. **AGENTS.md** — Team roles and directory ownership
+5. **DATA_SOURCES_CATALOG.md** — 30+ data sources (unchanged)
+6. **src/gww3/db/schema.py** — Fixed: Alliance node, commodity-centric trade, sparse temporal docs, APOC requirement
+7. **src/gww3/engine/pulse.py** — Fixed: interrupt system, snapshot strategy, 9 tests passing
+8. **tests/test_pulse.py** — 9 tests including interrupt priority ordering and snapshot validation
 
-6. Is the agent team (Dione, Inanna, Archon, Sentinel, Herald) properly scoped?
-   - Are there tasks that fall between agents with no clear owner?
-   - Are the checks & balances sufficient to catch errors?
-   - Is the decision escalation path (Agent → Dione → Ingo) clear and complete?
+---
 
-7. Are the sprint plans realistic?
-   - Can Sprint 1 (Neo4j Schema v1 + first data load) be completed in 1 week?
-   - Are there hidden dependencies between sprints?
-   - What is the critical path to a playable MVP?
+## Review Criteria (Round 2)
 
-### D. Design Gaps & Risks
+### A. Fix Validation
+For each of the 5 fixes above:
+1. Is the fix **correctly implemented** in code and documentation?
+2. Is it **complete** or are there loose ends?
+3. Does it introduce any **new problems**?
 
-8. What is MISSING from the current project definition that would block Sprint 1?
-   - Specific Neo4j schema decisions that haven't been made?
-   - Data format decisions (how to handle missing values, temporal granularity)?
-   - Infrastructure decisions (Neo4j hosting, Docker config)?
+### B. Remaining Architecture Gaps
+4. Are there any **consistency issues** between the updated schema.py, pulse.py, and DESIGN_v0.2.md?
+5. The trade model now uses PRODUCES/CONSUMES/TRADES — does this correctly enable the sanction evasion shortest-path routing described in the Deep Think analysis?
+6. The interrupt system processes interrupts before regular pulse handlers — is this the right ordering? Should some interrupts be processed AFTER economic updates?
+7. The sparse temporal model stores current state on entity nodes directly — how should the rules engine handle rollback/undo if a game needs to revert to a previous state?
 
-9. What are the top 5 technical RISKS for the project?
-   - Scalability (195 nations × 1000+ params × real-time ticks)?
-   - LLM cost/latency for 6 agents × 195 nations per game?
-   - Neo4j performance with millions of temporal STATE_AT edges?
-   - Data quality issues from open sources?
-   - OAuth/flat-rate subscription throughput limits?
+### C. Sprint 1 Readiness (Final Check)
+8. Is the rescoped Sprint 1 **realistic for 1 week** with the described agent team?
+9. Are there any **hidden dependencies** or tasks that are prerequisites but not listed?
+10. What is the **minimum viable deliverable** from Sprint 1 that unblocks Sprint 2?
 
-10. What would you ADD or CHANGE to the project definition before Sprint 1?
+### D. Strategic Risks (Longer Term)
+11. With ~195 nations in a single Neo4j instance, each with hundreds of relationships — what are the **performance implications** for graph traversal queries during gameplay?
+12. The reference AI player uses Google ADK — is there a risk of **vendor lock-in** that would prevent players from using other frameworks?
+13. The game API accepts structured JSON actions — is the **action schema** well-enough defined to start building it in Sprint 1, or does it need its own design phase?
 
 ---
 
 ## Output Format
 
-For each section (A-D), provide:
+### Section A: Fix Validation
+For each fix (1-5): ✅ Validated / ⚠️ Partially fixed / ❌ Still broken
+Include specific findings and any remaining items.
 
-1. **Assessment:** ✅ Ready / ⚠️ Needs attention / ❌ Blocker
-2. **Findings:** Specific issues found
-3. **Recommendations:** Concrete fixes or additions
-4. **Priority:** Must-fix before Sprint 1 / Should-fix during Sprint 1 / Can wait
+### Section B: Remaining Gaps
+For each gap found: severity (Blocker / Important / Nice-to-have) + recommended fix.
 
-End with a **GO / NO-GO recommendation** for Sprint 1, with a clear list of any must-fix items.
+### Section C: Sprint 1 Readiness
+Assessment: GO / CONDITIONAL GO / NO-GO
+If conditional: list the specific conditions.
 
-Be thorough, critical, and constructive. The goal is to catch problems NOW before they become expensive during implementation.
+### Section D: Strategic Risks
+Top 3 risks with mitigation strategies.
+
+### Final Verdict
+**GO / CONDITIONAL GO / NO-GO** with a clear, actionable summary.
+
+Be thorough but constructive. The goal is to greenlight Sprint 1 with confidence, or identify the specific remaining items that need resolution first.
