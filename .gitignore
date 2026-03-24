@@ -33,3 +33,13 @@ htmlcov/
 
 # Neo4j
 neo4j-data/
+
+# Logs (keep directory structure via .gitkeep)
+logs/*.log
+logs/*.json
+logs/warden/*.log
+!logs/.gitkeep
+!logs/warden/.gitkeep
+
+# Temp scripts
+/tmp/gww3_etl_*

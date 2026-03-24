@@ -1,8 +1,8 @@
 # GWW3 — Agent Architecture v2.1 (Resilient ADK Loop)
 
 *Created: 2026-03-24 by Dione 🌙*
-*Updated: 2026-03-24 — Deep Think Review + Warden code review agent incorporated*
-*Status: **Approved** — Ready for implementation*
+*Updated: 2026-03-24 — Deep Think Reviews #1 + #2 incorporated, Warden + Watchdog implemented*
+*Status: **Approved** — All 5 action items from Orchestration review implemented*
 
 ## Core Problem
 
@@ -277,86 +277,39 @@ Sentinel/Archon generates script
 
 ### Implementation
 
+See `src/gww3/agents/warden.py` for the full implementation. Key design decisions
+(from Orchestration Deep Think review):
+
 ```python
-import subprocess
-from pathlib import Path
+from gww3.agents.warden import review_script, execute_with_review, get_cached_script
 
-PROJECT_DIR = Path("/home/uranus/moltbot-workspace/projects/games-of-ww3")
+# 1. JSON structured output (no brittle string matching)
+#    Warden prompt demands: {"status": "APPROVED"|"REJECTED", "feedback": "..."}
+#    Parsed with json.loads(), with fallback extraction for surrounding text
 
-class GWW3Agent:
-    
-    def review_script(self, script_content: str, task: dict) -> tuple[bool, str]:
-        """Submit generated script to Warden (Codex) for review.
-        
-        Returns:
-            Tuple of (approved: bool, review_output: str)
-        """
-        script_path = f"/tmp/gww3_etl_{task['id']}.py"
-        with open(script_path, 'w') as f:
-            f.write(script_content)
-        
-        review_prompt = (
-            f"Review the Python script at {script_path}. "
-            f"Context: ETL script for the GWW3 geopolitical simulation. "
-            f"Task: {task['title']}. "
-            f"Target: Neo4j (bolt://localhost:7687). "
-            f"\n\nReview criteria:\n"
-            f"1. SECURITY: No Cypher injection, no hardcoded secrets, no arbitrary code execution\n"
-            f"2. CORRECTNESS: Right units (absolute USD not millions, rates as %, V-Dem 0-1 * 100), "
-            f"correct API endpoints and parameters\n"
-            f"3. ERROR HANDLING: Timeouts, retries, graceful failure on missing data\n"
-            f"4. IDEMPOTENCY: Uses MERGE not CREATE, can rerun safely without duplicates\n"
-            f"5. STANDARDS: Applies normalization.py converters and validation_bounds.py checks\n"
-            f"6. DATA QUALITY: Handles null values (imputes or flags), validates ranges\n"
-            f"\nRespond with EXACTLY one of:\n"
-            f"APPROVED - script is safe and correct\n"
-            f"REJECTED: <specific list of issues that must be fixed>"
-        )
-        
-        result = subprocess.run(
-            ["codex", "exec",
-             "--approval-mode", "full-auto",
-             "-c", 'model="gpt-5.3-codex"',
-             review_prompt],
-            capture_output=True, text=True, timeout=180,
-            cwd=str(PROJECT_DIR)
-        )
-        
-        output = result.stdout.strip()
-        approved = output.startswith("APPROVED") or "APPROVED" in output.split("\n")[-1]
-        return approved, output
-    
-    def execute_task_with_review(self, task: dict, timeout: int = 300):
-        """Generate, review (via Warden), then execute an ETL script.
-        
-        Up to 3 revision cycles if Warden rejects.
-        """
-        rejection_reason = None
-        
-        for attempt in range(3):
-            # Generate or revise script
-            if attempt == 0:
-                script = self.generate_script(task)
-            else:
-                script = self.revise_script(task, script, rejection_reason)
-            
-            # Submit to Warden
-            approved, review_output = self.review_script(script, task)
-            
-            if approved:
-                self.log(f"Warden APPROVED script for task {task['id']} "
-                        f"(attempt {attempt + 1})")
-                # Execute the approved script
-                return self.execute_script(f"/tmp/gww3_etl_{task['id']}.py", timeout)
-            else:
-                rejection_reason = review_output
-                self.log(f"Warden REJECTED (attempt {attempt + 1}/3): {rejection_reason}")
-        
-        # 3 revisions failed — block the task
-        raise TaskBlockedError(
-            f"Script failed Warden review after 3 revisions. "
-            f"Last rejection: {rejection_reason}"
-        )
+# 2. Interface context injection (Warden sees function signatures)
+#    INTERFACE_CONTEXT string contains signatures of normalization.py,
+#    validation_bounds.py, imputation.py — so Warden knows WHAT to enforce
+
+# 3. FileLock mutex (prevents parallel Codex rate limit hits)
+#    filelock.FileLock around every codex exec call
+#    Sentinel and Archon serialize their reviews automatically
+
+# 4. Script caching (skip review on recurring tasks)
+#    Approved scripts saved to src/scripts/approved_etl/{source}_{step}.py
+#    On recurring tasks: cache hit → execute directly, skip LLM + Warden
+
+# 5. Strict negative constraint (no style nits)
+#    Prompt explicitly says: "Do NOT reject for PEP8, type hints, naming"
+
+# Usage in agent loop:
+result = execute_with_review(
+    generate_fn=lambda: self.generate_script(task),
+    revise_fn=lambda script, feedback: self.revise_script(task, script, feedback),
+    execute_fn=lambda path: self.execute_script(path, timeout=300),
+    task=task,
+    max_rounds=3,
+)
 ```
 
 ### Warden Review Record (Provenance)

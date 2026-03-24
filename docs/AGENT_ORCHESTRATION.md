@@ -1,8 +1,8 @@
 # GWW3 — Agent Orchestration & Collaboration
 
 *Created: 2026-03-24 by Dione 🌙*
-*Updated: 2026-03-24 — Warden (Codex) code review agent added*
-*Status: Design document for implementation*
+*Updated: 2026-03-24 — Warden + Watchdog + all 5 Orchestration Deep Think action items*
+*Status: **Approved** — Ready for Phase 1 execution*
 
 ---
 
@@ -51,34 +51,30 @@
 
 **Responsibilities:**
 - **Task creation:** Reads DATA_LOADING_PLAN.md, creates Task nodes in Neo4j
-- **Monitoring:** Checks task status during heartbeats, detects blocked/failed tasks
+- **Strategic monitoring:** Reads `logs/watchdog-status.json` for pipeline health (NOT ps aux)
 - **Quality gate:** Reviews ImportBatch results before marking phases as complete
 - **Escalation:** Alerts Ingo on blocked tasks, data conflicts, budget overruns
 - **Deep Think trigger:** Creates review prompts after phase completion
-- **Agent lifecycle:** Starts/stops/restarts Sentinel, Archon, Warden processes
 
-**How Dione starts agents:**
-```bash
-# Sentinel (Gemini CLI in project directory)
-cd /home/uranus/moltbot-workspace/projects/games-of-ww3
-gemini -p 'You are Sentinel, the Data Analyst agent for GWW3. 
-  Read AGENTS.md for your role. Claim your next Task from Neo4j 
-  using the atomic query from AGENT_ARCHITECTURE_V2.md. 
-  Execute it and commit the result.'
+**What Dione does NOT do (delegated to Watchdog):**
+- ❌ Process supervision (ps aux, kill, restart) → Watchdog + systemd
+- ❌ Zombie task detection → Watchdog daemon
+- ❌ Mechanical health polling → Watchdog cron
 
-# Archon (separate Gemini CLI process)
-gemini -p 'You are Archon, the Lead Engineer for GWW3.
-  Read AGENTS.md. Claim and execute your next Task.'
-```
-
-**Monitoring loop (during heartbeats):**
-```cypher
--- Quick status check
-MATCH (t:Task)
-WITH t.status AS status, count(t) AS cnt
-RETURN status, cnt ORDER BY cnt DESC
--- If "blocked" > 0: Alert Ingo immediately
--- If all tasks in a phase are "completed": Trigger Deep Think review
+**How Dione monitors (during heartbeats):**
+```python
+# Read the watchdog status file (written every 5 min by watchdog.py)
+import json
+status = json.loads(open("logs/watchdog-status.json").read())
+if not status["healthy"]:
+    # Alert Ingo about blocked tasks
+    for task in status["blocked_tasks"]:
+        message(f"⚠️ Task blocked: {task['title']}\nError: {task['error']}")
+# Check phase completion
+for phase in status["phases"]:
+    if phase["phase_complete"]:
+        # Trigger Deep Think review for completed phase
+        pass
 ```
 
 ---
@@ -150,21 +146,19 @@ Only pure Cypher DDL (schema changes) bypasses Warden — these are reviewed by 
 **Warden is NOT an autonomous agent.** It has no loop, no task queue, no memory.
 It is a stateless function called synchronously by other agents.
 
-**Review protocol:**
+**Review protocol (JSON structured output + mutex + caching):**
 ```python
-# Sentinel/Archon calls Warden:
-result = subprocess.run(
-    ["codex", "exec",
-     "--approval-mode", "full-auto",
-     "-c", 'model="gpt-5.3-codex"',
-     REVIEW_PROMPT],
-    capture_output=True, text=True, timeout=180,
-    cwd=PROJECT_DIR
-)
+from gww3.agents.warden import review_script, execute_with_review
 
-# Warden responds with exactly one of:
-# "APPROVED" — script is safe and correct
-# "REJECTED: <specific issues>" — must be fixed before execution
+# Warden responds with structured JSON (not free text):
+# {"status": "APPROVED", "feedback": "Script looks correct"}
+# {"status": "REJECTED", "feedback": "Missing timeout on requests.get()"}
+
+# FileLock mutex prevents parallel Codex calls from hitting rate limits
+# Script caching: approved scripts reused for recurring tasks
+# Interface context: Warden sees normalization.py/validation_bounds.py signatures
+
+# Full implementation: src/gww3/agents/warden.py
 ```
 
 **Review criteria (the 6 gates):**
@@ -226,6 +220,33 @@ If still rejected after 3 rounds → Task status = `blocked` → Dione alerted �
 - Post project updates to Moltbook (m/wargames, m/engineering)
 - Monitor community feedback, report relevant items to Dione
 - Activated only at milestones — no permanent loop
+
+---
+
+### Watchdog — Deterministic Process Supervisor (NEW)
+
+| Property | Value |
+|----------|-------|
+| **Runtime** | Plain Python daemon (NOT an LLM) |
+| **Invocation** | Cron job every 5 minutes |
+| **Code** | `src/gww3/agents/watchdog.py` |
+
+**Responsibilities:**
+- Detect zombie tasks (IN_PROGRESS for >60 minutes)
+- Auto-requeue with retry_count increment (up to max_retries)
+- Block tasks that exceed max_retries
+- Write `logs/watchdog-status.json` for Dione to read
+- Write `logs/watchdog-alerts.json` for alert history
+
+**Why a separate daemon, not Dione?**
+Process supervision must be handled by the OS, not an LLM. If Dione's session
+crashes or is busy chatting, the watchdog still runs independently via cron.
+
+```bash
+# Cron setup (runs every 5 minutes)
+*/5 * * * * cd /home/uranus/moltbot-workspace/projects/games-of-ww3 \
+  && python -m gww3.agents.watchdog >> logs/watchdog.log 2>&1
+```
 
 ---
 
@@ -535,9 +556,9 @@ On restart, the only question is: "Which tasks are still open?"
 
 ---
 
-## 10. Key Design Insight: Defense in Depth
+## 10. Key Design Insights
 
-The system has **four layers of data quality protection**:
+### Defense in Depth (4 layers of data quality)
 
 ```
 Layer 1: WARDEN (Codex)     — Reviews code BEFORE execution
@@ -549,6 +570,30 @@ Layer 4: DEEP THINK         — Reviews entire schema/data AFTER phase completio
 No single point of failure. A bug that passes Warden will be caught by sanity bounds.
 A valid-looking but implausible value that passes bounds will be caught by Inanna.
 A systemic design issue that passes all agents will be caught by Deep Think review.
+
+### Separation of Concerns (from Orchestration Deep Think review)
+
+```
+DIONE    = Strategic orchestration, human interface, phase reviews
+WATCHDOG = Mechanical supervision, zombie detection, health reporting
+WARDEN   = Code quality gate (stateless, mutex-protected)
+AGENTS   = Stateless workers (memory reset after each task)
+NEO4J    = Persistent state (survives all crashes)
+```
+
+Dione is NOT a process manager. Watchdog handles that via cron.
+Agents are NOT stateful. Neo4j holds all state.
+Warden is NOT autonomous. It's a synchronous function call.
+
+### Implemented Safeguards (Deep Think Review #2 Action Items)
+
+| # | Safeguard | Implementation |
+|---|-----------|----------------|
+| 1 | Process supervision extracted | `src/gww3/agents/watchdog.py` — cron daemon, not LLM |
+| 2 | Warden context injection | `INTERFACE_CONTEXT` with function signatures |
+| 3 | Rate limit mutex | `filelock.FileLock` around `codex exec` calls |
+| 4 | JSON structured output | `{"status": "APPROVED/REJECTED", "feedback": "..."}` |
+| 5 | Script caching | `src/scripts/approved_etl/` — skip review on recurring tasks |
 
 ---
 
