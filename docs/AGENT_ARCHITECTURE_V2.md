@@ -181,6 +181,24 @@ class GWW3Agent:
         
         with self.neo4j.session() as session:
             with session.begin_transaction() as tx:
+                # VERIFY OWNERSHIP before committing (split-brain protection).
+                # If Watchdog requeued this task while we were working,
+                # another agent may have claimed it. Abort to prevent double-write.
+                check = tx.run("""
+                    MATCH (t:Task {id: $task_id})
+                    RETURN t.status AS status, t.assigned_to AS agent
+                """, task_id=task['id']).single()
+                
+                if (not check 
+                    or check["status"] != "in_progress" 
+                    or check["agent"] != self.name):
+                    raise RuntimeError(
+                        f"Task {task['id']} ownership lost "
+                        f"(status={check['status'] if check else '?'}, "
+                        f"agent={check['agent'] if check else '?'}). "
+                        f"Aborting commit to prevent split-brain double-write."
+                    )
+                
                 # Create ImportBatch
                 tx.run("""
                     CREATE (ib:ImportBatch {
@@ -217,8 +235,10 @@ class GWW3Agent:
                     """, iso3=record.iso3, properties=record.data, 
                          batch_id=batch_id, prop_names=list(record.data.keys()))
                 
-                # Commit atomically — all or nothing
-                tx.commit()
+                # NOTE: Do NOT call tx.commit() here!
+                # The `with` context manager auto-commits on clean exit.
+                # Explicit tx.commit() would close the transaction early,
+                # causing TransactionError when the context manager exits.
     
     def reset_memory(self):
         """Clear LLM conversation history to prevent context window bloat.

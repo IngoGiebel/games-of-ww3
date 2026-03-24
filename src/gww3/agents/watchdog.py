@@ -44,7 +44,7 @@ NEO4J_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
 NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "gww3-dev-2026")
 
-ZOMBIE_THRESHOLD_MINUTES = 60       # Task stuck IN_PROGRESS for this long = zombie
+ZOMBIE_THRESHOLD_MINUTES = 240      # 4 hours. Paginated APIs (UN Comtrade) can take >1hr.
 MAX_AUTO_REQUEUE = 3                # Auto-requeue up to this many retries, then block
 STATUS_FILE = Path("logs/watchdog-status.json")
 ALERT_FILE = Path("logs/watchdog-alerts.json")
@@ -79,33 +79,44 @@ def check_zombie_tasks(driver, dry_run: bool = False) -> list[dict]:
             retries = record["retries"] or 0
             max_retries = record["max_retries"] or 3
 
-            if retries >= max_retries:
-                action = "blocked"
-                if not dry_run:
+            if not dry_run:
+                # First: check if an ImportBatch exists for this task.
+                # Because commits are atomic (transaction-based), if an ImportBatch
+                # exists it means the Neo4j write SUCCEEDED — the agent just crashed
+                # before marking the task as completed. We must NOT delete it.
+                batch_check = session.run("""
+                    MATCH (t:Task {id: $id})
+                    OPTIONAL MATCH (ib:ImportBatch)
+                    WHERE ib.id STARTS WITH 'import-' AND ib.id ENDS WITH ('-' + t.step)
+                          AND ib.timestamp > t.started_at
+                    RETURN ib.id AS batch_id
+                """, id=task_id).single()
+
+                if batch_check and batch_check["batch_id"]:
+                    # ImportBatch exists → transaction succeeded, agent crashed post-commit
+                    # Mark task as COMPLETED (rescue the successful work)
+                    action = "rescued"
+                    session.run("""
+                        MATCH (t:Task {id: $id})
+                        SET t.status = "completed",
+                            t.completed_at = datetime(),
+                            t.result_summary = "Watchdog: rescued completed task (agent crashed post-commit)"
+                    """, id=task_id)
+                elif retries >= max_retries:
+                    # No ImportBatch + max retries exceeded → truly stuck
+                    action = "blocked"
                     session.run("""
                         MATCH (t:Task {id: $id})
                         SET t.status = "blocked",
                             t.error_log = "Watchdog: zombie task exceeded max retries after " +
                                           toString($retries) + " attempts"
                     """, id=task_id, retries=retries)
-            else:
-                action = "requeued"
-                if not dry_run:
-                    # Check for partial ImportBatch and rollback.
-                    # CRITICAL: Use '-' + step to avoid matching "2.1" when step is "1".
-                    # NOTE: We only delete the ImportBatch + PROVENANCE edges.
-                    # Actual property writes MUST use Neo4j transactions (begin_transaction)
-                    # so they roll back automatically on crash. See AGENT_ARCHITECTURE_V2.md.
+                else:
+                    # No ImportBatch + retries remaining → safe to requeue
+                    # (atomic transaction means no partial writes to clean up)
+                    action = "requeued"
                     session.run("""
                         MATCH (t:Task {id: $id})
-                        OPTIONAL MATCH (ib:ImportBatch)
-                        WHERE ib.id STARTS WITH 'import-' AND ib.id ENDS WITH ('-' + t.step)
-                              AND ib.timestamp > t.started_at
-                        // Rollback provenance edges from partial batch
-                        OPTIONAL MATCH (entity)-[p:PROVENANCE]->(ib)
-                        DELETE p
-                        WITH t, ib
-                        DETACH DELETE ib
                         SET t.status = "pending",
                             t.retry_count = t.retry_count + 1,
                             t.started_at = null,
