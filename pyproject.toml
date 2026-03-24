@@ -29,6 +29,8 @@ dependencies = [
     "pydantic>=2.10",
     "httpx>=0.28",
     "pandas>=2.2",
+    "requests>=2.31",
+    "filelock>=3.13",
     "google-adk>=0.1",
 ]
 

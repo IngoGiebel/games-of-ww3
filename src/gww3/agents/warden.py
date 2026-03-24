@@ -79,6 +79,16 @@ def impute_record(record, context, historical=None) -> tuple[dict, list[Imputati
 # MERGE (not CREATE) for idempotent node creation
 # ON MATCH SET for updates
 # Always create ImportBatch + PROVENANCE edges with properties list on edge
+# ALL writes MUST be inside a single transaction (session.begin_transaction())
+#   — partial writes corrupt the database; transactions roll back atomically
+
+# Source field mappings (verify scripts use these, not guessed column names):
+WORLDBANK_INDICATOR_MAP: dict[str, str]  # WB indicator code → property name
+SIPRI_FIELD_MAP: dict[str, str]          # SIPRI CSV column → property name
+VDEM_FIELD_MAP: dict[str, str]           # V-Dem column code → property name
+ACLED_FIELD_MAP: dict[str, str]          # ACLED CSV column → property/node field
+EIA_FIELD_MAP: dict[str, str]            # EIA series ID template → property name
+FAO_FIELD_MAP: dict[str, str]            # FAO item → property name
 === END PROJECT API SIGNATURES ===
 """
 
@@ -201,13 +211,13 @@ def review_script(
 
     lock = _acquire_lock()
     try:
-        # Pipe prompt via stdin to avoid file collision issues
+        # Pass prompt as positional argument (codex exec <prompt>)
+        # Stdin piping may not be supported by all codex versions.
         result = subprocess.run(
             ["codex", "exec",
              "--approval-mode", "full-auto",
              "-c", f'model="{CODEX_MODEL}"',
-             "-"],  # Read from stdin
-            input=prompt,
+             prompt],
             capture_output=True,
             text=True,
             timeout=CODEX_TIMEOUT,
@@ -216,12 +226,23 @@ def review_script(
     except subprocess.TimeoutExpired:
         return ReviewVerdict(
             approved=False,
-            feedback="Warden review timed out after {CODEX_TIMEOUT}s",
+            feedback=f"Warden review timed out after {CODEX_TIMEOUT}s",
             raw_output="TIMEOUT",
             attempt=attempt,
         )
     finally:
         _release_lock(lock)
+
+    # BLOCKING FIX #1: Check returncode and stderr BEFORE parsing stdout.
+    # If Codex CLI fails (API down, auth expired, rate limited), it exits
+    # non-zero and writes to stderr. Without this check, we'd burn 3 revision
+    # rounds trying to "fix" perfectly valid code for a network outage.
+    if result.returncode != 0:
+        error_msg = result.stderr.strip() or f"Exit code {result.returncode}"
+        log.error(f"Codex CLI failed: {error_msg}")
+        raise RuntimeError(
+            f"Codex CLI failed (exit {result.returncode}): {error_msg}"
+        )
 
     raw_output = result.stdout.strip()
 

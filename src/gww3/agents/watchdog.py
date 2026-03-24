@@ -91,13 +91,17 @@ def check_zombie_tasks(driver, dry_run: bool = False) -> list[dict]:
             else:
                 action = "requeued"
                 if not dry_run:
-                    # Check for partial ImportBatch and rollback
+                    # Check for partial ImportBatch and rollback.
+                    # CRITICAL: Use '-' + step to avoid matching "2.1" when step is "1".
+                    # NOTE: We only delete the ImportBatch + PROVENANCE edges.
+                    # Actual property writes MUST use Neo4j transactions (begin_transaction)
+                    # so they roll back automatically on crash. See AGENT_ARCHITECTURE_V2.md.
                     session.run("""
                         MATCH (t:Task {id: $id})
                         OPTIONAL MATCH (ib:ImportBatch)
-                        WHERE ib.id STARTS WITH 'import-' AND ib.id ENDS WITH t.step
+                        WHERE ib.id STARTS WITH 'import-' AND ib.id ENDS WITH ('-' + t.step)
                               AND ib.timestamp > t.started_at
-                        // Rollback partial writes
+                        // Rollback provenance edges from partial batch
                         OPTIONAL MATCH (entity)-[p:PROVENANCE]->(ib)
                         DELETE p
                         WITH t, ib

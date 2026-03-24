@@ -197,3 +197,103 @@ INCOME_GROUPS = {
     "LMC": "Lower middle income",
     "LIC": "Low income",
 }
+
+# ──────────────────────────────────────────────
+# SIPRI MILEX field mapping
+# Source: SIPRI Military Expenditure Database (Excel/CSV download)
+# Columns vary by dataset version; these are the standard exports.
+# Values in source are in MILLIONS USD (constant or current) — multiply by 1_000_000.
+# ──────────────────────────────────────────────
+
+SIPRI_FIELD_MAP = {
+    # SIPRI column name → our property name
+    "Spending (current US$)": "military_spending_abs",       # needs *1M normalization
+    "Spending as a share of GDP": "military_spending_pct_gdp",
+    # Alternative column names in different SIPRI downloads
+    "Mil. exp. (current USD, millions)": "military_spending_abs",
+    "Mil. exp. as % of GDP": "military_spending_pct_gdp",
+}
+
+# ──────────────────────────────────────────────
+# V-Dem field mapping
+# Source: V-Dem v14+ dataset (CSV download)
+# V-Dem columns are cryptic codes. All indices are 0-1 floats.
+# Our schema stores them as 0-100 integers (multiply by 100).
+# ──────────────────────────────────────────────
+
+VDEM_FIELD_MAP = {
+    # V-Dem column → our property name
+    "v2x_polyarchy": "freedom_house_score",  # Electoral democracy index → 0-100
+    "v2x_libdem": "stability_index",         # Liberal democracy → used as stability proxy
+    "v2x_corr": "corruption_index",          # Corruption index (inverted: 0=clean, 1=corrupt)
+    "v2x_freexp_altinf": "press_freedom",    # Freedom of expression / alt info → 0-100
+    "v2x_partipdem": "_partip_democracy",    # Participatory democracy (intermediate, not stored)
+    "v2x_egaldem": "_egal_democracy",        # Egalitarian democracy (intermediate)
+    # Identity columns
+    "country_text_id": "iso3",               # 3-letter code (matches our iso3 after crosswalk)
+    "country_name": "_vdem_country_name",     # For crosswalk verification
+    "year": "_year",                          # Data year
+    "country_id": "vdem_id",                  # V-Dem numeric ID
+}
+
+# Note on v2x_corr: V-Dem's corruption index is 0=clean, 1=corrupt.
+# Transparency International CPI is 0=corrupt, 100=clean.
+# Our schema uses TI convention: corruption_index = round((1 - v2x_corr) * 100)
+
+# ──────────────────────────────────────────────
+# ACLED field mapping
+# Source: ACLED API / CSV exports
+# ──────────────────────────────────────────────
+
+ACLED_FIELD_MAP = {
+    # ACLED column → our node/property
+    "event_type": "type",                    # "Battles", "Violence against civilians", etc.
+    "sub_event_type": "_sub_type",
+    "actor1": "name",                        # Primary actor → NonStateActor.name
+    "assoc_actor_1": "_associated_actor",
+    "inter1": "_actor_type_code",            # 1=state, 2=rebel, 3=militia, etc.
+    "country": "_country_name",              # Needs crosswalk to iso3
+    "iso": "iso3",                           # ISO numeric → needs conversion to alpha-3
+    "latitude": "_lat",
+    "longitude": "_lon",
+    "fatalities": "fatalities_est",
+    "event_date": "start_date",
+    "notes": "_event_notes",
+    "source": "_acled_source",
+}
+
+# ACLED inter1 codes → our NonStateActor.type mapping
+ACLED_ACTOR_TYPE_MAP = {
+    1: "state_force",
+    2: "insurgency",          # rebel group
+    3: "militia",             # political militia
+    4: "identity_militia",    # identity-based militia
+    5: "rioter",
+    6: "protester",
+    7: "civilian",
+    8: "external_force",      # external/other force
+}
+
+# ──────────────────────────────────────────────
+# EIA field mapping
+# Source: US Energy Information Administration API
+# ──────────────────────────────────────────────
+
+EIA_FIELD_MAP = {
+    "INTL.57-1-{ISO}-TBPD.A": "oil_production",      # Crude oil production (1000 bbl/day)
+    "INTL.57-2-{ISO}-TBPD.A": "oil_consumption",      # Petroleum consumption
+    "INTL.26-1-{ISO}-BCF.A": "natural_gas_production", # Dry natural gas production (BCF)
+    "INTL.26-2-{ISO}-BCF.A": "natural_gas_consumption",
+}
+
+# ──────────────────────────────────────────────
+# FAO field mapping
+# Source: FAOSTAT bulk data downloads
+# ──────────────────────────────────────────────
+
+FAO_FIELD_MAP = {
+    # FAO Item Code 15 = Wheat, Element Code 5510 = Production (tonnes)
+    "Production_Wheat": "wheat_production",
+    "Import_Wheat": "wheat_imports",
+    "Food_supply_Wheat": "wheat_consumption",
+}

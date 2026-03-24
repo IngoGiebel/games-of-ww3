@@ -171,37 +171,54 @@ class GWW3Agent:
         return ValidationResult(checks)
     
     def commit_result(self, task, result):
-        """Write to Neo4j with full provenance. Properties tracked on PROVENANCE edge."""
+        """Write to Neo4j with full provenance inside a SINGLE TRANSACTION.
+        
+        CRITICAL: All writes happen in one transaction. If the script crashes
+        mid-batch, Neo4j rolls back everything automatically. No partial writes,
+        no orphaned data, no need for watchdog rollback of properties.
+        """
         batch_id = f"import-{datetime.utcnow().strftime('%Y%m%dT%H%M%S')}-{task['step']}"
         
-        # Create ImportBatch
-        self.neo4j.run("""
-            CREATE (ib:ImportBatch {
-                id: $batch_id, timestamp: datetime(), agent: $agent,
-                method: $method, record_count: $count,
-                notes: $notes, confidence: $confidence,
-                derivation_formula: $formula
-            })
-            WITH ib
-            MATCH (ds:DataSource {id: $source_id})
-            MERGE (ib)-[:FROM_SOURCE]->(ds)
-        """, batch_id=batch_id, agent=self.name, 
-             method=task.get('method', 'api_import'),
-             count=len(result.records), notes=task.get('title'),
-             confidence=result.confidence, formula=result.derivation_formula,
-             source_id=task['source_id'])
-        
-        # Write data + link provenance with properties on the edge
-        for record in result.records:
-            self.neo4j.run("""
-                MATCH (n:Nation {iso3: $iso3})
-                SET n += $properties
-                WITH n
-                MATCH (ib:ImportBatch {id: $batch_id})
-                MERGE (n)-[p:PROVENANCE]->(ib)
-                SET p.properties = $prop_names
-            """, iso3=record.iso3, properties=record.data, 
-                 batch_id=batch_id, prop_names=list(record.data.keys()))
+        with self.neo4j.session() as session:
+            with session.begin_transaction() as tx:
+                # Create ImportBatch
+                tx.run("""
+                    CREATE (ib:ImportBatch {
+                        id: $batch_id, timestamp: datetime(), agent: $agent,
+                        method: $method, record_count: $count,
+                        notes: $notes, confidence: $confidence,
+                        derivation_formula: $formula,
+                        warden_approved: $warden_ok,
+                        warden_review_attempts: $warden_attempts,
+                        warden_model: $warden_model
+                    })
+                    WITH ib
+                    MATCH (ds:DataSource {id: $source_id})
+                    MERGE (ib)-[:FROM_SOURCE]->(ds)
+                """, batch_id=batch_id, agent=self.name, 
+                     method=task.get('method', 'api_import'),
+                     count=len(result.records), notes=task.get('title'),
+                     confidence=result.confidence,
+                     formula=result.derivation_formula,
+                     source_id=task['source_id'],
+                     warden_ok=result.warden_approved,
+                     warden_attempts=result.warden_attempts,
+                     warden_model=result.warden_model)
+                
+                # Write data + link provenance with properties on the edge
+                for record in result.records:
+                    tx.run("""
+                        MATCH (n:Nation {iso3: $iso3})
+                        SET n += $properties
+                        WITH n
+                        MATCH (ib:ImportBatch {id: $batch_id})
+                        MERGE (n)-[p:PROVENANCE]->(ib)
+                        SET p.properties = $prop_names
+                    """, iso3=record.iso3, properties=record.data, 
+                         batch_id=batch_id, prop_names=list(record.data.keys()))
+                
+                # Commit atomically — all or nothing
+                tx.commit()
     
     def reset_memory(self):
         """Clear LLM conversation history to prevent context window bloat.
