@@ -125,6 +125,56 @@ or
 """
 
 
+def _extract_verdict_json(raw: str) -> dict:
+    """Robustly extract the verdict JSON from Codex output.
+    
+    Handles: bare JSON, markdown code fences, conversational padding,
+    and multiple JSON-like blocks (takes the one with "status" key).
+    """
+    import re
+    
+    # Strategy 1: Try the whole string as JSON
+    try:
+        return json.loads(raw.strip())
+    except json.JSONDecodeError:
+        pass
+    
+    # Strategy 2: Extract from markdown code fence
+    fence_match = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', raw, re.DOTALL)
+    if fence_match:
+        try:
+            candidate = json.loads(fence_match.group(1))
+            if "status" in candidate:
+                return candidate
+        except json.JSONDecodeError:
+            pass
+    
+    # Strategy 3: Find ALL {...} blocks, return the one with "status"
+    candidates = []
+    depth = 0
+    start = -1
+    for i, ch in enumerate(raw):
+        if ch == '{':
+            if depth == 0:
+                start = i
+            depth += 1
+        elif ch == '}':
+            depth -= 1
+            if depth == 0 and start >= 0:
+                candidates.append(raw[start:i+1])
+                start = -1
+    
+    for candidate_str in reversed(candidates):  # prefer last (most likely the verdict)
+        try:
+            candidate = json.loads(candidate_str)
+            if "status" in candidate:
+                return candidate
+        except json.JSONDecodeError:
+            continue
+    
+    raise ValueError(f"No valid JSON with 'status' key found in output ({len(raw)} chars)")
+
+
 @dataclass
 class ReviewVerdict:
     """Result of a Warden review."""
@@ -249,24 +299,16 @@ def review_script(
     # Log the review
     _log_review(task, script_content, raw_output, attempt)
 
-    # Parse JSON response
+    # Parse JSON response — robust extraction handles conversational padding,
+    # markdown code fences, and multiple JSON blocks (take last valid one).
     try:
-        # Try to extract JSON from output (Codex might add surrounding text)
-        json_str = raw_output
-        # Find first { and last }
-        start = raw_output.find("{")
-        end = raw_output.rfind("}") + 1
-        if start >= 0 and end > start:
-            json_str = raw_output[start:end]
-
-        verdict_data = json.loads(json_str)
+        verdict_data = _extract_verdict_json(raw_output)
         approved = verdict_data.get("status", "").upper() == "APPROVED"
         feedback = verdict_data.get("feedback", "No feedback provided")
-    except (json.JSONDecodeError, AttributeError):
-        # Fallback: if JSON parsing fails, treat as rejection
+    except (json.JSONDecodeError, ValueError) as e:
         log.warning(f"Warden output is not valid JSON, treating as rejection: {raw_output[:200]}")
         approved = False
-        feedback = f"Warden output was not valid JSON. Raw: {raw_output[:500]}"
+        feedback = f"Warden output was not valid JSON ({e}). Raw: {raw_output[:500]}"
 
     return ReviewVerdict(
         approved=approved,

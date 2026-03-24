@@ -101,6 +101,11 @@ This is a single atomic Cypher query — no TOCTOU race between pick and claim.
 Each agent runs as a **Google ADK agent** with this core loop:
 
 ```python
+class TaskOwnershipLostError(Exception):
+    """Raised when Watchdog has requeued a task while the agent was working.
+    Must NOT trigger fail_task() — the task now belongs to another agent."""
+    pass
+
 class GWW3Agent:
     """Base class for all GWW3 ADK agents."""
     
@@ -133,6 +138,13 @@ class GWW3Agent:
                 #    Prevents context window bloat over long-running sessions
                 self.reset_memory()
                     
+            except TaskOwnershipLostError as e:
+                # Watchdog requeued this task — another agent owns it now.
+                # Do NOT call fail_task() — that would corrupt the other agent's state.
+                self.log(f"Ownership lost (normal): {e}")
+                self.reset_memory()
+                continue
+                
             except RateLimitError as e:
                 self.log(f"Rate limited: {e}. Backing off {e.retry_after}s")
                 time.sleep(e.retry_after or 60)
@@ -192,7 +204,7 @@ class GWW3Agent:
                 if (not check 
                     or check["status"] != "in_progress" 
                     or check["agent"] != self.name):
-                    raise RuntimeError(
+                    raise TaskOwnershipLostError(
                         f"Task {task['id']} ownership lost "
                         f"(status={check['status'] if check else '?'}, "
                         f"agent={check['agent'] if check else '?'}). "
@@ -223,22 +235,27 @@ class GWW3Agent:
                      warden_attempts=result.warden_attempts,
                      warden_model=result.warden_model)
                 
-                # Write data + link provenance with properties on the edge
-                for record in result.records:
-                    tx.run("""
-                        MATCH (n:Nation {iso3: $iso3})
-                        SET n += $properties
-                        WITH n
-                        MATCH (ib:ImportBatch {id: $batch_id})
-                        MERGE (n)-[p:PROVENANCE]->(ib)
-                        SET p.properties = $prop_names
-                    """, iso3=record.iso3, properties=record.data, 
-                         batch_id=batch_id, prop_names=list(record.data.keys()))
+                # Write data + link provenance — single UNWIND (no N+1 loop).
+                # Passes entire batch as one parameter, one network roundtrip.
+                records_param = [
+                    {"iso3": r.iso3, "properties": r.data, 
+                     "prop_names": list(r.data.keys())}
+                    for r in result.records
+                ]
+                tx.run("""
+                    UNWIND $records AS rec
+                    MATCH (n:Nation {iso3: rec.iso3})
+                    SET n += rec.properties
+                    WITH n, rec
+                    MATCH (ib:ImportBatch {id: $batch_id})
+                    MERGE (n)-[p:PROVENANCE]->(ib)
+                    SET p.properties = rec.prop_names
+                """, records=records_param, batch_id=batch_id)
                 
-                # NOTE: Do NOT call tx.commit() here!
-                # The `with` context manager auto-commits on clean exit.
-                # Explicit tx.commit() would close the transaction early,
-                # causing TransactionError when the context manager exits.
+                # MUST explicitly commit. Neo4j's unmanaged transaction
+                # (begin_transaction) auto-ROLLBACKS on exit, not auto-commits.
+                # Without this line, all writes silently vanish.
+                tx.commit()
     
     def reset_memory(self):
         """Clear LLM conversation history to prevent context window bloat.
