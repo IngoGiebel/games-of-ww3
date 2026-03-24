@@ -265,7 +265,7 @@ def review_script(
         # Stdin piping may not be supported by all codex versions.
         result = subprocess.run(
             ["codex", "exec",
-             "--approval-mode", "full-auto",
+             "--full-auto",
              "-c", f'model="{CODEX_MODEL}"',
              prompt],
             capture_output=True,
