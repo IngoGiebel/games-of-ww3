@@ -1,2185 +1,1757 @@
-[
-    {
-        "iso3": "AFG",
-        "iso2": "AF",
-        "cow_code": 700,
-        "un_m49": 4,
-        "name_en": "Afghanistan",
-        "name_short": "Afghanistan",
-        "wb_code": "AFG",
-        "vdem_code": 36,
-        "acled_name": "Afghanistan"
-    },
-    {
-        "iso3": "ALB",
-        "iso2": "AL",
-        "cow_code": 339,
-        "un_m49": 8,
-        "name_en": "Albania",
-        "name_short": "Albania",
-        "wb_code": "ALB",
-        "vdem_code": 12,
-        "acled_name": "Albania"
-    },
-    {
-        "iso3": "DZA",
-        "iso2": "DZ",
-        "cow_code": 615,
-        "un_m49": 12,
-        "name_en": "Algeria",
-        "name_short": "Algeria",
-        "wb_code": "DZA",
-        "vdem_code": 103,
-        "acled_name": "Algeria"
-    },
-    {
-        "iso3": "AND",
-        "iso2": "AD",
-        "cow_code": 232,
-        "un_m49": 20,
-        "name_en": "Andorra",
-        "name_short": "Andorra",
-        "wb_code": "ADO",
-        "vdem_code": 142,
-        "acled_name": "Andorra"
-    },
-    {
-        "iso3": "AGO",
-        "iso2": "AO",
-        "cow_code": 540,
-        "un_m49": 24,
-        "name_en": "Angola",
-        "name_short": "Angola",
-        "wb_code": "AGO",
-        "vdem_code": 104,
-        "acled_name": "Angola"
-    },
-    {
-        "iso3": "ATG",
-        "iso2": "AG",
-        "cow_code": 58,
-        "un_m49": 28,
-        "name_en": "Antigua and Barbuda",
-        "name_short": "Antigua and Barbuda",
-        "wb_code": "ATG",
-        "vdem_code": null,
-        "acled_name": "Antigua and Barbuda",
-        "uncertain": true
-    },
-    {
-        "iso3": "ARG",
-        "iso2": "AR",
-        "cow_code": 160,
-        "un_m49": 32,
-        "name_en": "Argentina",
-        "name_short": "Argentina",
-        "wb_code": "ARG",
-        "vdem_code": 37,
-        "acled_name": "Argentina"
-    },
-    {
-        "iso3": "ARM",
-        "iso2": "AM",
-        "cow_code": 371,
-        "un_m49": 51,
-        "name_en": "Armenia",
-        "name_short": "Armenia",
-        "wb_code": "ARM",
-        "vdem_code": 105,
-        "acled_name": "Armenia"
-    },
-    {
-        "iso3": "AUS",
-        "iso2": "AU",
-        "cow_code": 900,
-        "un_m49": 36,
-        "name_en": "Australia",
-        "name_short": "Australia",
-        "wb_code": "AUS",
-        "vdem_code": 67,
-        "acled_name": "Australia"
-    },
-    {
-        "iso3": "AUT",
-        "iso2": "AT",
-        "cow_code": 305,
-        "un_m49": 40,
-        "name_en": "Austria",
-        "name_short": "Austria",
-        "wb_code": "AUT",
-        "vdem_code": 144,
-        "acled_name": "Austria"
-    },
-    {
-        "iso3": "AZE",
-        "iso2": "AZ",
-        "cow_code": 373,
-        "un_m49": 31,
-        "name_en": "Azerbaijan",
-        "name_short": "Azerbaijan",
-        "wb_code": "AZE",
-        "vdem_code": 106,
-        "acled_name": "Azerbaijan"
-    },
-    {
-        "iso3": "BHS",
-        "iso2": "BS",
-        "cow_code": 31,
-        "un_m49": 44,
-        "name_en": "Bahamas",
-        "name_short": "Bahamas",
-        "wb_code": "BHS",
-        "vdem_code": null,
-        "acled_name": "Bahamas",
-        "uncertain": true
-    },
-    {
-        "iso3": "BHR",
-        "iso2": "BH",
-        "cow_code": 692,
-        "un_m49": 48,
-        "name_en": "Bahrain",
-        "name_short": "Bahrain",
-        "wb_code": "BHR",
-        "vdem_code": 146,
-        "acled_name": "Bahrain"
-    },
-    {
-        "iso3": "BGD",
-        "iso2": "BD",
-        "cow_code": 771,
-        "un_m49": 50,
-        "name_en": "Bangladesh",
-        "name_short": "Bangladesh",
-        "wb_code": "BGD",
-        "vdem_code": 24,
-        "acled_name": "Bangladesh"
-    },
-    {
-        "iso3": "BRB",
-        "iso2": "BB",
-        "cow_code": 53,
-        "un_m49": 52,
-        "name_en": "Barbados",
-        "name_short": "Barbados",
-        "wb_code": "BRB",
-        "vdem_code": 147,
-        "acled_name": "Barbados"
-    },
-    {
-        "iso3": "BLR",
-        "iso2": "BY",
-        "cow_code": 370,
-        "un_m49": 112,
-        "name_en": "Belarus",
-        "name_short": "Belarus",
-        "wb_code": "BLR",
-        "vdem_code": 107,
-        "acled_name": "Belarus"
-    },
-    {
-        "iso3": "BEL",
-        "iso2": "BE",
-        "cow_code": 211,
-        "un_m49": 56,
-        "name_en": "Belgium",
-        "name_short": "Belgium",
-        "wb_code": "BEL",
-        "vdem_code": 148,
-        "acled_name": "Belgium"
-    },
-    {
-        "iso3": "BLZ",
-        "iso2": "BZ",
-        "cow_code": 80,
-        "un_m49": 84,
-        "name_en": "Belize",
-        "name_short": "Belize",
-        "wb_code": "BLZ",
-        "vdem_code": 149,
-        "acled_name": "Belize"
-    },
-    {
-        "iso3": "BEN",
-        "iso2": "BJ",
-        "cow_code": 434,
-        "un_m49": 204,
-        "name_en": "Benin",
-        "name_short": "Benin",
-        "wb_code": "BEN",
-        "vdem_code": 52,
-        "acled_name": "Benin"
-    },
-    {
-        "iso3": "BTN",
-        "iso2": "BT",
-        "cow_code": 760,
-        "un_m49": 64,
-        "name_en": "Bhutan",
-        "name_short": "Bhutan",
-        "wb_code": "BTN",
-        "vdem_code": 53,
-        "acled_name": "Bhutan"
-    },
-    {
-        "iso3": "BOL",
-        "iso2": "BO",
-        "cow_code": 145,
-        "un_m49": 68,
-        "name_en": "Bolivia",
-        "name_short": "Bolivia",
-        "wb_code": "BOL",
-        "vdem_code": 25,
-        "acled_name": "Bolivia"
-    },
-    {
-        "iso3": "BIH",
-        "iso2": "BA",
-        "cow_code": 346,
-        "un_m49": 70,
-        "name_en": "Bosnia and Herzegovina",
-        "name_short": "Bosnia and Herzegovina",
-        "wb_code": "BIH",
-        "vdem_code": 150,
-        "acled_name": "Bosnia and Herzegovina"
-    },
-    {
-        "iso3": "BWA",
-        "iso2": "BW",
-        "cow_code": 571,
-        "un_m49": 72,
-        "name_en": "Botswana",
-        "name_short": "Botswana",
-        "wb_code": "BWA",
-        "vdem_code": 68,
-        "acled_name": "Botswana"
-    },
-    {
-        "iso3": "BRA",
-        "iso2": "BR",
-        "cow_code": 140,
-        "un_m49": 76,
-        "name_en": "Brazil",
-        "name_short": "Brazil",
-        "wb_code": "BRA",
-        "vdem_code": 19,
-        "acled_name": "Brazil"
-    },
-    {
-        "iso3": "BRN",
-        "iso2": "BN",
-        "cow_code": 835,
-        "un_m49": 96,
-        "name_en": "Brunei Darussalam",
-        "name_short": "Brunei",
-        "wb_code": "BRN",
-        "vdem_code": 151,
-        "acled_name": "Brunei"
-    },
-    {
-        "iso3": "BGR",
-        "iso2": "BG",
-        "cow_code": 355,
-        "un_m49": 100,
-        "name_en": "Bulgaria",
-        "name_short": "Bulgaria",
-        "wb_code": "BGR",
-        "vdem_code": 152,
-        "acled_name": "Bulgaria"
-    },
-    {
-        "iso3": "BFA",
-        "iso2": "BF",
-        "cow_code": 439,
-        "un_m49": 854,
-        "name_en": "Burkina Faso",
-        "name_short": "Burkina Faso",
-        "wb_code": "BFA",
-        "vdem_code": 54,
-        "acled_name": "Burkina Faso"
-    },
-    {
-        "iso3": "BDI",
-        "iso2": "BI",
-        "cow_code": 516,
-        "un_m49": 108,
-        "name_en": "Burundi",
-        "name_short": "Burundi",
-        "wb_code": "BDI",
-        "vdem_code": 69,
-        "acled_name": "Burundi"
-    },
-    {
-        "iso3": "CPV",
-        "iso2": "CV",
-        "cow_code": 402,
-        "un_m49": 132,
-        "name_en": "Cabo Verde",
-        "name_short": "Cape Verde",
-        "wb_code": "CPV",
-        "vdem_code": 70,
-        "acled_name": "Cape Verde"
-    },
-    {
-        "iso3": "KHM",
-        "iso2": "KH",
-        "cow_code": 811,
-        "un_m49": 116,
-        "name_en": "Cambodia",
-        "name_short": "Cambodia",
-        "wb_code": "KHM",
-        "vdem_code": 55,
-        "acled_name": "Cambodia"
-    },
-    {
-        "iso3": "CMR",
-        "iso2": "CM",
-        "cow_code": 471,
-        "un_m49": 120,
-        "name_en": "Cameroon",
-        "name_short": "Cameroon",
-        "wb_code": "CMR",
-        "vdem_code": 108,
-        "acled_name": "Cameroon"
-    },
-    {
-        "iso3": "CAN",
-        "iso2": "CA",
-        "cow_code": 20,
-        "un_m49": 124,
-        "name_en": "Canada",
-        "name_short": "Canada",
-        "wb_code": "CAN",
-        "vdem_code": 66,
-        "acled_name": "Canada"
-    },
-    {
-        "iso3": "CAF",
-        "iso2": "CF",
-        "cow_code": 482,
-        "un_m49": 140,
-        "name_en": "Central African Republic",
-        "name_short": "Central African Republic",
-        "wb_code": "CAF",
-        "vdem_code": 71,
-        "acled_name": "Central African Republic"
-    },
-    {
-        "iso3": "TCD",
-        "iso2": "TD",
-        "cow_code": 483,
-        "un_m49": 148,
-        "name_en": "Chad",
-        "name_short": "Chad",
-        "wb_code": "TCD",
-        "vdem_code": 109,
-        "acled_name": "Chad"
-    },
-    {
-        "iso3": "CHL",
-        "iso2": "CL",
-        "cow_code": 155,
-        "un_m49": 152,
-        "name_en": "Chile",
-        "name_short": "Chile",
-        "wb_code": "CHL",
-        "vdem_code": 72,
-        "acled_name": "Chile"
-    },
-    {
-        "iso3": "CHN",
-        "iso2": "CN",
-        "cow_code": 710,
-        "un_m49": 156,
-        "name_en": "China",
-        "name_short": "China",
-        "wb_code": "CHN",
-        "vdem_code": 110,
-        "acled_name": "China"
-    },
-    {
-        "iso3": "COL",
-        "iso2": "CO",
-        "cow_code": 100,
-        "un_m49": 170,
-        "name_en": "Colombia",
-        "name_short": "Colombia",
-        "wb_code": "COL",
-        "vdem_code": 15,
-        "acled_name": "Colombia"
-    },
-    {
-        "iso3": "COM",
-        "iso2": "KM",
-        "cow_code": 581,
-        "un_m49": 174,
-        "name_en": "Comoros",
-        "name_short": "Comoros",
-        "wb_code": "COM",
-        "vdem_code": 153,
-        "acled_name": "Comoros"
-    },
-    {
-        "iso3": "COG",
-        "iso2": "CG",
-        "cow_code": 484,
-        "un_m49": 178,
-        "name_en": "Congo, Rep.",
-        "name_short": "Congo",
-        "wb_code": "COG",
-        "vdem_code": 112,
-        "acled_name": "Republic of Congo"
-    },
-    {
-        "iso3": "COD",
-        "iso2": "CD",
-        "cow_code": 490,
-        "un_m49": 180,
-        "name_en": "Congo, Dem. Rep.",
-        "name_short": "DR Congo",
-        "wb_code": "COD",
-        "vdem_code": 111,
-        "acled_name": "Democratic Republic of Congo"
-    },
-    {
-        "iso3": "CRI",
-        "iso2": "CR",
-        "cow_code": 94,
-        "un_m49": 188,
-        "name_en": "Costa Rica",
-        "name_short": "Costa Rica",
-        "wb_code": "CRI",
-        "vdem_code": 73,
-        "acled_name": "Costa Rica"
-    },
-    {
-        "iso3": "CIV",
-        "iso2": "CI",
-        "cow_code": 437,
-        "un_m49": 384,
-        "name_en": "Côte d'Ivoire",
-        "name_short": "Côte d'Ivoire",
-        "wb_code": "CIV",
-        "vdem_code": 64,
-        "acled_name": "Ivory Coast"
-    },
-    {
-        "iso3": "HRV",
-        "iso2": "HR",
-        "cow_code": 344,
-        "un_m49": 191,
-        "name_en": "Croatia",
-        "name_short": "Croatia",
-        "wb_code": "HRV",
-        "vdem_code": 154,
-        "acled_name": "Croatia"
-    },
-    {
-        "iso3": "CUB",
-        "iso2": "CU",
-        "cow_code": 40,
-        "un_m49": 192,
-        "name_en": "Cuba",
-        "name_short": "Cuba",
-        "wb_code": "CUB",
-        "vdem_code": 155,
-        "acled_name": "Cuba"
-    },
-    {
-        "iso3": "CYP",
-        "iso2": "CY",
-        "cow_code": 352,
-        "un_m49": 196,
-        "name_en": "Cyprus",
-        "name_short": "Cyprus",
-        "wb_code": "CYP",
-        "vdem_code": 156,
-        "acled_name": "Cyprus"
-    },
-    {
-        "iso3": "CZE",
-        "iso2": "CZ",
-        "cow_code": 316,
-        "un_m49": 203,
-        "name_en": "Czech Republic",
-        "name_short": "Czech Republic",
-        "wb_code": "CZE",
-        "vdem_code": 157,
-        "acled_name": "Czech Republic"
-    },
-    {
-        "iso3": "DNK",
-        "iso2": "DK",
-        "cow_code": 390,
-        "un_m49": 208,
-        "name_en": "Denmark",
-        "name_short": "Denmark",
-        "wb_code": "DNK",
-        "vdem_code": 158,
-        "acled_name": "Denmark"
-    },
-    {
-        "iso3": "DJI",
-        "iso2": "DJ",
-        "cow_code": 522,
-        "un_m49": 262,
-        "name_en": "Djibouti",
-        "name_short": "Djibouti",
-        "wb_code": "DJI",
-        "vdem_code": 113,
-        "acled_name": "Djibouti"
-    },
-    {
-        "iso3": "DMA",
-        "iso2": "DM",
-        "cow_code": 54,
-        "un_m49": 212,
-        "name_en": "Dominica",
-        "name_short": "Dominica",
-        "wb_code": "DMA",
-        "vdem_code": null,
-        "acled_name": "Dominica",
-        "uncertain": true
-    },
-    {
-        "iso3": "DOM",
-        "iso2": "DO",
-        "cow_code": 42,
-        "un_m49": 214,
-        "name_en": "Dominican Republic",
-        "name_short": "Dominican Republic",
-        "wb_code": "DOM",
-        "vdem_code": 114,
-        "acled_name": "Dominican Republic"
-    },
-    {
-        "iso3": "ECU",
-        "iso2": "EC",
-        "cow_code": 130,
-        "un_m49": 218,
-        "name_en": "Ecuador",
-        "name_short": "Ecuador",
-        "wb_code": "ECU",
-        "vdem_code": 75,
-        "acled_name": "Ecuador"
-    },
-    {
-        "iso3": "EGY",
-        "iso2": "EG",
-        "cow_code": 651,
-        "un_m49": 818,
-        "name_en": "Egypt",
-        "name_short": "Egypt",
-        "wb_code": "EGY",
-        "vdem_code": 13,
-        "acled_name": "Egypt"
-    },
-    {
-        "iso3": "SLV",
-        "iso2": "SV",
-        "cow_code": 92,
-        "un_m49": 222,
-        "name_en": "El Salvador",
-        "name_short": "El Salvador",
-        "wb_code": "SLV",
-        "vdem_code": 22,
-        "acled_name": "El Salvador"
-    },
-    {
-        "iso3": "GNQ",
-        "iso2": "GQ",
-        "cow_code": 411,
-        "un_m49": 226,
-        "name_en": "Equatorial Guinea",
-        "name_short": "Equatorial Guinea",
-        "wb_code": "GNQ",
-        "vdem_code": 160,
-        "acled_name": "Equatorial Guinea"
-    },
-    {
-        "iso3": "ERI",
-        "iso2": "ER",
-        "cow_code": 531,
-        "un_m49": 232,
-        "name_en": "Eritrea",
-        "name_short": "Eritrea",
-        "wb_code": "ERI",
-        "vdem_code": 115,
-        "acled_name": "Eritrea"
-    },
-    {
-        "iso3": "EST",
-        "iso2": "EE",
-        "cow_code": 366,
-        "un_m49": 233,
-        "name_en": "Estonia",
-        "name_short": "Estonia",
-        "wb_code": "EST",
-        "vdem_code": 161,
-        "acled_name": "Estonia"
-    },
-    {
-        "iso3": "SWZ",
-        "iso2": "SZ",
-        "cow_code": 572,
-        "un_m49": 748,
-        "name_en": "Eswatini",
-        "name_short": "Eswatini",
-        "wb_code": "SWZ",
-        "vdem_code": 132,
-        "acled_name": "eSwatini"
-    },
-    {
-        "iso3": "ETH",
-        "iso2": "ET",
-        "cow_code": 530,
-        "un_m49": 231,
-        "name_en": "Ethiopia",
-        "name_short": "Ethiopia",
-        "wb_code": "ETH",
-        "vdem_code": 38,
-        "acled_name": "Ethiopia"
-    },
-    {
-        "iso3": "FJI",
-        "iso2": "FJ",
-        "cow_code": 950,
-        "un_m49": 242,
-        "name_en": "Fiji",
-        "name_short": "Fiji",
-        "wb_code": "FJI",
-        "vdem_code": 162,
-        "acled_name": "Fiji"
-    },
-    {
-        "iso3": "FIN",
-        "iso2": "FI",
-        "cow_code": 375,
-        "un_m49": 246,
-        "name_en": "Finland",
-        "name_short": "Finland",
-        "wb_code": "FIN",
-        "vdem_code": 163,
-        "acled_name": "Finland"
-    },
-    {
-        "iso3": "FRA",
-        "iso2": "FR",
-        "cow_code": 220,
-        "un_m49": 250,
-        "name_en": "France",
-        "name_short": "France",
-        "wb_code": "FRA",
-        "vdem_code": 76,
-        "acled_name": "France"
-    },
-    {
-        "iso3": "GAB",
-        "iso2": "GA",
-        "cow_code": 481,
-        "un_m49": 266,
-        "name_en": "Gabon",
-        "name_short": "Gabon",
-        "wb_code": "GAB",
-        "vdem_code": 116,
-        "acled_name": "Gabon"
-    },
-    {
-        "iso3": "GMB",
-        "iso2": "GM",
-        "cow_code": 420,
-        "un_m49": 270,
-        "name_en": "Gambia",
-        "name_short": "Gambia",
-        "wb_code": "GMB",
-        "vdem_code": 117,
-        "acled_name": "Gambia"
-    },
-    {
-        "iso3": "GEO",
-        "iso2": "GE",
-        "cow_code": 372,
-        "un_m49": 268,
-        "name_en": "Georgia",
-        "name_short": "Georgia",
-        "wb_code": "GEO",
-        "vdem_code": 118,
-        "acled_name": "Georgia"
-    },
-    {
-        "iso3": "DEU",
-        "iso2": "DE",
-        "cow_code": 255,
-        "un_m49": 276,
-        "name_en": "Germany",
-        "name_short": "Germany",
-        "wb_code": "DEU",
-        "vdem_code": 77,
-        "acled_name": "Germany"
-    },
-    {
-        "iso3": "GHA",
-        "iso2": "GH",
-        "cow_code": 452,
-        "un_m49": 288,
-        "name_en": "Ghana",
-        "name_short": "Ghana",
-        "wb_code": "GHA",
-        "vdem_code": 7,
-        "acled_name": "Ghana"
-    },
-    {
-        "iso3": "GRC",
-        "iso2": "GR",
-        "cow_code": 350,
-        "un_m49": 300,
-        "name_en": "Greece",
-        "name_short": "Greece",
-        "wb_code": "GRC",
-        "vdem_code": 164,
-        "acled_name": "Greece"
-    },
-    {
-        "iso3": "GRD",
-        "iso2": "GD",
-        "cow_code": 55,
-        "un_m49": 308,
-        "name_en": "Grenada",
-        "name_short": "Grenada",
-        "wb_code": "GRD",
-        "vdem_code": null,
-        "acled_name": "Grenada",
-        "uncertain": true
-    },
-    {
-        "iso3": "GTM",
-        "iso2": "GT",
-        "cow_code": 90,
-        "un_m49": 320,
-        "name_en": "Guatemala",
-        "name_short": "Guatemala",
-        "wb_code": "GTM",
-        "vdem_code": 78,
-        "acled_name": "Guatemala"
-    },
-    {
-        "iso3": "GIN",
-        "iso2": "GN",
-        "cow_code": 438,
-        "un_m49": 324,
-        "name_en": "Guinea",
-        "name_short": "Guinea",
-        "wb_code": "GIN",
-        "vdem_code": 63,
-        "acled_name": "Guinea"
-    },
-    {
-        "iso3": "GNB",
-        "iso2": "GW",
-        "cow_code": 404,
-        "un_m49": 624,
-        "name_en": "Guinea-Bissau",
-        "name_short": "Guinea-Bissau",
-        "wb_code": "GNB",
-        "vdem_code": 119,
-        "acled_name": "Guinea-Bissau"
-    },
-    {
-        "iso3": "GUY",
-        "iso2": "GY",
-        "cow_code": 110,
-        "un_m49": 328,
-        "name_en": "Guyana",
-        "name_short": "Guyana",
-        "wb_code": "GUY",
-        "vdem_code": 166,
-        "acled_name": "Guyana"
-    },
-    {
-        "iso3": "HTI",
-        "iso2": "HT",
-        "cow_code": 41,
-        "un_m49": 332,
-        "name_en": "Haiti",
-        "name_short": "Haiti",
-        "wb_code": "HTI",
-        "vdem_code": 26,
-        "acled_name": "Haiti"
-    },
-    {
-        "iso3": "HND",
-        "iso2": "HN",
-        "cow_code": 91,
-        "un_m49": 340,
-        "name_en": "Honduras",
-        "name_short": "Honduras",
-        "wb_code": "HND",
-        "vdem_code": 27,
-        "acled_name": "Honduras"
-    },
-    {
-        "iso3": "HUN",
-        "iso2": "HU",
-        "cow_code": 310,
-        "un_m49": 348,
-        "name_en": "Hungary",
-        "name_short": "Hungary",
-        "wb_code": "HUN",
-        "vdem_code": 210,
-        "acled_name": "Hungary"
-    },
-    {
-        "iso3": "ISL",
-        "iso2": "IS",
-        "cow_code": 395,
-        "un_m49": 352,
-        "name_en": "Iceland",
-        "name_short": "Iceland",
-        "wb_code": "ISL",
-        "vdem_code": 168,
-        "acled_name": "Iceland"
-    },
-    {
-        "iso3": "IND",
-        "iso2": "IN",
-        "cow_code": 750,
-        "un_m49": 356,
-        "name_en": "India",
-        "name_short": "India",
-        "wb_code": "IND",
-        "vdem_code": 39,
-        "acled_name": "India"
-    },
-    {
-        "iso3": "IDN",
-        "iso2": "ID",
-        "cow_code": 850,
-        "un_m49": 360,
-        "name_en": "Indonesia",
-        "name_short": "Indonesia",
-        "wb_code": "IDN",
-        "vdem_code": 56,
-        "acled_name": "Indonesia"
-    },
-    {
-        "iso3": "IRN",
-        "iso2": "IR",
-        "cow_code": 630,
-        "un_m49": 364,
-        "name_en": "Iran",
-        "name_short": "Iran",
-        "wb_code": "IRN",
-        "vdem_code": 79,
-        "acled_name": "Iran"
-    },
-    {
-        "iso3": "IRQ",
-        "iso2": "IQ",
-        "cow_code": 645,
-        "un_m49": 368,
-        "name_en": "Iraq",
-        "name_short": "Iraq",
-        "wb_code": "IRQ",
-        "vdem_code": 80,
-        "acled_name": "Iraq"
-    },
-    {
-        "iso3": "IRL",
-        "iso2": "IE",
-        "cow_code": 205,
-        "un_m49": 372,
-        "name_en": "Ireland",
-        "name_short": "Ireland",
-        "wb_code": "IRL",
-        "vdem_code": 81,
-        "acled_name": "Ireland"
-    },
-    {
-        "iso3": "ISR",
-        "iso2": "IL",
-        "cow_code": 666,
-        "un_m49": 376,
-        "name_en": "Israel",
-        "name_short": "Israel",
-        "wb_code": "ISR",
-        "vdem_code": 169,
-        "acled_name": "Israel"
-    },
-    {
-        "iso3": "ITA",
-        "iso2": "IT",
-        "cow_code": 325,
-        "un_m49": 380,
-        "name_en": "Italy",
-        "name_short": "Italy",
-        "wb_code": "ITA",
-        "vdem_code": 82,
-        "acled_name": "Italy"
-    },
-    {
-        "iso3": "JAM",
-        "iso2": "JM",
-        "cow_code": 51,
-        "un_m49": 388,
-        "name_en": "Jamaica",
-        "name_short": "Jamaica",
-        "wb_code": "JAM",
-        "vdem_code": 120,
-        "acled_name": "Jamaica"
-    },
-    {
-        "iso3": "JPN",
-        "iso2": "JP",
-        "cow_code": 740,
-        "un_m49": 392,
-        "name_en": "Japan",
-        "name_short": "Japan",
-        "wb_code": "JPN",
-        "vdem_code": 9,
-        "acled_name": "Japan"
-    },
-    {
-        "iso3": "JOR",
-        "iso2": "JO",
-        "cow_code": 663,
-        "un_m49": 400,
-        "name_en": "Jordan",
-        "name_short": "Jordan",
-        "wb_code": "JOR",
-        "vdem_code": 83,
-        "acled_name": "Jordan"
-    },
-    {
-        "iso3": "KAZ",
-        "iso2": "KZ",
-        "cow_code": 705,
-        "un_m49": 398,
-        "name_en": "Kazakhstan",
-        "name_short": "Kazakhstan",
-        "wb_code": "KAZ",
-        "vdem_code": 121,
-        "acled_name": "Kazakhstan"
-    },
-    {
-        "iso3": "KEN",
-        "iso2": "KE",
-        "cow_code": 501,
-        "un_m49": 404,
-        "name_en": "Kenya",
-        "name_short": "Kenya",
-        "wb_code": "KEN",
-        "vdem_code": 40,
-        "acled_name": "Kenya"
-    },
-    {
-        "iso3": "KIR",
-        "iso2": "KI",
-        "cow_code": 935,
-        "un_m49": 296,
-        "name_en": "Kiribati",
-        "name_short": "Kiribati",
-        "wb_code": "KIR",
-        "vdem_code": null,
-        "acled_name": "Kiribati",
-        "uncertain": true
-    },
-    {
-        "iso3": "PRK",
-        "iso2": "KP",
-        "cow_code": 731,
-        "un_m49": 408,
-        "name_en": "Korea, Dem. People's Rep.",
-        "name_short": "North Korea",
-        "wb_code": "PRK",
-        "vdem_code": 41,
-        "acled_name": "North Korea"
-    },
-    {
-        "iso3": "KOR",
-        "iso2": "KR",
-        "cow_code": 732,
-        "un_m49": 410,
-        "name_en": "Korea, Rep.",
-        "name_short": "South Korea",
-        "wb_code": "KOR",
-        "vdem_code": 42,
-        "acled_name": "South Korea"
-    },
-    {
-        "iso3": "XKX",
-        "iso2": "XK",
-        "cow_code": 347,
-        "un_m49": null,
-        "name_en": "Kosovo",
-        "name_short": "Kosovo",
-        "wb_code": "XKX",
-        "vdem_code": 43,
-        "acled_name": "Kosovo"
-    },
-    {
-        "iso3": "KWT",
-        "iso2": "KW",
-        "cow_code": 690,
-        "un_m49": 414,
-        "name_en": "Kuwait",
-        "name_short": "Kuwait",
-        "wb_code": "KWT",
-        "vdem_code": 171,
-        "acled_name": "Kuwait"
-    },
-    {
-        "iso3": "KGZ",
-        "iso2": "KG",
-        "cow_code": 703,
-        "un_m49": 417,
-        "name_en": "Kyrgyzstan",
-        "name_short": "Kyrgyzstan",
-        "wb_code": "KGZ",
-        "vdem_code": 122,
-        "acled_name": "Kyrgyzstan"
-    },
-    {
-        "iso3": "LAO",
-        "iso2": "LA",
-        "cow_code": 812,
-        "un_m49": 418,
-        "name_en": "Lao PDR",
-        "name_short": "Laos",
-        "wb_code": "LAO",
-        "vdem_code": 123,
-        "acled_name": "Laos"
-    },
-    {
-        "iso3": "LVA",
-        "iso2": "LV",
-        "cow_code": 367,
-        "un_m49": 428,
-        "name_en": "Latvia",
-        "name_short": "Latvia",
-        "wb_code": "LVA",
-        "vdem_code": 84,
-        "acled_name": "Latvia"
-    },
-    {
-        "iso3": "LBN",
-        "iso2": "LB",
-        "cow_code": 660,
-        "un_m49": 422,
-        "name_en": "Lebanon",
-        "name_short": "Lebanon",
-        "wb_code": "LBN",
-        "vdem_code": 44,
-        "acled_name": "Lebanon"
-    },
-    {
-        "iso3": "LSO",
-        "iso2": "LS",
-        "cow_code": 570,
-        "un_m49": 426,
-        "name_en": "Lesotho",
-        "name_short": "Lesotho",
-        "wb_code": "LSO",
-        "vdem_code": 85,
-        "acled_name": "Lesotho"
-    },
-    {
-        "iso3": "LBR",
-        "iso2": "LR",
-        "cow_code": 450,
-        "un_m49": 430,
-        "name_en": "Liberia",
-        "name_short": "Liberia",
-        "wb_code": "LBR",
-        "vdem_code": 86,
-        "acled_name": "Liberia"
-    },
-    {
-        "iso3": "LBY",
-        "iso2": "LY",
-        "cow_code": 620,
-        "un_m49": 434,
-        "name_en": "Libya",
-        "name_short": "Libya",
-        "wb_code": "LBY",
-        "vdem_code": 124,
-        "acled_name": "Libya"
-    },
-    {
-        "iso3": "LIE",
-        "iso2": "LI",
-        "cow_code": 223,
-        "un_m49": 438,
-        "name_en": "Liechtenstein",
-        "name_short": "Liechtenstein",
-        "wb_code": "LIE",
-        "vdem_code": 172,
-        "acled_name": "Liechtenstein"
-    },
-    {
-        "iso3": "LTU",
-        "iso2": "LT",
-        "cow_code": 368,
-        "un_m49": 440,
-        "name_en": "Lithuania",
-        "name_short": "Lithuania",
-        "wb_code": "LTU",
-        "vdem_code": 173,
-        "acled_name": "Lithuania"
-    },
-    {
-        "iso3": "LUX",
-        "iso2": "LU",
-        "cow_code": 212,
-        "un_m49": 442,
-        "name_en": "Luxembourg",
-        "name_short": "Luxembourg",
-        "wb_code": "LUX",
-        "vdem_code": 174,
-        "acled_name": "Luxembourg"
-    },
-    {
-        "iso3": "MDG",
-        "iso2": "MG",
-        "cow_code": 580,
-        "un_m49": 450,
-        "name_en": "Madagascar",
-        "name_short": "Madagascar",
-        "wb_code": "MDG",
-        "vdem_code": 125,
-        "acled_name": "Madagascar"
-    },
-    {
-        "iso3": "MWI",
-        "iso2": "MW",
-        "cow_code": 553,
-        "un_m49": 454,
-        "name_en": "Malawi",
-        "name_short": "Malawi",
-        "wb_code": "MWI",
-        "vdem_code": 87,
-        "acled_name": "Malawi"
-    },
-    {
-        "iso3": "MYS",
-        "iso2": "MY",
-        "cow_code": 820,
-        "un_m49": 458,
-        "name_en": "Malaysia",
-        "name_short": "Malaysia",
-        "wb_code": "MYS",
-        "vdem_code": 177,
-        "acled_name": "Malaysia"
-    },
-    {
-        "iso3": "MDV",
-        "iso2": "MV",
-        "cow_code": 781,
-        "un_m49": 462,
-        "name_en": "Maldives",
-        "name_short": "Maldives",
-        "wb_code": "MDV",
-        "vdem_code": 88,
-        "acled_name": "Maldives"
-    },
-    {
-        "iso3": "MLI",
-        "iso2": "ML",
-        "cow_code": 432,
-        "un_m49": 466,
-        "name_en": "Mali",
-        "name_short": "Mali",
-        "wb_code": "MLI",
-        "vdem_code": 28,
-        "acled_name": "Mali"
-    },
-    {
-        "iso3": "MLT",
-        "iso2": "MT",
-        "cow_code": 338,
-        "un_m49": 470,
-        "name_en": "Malta",
-        "name_short": "Malta",
-        "wb_code": "MLT",
-        "vdem_code": 178,
-        "acled_name": "Malta"
-    },
-    {
-        "iso3": "MHL",
-        "iso2": "MH",
-        "cow_code": 983,
-        "un_m49": 584,
-        "name_en": "Marshall Islands",
-        "name_short": "Marshall Islands",
-        "wb_code": "MHL",
-        "vdem_code": null,
-        "acled_name": "Marshall Islands",
-        "uncertain": true
-    },
-    {
-        "iso3": "MRT",
-        "iso2": "MR",
-        "cow_code": 435,
-        "un_m49": 478,
-        "name_en": "Mauritania",
-        "name_short": "Mauritania",
-        "wb_code": "MRT",
-        "vdem_code": 65,
-        "acled_name": "Mauritania"
-    },
-    {
-        "iso3": "MUS",
-        "iso2": "MU",
-        "cow_code": 590,
-        "un_m49": 480,
-        "name_en": "Mauritius",
-        "name_short": "Mauritius",
-        "wb_code": "MUS",
-        "vdem_code": 180,
-        "acled_name": "Mauritius"
-    },
-    {
-        "iso3": "MEX",
-        "iso2": "MX",
-        "cow_code": 70,
-        "un_m49": 484,
-        "name_en": "Mexico",
-        "name_short": "Mexico",
-        "wb_code": "MEX",
-        "vdem_code": 3,
-        "acled_name": "Mexico"
-    },
-    {
-        "iso3": "FSM",
-        "iso2": "FM",
-        "cow_code": 987,
-        "un_m49": 583,
-        "name_en": "Micronesia, Fed. Sts.",
-        "name_short": "Micronesia",
-        "wb_code": "FSM",
-        "vdem_code": null,
-        "acled_name": "Micronesia",
-        "uncertain": true
-    },
-    {
-        "iso3": "MDA",
-        "iso2": "MD",
-        "cow_code": 359,
-        "un_m49": 498,
-        "name_en": "Moldova",
-        "name_short": "Moldova",
-        "wb_code": "MDA",
-        "vdem_code": 126,
-        "acled_name": "Moldova"
-    },
-    {
-        "iso3": "MCO",
-        "iso2": "MC",
-        "cow_code": 221,
-        "un_m49": 492,
-        "name_en": "Monaco",
-        "name_short": "Monaco",
-        "wb_code": "MCO",
-        "vdem_code": 182,
-        "acled_name": "Monaco"
-    },
-    {
-        "iso3": "MNG",
-        "iso2": "MN",
-        "cow_code": 712,
-        "un_m49": 496,
-        "name_en": "Mongolia",
-        "name_short": "Mongolia",
-        "wb_code": "MNG",
-        "vdem_code": 89,
-        "acled_name": "Mongolia"
-    },
-    {
-        "iso3": "MNE",
-        "iso2": "ME",
-        "cow_code": 341,
-        "un_m49": 499,
-        "name_en": "Montenegro",
-        "name_short": "Montenegro",
-        "wb_code": "MNE",
-        "vdem_code": 183,
-        "acled_name": "Montenegro"
-    },
-    {
-        "iso3": "MAR",
-        "iso2": "MA",
-        "cow_code": 600,
-        "un_m49": 504,
-        "name_en": "Morocco",
-        "name_short": "Morocco",
-        "wb_code": "MAR",
-        "vdem_code": 90,
-        "acled_name": "Morocco"
-    },
-    {
-        "iso3": "MOZ",
-        "iso2": "MZ",
-        "cow_code": 541,
-        "un_m49": 508,
-        "name_en": "Mozambique",
-        "name_short": "Mozambique",
-        "wb_code": "MOZ",
-        "vdem_code": 57,
-        "acled_name": "Mozambique"
-    },
-    {
-        "iso3": "MMR",
-        "iso2": "MM",
-        "cow_code": 775,
-        "un_m49": 104,
-        "name_en": "Myanmar",
-        "name_short": "Myanmar",
-        "wb_code": "MMR",
-        "vdem_code": 10,
-        "acled_name": "Myanmar"
-    },
-    {
-        "iso3": "NAM",
-        "iso2": "NA",
-        "cow_code": 565,
-        "un_m49": 516,
-        "name_en": "Namibia",
-        "name_short": "Namibia",
-        "wb_code": "NAM",
-        "vdem_code": 127,
-        "acled_name": "Namibia"
-    },
-    {
-        "iso3": "NRU",
-        "iso2": "NR",
-        "cow_code": 970,
-        "un_m49": 520,
-        "name_en": "Nauru",
-        "name_short": "Nauru",
-        "wb_code": "NRU",
-        "vdem_code": null,
-        "acled_name": "Nauru",
-        "uncertain": true
-    },
-    {
-        "iso3": "NPL",
-        "iso2": "NP",
-        "cow_code": 790,
-        "un_m49": 524,
-        "name_en": "Nepal",
-        "name_short": "Nepal",
-        "wb_code": "NPL",
-        "vdem_code": 58,
-        "acled_name": "Nepal"
-    },
-    {
-        "iso3": "NLD",
-        "iso2": "NL",
-        "cow_code": 210,
-        "un_m49": 528,
-        "name_en": "Netherlands",
-        "name_short": "Netherlands",
-        "wb_code": "NLD",
-        "vdem_code": 91,
-        "acled_name": "Netherlands"
-    },
-    {
-        "iso3": "NZL",
-        "iso2": "NZ",
-        "cow_code": 920,
-        "un_m49": 554,
-        "name_en": "New Zealand",
-        "name_short": "New Zealand",
-        "wb_code": "NZL",
-        "vdem_code": 185,
-        "acled_name": "New Zealand"
-    },
-    {
-        "iso3": "NIC",
-        "iso2": "NI",
-        "cow_code": 93,
-        "un_m49": 558,
-        "name_en": "Nicaragua",
-        "name_short": "Nicaragua",
-        "wb_code": "NIC",
-        "vdem_code": 59,
-        "acled_name": "Nicaragua"
-    },
-    {
-        "iso3": "NER",
-        "iso2": "NE",
-        "cow_code": 436,
-        "un_m49": 562,
-        "name_en": "Niger",
-        "name_short": "Niger",
-        "wb_code": "NER",
-        "vdem_code": 60,
-        "acled_name": "Niger"
-    },
-    {
-        "iso3": "NGA",
-        "iso2": "NG",
-        "cow_code": 475,
-        "un_m49": 566,
-        "name_en": "Nigeria",
-        "name_short": "Nigeria",
-        "wb_code": "NGA",
-        "vdem_code": 45,
-        "acled_name": "Nigeria"
-    },
-    {
-        "iso3": "MKD",
-        "iso2": "MK",
-        "cow_code": 343,
-        "un_m49": 807,
-        "name_en": "North Macedonia",
-        "name_short": "North Macedonia",
-        "wb_code": "MKD",
-        "vdem_code": 176,
-        "acled_name": "North Macedonia"
-    },
-    {
-        "iso3": "NOR",
-        "iso2": "NO",
-        "cow_code": 385,
-        "un_m49": 578,
-        "name_en": "Norway",
-        "name_short": "Norway",
-        "wb_code": "NOR",
-        "vdem_code": 186,
-        "acled_name": "Norway"
-    },
-    {
-        "iso3": "OMN",
-        "iso2": "OM",
-        "cow_code": 698,
-        "un_m49": 512,
-        "name_en": "Oman",
-        "name_short": "Oman",
-        "wb_code": "OMN",
-        "vdem_code": 187,
-        "acled_name": "Oman"
-    },
-    {
-        "iso3": "PAK",
-        "iso2": "PK",
-        "cow_code": 770,
-        "un_m49": 586,
-        "name_en": "Pakistan",
-        "name_short": "Pakistan",
-        "wb_code": "PAK",
-        "vdem_code": 29,
-        "acled_name": "Pakistan"
-    },
-    {
-        "iso3": "PLW",
-        "iso2": "PW",
-        "cow_code": 986,
-        "un_m49": 585,
-        "name_en": "Palau",
-        "name_short": "Palau",
-        "wb_code": "PLW",
-        "vdem_code": null,
-        "acled_name": "Palau",
-        "uncertain": true
-    },
-    {
-        "iso3": "PSE",
-        "iso2": "PS",
-        "cow_code": 665,
-        "un_m49": 275,
-        "name_en": "Palestine",
-        "name_short": "Palestine",
-        "wb_code": "PSE",
-        "vdem_code": 128,
-        "acled_name": "Palestine"
-    },
-    {
-        "iso3": "PAN",
-        "iso2": "PA",
-        "cow_code": 95,
-        "un_m49": 591,
-        "name_en": "Panama",
-        "name_short": "Panama",
-        "wb_code": "PAN",
-        "vdem_code": 92,
-        "acled_name": "Panama"
-    },
-    {
-        "iso3": "PNG",
-        "iso2": "PG",
-        "cow_code": 910,
-        "un_m49": 598,
-        "name_en": "Papua New Guinea",
-        "name_short": "Papua New Guinea",
-        "wb_code": "PNG",
-        "vdem_code": 93,
-        "acled_name": "Papua New Guinea"
-    },
-    {
-        "iso3": "PRY",
-        "iso2": "PY",
-        "cow_code": 150,
-        "un_m49": 600,
-        "name_en": "Paraguay",
-        "name_short": "Paraguay",
-        "wb_code": "PRY",
-        "vdem_code": 189,
-        "acled_name": "Paraguay"
-    },
-    {
-        "iso3": "PER",
-        "iso2": "PE",
-        "cow_code": 135,
-        "un_m49": 604,
-        "name_en": "Peru",
-        "name_short": "Peru",
-        "wb_code": "PER",
-        "vdem_code": 30,
-        "acled_name": "Peru"
-    },
-    {
-        "iso3": "PHL",
-        "iso2": "PH",
-        "cow_code": 840,
-        "un_m49": 608,
-        "name_en": "Philippines",
-        "name_short": "Philippines",
-        "wb_code": "PHL",
-        "vdem_code": 46,
-        "acled_name": "Philippines"
-    },
-    {
-        "iso3": "POL",
-        "iso2": "PL",
-        "cow_code": 290,
-        "un_m49": 616,
-        "name_en": "Poland",
-        "name_short": "Poland",
-        "wb_code": "POL",
-        "vdem_code": 17,
-        "acled_name": "Poland"
-    },
-    {
-        "iso3": "PRT",
-        "iso2": "PT",
-        "cow_code": 235,
-        "un_m49": 620,
-        "name_en": "Portugal",
-        "name_short": "Portugal",
-        "wb_code": "PRT",
-        "vdem_code": 21,
-        "acled_name": "Portugal"
-    },
-    {
-        "iso3": "QAT",
-        "iso2": "QA",
-        "cow_code": 694,
-        "un_m49": 634,
-        "name_en": "Qatar",
-        "name_short": "Qatar",
-        "wb_code": "QAT",
-        "vdem_code": 94,
-        "acled_name": "Qatar"
-    },
-    {
-        "iso3": "ROU",
-        "iso2": "RO",
-        "cow_code": 360,
-        "un_m49": 642,
-        "name_en": "Romania",
-        "name_short": "Romania",
-        "wb_code": "ROU",
-        "vdem_code": 190,
-        "acled_name": "Romania"
-    },
-    {
-        "iso3": "RUS",
-        "iso2": "RU",
-        "cow_code": 365,
-        "un_m49": 643,
-        "name_en": "Russia",
-        "name_short": "Russia",
-        "wb_code": "RUS",
-        "vdem_code": 11,
-        "acled_name": "Russia"
-    },
-    {
-        "iso3": "RWA",
-        "iso2": "RW",
-        "cow_code": 517,
-        "un_m49": 646,
-        "name_en": "Rwanda",
-        "name_short": "Rwanda",
-        "wb_code": "RWA",
-        "vdem_code": 129,
-        "acled_name": "Rwanda"
-    },
-    {
-        "iso3": "KNA",
-        "iso2": "KN",
-        "cow_code": 56,
-        "un_m49": 659,
-        "name_en": "St. Kitts and Nevis",
-        "name_short": "St. Kitts and Nevis",
-        "wb_code": "KNA",
-        "vdem_code": null,
-        "acled_name": "Saint Kitts and Nevis",
-        "uncertain": true
-    },
-    {
-        "iso3": "LCA",
-        "iso2": "LC",
-        "cow_code": 57,
-        "un_m49": 662,
-        "name_en": "St. Lucia",
-        "name_short": "St. Lucia",
-        "wb_code": "LCA",
-        "vdem_code": null,
-        "acled_name": "Saint Lucia",
-        "uncertain": true
-    },
-    {
-        "iso3": "VCT",
-        "iso2": "VC",
-        "cow_code": 58,
-        "un_m49": 670,
-        "name_en": "St. Vincent and the Grenadines",
-        "name_short": "St. Vincent and the Grenadines",
-        "wb_code": "VCT",
-        "vdem_code": null,
-        "acled_name": "Saint Vincent and the Grenadines",
-        "uncertain": true
-    },
-    {
-        "iso3": "WSM",
-        "iso2": "WS",
-        "cow_code": 990,
-        "un_m49": 882,
-        "name_en": "Samoa",
-        "name_short": "Samoa",
-        "wb_code": "WSM",
-        "vdem_code": null,
-        "acled_name": "Samoa",
-        "uncertain": true
-    },
-    {
-        "iso3": "SMR",
-        "iso2": "SM",
-        "cow_code": 331,
-        "un_m49": 674,
-        "name_en": "San Marino",
-        "name_short": "San Marino",
-        "wb_code": "SMR",
-        "vdem_code": 195,
-        "acled_name": "San Marino"
-    },
-    {
-        "iso3": "STP",
-        "iso2": "ST",
-        "cow_code": 403,
-        "un_m49": 678,
-        "name_en": "Sao Tome and Principe",
-        "name_short": "Sao Tome and Principe",
-        "wb_code": "STP",
-        "vdem_code": 196,
-        "acled_name": "Sao Tome and Principe"
-    },
-    {
-        "iso3": "SAU",
-        "iso2": "SA",
-        "cow_code": 670,
-        "un_m49": 682,
-        "name_en": "Saudi Arabia",
-        "name_short": "Saudi Arabia",
-        "wb_code": "SAU",
-        "vdem_code": 197,
-        "acled_name": "Saudi Arabia"
-    },
-    {
-        "iso3": "SEN",
-        "iso2": "SN",
-        "cow_code": 433,
-        "un_m49": 686,
-        "name_en": "Senegal",
-        "name_short": "Senegal",
-        "wb_code": "SEN",
-        "vdem_code": 31,
-        "acled_name": "Senegal"
-    },
-    {
-        "iso3": "SRB",
-        "iso2": "RS",
-        "cow_code": 345,
-        "un_m49": 688,
-        "name_en": "Serbia",
-        "name_short": "Serbia",
-        "wb_code": "SRB",
-        "vdem_code": 198,
-        "acled_name": "Serbia"
-    },
-    {
-        "iso3": "SYC",
-        "iso2": "SC",
-        "cow_code": 591,
-        "un_m49": 690,
-        "name_en": "Seychelles",
-        "name_short": "Seychelles",
-        "wb_code": "SYC",
-        "vdem_code": 199,
-        "acled_name": "Seychelles"
-    },
-    {
-        "iso3": "SLE",
-        "iso2": "SL",
-        "cow_code": 451,
-        "un_m49": 694,
-        "name_en": "Sierra Leone",
-        "name_short": "Sierra Leone",
-        "wb_code": "SLE",
-        "vdem_code": 95,
-        "acled_name": "Sierra Leone"
-    },
-    {
-        "iso3": "SGP",
-        "iso2": "SG",
-        "cow_code": 830,
-        "un_m49": 702,
-        "name_en": "Singapore",
-        "name_short": "Singapore",
-        "wb_code": "SGP",
-        "vdem_code": 200,
-        "acled_name": "Singapore"
-    },
-    {
-        "iso3": "SVK",
-        "iso2": "SK",
-        "cow_code": 317,
-        "un_m49": 703,
-        "name_en": "Slovakia",
-        "name_short": "Slovakia",
-        "wb_code": "SVK",
-        "vdem_code": 201,
-        "acled_name": "Slovakia"
-    },
-    {
-        "iso3": "SVN",
-        "iso2": "SI",
-        "cow_code": 349,
-        "un_m49": 705,
-        "name_en": "Slovenia",
-        "name_short": "Slovenia",
-        "wb_code": "SVN",
-        "vdem_code": 202,
-        "acled_name": "Slovenia"
-    },
-    {
-        "iso3": "SLB",
-        "iso2": "SB",
-        "cow_code": 940,
-        "un_m49": 90,
-        "name_en": "Solomon Islands",
-        "name_short": "Solomon Islands",
-        "wb_code": "SLB",
-        "vdem_code": 203,
-        "acled_name": "Solomon Islands"
-    },
-    {
-        "iso3": "SOM",
-        "iso2": "SO",
-        "cow_code": 520,
-        "un_m49": 706,
-        "name_en": "Somalia",
-        "name_short": "Somalia",
-        "wb_code": "SOM",
-        "vdem_code": 130,
-        "acled_name": "Somalia"
-    },
-    {
-        "iso3": "ZAF",
-        "iso2": "ZA",
-        "cow_code": 560,
-        "un_m49": 710,
-        "name_en": "South Africa",
-        "name_short": "South Africa",
-        "wb_code": "ZAF",
-        "vdem_code": 8,
-        "acled_name": "South Africa"
-    },
-    {
-        "iso3": "SSD",
-        "iso2": "SS",
-        "cow_code": 525,
-        "un_m49": 728,
-        "name_en": "South Sudan",
-        "name_short": "South Sudan",
-        "wb_code": "SSD",
-        "vdem_code": 32,
-        "acled_name": "South Sudan"
-    },
-    {
-        "iso3": "ESP",
-        "iso2": "ES",
-        "cow_code": 230,
-        "un_m49": 724,
-        "name_en": "Spain",
-        "name_short": "Spain",
-        "wb_code": "ESP",
-        "vdem_code": 96,
-        "acled_name": "Spain"
-    },
-    {
-        "iso3": "LKA",
-        "iso2": "LK",
-        "cow_code": 780,
-        "un_m49": 144,
-        "name_en": "Sri Lanka",
-        "name_short": "Sri Lanka",
-        "wb_code": "LKA",
-        "vdem_code": 131,
-        "acled_name": "Sri Lanka"
-    },
-    {
-        "iso3": "SDN",
-        "iso2": "SD",
-        "cow_code": 625,
-        "un_m49": 729,
-        "name_en": "Sudan",
-        "name_short": "Sudan",
-        "wb_code": "SDN",
-        "vdem_code": 33,
-        "acled_name": "Sudan"
-    },
-    {
-        "iso3": "SUR",
-        "iso2": "SR",
-        "cow_code": 115,
-        "un_m49": 740,
-        "name_en": "Suriname",
-        "name_short": "Suriname",
-        "wb_code": "SUR",
-        "vdem_code": 4,
-        "acled_name": "Suriname"
-    },
-    {
-        "iso3": "SWE",
-        "iso2": "SE",
-        "cow_code": 380,
-        "un_m49": 752,
-        "name_en": "Sweden",
-        "name_short": "Sweden",
-        "wb_code": "SWE",
-        "vdem_code": 5,
-        "acled_name": "Sweden"
-    },
-    {
-        "iso3": "CHE",
-        "iso2": "CH",
-        "cow_code": 225,
-        "un_m49": 756,
-        "name_en": "Switzerland",
-        "name_short": "Switzerland",
-        "wb_code": "CHE",
-        "vdem_code": 6,
-        "acled_name": "Switzerland"
-    },
-    {
-        "iso3": "SYR",
-        "iso2": "SY",
-        "cow_code": 652,
-        "un_m49": 760,
-        "name_en": "Syrian Arab Republic",
-        "name_short": "Syria",
-        "wb_code": "SYR",
-        "vdem_code": 97,
-        "acled_name": "Syria"
-    },
-    {
-        "iso3": "TWN",
-        "iso2": "TW",
-        "cow_code": 713,
-        "un_m49": 158,
-        "name_en": "Taiwan",
-        "name_short": "Taiwan",
-        "wb_code": "TWN",
-        "vdem_code": 48,
-        "acled_name": "Taiwan"
-    },
-    {
-        "iso3": "TJK",
-        "iso2": "TJ",
-        "cow_code": 702,
-        "un_m49": 762,
-        "name_en": "Tajikistan",
-        "name_short": "Tajikistan",
-        "wb_code": "TJK",
-        "vdem_code": 133,
-        "acled_name": "Tajikistan"
-    },
-    {
-        "iso3": "TZA",
-        "iso2": "TZ",
-        "cow_code": 510,
-        "un_m49": 834,
-        "name_en": "Tanzania",
-        "name_short": "Tanzania",
-        "wb_code": "TZA",
-        "vdem_code": 47,
-        "acled_name": "Tanzania"
-    },
-    {
-        "iso3": "THA",
-        "iso2": "TH",
-        "cow_code": 800,
-        "un_m49": 764,
-        "name_en": "Thailand",
-        "name_short": "Thailand",
-        "wb_code": "THA",
-        "vdem_code": 49,
-        "acled_name": "Thailand"
-    },
-    {
-        "iso3": "TLS",
-        "iso2": "TL",
-        "cow_code": 860,
-        "un_m49": 626,
-        "name_en": "Timor-Leste",
-        "name_short": "Timor-Leste",
-        "wb_code": "TLS",
-        "vdem_code": 74,
-        "acled_name": "East Timor"
-    },
-    {
-        "iso3": "TGO",
-        "iso2": "TG",
-        "cow_code": 461,
-        "un_m49": 768,
-        "name_en": "Togo",
-        "name_short": "Togo",
-        "wb_code": "TGO",
-        "vdem_code": 134,
-        "acled_name": "Togo"
-    },
-    {
-        "iso3": "TON",
-        "iso2": "TO",
-        "cow_code": 955,
-        "un_m49": 776,
-        "name_en": "Tonga",
-        "name_short": "Tonga",
-        "wb_code": "TON",
-        "vdem_code": null,
-        "acled_name": "Tonga",
-        "uncertain": true
-    },
-    {
-        "iso3": "TTO",
-        "iso2": "TT",
-        "cow_code": 52,
-        "un_m49": 780,
-        "name_en": "Trinidad and Tobago",
-        "name_short": "Trinidad and Tobago",
-        "wb_code": "TTO",
-        "vdem_code": 135,
-        "acled_name": "Trinidad and Tobago"
-    },
-    {
-        "iso3": "TUN",
-        "iso2": "TN",
-        "cow_code": 616,
-        "un_m49": 788,
-        "name_en": "Tunisia",
-        "name_short": "Tunisia",
-        "wb_code": "TUN",
-        "vdem_code": 98,
-        "acled_name": "Tunisia"
-    },
-    {
-        "iso3": "TUR",
-        "iso2": "TR",
-        "cow_code": 640,
-        "un_m49": 792,
-        "name_en": "Turkey",
-        "name_short": "Turkey",
-        "wb_code": "TUR",
-        "vdem_code": 99,
-        "acled_name": "Turkey"
-    },
-    {
-        "iso3": "TKM",
-        "iso2": "TM",
-        "cow_code": 701,
-        "un_m49": 795,
-        "name_en": "Turkmenistan",
-        "name_short": "Turkmenistan",
-        "wb_code": "TKM",
-        "vdem_code": 136,
-        "acled_name": "Turkmenistan"
-    },
-    {
-        "iso3": "TUV",
-        "iso2": "TV",
-        "cow_code": 947,
-        "un_m49": 798,
-        "name_en": "Tuvalu",
-        "name_short": "Tuvalu",
-        "wb_code": "TUV",
-        "vdem_code": null,
-        "acled_name": "Tuvalu",
-        "uncertain": true
-    },
-    {
-        "iso3": "UGA",
-        "iso2": "UG",
-        "cow_code": 500,
-        "un_m49": 800,
-        "name_en": "Uganda",
-        "name_short": "Uganda",
-        "wb_code": "UGA",
-        "vdem_code": 50,
-        "acled_name": "Uganda"
-    },
-    {
-        "iso3": "UKR",
-        "iso2": "UA",
-        "cow_code": 369,
-        "un_m49": 804,
-        "name_en": "Ukraine",
-        "name_short": "Ukraine",
-        "wb_code": "UKR",
-        "vdem_code": 100,
-        "acled_name": "Ukraine"
-    },
-    {
-        "iso3": "ARE",
-        "iso2": "AE",
-        "cow_code": 696,
-        "un_m49": 784,
-        "name_en": "United Arab Emirates",
-        "name_short": "United Arab Emirates",
-        "wb_code": "ARE",
-        "vdem_code": 207,
-        "acled_name": "United Arab Emirates"
-    },
-    {
-        "iso3": "GBR",
-        "iso2": "GB",
-        "cow_code": 200,
-        "un_m49": 826,
-        "name_en": "United Kingdom",
-        "name_short": "United Kingdom",
-        "wb_code": "GBR",
-        "vdem_code": 101,
-        "acled_name": "United Kingdom"
-    },
-    {
-        "iso3": "USA",
-        "iso2": "US",
-        "cow_code": 2,
-        "un_m49": 840,
-        "name_en": "United States",
-        "name_short": "United States",
-        "wb_code": "USA",
-        "vdem_code": 20,
-        "acled_name": "United States"
-    },
-    {
-        "iso3": "URY",
-        "iso2": "UY",
-        "cow_code": 165,
-        "un_m49": 858,
-        "name_en": "Uruguay",
-        "name_short": "Uruguay",
-        "wb_code": "URY",
-        "vdem_code": 102,
-        "acled_name": "Uruguay"
-    },
-    {
-        "iso3": "UZB",
-        "iso2": "UZ",
-        "cow_code": 704,
-        "un_m49": 860,
-        "name_en": "Uzbekistan",
-        "name_short": "Uzbekistan",
-        "wb_code": "UZB",
-        "vdem_code": 140,
-        "acled_name": "Uzbekistan"
-    },
-    {
-        "iso3": "VUT",
-        "iso2": "VU",
-        "cow_code": 935,
-        "un_m49": 548,
-        "name_en": "Vanuatu",
-        "name_short": "Vanuatu",
-        "wb_code": "VUT",
-        "vdem_code": 206,
-        "acled_name": "Vanuatu"
-    },
-    {
-        "iso3": "VEN",
-        "iso2": "VE",
-        "cow_code": 101,
-        "un_m49": 862,
-        "name_en": "Venezuela, RB",
-        "name_short": "Venezuela",
-        "wb_code": "VEN",
-        "vdem_code": 51,
-        "acled_name": "Venezuela"
-    },
-    {
-        "iso3": "VNM",
-        "iso2": "VN",
-        "cow_code": 816,
-        "un_m49": 704,
-        "name_en": "Vietnam",
-        "name_short": "Vietnam",
-        "wb_code": "VNM",
-        "vdem_code": 34,
-        "acled_name": "Vietnam"
-    },
-    {
-        "iso3": "ESH",
-        "iso2": "EH",
-        "cow_code": 601,
-        "un_m49": 732,
-        "name_en": "Western Sahara",
-        "name_short": "Western Sahara",
-        "wb_code": "ESH",
-        "vdem_code": null,
-        "acled_name": "Western Sahara",
-        "uncertain": true
-    },
-    {
-        "iso3": "YEM",
-        "iso2": "YE",
-        "cow_code": 679,
-        "un_m49": 887,
-        "name_en": "Yemen",
-        "name_short": "Yemen",
-        "wb_code": "YEM",
-        "vdem_code": 14,
-        "acled_name": "Yemen"
-    },
-    {
-        "iso3": "ZMB",
-        "iso2": "ZM",
-        "cow_code": 551,
-        "un_m49": 894,
-        "name_en": "Zambia",
-        "name_short": "Zambia",
-        "wb_code": "ZMB",
-        "vdem_code": 61,
-        "acled_name": "Zambia"
-    },
-    {
-        "iso3": "ZWE",
-        "iso2": "ZW",
-        "cow_code": 552,
-        "un_m49": 716,
-        "name_en": "Zimbabwe",
-        "name_short": "Zimbabwe",
-        "wb_code": "ZWE",
-        "vdem_code": 62,
-        "acled_name": "Zimbabwe"
-    }
-]
+{
+  "AFG": {
+    "iso3": "AFG",
+    "iso2": "AF",
+    "name": "Afghanistan",
+    "un_m49": 4,
+    "cow_code": 700,
+    "vdem_id": 100,
+    "wb_code": "AFG"
+  },
+  "AGO": {
+    "iso3": "AGO",
+    "iso2": "AO",
+    "name": "Angola",
+    "un_m49": 24,
+    "cow_code": 540,
+    "vdem_id": 104,
+    "wb_code": "AGO"
+  },
+  "ALB": {
+    "iso3": "ALB",
+    "iso2": "AL",
+    "name": "Albania",
+    "un_m49": 8,
+    "cow_code": 339,
+    "vdem_id": 118,
+    "wb_code": "ALB"
+  },
+  "AND": {
+    "iso3": "AND",
+    "iso2": "AD",
+    "name": "Andorra",
+    "un_m49": 20,
+    "cow_code": 232,
+    "vdem_id": null,
+    "wb_code": "AND"
+  },
+  "ARE": {
+    "iso3": "ARE",
+    "iso2": "AE",
+    "name": "United Arab Emirates",
+    "un_m49": 784,
+    "cow_code": 696,
+    "vdem_id": 124,
+    "wb_code": "ARE"
+  },
+  "ARG": {
+    "iso3": "ARG",
+    "iso2": "AR",
+    "name": "Argentina",
+    "un_m49": 32,
+    "cow_code": 160,
+    "vdem_id": 18,
+    "wb_code": "ARG"
+  },
+  "ARM": {
+    "iso3": "ARM",
+    "iso2": "AM",
+    "name": "Armenia",
+    "un_m49": 51,
+    "cow_code": 371,
+    "vdem_id": 38,
+    "wb_code": "ARM"
+  },
+  "ATG": {
+    "iso3": "ATG",
+    "iso2": "AG",
+    "name": "Antigua and Barbuda",
+    "un_m49": 28,
+    "cow_code": 58,
+    "vdem_id": null,
+    "wb_code": "ATG"
+  },
+  "AUS": {
+    "iso3": "AUS",
+    "iso2": "AU",
+    "name": "Australia",
+    "un_m49": 36,
+    "cow_code": 900,
+    "vdem_id": 128,
+    "wb_code": "AUS"
+  },
+  "AUT": {
+    "iso3": "AUT",
+    "iso2": "AT",
+    "name": "Austria",
+    "un_m49": 40,
+    "cow_code": 305,
+    "vdem_id": 109,
+    "wb_code": "AUT"
+  },
+  "AZE": {
+    "iso3": "AZE",
+    "iso2": "AZ",
+    "name": "Azerbaijan",
+    "un_m49": 31,
+    "cow_code": 373,
+    "vdem_id": 40,
+    "wb_code": "AZE"
+  },
+  "BDI": {
+    "iso3": "BDI",
+    "iso2": "BI",
+    "name": "Burundi",
+    "un_m49": 108,
+    "cow_code": 516,
+    "vdem_id": null,
+    "wb_code": "BDI"
+  },
+  "BEL": {
+    "iso3": "BEL",
+    "iso2": "BE",
+    "name": "Belgium",
+    "un_m49": 56,
+    "cow_code": 211,
+    "vdem_id": 103,
+    "wb_code": "BEL"
+  },
+  "BEN": {
+    "iso3": "BEN",
+    "iso2": "BJ",
+    "name": "Benin",
+    "un_m49": 204,
+    "cow_code": 434,
+    "vdem_id": null,
+    "wb_code": "BEN"
+  },
+  "BFA": {
+    "iso3": "BFA",
+    "iso2": "BF",
+    "name": "Burkina Faso",
+    "un_m49": 854,
+    "cow_code": 439,
+    "vdem_id": null,
+    "wb_code": "BFA"
+  },
+  "BGD": {
+    "iso3": "BGD",
+    "iso2": "BD",
+    "name": "Bangladesh",
+    "un_m49": 50,
+    "cow_code": 771,
+    "vdem_id": 56,
+    "wb_code": "BGD"
+  },
+  "BGR": {
+    "iso3": "BGR",
+    "iso2": "BG",
+    "name": "Bulgaria",
+    "un_m49": 100,
+    "cow_code": 355,
+    "vdem_id": 71,
+    "wb_code": "BGR"
+  },
+  "BHR": {
+    "iso3": "BHR",
+    "iso2": "BH",
+    "name": "Bahrain",
+    "un_m49": 48,
+    "cow_code": 692,
+    "vdem_id": 122,
+    "wb_code": "BHR"
+  },
+  "BHS": {
+    "iso3": "BHS",
+    "iso2": "BS",
+    "name": "Bahamas",
+    "un_m49": 44,
+    "cow_code": 31,
+    "vdem_id": 132,
+    "wb_code": "BHS"
+  },
+  "BIH": {
+    "iso3": "BIH",
+    "iso2": "BA",
+    "name": "Bosnia and Herzegovina",
+    "un_m49": 70,
+    "cow_code": 346,
+    "vdem_id": 152,
+    "wb_code": "BIH"
+  },
+  "BLR": {
+    "iso3": "BLR",
+    "iso2": "BY",
+    "name": "Belarus",
+    "un_m49": 112,
+    "cow_code": 370,
+    "vdem_id": 34,
+    "wb_code": "BLR"
+  },
+  "BLZ": {
+    "iso3": "BLZ",
+    "iso2": "BZ",
+    "name": "Belize",
+    "un_m49": 84,
+    "cow_code": 80,
+    "vdem_id": null,
+    "wb_code": "BLZ"
+  },
+  "BOL": {
+    "iso3": "BOL",
+    "iso2": "BO",
+    "name": "Bolivia",
+    "un_m49": 68,
+    "cow_code": 145,
+    "vdem_id": 14,
+    "wb_code": "BOL"
+  },
+  "BRA": {
+    "iso3": "BRA",
+    "iso2": "BR",
+    "name": "Brazil",
+    "un_m49": 76,
+    "cow_code": 140,
+    "vdem_id": 15,
+    "wb_code": "BRA"
+  },
+  "BRB": {
+    "iso3": "BRB",
+    "iso2": "BB",
+    "name": "Barbados",
+    "un_m49": 52,
+    "cow_code": 53,
+    "vdem_id": null,
+    "wb_code": "BRB"
+  },
+  "BRN": {
+    "iso3": "BRN",
+    "iso2": "BN",
+    "name": "Brunei",
+    "un_m49": 96,
+    "cow_code": 835,
+    "vdem_id": 131,
+    "wb_code": "BRN"
+  },
+  "BTN": {
+    "iso3": "BTN",
+    "iso2": "BT",
+    "name": "Bhutan",
+    "un_m49": 64,
+    "cow_code": 760,
+    "vdem_id": 176,
+    "wb_code": "BTN"
+  },
+  "BWA": {
+    "iso3": "BWA",
+    "iso2": "BW",
+    "name": "Botswana",
+    "un_m49": 72,
+    "cow_code": 571,
+    "vdem_id": null,
+    "wb_code": "BWA"
+  },
+  "CAF": {
+    "iso3": "CAF",
+    "iso2": "CF",
+    "name": "Central African Republic",
+    "un_m49": 140,
+    "cow_code": 482,
+    "vdem_id": null,
+    "wb_code": "CAF"
+  },
+  "CAN": {
+    "iso3": "CAN",
+    "iso2": "CA",
+    "name": "Canada",
+    "un_m49": 124,
+    "cow_code": 20,
+    "vdem_id": 110,
+    "wb_code": "CAN"
+  },
+  "CHE": {
+    "iso3": "CHE",
+    "iso2": "CH",
+    "name": "Switzerland",
+    "un_m49": 756,
+    "cow_code": 225,
+    "vdem_id": 106,
+    "wb_code": "CHE"
+  },
+  "CHL": {
+    "iso3": "CHL",
+    "iso2": "CL",
+    "name": "Chile",
+    "un_m49": 152,
+    "cow_code": 155,
+    "vdem_id": 17,
+    "wb_code": "CHL"
+  },
+  "CHN": {
+    "iso3": "CHN",
+    "iso2": "CN",
+    "name": "China",
+    "un_m49": 156,
+    "cow_code": 710,
+    "vdem_id": 60,
+    "wb_code": "CHN"
+  },
+  "CIV": {
+    "iso3": "CIV",
+    "iso2": "CI",
+    "name": "Ivory Coast",
+    "un_m49": 384,
+    "cow_code": 437,
+    "vdem_id": 91,
+    "wb_code": "CIV"
+  },
+  "CMR": {
+    "iso3": "CMR",
+    "iso2": "CM",
+    "name": "Cameroon",
+    "un_m49": 120,
+    "cow_code": 471,
+    "vdem_id": 94,
+    "wb_code": "CMR"
+  },
+  "COD": {
+    "iso3": "COD",
+    "iso2": "CD",
+    "name": "DR Congo",
+    "un_m49": 180,
+    "cow_code": 490,
+    "vdem_id": 99,
+    "wb_code": "COD"
+  },
+  "COG": {
+    "iso3": "COG",
+    "iso2": "CG",
+    "name": "Republic of the Congo",
+    "un_m49": 178,
+    "cow_code": 484,
+    "vdem_id": null,
+    "wb_code": "COG"
+  },
+  "COL": {
+    "iso3": "COL",
+    "iso2": "CO",
+    "name": "Colombia",
+    "un_m49": 170,
+    "cow_code": 100,
+    "vdem_id": 10,
+    "wb_code": "COL"
+  },
+  "COM": {
+    "iso3": "COM",
+    "iso2": "KM",
+    "name": "Comoros",
+    "un_m49": 174,
+    "cow_code": 581,
+    "vdem_id": null,
+    "wb_code": "COM"
+  },
+  "CPV": {
+    "iso3": "CPV",
+    "iso2": "CV",
+    "name": "Cape Verde",
+    "un_m49": 132,
+    "cow_code": 402,
+    "vdem_id": null,
+    "wb_code": "CPV"
+  },
+  "CRI": {
+    "iso3": "CRI",
+    "iso2": "CR",
+    "name": "Costa Rica",
+    "un_m49": 188,
+    "cow_code": 94,
+    "vdem_id": 6,
+    "wb_code": "CRI"
+  },
+  "CUB": {
+    "iso3": "CUB",
+    "iso2": "CU",
+    "name": "Cuba",
+    "un_m49": 192,
+    "cow_code": 40,
+    "vdem_id": 2,
+    "wb_code": "CUB"
+  },
+  "CYP": {
+    "iso3": "CYP",
+    "iso2": "CY",
+    "name": "Cyprus",
+    "un_m49": 196,
+    "cow_code": 352,
+    "vdem_id": 120,
+    "wb_code": "CYP"
+  },
+  "CZE": {
+    "iso3": "CZE",
+    "iso2": "CZ",
+    "name": "Czechia",
+    "un_m49": 203,
+    "cow_code": 316,
+    "vdem_id": 157,
+    "wb_code": "CZE"
+  },
+  "DEU": {
+    "iso3": "DEU",
+    "iso2": "DE",
+    "name": "Germany",
+    "un_m49": 276,
+    "cow_code": 255,
+    "vdem_id": 77,
+    "wb_code": "DEU"
+  },
+  "DJI": {
+    "iso3": "DJI",
+    "iso2": "DJ",
+    "name": "Djibouti",
+    "un_m49": 262,
+    "cow_code": 522,
+    "vdem_id": null,
+    "wb_code": "DJI"
+  },
+  "DMA": {
+    "iso3": "DMA",
+    "iso2": "DM",
+    "name": "Dominica",
+    "un_m49": 212,
+    "cow_code": 54,
+    "vdem_id": null,
+    "wb_code": "DMA"
+  },
+  "DNK": {
+    "iso3": "DNK",
+    "iso2": "DK",
+    "name": "Denmark",
+    "un_m49": 208,
+    "cow_code": 390,
+    "vdem_id": 116,
+    "wb_code": "DNK"
+  },
+  "DOM": {
+    "iso3": "DOM",
+    "iso2": "DO",
+    "name": "Dominican Republic",
+    "un_m49": 214,
+    "cow_code": 42,
+    "vdem_id": 22,
+    "wb_code": "DOM"
+  },
+  "DZA": {
+    "iso3": "DZA",
+    "iso2": "DZ",
+    "name": "Algeria",
+    "un_m49": 12,
+    "cow_code": 615,
+    "vdem_id": 87,
+    "wb_code": "DZA"
+  },
+  "ECU": {
+    "iso3": "ECU",
+    "iso2": "EC",
+    "name": "Ecuador",
+    "un_m49": 218,
+    "cow_code": 130,
+    "vdem_id": 12,
+    "wb_code": "ECU"
+  },
+  "EGY": {
+    "iso3": "EGY",
+    "iso2": "EG",
+    "name": "Egypt",
+    "un_m49": 818,
+    "cow_code": 651,
+    "vdem_id": 51,
+    "wb_code": "EGY"
+  },
+  "ERI": {
+    "iso3": "ERI",
+    "iso2": "ER",
+    "name": "Eritrea",
+    "un_m49": 232,
+    "cow_code": 531,
+    "vdem_id": null,
+    "wb_code": "ERI"
+  },
+  "ESP": {
+    "iso3": "ESP",
+    "iso2": "ES",
+    "name": "Spain",
+    "un_m49": 724,
+    "cow_code": 230,
+    "vdem_id": 107,
+    "wb_code": "ESP"
+  },
+  "EST": {
+    "iso3": "EST",
+    "iso2": "EE",
+    "name": "Estonia",
+    "un_m49": 233,
+    "cow_code": 366,
+    "vdem_id": 35,
+    "wb_code": "EST"
+  },
+  "ETH": {
+    "iso3": "ETH",
+    "iso2": "ET",
+    "name": "Ethiopia",
+    "un_m49": 231,
+    "cow_code": 530,
+    "vdem_id": 82,
+    "wb_code": "ETH"
+  },
+  "FIN": {
+    "iso3": "FIN",
+    "iso2": "FI",
+    "name": "Finland",
+    "un_m49": 246,
+    "cow_code": 375,
+    "vdem_id": 113,
+    "wb_code": "FIN"
+  },
+  "FJI": {
+    "iso3": "FJI",
+    "iso2": "FJ",
+    "name": "Fiji",
+    "un_m49": 242,
+    "cow_code": 950,
+    "vdem_id": 136,
+    "wb_code": "FJI"
+  },
+  "FRA": {
+    "iso3": "FRA",
+    "iso2": "FR",
+    "name": "France",
+    "un_m49": 250,
+    "cow_code": 220,
+    "vdem_id": 105,
+    "wb_code": "FRA"
+  },
+  "FSM": {
+    "iso3": "FSM",
+    "iso2": "FM",
+    "name": "Micronesia",
+    "un_m49": 583,
+    "cow_code": 987,
+    "vdem_id": null,
+    "wb_code": "FSM"
+  },
+  "GAB": {
+    "iso3": "GAB",
+    "iso2": "GA",
+    "name": "Gabon",
+    "un_m49": 266,
+    "cow_code": 481,
+    "vdem_id": null,
+    "wb_code": "GAB"
+  },
+  "GBR": {
+    "iso3": "GBR",
+    "iso2": "GB",
+    "name": "United Kingdom",
+    "un_m49": 826,
+    "cow_code": 200,
+    "vdem_id": 101,
+    "wb_code": "GBR"
+  },
+  "GEO": {
+    "iso3": "GEO",
+    "iso2": "GE",
+    "name": "Georgia",
+    "un_m49": 268,
+    "cow_code": 372,
+    "vdem_id": 39,
+    "wb_code": "GEO"
+  },
+  "GHA": {
+    "iso3": "GHA",
+    "iso2": "GH",
+    "name": "Ghana",
+    "un_m49": 288,
+    "cow_code": 452,
+    "vdem_id": 83,
+    "wb_code": "GHA"
+  },
+  "GIN": {
+    "iso3": "GIN",
+    "iso2": "GN",
+    "name": "Guinea",
+    "un_m49": 324,
+    "cow_code": 438,
+    "vdem_id": null,
+    "wb_code": "GIN"
+  },
+  "GMB": {
+    "iso3": "GMB",
+    "iso2": "GM",
+    "name": "Gambia",
+    "un_m49": 270,
+    "cow_code": 420,
+    "vdem_id": null,
+    "wb_code": "GMB"
+  },
+  "GNB": {
+    "iso3": "GNB",
+    "iso2": "GW",
+    "name": "Guinea-Bissau",
+    "un_m49": 624,
+    "cow_code": 404,
+    "vdem_id": null,
+    "wb_code": "GNB"
+  },
+  "GNQ": {
+    "iso3": "GNQ",
+    "iso2": "GQ",
+    "name": "Equatorial Guinea",
+    "un_m49": 226,
+    "cow_code": 411,
+    "vdem_id": null,
+    "wb_code": "GNQ"
+  },
+  "GRC": {
+    "iso3": "GRC",
+    "iso2": "GR",
+    "name": "Greece",
+    "un_m49": 300,
+    "cow_code": 350,
+    "vdem_id": 111,
+    "wb_code": "GRC"
+  },
+  "GRD": {
+    "iso3": "GRD",
+    "iso2": "GD",
+    "name": "Grenada",
+    "un_m49": 308,
+    "cow_code": 55,
+    "vdem_id": null,
+    "wb_code": "GRD"
+  },
+  "GTM": {
+    "iso3": "GTM",
+    "iso2": "GT",
+    "name": "Guatemala",
+    "un_m49": 320,
+    "cow_code": 90,
+    "vdem_id": 4,
+    "wb_code": "GTM"
+  },
+  "GUY": {
+    "iso3": "GUY",
+    "iso2": "GY",
+    "name": "Guyana",
+    "un_m49": 328,
+    "cow_code": 110,
+    "vdem_id": 79,
+    "wb_code": "GUY"
+  },
+  "HND": {
+    "iso3": "HND",
+    "iso2": "HN",
+    "name": "Honduras",
+    "un_m49": 340,
+    "cow_code": 91,
+    "vdem_id": 7,
+    "wb_code": "HND"
+  },
+  "HRV": {
+    "iso3": "HRV",
+    "iso2": "HR",
+    "name": "Croatia",
+    "un_m49": 191,
+    "cow_code": 344,
+    "vdem_id": 155,
+    "wb_code": "HRV"
+  },
+  "HTI": {
+    "iso3": "HTI",
+    "iso2": "HT",
+    "name": "Haiti",
+    "un_m49": 332,
+    "cow_code": 41,
+    "vdem_id": 21,
+    "wb_code": "HTI"
+  },
+  "HUN": {
+    "iso3": "HUN",
+    "iso2": "HU",
+    "name": "Hungary",
+    "un_m49": 348,
+    "cow_code": 310,
+    "vdem_id": 69,
+    "wb_code": "HUN"
+  },
+  "IDN": {
+    "iso3": "IDN",
+    "iso2": "ID",
+    "name": "Indonesia",
+    "un_m49": 360,
+    "cow_code": 850,
+    "vdem_id": 127,
+    "wb_code": "IDN"
+  },
+  "IND": {
+    "iso3": "IND",
+    "iso2": "IN",
+    "name": "India",
+    "un_m49": 356,
+    "cow_code": 750,
+    "vdem_id": 54,
+    "wb_code": "IND"
+  },
+  "IRL": {
+    "iso3": "IRL",
+    "iso2": "IE",
+    "name": "Ireland",
+    "un_m49": 372,
+    "cow_code": 205,
+    "vdem_id": 102,
+    "wb_code": "IRL"
+  },
+  "IRN": {
+    "iso3": "IRN",
+    "iso2": "IR",
+    "name": "Iran",
+    "un_m49": 364,
+    "cow_code": 630,
+    "vdem_id": 42,
+    "wb_code": "IRN"
+  },
+  "IRQ": {
+    "iso3": "IRQ",
+    "iso2": "IQ",
+    "name": "Iraq",
+    "un_m49": 368,
+    "cow_code": 645,
+    "vdem_id": 41,
+    "wb_code": "IRQ"
+  },
+  "ISL": {
+    "iso3": "ISL",
+    "iso2": "IS",
+    "name": "Iceland",
+    "un_m49": 352,
+    "cow_code": 395,
+    "vdem_id": 117,
+    "wb_code": "ISL"
+  },
+  "ISR": {
+    "iso3": "ISR",
+    "iso2": "IL",
+    "name": "Israel",
+    "un_m49": 376,
+    "cow_code": 666,
+    "vdem_id": 46,
+    "wb_code": "ISR"
+  },
+  "ITA": {
+    "iso3": "ITA",
+    "iso2": "IT",
+    "name": "Italy",
+    "un_m49": 380,
+    "cow_code": 325,
+    "vdem_id": 112,
+    "wb_code": "ITA"
+  },
+  "JAM": {
+    "iso3": "JAM",
+    "iso2": "JM",
+    "name": "Jamaica",
+    "un_m49": 388,
+    "cow_code": 51,
+    "vdem_id": 23,
+    "wb_code": "JAM"
+  },
+  "JOR": {
+    "iso3": "JOR",
+    "iso2": "JO",
+    "name": "Jordan",
+    "un_m49": 400,
+    "cow_code": 663,
+    "vdem_id": 45,
+    "wb_code": "JOR"
+  },
+  "JPN": {
+    "iso3": "JPN",
+    "iso2": "JP",
+    "name": "Japan",
+    "un_m49": 392,
+    "cow_code": 740,
+    "vdem_id": 65,
+    "wb_code": "JPN"
+  },
+  "KAZ": {
+    "iso3": "KAZ",
+    "iso2": "KZ",
+    "name": "Kazakhstan",
+    "un_m49": 398,
+    "cow_code": 705,
+    "vdem_id": 145,
+    "wb_code": "KAZ"
+  },
+  "KEN": {
+    "iso3": "KEN",
+    "iso2": "KE",
+    "name": "Kenya",
+    "un_m49": 404,
+    "cow_code": 501,
+    "vdem_id": 84,
+    "wb_code": "KEN"
+  },
+  "KGZ": {
+    "iso3": "KGZ",
+    "iso2": "KG",
+    "name": "Kyrgyzstan",
+    "un_m49": 417,
+    "cow_code": 703,
+    "vdem_id": 146,
+    "wb_code": "KGZ"
+  },
+  "KHM": {
+    "iso3": "KHM",
+    "iso2": "KH",
+    "name": "Cambodia",
+    "un_m49": 116,
+    "cow_code": 811,
+    "vdem_id": 137,
+    "wb_code": "KHM"
+  },
+  "KIR": {
+    "iso3": "KIR",
+    "iso2": "KI",
+    "name": "Kiribati",
+    "un_m49": 296,
+    "cow_code": 946,
+    "vdem_id": null,
+    "wb_code": "KIR"
+  },
+  "KNA": {
+    "iso3": "KNA",
+    "iso2": "KN",
+    "name": "Saint Kitts and Nevis",
+    "un_m49": 659,
+    "cow_code": 60,
+    "vdem_id": null,
+    "wb_code": "KNA"
+  },
+  "KOR": {
+    "iso3": "KOR",
+    "iso2": "KR",
+    "name": "South Korea",
+    "un_m49": 410,
+    "cow_code": 732,
+    "vdem_id": 64,
+    "wb_code": "KOR"
+  },
+  "KWT": {
+    "iso3": "KWT",
+    "iso2": "KW",
+    "name": "Kuwait",
+    "un_m49": 414,
+    "cow_code": 690,
+    "vdem_id": 49,
+    "wb_code": "KWT"
+  },
+  "LAO": {
+    "iso3": "LAO",
+    "iso2": "LA",
+    "name": "Laos",
+    "un_m49": 418,
+    "cow_code": 812,
+    "vdem_id": 138,
+    "wb_code": "LAO"
+  },
+  "LBN": {
+    "iso3": "LBN",
+    "iso2": "LB",
+    "name": "Lebanon",
+    "un_m49": 422,
+    "cow_code": 660,
+    "vdem_id": 44,
+    "wb_code": "LBN"
+  },
+  "LBR": {
+    "iso3": "LBR",
+    "iso2": "LR",
+    "name": "Liberia",
+    "un_m49": 430,
+    "cow_code": 450,
+    "vdem_id": null,
+    "wb_code": "LBR"
+  },
+  "LBY": {
+    "iso3": "LBY",
+    "iso2": "LY",
+    "name": "Libya",
+    "un_m49": 434,
+    "cow_code": 620,
+    "vdem_id": 89,
+    "wb_code": "LBY"
+  },
+  "LCA": {
+    "iso3": "LCA",
+    "iso2": "LC",
+    "name": "Saint Lucia",
+    "un_m49": 662,
+    "cow_code": 56,
+    "vdem_id": null,
+    "wb_code": "LCA"
+  },
+  "LIE": {
+    "iso3": "LIE",
+    "iso2": "LI",
+    "name": "Liechtenstein",
+    "un_m49": 438,
+    "cow_code": 223,
+    "vdem_id": null,
+    "wb_code": "LIE"
+  },
+  "LKA": {
+    "iso3": "LKA",
+    "iso2": "LK",
+    "name": "Sri Lanka",
+    "un_m49": 144,
+    "cow_code": 780,
+    "vdem_id": 57,
+    "wb_code": "LKA"
+  },
+  "LSO": {
+    "iso3": "LSO",
+    "iso2": "LS",
+    "name": "Lesotho",
+    "un_m49": 426,
+    "cow_code": 570,
+    "vdem_id": null,
+    "wb_code": "LSO"
+  },
+  "LTU": {
+    "iso3": "LTU",
+    "iso2": "LT",
+    "name": "Lithuania",
+    "un_m49": 440,
+    "cow_code": 368,
+    "vdem_id": 37,
+    "wb_code": "LTU"
+  },
+  "LUX": {
+    "iso3": "LUX",
+    "iso2": "LU",
+    "name": "Luxembourg",
+    "un_m49": 442,
+    "cow_code": 212,
+    "vdem_id": 104,
+    "wb_code": "LUX"
+  },
+  "LVA": {
+    "iso3": "LVA",
+    "iso2": "LV",
+    "name": "Latvia",
+    "un_m49": 428,
+    "cow_code": 367,
+    "vdem_id": 36,
+    "wb_code": "LVA"
+  },
+  "MAR": {
+    "iso3": "MAR",
+    "iso2": "MA",
+    "name": "Morocco",
+    "un_m49": 504,
+    "cow_code": 600,
+    "vdem_id": 86,
+    "wb_code": "MAR"
+  },
+  "MCO": {
+    "iso3": "MCO",
+    "iso2": "MC",
+    "name": "Monaco",
+    "un_m49": 492,
+    "cow_code": 221,
+    "vdem_id": null,
+    "wb_code": "MCO"
+  },
+  "MDA": {
+    "iso3": "MDA",
+    "iso2": "MD",
+    "name": "Moldova",
+    "un_m49": 498,
+    "cow_code": 359,
+    "vdem_id": 32,
+    "wb_code": "MDA"
+  },
+  "MDG": {
+    "iso3": "MDG",
+    "iso2": "MG",
+    "name": "Madagascar",
+    "un_m49": 450,
+    "cow_code": 580,
+    "vdem_id": 85,
+    "wb_code": "MDG"
+  },
+  "MDV": {
+    "iso3": "MDV",
+    "iso2": "MV",
+    "name": "Maldives",
+    "un_m49": 462,
+    "cow_code": 781,
+    "vdem_id": null,
+    "wb_code": "MDV"
+  },
+  "MEX": {
+    "iso3": "MEX",
+    "iso2": "MX",
+    "name": "Mexico",
+    "un_m49": 484,
+    "cow_code": 70,
+    "vdem_id": 3,
+    "wb_code": "MEX"
+  },
+  "MHL": {
+    "iso3": "MHL",
+    "iso2": "MH",
+    "name": "Marshall Islands",
+    "un_m49": 584,
+    "cow_code": 983,
+    "vdem_id": null,
+    "wb_code": "MHL"
+  },
+  "MKD": {
+    "iso3": "MKD",
+    "iso2": "MK",
+    "name": "North Macedonia",
+    "un_m49": 807,
+    "cow_code": 343,
+    "vdem_id": 153,
+    "wb_code": "MKD"
+  },
+  "MLI": {
+    "iso3": "MLI",
+    "iso2": "ML",
+    "name": "Mali",
+    "un_m49": 466,
+    "cow_code": 432,
+    "vdem_id": null,
+    "wb_code": "MLI"
+  },
+  "MLT": {
+    "iso3": "MLT",
+    "iso2": "MT",
+    "name": "Malta",
+    "un_m49": 470,
+    "cow_code": 338,
+    "vdem_id": null,
+    "wb_code": "MLT"
+  },
+  "MMR": {
+    "iso3": "MMR",
+    "iso2": "MM",
+    "name": "Myanmar",
+    "un_m49": 104,
+    "cow_code": 775,
+    "vdem_id": 59,
+    "wb_code": "MMR"
+  },
+  "MNE": {
+    "iso3": "MNE",
+    "iso2": "ME",
+    "name": "Montenegro",
+    "un_m49": 499,
+    "cow_code": 341,
+    "vdem_id": 159,
+    "wb_code": "MNE"
+  },
+  "MNG": {
+    "iso3": "MNG",
+    "iso2": "MN",
+    "name": "Mongolia",
+    "un_m49": 496,
+    "cow_code": 712,
+    "vdem_id": 62,
+    "wb_code": "MNG"
+  },
+  "MOZ": {
+    "iso3": "MOZ",
+    "iso2": "MZ",
+    "name": "Mozambique",
+    "un_m49": 508,
+    "cow_code": 541,
+    "vdem_id": 98,
+    "wb_code": "MOZ"
+  },
+  "MRT": {
+    "iso3": "MRT",
+    "iso2": "MR",
+    "name": "Mauritania",
+    "un_m49": 478,
+    "cow_code": 435,
+    "vdem_id": null,
+    "wb_code": "MRT"
+  },
+  "MUS": {
+    "iso3": "MUS",
+    "iso2": "MU",
+    "name": "Mauritius",
+    "un_m49": 480,
+    "cow_code": 590,
+    "vdem_id": null,
+    "wb_code": "MUS"
+  },
+  "MWI": {
+    "iso3": "MWI",
+    "iso2": "MW",
+    "name": "Malawi",
+    "un_m49": 454,
+    "cow_code": 553,
+    "vdem_id": 160,
+    "wb_code": "MWI"
+  },
+  "MYS": {
+    "iso3": "MYS",
+    "iso2": "MY",
+    "name": "Malaysia",
+    "un_m49": 458,
+    "cow_code": 820,
+    "vdem_id": 67,
+    "wb_code": "MYS"
+  },
+  "NAM": {
+    "iso3": "NAM",
+    "iso2": "NA",
+    "name": "Namibia",
+    "un_m49": 516,
+    "cow_code": 565,
+    "vdem_id": null,
+    "wb_code": "NAM"
+  },
+  "NER": {
+    "iso3": "NER",
+    "iso2": "NE",
+    "name": "Niger",
+    "un_m49": 562,
+    "cow_code": 436,
+    "vdem_id": null,
+    "wb_code": "NER"
+  },
+  "NGA": {
+    "iso3": "NGA",
+    "iso2": "NG",
+    "name": "Nigeria",
+    "un_m49": 566,
+    "cow_code": 475,
+    "vdem_id": 93,
+    "wb_code": "NGA"
+  },
+  "NIC": {
+    "iso3": "NIC",
+    "iso2": "NI",
+    "name": "Nicaragua",
+    "un_m49": 558,
+    "cow_code": 93,
+    "vdem_id": 8,
+    "wb_code": "NIC"
+  },
+  "NLD": {
+    "iso3": "NLD",
+    "iso2": "NL",
+    "name": "Netherlands",
+    "un_m49": 528,
+    "cow_code": 210,
+    "vdem_id": 21,
+    "wb_code": "NLD"
+  },
+  "NOR": {
+    "iso3": "NOR",
+    "iso2": "NO",
+    "name": "Norway",
+    "un_m49": 578,
+    "cow_code": 385,
+    "vdem_id": 115,
+    "wb_code": "NOR"
+  },
+  "NPL": {
+    "iso3": "NPL",
+    "iso2": "NP",
+    "name": "Nepal",
+    "un_m49": 524,
+    "cow_code": 790,
+    "vdem_id": 58,
+    "wb_code": "NPL"
+  },
+  "NRU": {
+    "iso3": "NRU",
+    "iso2": "NR",
+    "name": "Nauru",
+    "un_m49": 520,
+    "cow_code": 970,
+    "vdem_id": null,
+    "wb_code": "NRU"
+  },
+  "NZL": {
+    "iso3": "NZL",
+    "iso2": "NZ",
+    "name": "New Zealand",
+    "un_m49": 554,
+    "cow_code": 920,
+    "vdem_id": 129,
+    "wb_code": "NZL"
+  },
+  "OMN": {
+    "iso3": "OMN",
+    "iso2": "OM",
+    "name": "Oman",
+    "un_m49": 512,
+    "cow_code": 698,
+    "vdem_id": 125,
+    "wb_code": "OMN"
+  },
+  "PAK": {
+    "iso3": "PAK",
+    "iso2": "PK",
+    "name": "Pakistan",
+    "un_m49": 586,
+    "cow_code": 770,
+    "vdem_id": 55,
+    "wb_code": "PAK"
+  },
+  "PAN": {
+    "iso3": "PAN",
+    "iso2": "PA",
+    "name": "Panama",
+    "un_m49": 591,
+    "cow_code": 95,
+    "vdem_id": 9,
+    "wb_code": "PAN"
+  },
+  "PER": {
+    "iso3": "PER",
+    "iso2": "PE",
+    "name": "Peru",
+    "un_m49": 604,
+    "cow_code": 135,
+    "vdem_id": 13,
+    "wb_code": "PER"
+  },
+  "PHL": {
+    "iso3": "PHL",
+    "iso2": "PH",
+    "name": "Philippines",
+    "un_m49": 608,
+    "cow_code": 840,
+    "vdem_id": 126,
+    "wb_code": "PHL"
+  },
+  "PLW": {
+    "iso3": "PLW",
+    "iso2": "PW",
+    "name": "Palau",
+    "un_m49": 585,
+    "cow_code": 986,
+    "vdem_id": null,
+    "wb_code": "PLW"
+  },
+  "PNG": {
+    "iso3": "PNG",
+    "iso2": "PG",
+    "name": "Papua New Guinea",
+    "un_m49": 598,
+    "cow_code": 910,
+    "vdem_id": 133,
+    "wb_code": "PNG"
+  },
+  "POL": {
+    "iso3": "POL",
+    "iso2": "PL",
+    "name": "Poland",
+    "un_m49": 616,
+    "cow_code": 290,
+    "vdem_id": 68,
+    "wb_code": "POL"
+  },
+  "PRK": {
+    "iso3": "PRK",
+    "iso2": "KP",
+    "name": "North Korea",
+    "un_m49": 408,
+    "cow_code": 731,
+    "vdem_id": 63,
+    "wb_code": "PRK"
+  },
+  "PRT": {
+    "iso3": "PRT",
+    "iso2": "PT",
+    "name": "Portugal",
+    "un_m49": 620,
+    "cow_code": 235,
+    "vdem_id": 108,
+    "wb_code": "PRT"
+  },
+  "PRY": {
+    "iso3": "PRY",
+    "iso2": "PY",
+    "name": "Paraguay",
+    "un_m49": 600,
+    "cow_code": 150,
+    "vdem_id": 16,
+    "wb_code": "PRY"
+  },
+  "QAT": {
+    "iso3": "QAT",
+    "iso2": "QA",
+    "name": "Qatar",
+    "un_m49": 634,
+    "cow_code": 694,
+    "vdem_id": 123,
+    "wb_code": "QAT"
+  },
+  "ROU": {
+    "iso3": "ROU",
+    "iso2": "RO",
+    "name": "Romania",
+    "un_m49": 642,
+    "cow_code": 360,
+    "vdem_id": 70,
+    "wb_code": "ROU"
+  },
+  "RUS": {
+    "iso3": "RUS",
+    "iso2": "RU",
+    "name": "Russia",
+    "un_m49": 643,
+    "cow_code": 365,
+    "vdem_id": 30,
+    "wb_code": "RUS"
+  },
+  "RWA": {
+    "iso3": "RWA",
+    "iso2": "RW",
+    "name": "Rwanda",
+    "un_m49": 646,
+    "cow_code": 517,
+    "vdem_id": 129,
+    "wb_code": "RWA"
+  },
+  "SAU": {
+    "iso3": "SAU",
+    "iso2": "SA",
+    "name": "Saudi Arabia",
+    "un_m49": 682,
+    "cow_code": 670,
+    "vdem_id": 48,
+    "wb_code": "SAU"
+  },
+  "SDN": {
+    "iso3": "SDN",
+    "iso2": "SD",
+    "name": "Sudan",
+    "un_m49": 729,
+    "cow_code": 625,
+    "vdem_id": 52,
+    "wb_code": "SDN"
+  },
+  "SEN": {
+    "iso3": "SEN",
+    "iso2": "SN",
+    "name": "Senegal",
+    "un_m49": 686,
+    "cow_code": 433,
+    "vdem_id": 90,
+    "wb_code": "SEN"
+  },
+  "SGP": {
+    "iso3": "SGP",
+    "iso2": "SG",
+    "name": "Singapore",
+    "un_m49": 702,
+    "cow_code": 830,
+    "vdem_id": 130,
+    "wb_code": "SGP"
+  },
+  "SLB": {
+    "iso3": "SLB",
+    "iso2": "SB",
+    "name": "Solomon Islands",
+    "un_m49": 90,
+    "cow_code": 940,
+    "vdem_id": null,
+    "wb_code": "SLB"
+  },
+  "SLE": {
+    "iso3": "SLE",
+    "iso2": "SL",
+    "name": "Sierra Leone",
+    "un_m49": 694,
+    "cow_code": 451,
+    "vdem_id": null,
+    "wb_code": "SLE"
+  },
+  "SLV": {
+    "iso3": "SLV",
+    "iso2": "SV",
+    "name": "El Salvador",
+    "un_m49": 222,
+    "cow_code": 92,
+    "vdem_id": 5,
+    "wb_code": "SLV"
+  },
+  "SMR": {
+    "iso3": "SMR",
+    "iso2": "SM",
+    "name": "San Marino",
+    "un_m49": 674,
+    "cow_code": 331,
+    "vdem_id": null,
+    "wb_code": "SMR"
+  },
+  "SOM": {
+    "iso3": "SOM",
+    "iso2": "SO",
+    "name": "Somalia",
+    "un_m49": 706,
+    "cow_code": 520,
+    "vdem_id": null,
+    "wb_code": "SOM"
+  },
+  "SRB": {
+    "iso3": "SRB",
+    "iso2": "RS",
+    "name": "Serbia",
+    "un_m49": 688,
+    "cow_code": 345,
+    "vdem_id": 156,
+    "wb_code": "SRB"
+  },
+  "SSD": {
+    "iso3": "SSD",
+    "iso2": "SS",
+    "name": "South Sudan",
+    "un_m49": 728,
+    "cow_code": 626,
+    "vdem_id": 181,
+    "wb_code": "SSD"
+  },
+  "STP": {
+    "iso3": "STP",
+    "iso2": "ST",
+    "name": "São Tomé and Príncipe",
+    "un_m49": 678,
+    "cow_code": 403,
+    "vdem_id": null,
+    "wb_code": "STP"
+  },
+  "SUR": {
+    "iso3": "SUR",
+    "iso2": "SR",
+    "name": "Suriname",
+    "un_m49": 740,
+    "cow_code": 115,
+    "vdem_id": 80,
+    "wb_code": "SUR"
+  },
+  "SVK": {
+    "iso3": "SVK",
+    "iso2": "SK",
+    "name": "Slovakia",
+    "un_m49": 703,
+    "cow_code": 317,
+    "vdem_id": 158,
+    "wb_code": "SVK"
+  },
+  "SVN": {
+    "iso3": "SVN",
+    "iso2": "SI",
+    "name": "Slovenia",
+    "un_m49": 705,
+    "cow_code": 349,
+    "vdem_id": 154,
+    "wb_code": "SVN"
+  },
+  "SWE": {
+    "iso3": "SWE",
+    "iso2": "SE",
+    "name": "Sweden",
+    "un_m49": 752,
+    "cow_code": 380,
+    "vdem_id": 114,
+    "wb_code": "SWE"
+  },
+  "SWZ": {
+    "iso3": "SWZ",
+    "iso2": "SZ",
+    "name": "Eswatini",
+    "un_m49": 748,
+    "cow_code": 572,
+    "vdem_id": null,
+    "wb_code": "SWZ"
+  },
+  "SYC": {
+    "iso3": "SYC",
+    "iso2": "SC",
+    "name": "Seychelles",
+    "un_m49": 690,
+    "cow_code": 591,
+    "vdem_id": null,
+    "wb_code": "SYC"
+  },
+  "SYR": {
+    "iso3": "SYR",
+    "iso2": "SY",
+    "name": "Syria",
+    "un_m49": 760,
+    "cow_code": 652,
+    "vdem_id": 43,
+    "wb_code": "SYR"
+  },
+  "TCD": {
+    "iso3": "TCD",
+    "iso2": "TD",
+    "name": "Chad",
+    "un_m49": 148,
+    "cow_code": 483,
+    "vdem_id": null,
+    "wb_code": "TCD"
+  },
+  "TGO": {
+    "iso3": "TGO",
+    "iso2": "TG",
+    "name": "Togo",
+    "un_m49": 768,
+    "cow_code": 461,
+    "vdem_id": null,
+    "wb_code": "TGO"
+  },
+  "THA": {
+    "iso3": "THA",
+    "iso2": "TH",
+    "name": "Thailand",
+    "un_m49": 764,
+    "cow_code": 800,
+    "vdem_id": 66,
+    "wb_code": "THA"
+  },
+  "TJK": {
+    "iso3": "TJK",
+    "iso2": "TJ",
+    "name": "Tajikistan",
+    "un_m49": 762,
+    "cow_code": 702,
+    "vdem_id": 147,
+    "wb_code": "TJK"
+  },
+  "TKM": {
+    "iso3": "TKM",
+    "iso2": "TM",
+    "name": "Turkmenistan",
+    "un_m49": 795,
+    "cow_code": 701,
+    "vdem_id": 148,
+    "wb_code": "TKM"
+  },
+  "TLS": {
+    "iso3": "TLS",
+    "iso2": "TL",
+    "name": "Timor-Leste",
+    "un_m49": 626,
+    "cow_code": 860,
+    "vdem_id": 169,
+    "wb_code": "TLS"
+  },
+  "TON": {
+    "iso3": "TON",
+    "iso2": "TO",
+    "name": "Tonga",
+    "un_m49": 776,
+    "cow_code": 955,
+    "vdem_id": null,
+    "wb_code": "TON"
+  },
+  "TTO": {
+    "iso3": "TTO",
+    "iso2": "TT",
+    "name": "Trinidad and Tobago",
+    "un_m49": 780,
+    "cow_code": 52,
+    "vdem_id": 24,
+    "wb_code": "TTO"
+  },
+  "TUN": {
+    "iso3": "TUN",
+    "iso2": "TN",
+    "name": "Tunisia",
+    "un_m49": 788,
+    "cow_code": 616,
+    "vdem_id": 88,
+    "wb_code": "TUN"
+  },
+  "TUR": {
+    "iso3": "TUR",
+    "iso2": "TR",
+    "name": "Turkey",
+    "un_m49": 792,
+    "cow_code": 640,
+    "vdem_id": 78,
+    "wb_code": "TUR"
+  },
+  "TUV": {
+    "iso3": "TUV",
+    "iso2": "TV",
+    "name": "Tuvalu",
+    "un_m49": 798,
+    "cow_code": 947,
+    "vdem_id": null,
+    "wb_code": "TUV"
+  },
+  "TZA": {
+    "iso3": "TZA",
+    "iso2": "TZ",
+    "name": "Tanzania",
+    "un_m49": 834,
+    "cow_code": 510,
+    "vdem_id": 96,
+    "wb_code": "TZA"
+  },
+  "UGA": {
+    "iso3": "UGA",
+    "iso2": "UG",
+    "name": "Uganda",
+    "un_m49": 800,
+    "cow_code": 500,
+    "vdem_id": 95,
+    "wb_code": "UGA"
+  },
+  "UKR": {
+    "iso3": "UKR",
+    "iso2": "UA",
+    "name": "Ukraine",
+    "un_m49": 804,
+    "cow_code": 369,
+    "vdem_id": 33,
+    "wb_code": "UKR"
+  },
+  "UNK": {
+    "iso3": "UNK",
+    "iso2": "XK",
+    "name": "Kosovo",
+    "un_m49": null,
+    "cow_code": 347,
+    "vdem_id": null,
+    "wb_code": "UNK"
+  },
+  "URY": {
+    "iso3": "URY",
+    "iso2": "UY",
+    "name": "Uruguay",
+    "un_m49": 858,
+    "cow_code": 165,
+    "vdem_id": 19,
+    "wb_code": "URY"
+  },
+  "USA": {
+    "iso3": "USA",
+    "iso2": "US",
+    "name": "United States",
+    "un_m49": 840,
+    "cow_code": 2,
+    "vdem_id": 20,
+    "wb_code": "USA"
+  },
+  "UZB": {
+    "iso3": "UZB",
+    "iso2": "UZ",
+    "name": "Uzbekistan",
+    "un_m49": 860,
+    "cow_code": 704,
+    "vdem_id": 149,
+    "wb_code": "UZB"
+  },
+  "VAT": {
+    "iso3": "VAT",
+    "iso2": "VA",
+    "name": "Vatican City",
+    "un_m49": 336,
+    "cow_code": null,
+    "vdem_id": null,
+    "wb_code": "VAT"
+  },
+  "VCT": {
+    "iso3": "VCT",
+    "iso2": "VC",
+    "name": "Saint Vincent and the Grenadines",
+    "un_m49": 670,
+    "cow_code": 57,
+    "vdem_id": null,
+    "wb_code": "VCT"
+  },
+  "VEN": {
+    "iso3": "VEN",
+    "iso2": "VE",
+    "name": "Venezuela",
+    "un_m49": 862,
+    "cow_code": 101,
+    "vdem_id": 11,
+    "wb_code": "VEN"
+  },
+  "VNM": {
+    "iso3": "VNM",
+    "iso2": "VN",
+    "name": "Vietnam",
+    "un_m49": 704,
+    "cow_code": 816,
+    "vdem_id": 34,
+    "wb_code": "VNM"
+  },
+  "VUT": {
+    "iso3": "VUT",
+    "iso2": "VU",
+    "name": "Vanuatu",
+    "un_m49": 548,
+    "cow_code": 935,
+    "vdem_id": null,
+    "wb_code": "VUT"
+  },
+  "WSM": {
+    "iso3": "WSM",
+    "iso2": "WS",
+    "name": "Samoa",
+    "un_m49": 882,
+    "cow_code": 990,
+    "vdem_id": null,
+    "wb_code": "WSM"
+  },
+  "YEM": {
+    "iso3": "YEM",
+    "iso2": "YE",
+    "name": "Yemen",
+    "un_m49": 887,
+    "cow_code": 679,
+    "vdem_id": 47,
+    "wb_code": "YEM"
+  },
+  "ZAF": {
+    "iso3": "ZAF",
+    "iso2": "ZA",
+    "name": "South Africa",
+    "un_m49": 710,
+    "cow_code": 560,
+    "vdem_id": 97,
+    "wb_code": "ZAF"
+  },
+  "ZMB": {
+    "iso3": "ZMB",
+    "iso2": "ZM",
+    "name": "Zambia",
+    "un_m49": 894,
+    "cow_code": 551,
+    "vdem_id": 161,
+    "wb_code": "ZMB"
+  },
+  "ZWE": {
+    "iso3": "ZWE",
+    "iso2": "ZW",
+    "name": "Zimbabwe",
+    "un_m49": 716,
+    "cow_code": 552,
+    "vdem_id": 162,
+    "wb_code": "ZWE"
+  }
+}
