@@ -81,7 +81,8 @@ def fetch_acled_battles(token, year_start=2020, year_end=2025, limit=5000):
         log.info(f"Fetched {len(events)} events (total: {len(all_events)}, "
                  f"API total: {data.get('total_count', '?')})")
 
-        if len(events) < limit:
+        total_api = int(data.get("total_count", 0) or 0)
+        if len(events) < limit or len(all_events) >= total_api or len(all_events) >= 250000:
             break
         offset += limit
         time.sleep(1)
@@ -124,18 +125,33 @@ def aggregate_conflicts(events):
 def extract_nsas(events):
     """Extract non-state actors from ACLED events."""
     # inter1/inter2 codes: 1=state, 2=rebel, 3=political militia, 4=identity militia, 5=rioter, 6=protester, 7=civilian, 8=external
-    nsa_types = {2: "insurgency", 3: "militia", 4: "identity_militia", 8: "external_force"}
+    # ACLED inter1/inter2 can be numeric codes OR text labels depending on API version
+    nsa_types_num = {2: "insurgency", 3: "militia", 4: "identity_militia", 8: "external_force"}
+    nsa_types_text = {
+        "rebel group": "insurgency", "rebel groups": "insurgency",
+        "political militia": "militia", "political militias": "militia",
+        "identity militia": "identity_militia", "identity militias": "identity_militia",
+        "external/other force": "external_force",
+    }
 
     actors = defaultdict(lambda: {"type": None, "countries": set(), "events": 0, "fatalities": 0})
 
     for e in events:
         for actor_f, inter_f in [("actor1", "inter1"), ("actor2", "inter2")]:
             actor = e.get(actor_f, "")
-            inter = int(e.get(inter_f, 0) or 0)
+            inter_raw = e.get(inter_f, "")
+            
+            # Determine NSA type from inter field (numeric or text)
+            nsa_type = None
+            try:
+                inter_num = int(inter_raw)
+                nsa_type = nsa_types_num.get(inter_num)
+            except (ValueError, TypeError):
+                nsa_type = nsa_types_text.get(str(inter_raw).lower())
 
-            if inter in nsa_types and actor and "unidentified" not in actor.lower():
+            if nsa_type and actor and "unidentified" not in actor.lower():
                 a = actors[actor]
-                a["type"] = nsa_types[inter]
+                a["type"] = nsa_type
                 a["countries"].add(e.get("country", ""))
                 a["events"] += 1
                 a["fatalities"] += int(e.get("fatalities", 0) or 0)
