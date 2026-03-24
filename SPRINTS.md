@@ -1,122 +1,155 @@
 # SPRINTS.md — GWW3 Development Sprints
 
-## Sprint 0: Project Setup ← CURRENT
-**Goal:** Establish project structure, agent framework, ADK configuration
-**Duration:** 2-3 days
-**Lead:** Dione + Archon
-
-### Tasks
-- [x] Design Document v0.2 (consolidated)
-- [x] Data Sources Catalog (30+ sources)
-- [x] Deep Think Analysis (balancing, war financing, time model)
-- [x] Moltbook announcement (3 submolts)
-- [x] Agent Framework definition
-- [ ] ADK project structure for Archon + Sentinel
-- [ ] Neo4j local instance setup + connection test
-- [ ] Python project scaffolding (src/gww3/ modules)
-- [ ] CI/CD: GitHub Actions for lint + test
-- [ ] Sprint 1 planning (detailed task breakdown)
+*Updated: 2026-03-24 by Dione 🌙*
 
 ---
 
-## Sprint 1: Schema, ID Harmonization & Mock Data
-**Goal:** Finalized graph schema, master ID crosswalk, validated with mock data for 2 nations
-**Duration:** 1 week
-**Lead:** Archon (schema + mock data), Sentinel (ID crosswalk + data mapping), Inanna (military model review)
+## Sprint 1: Initial Data + Validation (CURRENT)
 
-### Tasks
-- [ ] Master ID Crosswalk (`data/id_crosswalk.json`): ISO-3 ↔ COW ↔ UN M49 ↔ source-native IDs for all ~195 nations (Sentinel, FIRST deliverable)
-- [ ] Neo4j Cypher schema v1 finalized (all node types, relationship types, constraints)
-- [ ] Commodity-centric trade model (PRODUCES/CONSUMES/TRADES through Commodity nodes)
-- [ ] Sparse temporal model (STATE_AT only on Monthly/Epoch, Event nodes for intra-month)
-- [ ] Mock data: 2 nations (USA + CHN) with full graph topology as static JSON
-- [ ] Mock data loaded into local Neo4j and validated via Cypher queries
-- [ ] Missing data strategy documented (imputation hierarchy, estimated flags)
-- [ ] DomesticFaction synthesis strategy from V-Dem proxies (documented, not yet coded)
-- [ ] Neo4j Docker Compose with APOC plugin
-- [ ] Schema documentation + data mapping table (which source → which node/edge)
-- [ ] Integration tests validating mock graph structure
+**Goal:** Populate Neo4j with real-world baseline data for all ~195 nations. Validate completeness and consistency. No historical time series yet.
 
-### Acceptance Criteria
-- `data/id_crosswalk.json` maps all ~195 nations across 4+ ID systems
-- Mock graph for USA + CHN passes all topology tests (nations, commodities, alliances, factions, chokepoints connected)
-- Sparse temporal model: Monthly snapshot creates STATE_AT, daily does NOT
-- Inanna approves military node/edge completeness for mock nations
-- Neo4j starts cleanly via Docker Compose with APOC installed
-- No live API calls in Sprint 1 (all mock/static data)
+**Duration:** ~1 week (started 2026-03-24)
 
----
+### Phase 0 — Infrastructure ✅ COMPLETE
+- [x] `normalization.py` — Property registry, unit conversions (38 tests)
+- [x] `imputation.py` — 4-level missing data hierarchy
+- [x] `validation_bounds.py` — 22 bounds + 4 cross-property invariants
+- [x] `warden.py` + `review_and_run.sh` — Code review gate (Codex 5.4)
+- [x] `watchdog.py` — Deterministic process supervisor
+- [x] `seed_tasks.py` — 29 tasks across 8 phases
 
-## Sprint 2: Data Pipeline
-**Goal:** Automated import from major data sources
-**Duration:** 1 week
-**Lead:** Sentinel (pipeline code), Archon (Neo4j integration)
+### Phase 1 — Foundation ✅ COMPLETE
+- [x] P1-01: Nation Registry — 195 sovereign nations (REST Countries API)
+- [x] P1-02: ID Crosswalk — ISO-3 ↔ COW ↔ UN M49 ↔ V-Dem ↔ WB
+- [x] P1-03: Borders — 624 BORDERS edges (312 border pairs)
 
-### Tasks
-- [ ] World Bank API importer (top 100 indicators)
-- [ ] V-Dem importer (governance, democracy scores)
-- [ ] SIPRI importer (military expenditure, arms transfers)
-- [ ] UN WPP importer (demographics, age distribution)
-- [ ] ACLED importer (conflict events → non-state actor nodes)
-- [ ] UN Comtrade importer (trade edges)
-- [ ] Pipeline orchestration (idempotent, versioned)
-- [ ] Data quality dashboard (completeness per country)
+### Phase 2 — Economics (IN PROGRESS)
+- [x] P2-01: World Bank GDP (190 nations, 2024, 10yr CAGR)
+- [ ] P2-02: World Bank demographics (population, urbanization, internet)
+- [ ] P2-03: World Bank macro (inflation, unemployment, gini, debt, forex)
+- [ ] P2-04: UN Comtrade bilateral trade (top 500 pairs)
+- [ ] P2-05: EIA oil/gas production and consumption
+- [ ] P2-06: FAO wheat production/consumption
+- [ ] P2-07: USGS rare earth + mineral production
+- [ ] P2-08: Compute GDP 10yr CAGR (derived from P2-01)
 
-### Acceptance Criteria
-- Full pipeline runs in <30 min
-- >1000 parameters per G20 nation
-- Non-state actors populated from ACLED
-- Trade edges exist for top 50 trading relationships
+### Phase 3 — Military
+- [x] P3-03: FAS nuclear warheads (9 nuclear states) ← Sentinel autonomous!
+- [ ] P3-01: SIPRI military expenditure (10 years)
+- [ ] P3-02: Military capabilities (manpower, equipment)
+- [ ] P3-04: SIPRI arms transfers (2016-2025)
 
----
+### Phase 4 — Governance
+- [ ] P4-01: V-Dem democracy and governance indices (10 years)
+- [ ] P4-02: Domestic factions (derived from V-Dem + CIA Factbook)
 
-## Sprint 3: Game Engine Core
-**Goal:** Pulse engine, rules engine, first game tick
-**Duration:** 2 weeks
-**Lead:** Archon (engine), Inanna (combat rules)
+### Phase 5 — Conflict & Non-State Actors
+- [ ] P5-01: ACLED conflict events → Conflict nodes (requires API key)
+- [ ] P5-02: Non-state actors from ACLED + open sources
 
-### Tasks
-- [ ] Pulse Engine (multi-resolution tick system)
-- [ ] Rules Engine (deterministic state transitions)
-- [ ] Economic model (GDP, trade, inflation, debt)
-- [ ] Combat resolution (simplified)
-- [ ] Sanctions mechanics (graph manipulation)
-- [ ] Event system (random events, interrupts)
-- [ ] Faction simulation (domestic politics)
-- [ ] First game loop: 2 nations, 100 ticks
+### Phase 6 — Infrastructure
+- [ ] P6-01: Chokepoint data (EIA transit volumes)
+- [ ] P6-02: Supply routes (derived from trade + geography)
+
+### Phase 7 — Alliances & Diplomacy
+- [ ] P7-01: Expand alliances to ~20 organizations + MEMBER_OF edges
+- [ ] P7-02: Bilateral diplomatic relations (derived)
+
+### Phase 8 — Validation (Sprint 1 scope: current data only)
+- [ ] P8-03: Full graph validation — topology, completeness, consistency checks
+
+### Sprint 1 Acceptance Criteria
+- All ~195 nations have: GDP, population, military spending, governance scores
+- All nations have: region, borders, at least 1 alliance membership
+- Sanity bounds pass for all G20 nations (0 errors)
+- Data completeness: G20 >95%, G50 >85%, rest >60%
+- All ETL scripts committed, documented, reproducible
+- Warden review gate operational and enforced
 
 ---
 
-## Sprint 4: AI Agents (Game Agents via ADK)
-**Goal:** LLM agents that can play nations
-**Duration:** 1 week
-**Lead:** Archon (ADK), Dione (prompts)
+## Sprint 2: Historical Data + Temporal Model
+
+**Goal:** Load 10 years of historical data (2016-2025), create Tick nodes and STATE_AT snapshots, validate temporal consistency.
+
+**Duration:** ~1 week
 
 ### Tasks
-- [ ] ADK Agent: Strategist (decision maker)
-- [ ] ADK Agent: Economist (budget, trade)
-- [ ] ADK Agent: General (military)
-- [ ] ADK Agent: Diplomat (alliances)
-- [ ] Cabinet protocol (debate → consensus → decision)
-- [ ] AIGA: Information asymmetry per agent role
-- [ ] First AI-vs-AI game: USA vs China (simplified)
+- [ ] Load historical time series for all World Bank indicators (2016-2025)
+- [ ] Load historical SIPRI military expenditure (2016-2025)
+- [ ] Load historical V-Dem governance indices (2016-2025)
+- [ ] P8-01: Create historical Tick nodes (T=-120 to T=-1, monthly)
+- [ ] P8-02: Create T=0 baseline STATE_AT snapshot for all nations
+- [ ] P8-03: Full temporal validation — consistency across years, trend plausibility
+- [ ] Compute derived historical metrics (CAGR, trend slopes, volatility)
+
+### Sprint 2 Acceptance Criteria
+- 23,400 Tick nodes (195 nations × 120 months)
+- STATE_AT snapshots for GDP, military spending, governance at minimum
+- No null values in critical game properties at T=0
+- Historical trends are monotonically plausible (no impossible jumps)
+- Time series stored in data/timeseries/ as reproducible JSON files
 
 ---
 
-## Sprint 5: Web UI MVP
-**Goal:** Visual game interface
-**Duration:** 2 weeks
-**Lead:** Archon (API + frontend)
+## Sprint 3: Data Model Extension + Game Engine Concept
 
-### Tasks
-- [ ] FastAPI game API (WebSocket for real-time)
-- [ ] React app scaffold
-- [ ] World map (Deck.gl globe)
-- [ ] Nation dashboard
-- [ ] News ticker (events)
-- [ ] Agent debate viewer
-- [ ] Spectator mode
+**Goal:** Extend the data model with derived game mechanics properties. Create initial Game Engine concept and architecture. First prototype of Pulse Engine with real data.
+
+**Duration:** ~2 weeks
+
+### Data Model Extension
+- [ ] Economic dependencies: trade flow analysis, sanction impact modeling
+- [ ] Military force projection: deployment ranges, logistics costs
+- [ ] Diplomatic influence: UN voting patterns, alliance strength scores
+- [ ] Domestic politics: faction dynamics, leader stability
+- [ ] Asymmetric warfare: insurgency effectiveness vs. conventional forces
+
+### Game Engine Concept
+- [ ] Rules Engine design: deterministic state transitions from real data
+- [ ] Economic model: GDP calculation, trade, inflation, debt spiral mechanics
+- [ ] Combat resolution: force comparison, terrain, logistics, morale
+- [ ] Diplomacy model: alliance formation, sanctions, treaties
+- [ ] Event system: random events, historical triggers, player actions
+
+### Pulse Engine Integration
+- [ ] Connect Pulse Engine to real Neo4j data (currently uses mock ticks)
+- [ ] First game loop: 2 nations (USA + CHN), 100 ticks with real data
+- [ ] Validate: do economic outputs match expected ranges?
+
+### Sprint 3 Acceptance Criteria
+- Extended data model documented and reviewed (Deep Think)
+- Game Engine architecture document approved
+- Pulse Engine runs 100 ticks with real data without crashing
+- Economic simulation produces plausible GDP trajectories
 
 ---
 
-*Updated: 2026-03-23 by Dione 🌙*
+## Sprint 4+ (Future — to be planned after Sprint 3)
+
+### Potential Topics
+- AI Game Agents (ADK): Strategist, Economist, General, Diplomat
+- Cabinet protocol: multi-agent debate → consensus → decision
+- Web UI MVP (FastAPI + React + Deck.gl globe)
+- Full AI-vs-AI simulation (USA vs China)
+- Community features: Moltbook integration, spectator mode
+- Public beta preparation
+
+---
+
+## Agent Roles Per Sprint
+
+| Sprint | Dione | Sentinel | Archon | Warden | Inanna |
+|--------|-------|----------|--------|--------|--------|
+| 1 | Orchestrate, ETL | ETL (autonomous) | — | Review scripts | — |
+| 2 | Orchestrate | Historical ETL | Temporal model | Review scripts | — |
+| 3 | Design docs | Data extension | Engine code | Review code | Military model review |
+| 4+ | Orchestrate | Data updates | Engine + API | Review all code | Combat system |
+
+---
+
+## Status Legend
+- ✅ = Complete
+- 🔄 = In Progress
+- ⏳ = Blocked (waiting for dependency)
+- ❌ = Failed (needs intervention)
