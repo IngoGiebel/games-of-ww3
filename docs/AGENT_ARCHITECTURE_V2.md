@@ -1,7 +1,7 @@
 # GWW3 — Agent Architecture v2.1 (Resilient ADK Loop)
 
 *Created: 2026-03-24 by Dione 🌙*
-*Updated: 2026-03-24 — Deep Think Review incorporated*
+*Updated: 2026-03-24 — Deep Think Review + Warden code review agent incorporated*
 *Status: **Approved** — Ready for implementation*
 
 ## Core Problem
@@ -17,34 +17,36 @@ We need: **autonomous agents that run in a loop, recover from errors, and contin
 4. **Coordinated:** Agents don't step on each other, tasks don't duplicate
 5. **Budget-aware:** Respect API rate limits, track token/credit usage
 6. **Memory-bounded:** Clear LLM context between tasks to prevent context window bloat
+7. **Code-reviewed:** No generated script executes without passing Warden (Codex) review
 
 ---
 
 ## Architecture Overview
 
 ```
-┌─────────────────────────────────────────────┐
-│              Dione (Orchestrator)            │
-│         OpenClaw Main Session                │
-│   - Assigns tasks via task queue             │
-│   - Monitors agent health                    │
-│   - Reviews & approves data imports          │
-│   - Triggers Deep Think reviews              │
-└──────────┬──────────────┬───────────────────┘
-           │              │
-    ┌──────▼──────┐ ┌─────▼──────┐
-    │   Archon    │ │  Sentinel  │
-    │ (Engineer)  │ │ (Analyst)  │
-    │ ADK Agent   │ │ ADK Agent  │
-    │ Gemini 2.5  │ │ Gemini 2.5 │
-    └──────┬──────┘ └─────┬──────┘
-           │              │
-    ┌──────▼──────────────▼──────┐
-    │        Neo4j Graph DB      │
-    │   + Task Queue (nodes)     │
-    │   + Import Log (nodes)     │
-    │   + Provenance Chain       │
-    └────────────────────────────┘
+┌─────────────────────────────────────────────────────┐
+│                 Dione (Orchestrator)                  │
+│            OpenClaw Main Session (Claude Opus)        │
+│   - Assigns tasks via task queue                      │
+│   - Monitors agent health                             │
+│   - Reviews & approves data imports                   │
+│   - Triggers Deep Think reviews                       │
+└──────┬──────────────┬──────────────┬─────────────────┘
+       │              │              │
+┌──────▼──────┐ ┌─────▼──────┐ ┌────▼────────┐
+│   Archon    │ │  Sentinel  │ │  Warden 🛡️  │
+│ (Engineer)  │ │ (Analyst)  │ │ (Code QA)   │
+│ Gemini 2.5  │ │ Gemini 2.5 │ │ Codex 5.4   │
+└──────┬──────┘ └─────┬──────┘ └──────┬──────┘
+       │              │               │
+       │              │◄──APPROVED────┤
+       │              │──script──────►│
+       │              │◄──REJECTED────┤
+       │              │               │
+┌──────▼──────────────▼───────────────▼──┐
+│           Neo4j Graph DB                │
+│   + Task Queue + Provenance Chain       │
+└─────────────────────────────────────────┘
 ```
 
 ---
@@ -224,33 +226,150 @@ Sentinel does NOT parse structured data payloads (JSON, CSV, XML) row-by-row via
 3. Exhaust API rate limits instantly
 4. Cost 100x more than a Python script
 
-**Correct pattern:**
+**Correct pattern (with Warden review gate):**
 ```python
 class SentinelAgent(GWW3Agent):
     def execute_task(self, task, timeout):
-        """Sentinel: generate + execute deterministic Python ETL script."""
+        """Sentinel: generate → Warden review → execute deterministic Python ETL script."""
         
         if task['method'] == 'api_import':
-            # 1. LLM generates a Python script based on task description
-            script = self.llm.generate(f"""
-                Write a Python script that:
-                - Fetches {task['source_query']} from {task['source_api']}
-                - Parses the JSON/CSV response with pandas
-                - Normalizes units per normalization.py standards
-                - Imputes missing values per imputation.py hierarchy
-                - Validates against sanity bounds
-                - Returns a list of dicts: [{{'iso3': 'DEU', 'gdp_nominal': 4700000000000, ...}}]
-            """)
-            
-            # 2. Execute the script in a sandboxed subprocess
-            result = self.execute_script(script, timeout=timeout)
-            
-            # 3. Return structured result (script output, NOT LLM interpretation)
-            return result
+            # Use the review-and-execute loop (up to 3 revision cycles)
+            return self.execute_task_with_review(task, timeout)
         
         elif task['method'] == 'llm_extract':
             # Only for unstructured data: leader ideologies, faction names, etc.
-            return self.llm_extract(task)
+            # These also go through Warden review.
+            return self.llm_extract_with_review(task)
+```
+
+---
+
+## Warden Review Gate (Codex 5.4)
+
+Every generated script passes through Warden before execution. No exceptions.
+
+### Review Flow
+
+```
+Sentinel/Archon generates script
+        │
+        ▼ write to /tmp/gww3_etl_{task_id}.py
+┌───────────────────────────────┐
+│  WARDEN (Codex 5.4)          │
+│  codex exec (non-interactive) │
+│                               │
+│  Checks:                      │
+│  1. Security (injections)     │
+│  2. Correctness (units, APIs) │
+│  3. Error handling            │
+│  4. Idempotency (MERGE>CREATE)│
+│  5. Standards compliance      │
+└───────────┬───────────────────┘
+            │
+       ┌────▼────┐
+       │Approved?│
+       └──┬───┬──┘
+     Yes  │   │  No (with feedback)
+          │   │
+          ▼   └──► Sentinel revises script (max 3 rounds)
+     Execute        └──► Still rejected? → Task BLOCKED → Dione alert
+```
+
+### Implementation
+
+```python
+import subprocess
+from pathlib import Path
+
+PROJECT_DIR = Path("/home/uranus/moltbot-workspace/projects/games-of-ww3")
+
+class GWW3Agent:
+    
+    def review_script(self, script_content: str, task: dict) -> tuple[bool, str]:
+        """Submit generated script to Warden (Codex) for review.
+        
+        Returns:
+            Tuple of (approved: bool, review_output: str)
+        """
+        script_path = f"/tmp/gww3_etl_{task['id']}.py"
+        with open(script_path, 'w') as f:
+            f.write(script_content)
+        
+        review_prompt = (
+            f"Review the Python script at {script_path}. "
+            f"Context: ETL script for the GWW3 geopolitical simulation. "
+            f"Task: {task['title']}. "
+            f"Target: Neo4j (bolt://localhost:7687). "
+            f"\n\nReview criteria:\n"
+            f"1. SECURITY: No Cypher injection, no hardcoded secrets, no arbitrary code execution\n"
+            f"2. CORRECTNESS: Right units (absolute USD not millions, rates as %, V-Dem 0-1 * 100), "
+            f"correct API endpoints and parameters\n"
+            f"3. ERROR HANDLING: Timeouts, retries, graceful failure on missing data\n"
+            f"4. IDEMPOTENCY: Uses MERGE not CREATE, can rerun safely without duplicates\n"
+            f"5. STANDARDS: Applies normalization.py converters and validation_bounds.py checks\n"
+            f"6. DATA QUALITY: Handles null values (imputes or flags), validates ranges\n"
+            f"\nRespond with EXACTLY one of:\n"
+            f"APPROVED - script is safe and correct\n"
+            f"REJECTED: <specific list of issues that must be fixed>"
+        )
+        
+        result = subprocess.run(
+            ["codex", "exec",
+             "--approval-mode", "full-auto",
+             "-c", 'model="gpt-5.3-codex"',
+             review_prompt],
+            capture_output=True, text=True, timeout=180,
+            cwd=str(PROJECT_DIR)
+        )
+        
+        output = result.stdout.strip()
+        approved = output.startswith("APPROVED") or "APPROVED" in output.split("\n")[-1]
+        return approved, output
+    
+    def execute_task_with_review(self, task: dict, timeout: int = 300):
+        """Generate, review (via Warden), then execute an ETL script.
+        
+        Up to 3 revision cycles if Warden rejects.
+        """
+        rejection_reason = None
+        
+        for attempt in range(3):
+            # Generate or revise script
+            if attempt == 0:
+                script = self.generate_script(task)
+            else:
+                script = self.revise_script(task, script, rejection_reason)
+            
+            # Submit to Warden
+            approved, review_output = self.review_script(script, task)
+            
+            if approved:
+                self.log(f"Warden APPROVED script for task {task['id']} "
+                        f"(attempt {attempt + 1})")
+                # Execute the approved script
+                return self.execute_script(f"/tmp/gww3_etl_{task['id']}.py", timeout)
+            else:
+                rejection_reason = review_output
+                self.log(f"Warden REJECTED (attempt {attempt + 1}/3): {rejection_reason}")
+        
+        # 3 revisions failed — block the task
+        raise TaskBlockedError(
+            f"Script failed Warden review after 3 revisions. "
+            f"Last rejection: {rejection_reason}"
+        )
+```
+
+### Warden Review Record (Provenance)
+
+Every review is logged in the ImportBatch for full traceability:
+```python
+# When committing results, include Warden review metadata:
+ib_properties = {
+    ...
+    "warden_approved": True,
+    "warden_review_attempts": attempt + 1,
+    "warden_model": "gpt-5.3-codex",
+}
 ```
 
 **When LLM reasoning IS appropriate:**
@@ -315,6 +434,15 @@ class SentinelAgent(GWW3Agent):
 - **Tools:** Read-only Neo4j, web search
 - **Loop:** Review queue → verify → approve/reject
 - **Special:** Can flag data as `needs_manual_review`
+
+### Warden 🛡️ (Code Review)
+- **Primary role:** Review all generated ETL scripts before execution
+- **Runtime:** Codex CLI 5.4 (GPT-5.3-codex, ChatGPT subscription)
+- **Method:** Non-interactive `codex exec` with structured review prompt
+- **Checks:** Security (injection), correctness (units, endpoints), error handling, idempotency, standards compliance
+- **Loop:** Invoked synchronously by Sentinel/Archon before each script execution
+- **Output:** APPROVED or REJECTED with specific fixes needed
+- **Revision cycle:** Up to 3 rounds; if still rejected → task blocked → escalate to Dione
 
 ### Herald (Community)
 - **Primary role:** Post updates to Moltbook, engage community
@@ -384,7 +512,11 @@ Review findings become new Tasks → agents pick them up → loop continues.
 - `src/gww3/agents/archon/derivation.py` — Derived data logic (with formula tracking)
 - `src/gww3/agents/archon/validator.py` — Cross-source validation
 
-### Step 4: Integration
+### Step 4: Warden Integration
+- `src/gww3/agents/warden.py` — Warden review API (wraps `codex exec`)
+- `tests/test_warden.py` — Review gate tests (approve/reject/revision cycle)
+
+### Step 5: Integration
 - `src/gww3/agents/orchestrator.py` — Dione's task creation + monitoring
 - `src/gww3/agents/adk_config.py` — ADK agent definitions
 - `tests/test_agent_loop.py` — Loop resilience tests (crash recovery, race conditions)

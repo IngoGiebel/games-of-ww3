@@ -1,615 +1,554 @@
-# GWW3 — Agent Orchestrierung & Kollaboration
+# GWW3 — Agent Orchestration & Collaboration
 
 *Created: 2026-03-24 by Dione 🌙*
-*Status: Designdokument für Implementierung*
+*Updated: 2026-03-24 — Warden (Codex) code review agent added*
+*Status: Design document for implementation*
 
 ---
 
-## 1. Überblick: Wer macht was?
+## 1. Overview: Who Does What?
 
 ```
 ┌────────────────────────────────────────────────────────────────────┐
-│                        INGO (Mensch)                               │
-│  Entscheidet: Strategie, Budget, Prioritäten, Go/No-Go            │
-│  Interagiert via: Telegram → Dione                                 │
+│                         INGO (Human)                               │
+│  Decides: Strategy, budget, priorities, Go/No-Go                   │
+│  Interacts via: Telegram → Dione                                   │
 └─────────────────────────┬──────────────────────────────────────────┘
                           │ natural language
 ┌─────────────────────────▼──────────────────────────────────────────┐
 │                    DIONE 🌙 (Orchestrator)                         │
 │  Runtime: OpenClaw Main Session (Claude Opus)                      │
-│  Rolle: Projektleiterin, Task-Erstellung, Quality Gate             │
-│  Kommuniziert mit Agenten via: OpenClaw sessions_spawn / Gemini CLI│
-└──────┬──────────────┬──────────────┬──────────────┬────────────────┘
-       │              │              │              │
-┌──────▼──────┐ ┌─────▼──────┐ ┌────▼─────┐ ┌─────▼──────┐
-│  ARCHON     │ │  SENTINEL  │ │  INANNA  │ │  HERALD    │
-│  (Engineer) │ │  (Analyst) │ │  (Review)│ │  (Comms)   │
-│  Gemini 2.5 │ │  Gemini 2.5│ │  Claude  │ │  Gemini    │
-│  ADK Agent  │ │  ADK Agent │ │  OpenClaw│ │  CLI       │
-└──────┬──────┘ └─────┬──────┘ └────┬─────┘ └─────┬──────┘
-       │              │              │              │
-       └──────────────┴──────┬───────┴──────────────┘
-                             │
-                    ┌────────▼────────┐
-                    │   Neo4j Graph   │
-                    │  (Single Source  │
-                    │   of Truth)     │
-                    └─────────────────┘
+│  Role: Project lead, task creation, quality gate, escalation       │
+└──────┬──────────┬──────────────┬──────────────┬──────────┬─────────┘
+       │          │              │              │          │
+┌──────▼──────┐ ┌─▼────────┐ ┌──▼──────┐ ┌────▼───┐ ┌────▼─────────┐
+│  ARCHON     │ │ SENTINEL │ │ WARDEN  │ │ INANNA │ │  HERALD      │
+│  Engineer   │ │ Analyst  │ │ Code QA │ │ Review │ │  Comms       │
+│  Gemini 2.5 │ │ Gemini   │ │ Codex   │ │ Claude │ │  Gemini      │
+│  ADK Agent  │ │ ADK Agent│ │ 5.4     │ │ Subagt │ │  CLI         │
+└─────────────┘ └────┬─────┘ └────▲────┘ └────────┘ └──────────────┘
+                     │            │
+                     │  script ──►│
+                     │◄─ verdict ─│
+                     │            │
+              ┌──────▼────────────▼───────┐
+              │      Neo4j Graph DB       │
+              │  (Single Source of Truth)  │
+              └───────────────────────────┘
 ```
 
 ---
 
-## 2. Agentenprofile im Detail
+## 2. Agent Profiles
 
 ### Dione 🌙 — Orchestrator & Quality Gate
 
-**Runtime:** OpenClaw Main Session (Claude Opus, via Telegram)
-**Warum Claude:** Langform-Reasoning, Kontext über Ingos gesamtes Workspace, direkte Telegram-Kommunikation
+| Property | Value |
+|----------|-------|
+| **Runtime** | OpenClaw Main Session (Claude Opus) |
+| **Model** | claude-opus-4-6 (Anthropic Max 20x subscription) |
+| **Communication** | Direct Telegram chat with Ingo |
 
-**Verantwortung:**
-- **Task-Erstellung:** Liest DATA_LOADING_PLAN.md, erstellt Task-Nodes in Neo4j
-- **Monitoring:** Prüft Task-Status bei Heartbeats, erkennt blockierte/fehlgeschlagene Tasks
-- **Quality Gate:** Reviewed ImportBatch-Ergebnisse bevor sie als "verified" gelten
-- **Eskalation:** Informiert Ingo bei blocked Tasks, Daten-Konflikten, Budget-Überschreitungen
-- **Deep Think Trigger:** Erstellt Review-Prompts nach Phasen-Abschluss
+**Responsibilities:**
+- **Task creation:** Reads DATA_LOADING_PLAN.md, creates Task nodes in Neo4j
+- **Monitoring:** Checks task status during heartbeats, detects blocked/failed tasks
+- **Quality gate:** Reviews ImportBatch results before marking phases as complete
+- **Escalation:** Alerts Ingo on blocked tasks, data conflicts, budget overruns
+- **Deep Think trigger:** Creates review prompts after phase completion
+- **Agent lifecycle:** Starts/stops/restarts Sentinel, Archon, Warden processes
 
-**Dione startet Agenten so:**
-```python
-# Sentinel starten (Gemini CLI im games-of-ww3 Verzeichnis)
-exec(command="cd /home/uranus/moltbot-workspace/projects/games-of-ww3 && "
-     "gemini -p 'Du bist Sentinel, der Data Analyst Agent für GWW3. "
-     "Lies AGENTS.md für deine Rolle. "
-     "Claim deinen nächsten Task aus Neo4j mit der atomic query aus "
-     "AGENT_ARCHITECTURE_V2.md. Führe ihn aus und committe das Ergebnis.'",
-     background=True)
+**How Dione starts agents:**
+```bash
+# Sentinel (Gemini CLI in project directory)
+cd /home/uranus/moltbot-workspace/projects/games-of-ww3
+gemini -p 'You are Sentinel, the Data Analyst agent for GWW3. 
+  Read AGENTS.md for your role. Claim your next Task from Neo4j 
+  using the atomic query from AGENT_ARCHITECTURE_V2.md. 
+  Execute it and commit the result.'
 
-# Archon starten (separater Gemini CLI Prozess)
-exec(command="cd /home/uranus/moltbot-workspace/projects/games-of-ww3 && "
-     "gemini -p 'Du bist Archon, der Lead Engineer für GWW3. "
-     "Lies AGENTS.md. Claim und bearbeite deinen nächsten Task.'",
-     background=True)
+# Archon (separate Gemini CLI process)
+gemini -p 'You are Archon, the Lead Engineer for GWW3.
+  Read AGENTS.md. Claim and execute your next Task.'
 ```
 
-**Monitoring-Loop (im Heartbeat):**
-```python
-# Bei jedem Heartbeat (oder on-demand):
-cypher = """
+**Monitoring loop (during heartbeats):**
+```cypher
+-- Quick status check
 MATCH (t:Task)
 WITH t.status AS status, count(t) AS cnt
 RETURN status, cnt ORDER BY cnt DESC
-"""
-# → Wenn "blocked" > 0: Alert an Ingo
-# → Wenn "failed" mit retry_count >= max_retries: Eskalation
-# → Wenn alle Tasks einer Phase "completed": Deep Think Review triggern
+-- If "blocked" > 0: Alert Ingo immediately
+-- If all tasks in a phase are "completed": Trigger Deep Think review
 ```
 
 ---
 
 ### Sentinel — Data Analyst (ETL Workhorse)
 
-**Runtime:** Google ADK Agent (Gemini 2.5 Pro) via Gemini CLI
-**Warum Gemini:** Google OAuth Flatrate, native ADK-Integration, Tool-Use für Shell/Code
+| Property | Value |
+|----------|-------|
+| **Runtime** | Google ADK Agent (Gemini 2.5 Pro) via Gemini CLI |
+| **Model** | gemini-2.5-pro (Google One AI Ultra subscription) |
+| **Auth** | OAuth Personal (ingo.giebel@gmail.com) |
 
-**Verantwortung:**
-- **Primär:** Daten von externen APIs holen und in Neo4j laden
-- **Methode:** Generiert + führt deterministische Python-Skripte aus
-- **Niemals:** Strukturierte Daten (JSON/CSV) im LLM-Kontext parsen
+**Responsibilities:**
+- **Primary:** Fetch data from external APIs and load into Neo4j
+- **Method:** Generate deterministic Python scripts → Warden review → execute
+- **Never:** Parse structured data (JSON/CSV) row-by-row in LLM context
 
-**Typischer Task-Ablauf:**
-
+**Task execution flow:**
 ```
-                    Sentinel claims Task
-                          │
-            ┌─────────────▼─────────────┐
-            │  1. Task-Details lesen     │
-            │     aus Neo4j Task-Node    │
-            └─────────────┬─────────────┘
-                          │
-            ┌─────────────▼─────────────┐
-            │  2. Python-Script          │
-            │     generieren             │
-            │     (ETL: fetch → parse    │
-            │      → normalize →         │
-            │      validate → output)    │
-            └─────────────┬─────────────┘
-                          │
-            ┌─────────────▼─────────────┐
-            │  3. Script ausführen       │
-            │     in Subprocess          │
-            │     (NICHT im LLM-Kontext!)│
-            └─────────────┬─────────────┘
-                          │
-            ┌─────────────▼─────────────┐
-            │  4. Ergebnis validieren    │
-            │     Sanity Bounds prüfen   │
-            │     Imputation anwenden    │
-            └─────────────┬─────────────┘
-                          │
-                     ┌────▼────┐
-                     │ Valid?  │
-                     └──┬───┬──┘
-                   Yes  │   │  No
-            ┌───────────▼┐ ┌▼──────────────┐
-            │ 5a. Commit │ │ 5b. Retry     │
-            │ to Neo4j   │ │ oder Eskalation│
-            │ + Provenance│ │ an Dione      │
-            └────────────┘ └───────────────┘
-                    │
-            ┌───────▼───────────────────┐
-            │  6. Memory reset          │
-            │     (Kontext leeren)      │
-            └───────────────────────────┘
+1. Claim task from Neo4j (atomic Cypher)
+2. Generate Python ETL script based on task description
+3. Submit script to Warden for review ←── NEW
+4. If APPROVED: execute script in subprocess
+   If REJECTED: revise script based on Warden feedback (max 3 rounds)
+5. Validate results against sanity bounds
+6. Commit to Neo4j with full provenance (ImportBatch + PROVENANCE edges)
+7. Clear LLM context (reset_memory)
+8. Loop → next task
 ```
-
-**Konkretes Beispiel — World Bank GDP Import:**
-
-```python
-# Sentinel generiert dieses Script und führt es aus:
-import requests
-import pandas as pd
-import json
-
-# Fetch from World Bank API (10 years, all countries)
-url = "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD"
-params = {"format": "json", "per_page": 500, "date": "2016:2025"}
-all_data = []
-page = 1
-while True:
-    resp = requests.get(url, params={**params, "page": page})
-    data = resp.json()
-    if len(data) < 2 or not data[1]:
-        break
-    all_data.extend(data[1])
-    page += 1
-
-# Parse into DataFrame
-df = pd.DataFrame([{
-    "iso3": r["countryiso3code"],
-    "year": int(r["date"]),
-    "gdp_nominal": float(r["value"]) if r["value"] else None,
-} for r in all_data if r["countryiso3code"]])
-
-# Output as JSON for Neo4j loading
-df.to_json("/tmp/worldbank_gdp.json", orient="records")
-print(f"Fetched {len(df)} records for {df['iso3'].nunique()} countries")
-```
-
-Sentinel liest dann `/tmp/worldbank_gdp.json`, validiert gegen Sanity Bounds,
-imputiert fehlende Werte, und committed via Cypher mit Provenance.
 
 ---
 
 ### Archon — Lead Engineer (Schema & Derived Data)
 
-**Runtime:** Google ADK Agent (Gemini 2.5 Pro) via Gemini CLI
-**Warum Gemini:** Code-Generierung, Schema-Design, komplexe Ableitungslogik
+| Property | Value |
+|----------|-------|
+| **Runtime** | Google ADK Agent (Gemini 2.5 Pro) via Gemini CLI |
+| **Model** | gemini-2.5-pro (Google One AI Ultra subscription) |
+| **Auth** | OAuth Personal |
 
-**Verantwortung:**
-- **Schema-Migrationen:** Neue Node-Types, Constraints, Indexes
-- **Derived Data:** Stability Index aus V-Dem, Factions aus Factbook-Text, Supply Routes
-- **Cross-Source-Validierung:** Vergleicht SIPRI vs. World Bank Militärdaten
-- **Infrastruktur:** normalization.py, imputation.py Verbesserungen
-- **Task-Erstellung:** Kann neue Tasks für Sentinel erstellen
+**Responsibilities:**
+- **Schema migrations:** New node types, constraints, indexes
+- **Derived data:** Stability index from V-Dem, factions from Factbook text, supply routes
+- **Cross-source validation:** Compares SIPRI vs. World Bank military data
+- **Infrastructure:** normalization.py, imputation.py improvements
+- **Task creation:** Can create new tasks for Sentinel
 
-**Wann nutzt Archon LLM-Reasoning?**
+**When Archon generates Python scripts**, they also go through Warden review.
+Only pure Cypher DDL (schema changes) bypasses Warden — these are reviewed by Dione instead.
 
-| Aufgabe | LLM? | Begründung |
-|---------|------|------------|
-| Schema-Cypher schreiben | ✅ Ja | Creative, einmalig |
-| Derivation-Formel entwerfen | ✅ Ja | Domänenwissen nötig |
-| Factions aus Factbook-Text extrahieren | ✅ Ja | Unstrukturiert → Strukturiert |
-| CSV/JSON parsen | ❌ Nein | Deterministic code |
-| Tests schreiben | ✅ Ja | Creative, einmalig |
-| Bulk-Daten transformieren | ❌ Nein | Script generieren + ausführen |
+---
 
-**Archon erstellt Sentinel-Tasks:**
+### Warden 🛡️ — Code Review Agent (NEW)
+
+| Property | Value |
+|----------|-------|
+| **Runtime** | Codex CLI 5.4 (non-interactive `codex exec`) |
+| **Model** | gpt-5.3-codex (ChatGPT subscription) |
+| **Auth** | ChatGPT OAuth |
+| **Invocation** | Synchronous — called by Sentinel/Archon before script execution |
+
+**Responsibilities:**
+- **Code review:** Every generated Python script before execution
+- **Security audit:** Cypher injection, hardcoded secrets, arbitrary code execution
+- **Correctness check:** Unit conversions, API endpoints, data format compliance
+- **Standards enforcement:** normalization.py, validation_bounds.py, imputation.py usage
+- **Idempotency check:** MERGE vs CREATE, safe-to-rerun verification
+
+**Warden is NOT an autonomous agent.** It has no loop, no task queue, no memory.
+It is a stateless function called synchronously by other agents.
+
+**Review protocol:**
 ```python
-# Archon erkennt fehlende Commodity-Daten und erstellt Task für Sentinel:
-neo4j.run("""
-    CREATE (t:Task {
-        id: "task-023-eia-natgas-producers",
-        phase: 2, step: "2.3",
-        title: "Import EIA natural gas production data for all nations",
-        assigned_to: "Sentinel",
-        status: "pending",
-        priority: 2,
-        created_at: datetime(),
-        retry_count: 0, max_retries: 3,
-        source_id: "eia-energy",
-        method: "api_import"
-    })
-    WITH t
-    MATCH (dep:Task {id: "task-001-nation-registry"})
-    CREATE (t)-[:DEPENDS_ON]->(dep)
-""")
+# Sentinel/Archon calls Warden:
+result = subprocess.run(
+    ["codex", "exec",
+     "--approval-mode", "full-auto",
+     "-c", 'model="gpt-5.3-codex"',
+     REVIEW_PROMPT],
+    capture_output=True, text=True, timeout=180,
+    cwd=PROJECT_DIR
+)
+
+# Warden responds with exactly one of:
+# "APPROVED" — script is safe and correct
+# "REJECTED: <specific issues>" — must be fixed before execution
 ```
+
+**Review criteria (the 6 gates):**
+
+| # | Gate | Examples |
+|---|------|----------|
+| 1 | **Security** | No `f"... {user_input} ..."` in Cypher strings. No `os.system()`. No hardcoded passwords. |
+| 2 | **Correctness** | SIPRI data multiplied by 1M. V-Dem indices multiplied by 100. Correct WB indicator codes. |
+| 3 | **Error handling** | `requests.get()` has timeout. Retries on 429/5xx. `try/except` around Neo4j writes. |
+| 4 | **Idempotency** | Uses `MERGE` not `CREATE` for nodes. Uses `ON MATCH SET` for updates. |
+| 5 | **Standards** | Imports `normalization.py`. Calls `validate_record()`. Calls `impute_record()`. |
+| 6 | **Data quality** | Checks for null values. Validates ranges. Tags confidence levels. |
+
+**Revision cycle:**
+```
+Round 1: Sentinel generates script → Warden REJECTED (missing timeout on requests)
+Round 2: Sentinel revises script → Warden REJECTED (SIPRI data not normalized to abs USD)
+Round 3: Sentinel revises script → Warden APPROVED → Execute
+```
+
+If still rejected after 3 rounds → Task status = `blocked` → Dione alerted → Ingo informed.
+
+**Why Codex specifically?**
+- Codex is purpose-built for code review (native `codex review` command)
+- GPT-5.3-codex excels at finding bugs and security issues in Python
+- Non-interactive `codex exec` is fast (~10-30s per review)
+- On ChatGPT subscription — $0 incremental cost
+- Different model family from Sentinel/Archon (Gemini) — diversity catches more issues
 
 ---
 
 ### Inanna ⚔️ — Military Domain Expert & Reviewer
 
-**Runtime:** OpenClaw Subagent (Claude) oder eigenständige Session
-**Warum Claude:** Tiefes Reasoning für militärische Plausibilitätsprüfung
+| Property | Value |
+|----------|-------|
+| **Runtime** | OpenClaw Subagent (Claude) |
+| **Model** | claude-opus-4-6 (shares Dione's Max 20x) |
+| **Invocation** | Spawned by Dione for review tasks |
 
-**Verantwortung:**
-- **Review-Queue:** Prüft alle Military/Security ImportBatches auf Plausibilität
-- **Cross-Referenzierung:** Vergleicht Daten mit offenen Quellen (OSINT)
-- **Flags:** Kann Daten als `needs_manual_review` markieren
-- **PoW-Security-Expertise:** Ihr Kernwissen fließt in NSA-Modellierung ein
+**Responsibilities:**
+- **Review queue:** Validates all military/security ImportBatches for plausibility
+- **Cross-referencing:** Compares data with OSINT sources
+- **Flags:** Can mark data as `needs_manual_review` with reasoning
+- **Domain expertise:** PoW security, military capabilities, NSA modeling
 
-**Inanna arbeitet read-only auf Neo4j:**
-```python
-# Inanna reviews eine Military ImportBatch:
-batch = neo4j.run("""
-    MATCH (ib:ImportBatch {agent: "Sentinel"})-[:FROM_SOURCE]->(:DataSource {id: "sipri-milex"})
-    WHERE NOT exists(ib.reviewed_by)
-    RETURN ib ORDER BY ib.timestamp DESC LIMIT 1
-""")
-
-# Prüft: Sind die SIPRI-Daten plausibel?
-# Beispiel: Iran military_spending = $25B laut SIPRI
-# Inanna weiß aus OSINT: Iran's tatsächliches Budget vermutlich $40-60B (IRGC off-budget)
-# → Flaggt: data_confidence = "medium", note = "SIPRI underestimates due to IRGC off-budget spending"
-```
+**Inanna is read-only on Neo4j.** She does not write data directly.
 
 ---
 
 ### Herald — Community & Moltbook
 
-**Runtime:** Gemini CLI (leichtgewichtig)
-**Warum Gemini:** Kostengünstig für Textgenerierung, OAuth Flatrate
+| Property | Value |
+|----------|-------|
+| **Runtime** | Gemini CLI (lightweight) |
+| **Model** | gemini-2.5-pro (Google One AI Ultra) |
+| **Invocation** | Triggered by Dione at milestones |
 
-**Verantwortung:**
-- **Moltbook-Posts:** Projekt-Updates in m/wargames, m/engineering, m/maschinenvolk
-- **Feedback-Monitoring:** Liest Kommentare, meldet relevantes an Dione
-- **Milestone-Kommunikation:** Automatische Posts bei Phasen-Abschluss
-
-**Herald wird nur bei Milestones aktiviert — kein dauerhafter Loop.**
+**Responsibilities:**
+- Post project updates to Moltbook (m/wargames, m/engineering)
+- Monitor community feedback, report relevant items to Dione
+- Activated only at milestones — no permanent loop
 
 ---
 
-## 3. Kommunikationsprotokolle
+## 3. Communication Protocols
 
-### Dione ↔ Sentinel/Archon (via Neo4j)
+### Task-Based Coordination (Dione ↔ Sentinel/Archon)
 
-**Kein direkter Message-Passing!** Alle Koordination läuft über Neo4j Task-Nodes.
+**No direct message-passing.** All coordination flows through Neo4j Task nodes.
 
 ```
-Dione erstellt Task → Neo4j
-                       ↕
-Sentinel/Archon claimen Task ← Neo4j
-                       ↕
-Agent committed Ergebnis → Neo4j (ImportBatch + PROVENANCE)
-                       ↕
-Dione liest Ergebnis ← Neo4j (bei nächstem Heartbeat/on-demand)
+Dione creates Task ──────────────────────► Neo4j
+                                             ↕
+Sentinel/Archon claims Task ◄──────────── Neo4j
+                                             ↕
+Agent generates script ──► Warden review     │
+                                             ↕
+Agent commits result ────────────────────► Neo4j (ImportBatch + PROVENANCE)
+                                             ↕
+Dione reads result at next heartbeat ◄──── Neo4j
 ```
 
-**Warum kein direktes Messaging?**
-- Agents laufen asynchron — Dione muss nicht warten
-- Neo4j ist die Single Source of Truth
-- Task-Status ist persistiert (überlebt Crashes)
-- Keine Race Conditions (atomic Cypher)
-- Debugging: Kompletter Audit Trail in der Graphdatenbank
+**Why no direct messaging?**
+- Agents run asynchronously — Dione doesn't need to wait
+- Neo4j is the single source of truth
+- Task status survives agent crashes (persistent state)
+- No race conditions (atomic Cypher queries)
+- Full audit trail in the graph database
 
-### Dione ↔ Inanna (via OpenClaw sessions)
+### Synchronous Review (Sentinel/Archon ↔ Warden)
+
+Warden is called **inline** — the calling agent blocks until review completes.
+This is intentional: no script should ever execute without review.
+
+```
+Sentinel ──(script)──► codex exec ──(verdict)──► Sentinel
+           blocking        ~30s         blocking
+```
+
+### Subagent Spawning (Dione ↔ Inanna)
 
 ```python
-# Dione spawnt Inanna für einen Review-Auftrag:
+# Dione spawns Inanna for a one-shot review:
 sessions_spawn(
-    task="Review die neueste SIPRI ImportBatch in Neo4j. "
-         "Prüfe die Military-Daten auf Plausibilität. "
-         "Nutze cypher-shell für Neo4j-Zugriff (Passwort: gww3-dev-2026). "
-         "Flagge verdächtige Werte mit deinen Gründen.",
+    task="Review the latest SIPRI ImportBatch in Neo4j. "
+         "Check military data for plausibility using your domain expertise. "
+         "Neo4j: bolt://localhost:7687, password: gww3-dev-2026. "
+         "Flag suspicious values with reasoning.",
     runtime="subagent",
-    mode="run",  # one-shot, nicht persistent
+    mode="run",  # one-shot, not persistent
 )
 ```
 
-### Dione ↔ Ingo (via Telegram)
+### Human Escalation (Dione ↔ Ingo)
 
-- **Routine:** Status-Updates bei Morning Briefing
-- **Alerts:** Sofort bei blockierten Tasks oder Daten-Konflikten
-- **Milestones:** Phasen-Abschluss mit Zusammenfassung
-- **Entscheidungen:** Fragen die nur Ingo beantworten kann
+- **Routine:** Status updates during morning briefing
+- **Alerts:** Immediately on blocked tasks or data conflicts
+- **Milestones:** Phase completion with summary
+- **Decisions:** Questions only Ingo can answer
 
 ---
 
-## 4. Task-Lifecycle im Detail
+## 4. Task Lifecycle
 
 ```
     ┌─────────┐
-    │ PENDING │ ← Dione erstellt Task
+    │ PENDING │ ← Dione creates task
     └────┬────┘
-         │ Agent claims (atomic Cypher)
+         │ Agent claims (atomic Cypher SET)
     ┌────▼────────┐
-    │ IN_PROGRESS │ ← Agent arbeitet
+    │ IN_PROGRESS │ ← Agent working
+    └────┬────────┘
+         │ Script generated
+    ┌────▼────────┐
+    │ WARDEN      │ ← Code review (up to 3 rounds)
+    │ REVIEW      │
     └────┬────────┘
          │
-    ┌────▼────┐    Validation failed, retry < max
-    │  Check  │───────────────────────────────┐
-    │ Result  │                               │
+    ┌────▼────┐
+    │ Result  │    Validation failed, retry < max
+    │ Check   │───────────────────────────────┐
     └──┬───┬──┘                               │
    OK  │   │  Failed                    ┌─────▼─────┐
-  ┌────▼───┐│                           │  PENDING   │
-  │COMPLETE││                           │(retry_count│
-  │   D    ││                           │  += 1)     │
-  └────────┘│                           └────────────┘
-            │  Failed, retry >= max
-       ┌────▼─────┐
-       │ BLOCKED  │ ← Dione wird alertet
-       └────┬─────┘
-            │ Dione/Ingo löst Problem
-       ┌────▼─────┐
-       │ PENDING  │ ← retry_count reset
-       └──────────┘
-```
-
-**Konkrete Task-Erstellung durch Dione (Phase 1):**
-
-```python
-# Dione erstellt alle Phase-1 Tasks in einem Schritt:
-PHASE_1_TASKS = [
-    {
-        "id": "task-P1-01-nation-registry",
-        "phase": 1, "step": "1.1",
-        "title": "Create 195 Nation nodes from CIA Factbook + ISO 3166",
-        "assigned_to": "Sentinel",
-        "priority": 1,
-        "source_id": "cia-factbook",
-        "method": "api_import",
-        "depends_on": [],
-    },
-    {
-        "id": "task-P1-02-id-crosswalk",
-        "phase": 1, "step": "1.2",
-        "title": "Build ID crosswalk: ISO-3 ↔ COW ↔ UN M49 ↔ V-Dem ↔ WB",
-        "assigned_to": "Sentinel",
-        "priority": 1,
-        "source_id": "cia-factbook",
-        "method": "api_import",
-        "depends_on": ["task-P1-01-nation-registry"],
-    },
-    {
-        "id": "task-P1-03-borders",
-        "phase": 1, "step": "1.3",
-        "title": "Create BORDERS relationships for all ~600 land border pairs",
-        "assigned_to": "Sentinel",
-        "priority": 2,
-        "source_id": "cia-factbook",
-        "method": "api_import",
-        "depends_on": ["task-P1-01-nation-registry"],
-    },
-]
-
-for task in PHASE_1_TASKS:
-    neo4j.run("""
-        CREATE (t:Task $props)
-    """, props={k: v for k, v in task.items() if k != "depends_on"})
-
-# Then create dependency edges:
-for task in PHASE_1_TASKS:
-    for dep_id in task["depends_on"]:
-        neo4j.run("""
-            MATCH (t:Task {id: $task_id})
-            MATCH (dep:Task {id: $dep_id})
-            CREATE (t)-[:DEPENDS_ON]->(dep)
-        """, task_id=task["id"], dep_id=dep_id)
+  ┌────▼───┐                            │  PENDING   │
+  │COMPLETE│                            │ (retry +1) │
+  │   D    │                            └────────────┘
+  └────────┘  Failed, retry >= max
+               ┌──────────┐
+               │ BLOCKED  │ ← Dione alerted → Ingo informed
+               └──────────┘
 ```
 
 ---
 
-## 5. Fehlerbehandlung & Recovery-Szenarien
+## 5. Error Recovery Scenarios
 
-### Szenario 1: Sentinel 429 (Rate Limit)
+### Scenario 1: Warden Rejects Script (most common)
+
+```
+Sentinel generates script with missing error handling
+    │
+    ├─ Warden REJECTED: "requests.get() has no timeout parameter"
+    ├─ Sentinel revises script, adds timeout=30
+    ├─ Warden APPROVED
+    └─ Script executes successfully
+```
+
+**Impact:** 30-90 seconds delay per rejection round. Acceptable.
+
+### Scenario 2: API Rate Limit (429)
 
 ```
 Sentinel → World Bank API → 429 Too Many Requests
     │
-    ├─ Agent erkennt RateLimitError
-    ├─ Exponential Backoff: 60s → 120s → 300s
-    ├─ Task bleibt IN_PROGRESS
-    ├─ Nach 3 Retries: Task → BLOCKED
-    └─ Dione wird bei nächstem Heartbeat alertet
-        └─ Informiert Ingo: "World Bank API rate limited. Warten oder API-Key nutzen?"
+    ├─ Agent catches RateLimitError
+    ├─ Exponential backoff: 60s → 120s → 300s
+    ├─ Task remains IN_PROGRESS
+    ├─ After 3 retries: Task → BLOCKED
+    └─ Dione alerted at next heartbeat
+        └─ Informs Ingo: "World Bank API rate limited. Wait or use API key?"
 ```
 
-### Szenario 2: Sentinel Crash (Process stirbt)
+### Scenario 3: Agent Process Crash (OOM, disconnect)
 
 ```
-Sentinel-Prozess stirbt (OOM, SSH-Disconnect, etc.)
+Sentinel process dies
     │
-    ├─ Task bleibt IN_PROGRESS in Neo4j (kein Agent aktualisiert)
-    ├─ Dione erkennt bei Heartbeat: "Task X seit >1h IN_PROGRESS, kein Fortschritt"
-    ├─ Dione prüft: Läuft der Sentinel-Prozess noch? (ps aux | grep gemini)
+    ├─ Task remains IN_PROGRESS in Neo4j (no agent to update it)
+    ├─ Dione detects at heartbeat: "Task X IN_PROGRESS for >1h, no progress"
+    ├─ Dione checks: Is Sentinel process running? (ps aux | grep gemini)
     │
-    ├─ Falls nein: Dione startet Sentinel neu
-    │   └─ Sentinel On-Startup:
+    ├─ If dead: Dione restarts Sentinel
+    │   └─ Sentinel on-startup:
     │       ├─ MATCH (t:Task {status: "in_progress", assigned_to: "Sentinel"})
-    │       ├─ Prüft: Hat dieser Task einen ImportBatch? (partieller Write?)
-    │       ├─ Falls ja: Rollback (DETACH DELETE ImportBatch)
-    │       ├─ SET t.status = "pending", t.retry_count += 1
-    │       └─ Weiter mit normalem Loop
+    │       ├─ Check: Does this task have a partial ImportBatch?
+    │       ├─ If yes: Rollback (DETACH DELETE partial ImportBatch)
+    │       └─ SET t.status = "pending", t.retry_count += 1
     │
-    └─ Falls ja aber hängt: Dione killt + neustartet
+    └─ If hanging: Dione kills + restarts
 ```
 
-### Szenario 3: Daten-Konflikt (zwei Quellen widersprechen sich)
+### Scenario 4: Data Conflict (two sources disagree)
 
 ```
-Archon Cross-Check findet:
+Archon cross-check finds:
     SIPRI: DEU military_spending = €52B
-    World Bank: DEU military_spending = €48B (anderer Umrechnungskurs)
+    World Bank: DEU military_spending = €48B
     │
-    ├─ Archon erstellt DataConflict-Node:
-    │   CREATE (:DataConflict {
-    │       id: "conflict-deu-milex-2024",
-    │       property: "military_spending_abs",
-    │       nation: "DEU",
-    │       source_a: "sipri-milex", value_a: 52000000000,
-    │       source_b: "worldbank-wdi", value_b: 48000000000,
-    │       detected_at: datetime(),
-    │       resolution: null
-    │   })
-    │
-    ├─ Dione wird alertet
-    ├─ Dione-Entscheidung (oder Ingos):
-    │   "SIPRI ist die authoritative Quelle für Military Spending → SIPRI gewinnt"
-    │
-    └─ Resolution wird eingetragen, World Bank Wert als secondary markiert
+    ├─ Archon creates DataConflict node in Neo4j
+    ├─ Dione alerted
+    ├─ Resolution: "SIPRI is authoritative for military spending"
+    └─ World Bank value marked as secondary
 ```
 
-### Szenario 4: Context Window Bloat
+### Scenario 5: Context Window Bloat
 
 ```
-Sentinel hat 20 Tasks hintereinander bearbeitet, Gemini-Kontext ist 500k Tokens
+Agent has processed 20 tasks in a row without memory reset
     │
-    ├─ reset_memory() wird nach JEDEM Task aufgerufen
-    ├─ Falls vergessen: Gemini wird langsam, dann halluziniert, dann 400 Error
-    │
-    ├─ Safeguard: Sentinel prüft Token-Count vor jedem Task
+    ├─ reset_memory() called after EVERY task (mandatory)
+    ├─ Safeguard: check token count before each task
     │   if self.context_tokens > 100_000:
     │       self.reset_memory()
-    │       self.log("WARNING: Memory reset due to bloat")
     │
-    └─ Zweiter Safeguard: Gemini CLI Session hat auto-timeout
-        gemini --max-turns 50  # Erzwingt Neustart nach 50 Turns
+    └─ Second safeguard: Gemini CLI session auto-timeout
+        gemini --max-turns 50
 ```
 
 ---
 
-## 6. Parallelität & Reihenfolge
+## 6. Parallelism & Sequencing
 
-### Phase-Level Parallelität
+### Phase-Level Parallelism
 
 ```
-Phase 0 ─────────────────── (Archon, sequentiell)
+Phase 0 (Normalization) ──── Archon, sequential ── DONE ✅
     │
-Phase 1 ─────────────────── (Sentinel, sequentiell: 1.1 → 1.2 + 1.3 parallel)
+Phase 1 (Foundation) ─────── Sentinel: 1.1 → (1.2 + 1.3 parallel)
     │
-    ├── Phase 2 (Economics) ─── Sentinel
-    ├── Phase 3 (Military) ──── Sentinel  ← kann parallel zu Phase 2!
-    ├── Phase 4 (Governance) ── Sentinel + Archon
-    ├── Phase 5 (Conflict) ──── Sentinel
-    ├── Phase 7 (Alliances) ─── Sentinel
-    │
-    └── Phase 6 (Infra) ────── abhängig von 2.3 (Commodities)
-    
-Phase 8 ─────────────────── (Archon, nach ALLEN anderen)
+    ├── Phase 2 (Economics) ──── Sentinel     ┐
+    ├── Phase 3 (Military) ───── Sentinel     │ All parallel!
+    ├── Phase 4 (Governance) ─── Sentinel +   │ (with Warden review
+    │                             Archon      │  on every script)
+    ├── Phase 5 (Conflict) ───── Sentinel     │
+    ├── Phase 7 (Alliances) ──── Sentinel     │
+    │                                         │
+    └── Phase 6 (Infra) ─────── depends on 2.3│
+                                              ┘
+Phase 8 (Validation) ──────── Archon, after ALL others
 ```
 
-### Task-Level Parallelität
+### Task-Level Parallelism
 
-Sentinel und Archon können **gleichzeitig** verschiedene Tasks bearbeiten:
-- Sentinel arbeitet an "World Bank GDP Import" (Phase 2)
-- Archon arbeitet an "V-Dem Index Derivation Formula" (Phase 4)
-- Keine Konflikte, weil sie verschiedene Properties/Nodes bearbeiten
+Sentinel and Archon can work on **different tasks simultaneously**.
+Warden reviews are sequential per agent (blocking call), but Sentinel and Archon
+can each be waiting on separate Warden reviews at the same time.
 
-**Race-Condition-Schutz:**
-Jeder Task hat `assigned_to` — Sentinel claimed nur Sentinel-Tasks, Archon nur Archon-Tasks.
-Die atomic Cypher-Query verhindert, dass zwei Instanzen desselben Agents den gleichen Task claimen.
+**Race condition protection:**
+Each task has `assigned_to` — Sentinel only claims Sentinel tasks, Archon only Archon tasks.
+The atomic Cypher query prevents duplicate claims even with multiple instances.
 
 ---
 
-## 7. Kosten & Budget
+## 7. Cost Model
 
-### Flatrate-Modell (Ingos Setup)
+### Subscriptions (Ingo's setup — all flatrate)
 
-| Agent | Modell | Kosten | Limit |
-|-------|--------|--------|-------|
-| Dione | Claude Opus (Max 20x) | Abo | 20x Sonnet-Rate |
-| Archon | Gemini 2.5 Pro (OAuth) | $0 | Google OAuth Flatrate |
-| Sentinel | Gemini 2.5 Pro (OAuth) | $0 | Google OAuth Flatrate |
-| Herald | Gemini CLI (OAuth) | $0 | Google OAuth Flatrate |
-| Inanna | Claude (OpenClaw Subagent) | Abo | Teilt Diones Max 20x |
+| Agent | Model | Cost | Limit |
+|-------|-------|------|-------|
+| Dione | Claude Opus (Max 20x) | Subscription | 20x Sonnet rate |
+| Archon | Gemini 2.5 Pro | $0 | Google OAuth flatrate |
+| Sentinel | Gemini 2.5 Pro | $0 | Google OAuth flatrate |
+| Warden | Codex/GPT-5.3 | Subscription | ChatGPT sub |
+| Herald | Gemini CLI | $0 | Google OAuth flatrate |
+| Inanna | Claude (subagent) | Subscription | Shares Dione's Max 20x |
 
-**Externe API-Kosten:**
-- World Bank API: kostenlos, kein Key nötig
-- SIPRI: kostenlos Download
-- V-Dem: kostenlos Download
-- ACLED: kostenlos mit Registrierung
-- UN Comtrade: kostenlos mit Rate Limits
-- EIA: kostenlos, kein Key nötig
-- Neo4j: lokal, keine Cloud-Kosten
+### External API Costs
 
-**Hauptkostenrisiko:** Google OAuth Rate Limits (429s bei zu schnellem Polling).
-Mitigation: Exponential Backoff + max 1 Request/10 Sekunden.
+| Source | Cost | Auth |
+|--------|------|------|
+| World Bank API | Free | None needed |
+| SIPRI MILEX | Free | Download CSV |
+| V-Dem | Free | Download |
+| ACLED | Free | Registration |
+| UN Comtrade | Free | Rate-limited |
+| EIA | Free | None needed |
+| Neo4j | Local | No cloud costs |
 
----
-
-## 8. Startup-Sequenz (wie geht's los?)
-
-```
-Schritt 1: Dione erstellt Phase-0 + Phase-1 Tasks in Neo4j
-    │
-Schritt 2: Dione startet Archon
-    │       → Archon claimed Phase-0 Tasks (normalization, imputation infra)
-    │       → Archon verifiziert bestehenden Code (schon implementiert! ✅)
-    │       → Archon markiert Phase-0 als complete
-    │
-Schritt 3: Dione erstellt Phase-2 bis Phase-7 Tasks in Neo4j
-    │
-Schritt 4: Dione startet Sentinel
-    │       → Sentinel claimed Phase-1.1 (Nation Registry)
-    │       → Sentinel generiert + führt CIA Factbook ETL Script aus
-    │       → 195 Nationen in Neo4j geladen
-    │       → Sentinel claimed Phase-1.2 + 1.3 (Crosswalk + Borders)
-    │
-Schritt 5: Wenn Phase 1 complete → Dione startet Sentinel + Archon parallel
-    │       → Sentinel: Phase 2 (Economics), Phase 3 (Military)
-    │       → Archon: Phase 4.2 (Faction Derivation)
-    │
-Schritt 6: Bei jedem Phasen-Abschluss → Dione triggert Deep Think Review
-    │
-Schritt 7: Phase 8 (Validation) → Archon + Alle
-    │
-Schritt 8: Dione informiert Ingo: "Datenbank initial befüllt. 
-    │       X Nationen, Y% Completeness, Z DataConflicts. 
-    │       Bereit für Game Engine Integration."
-    │
-    └── Loop: Continuous Improvement Cycle beginnt
-```
+**Primary cost risk:** Google OAuth rate limits (429s).
+**Mitigation:** Exponential backoff + max 1 request/10 seconds.
 
 ---
 
-## 9. Continuous Improvement: Der Endlos-Loop
-
-Nach der initialen Befüllung läuft das System in einer Dauerschleife:
+## 8. Startup Sequence
 
 ```
-┌──────────────────────────────────────────────────────┐
-│                    IMPROVEMENT LOOP                    │
-│                                                        │
-│  1. Sentinel prüft: Gibt es neue Daten bei Quellen?   │
-│     (World Bank annual update, ACLED weekly, etc.)     │
-│         │                                              │
-│  2. Falls ja: Sentinel erstellt sich selbst neue Tasks │
-│     und führt sie aus (idempotent, MERGE statt CREATE) │
-│         │                                              │
-│  3. Archon prüft: Gibt es DataConflicts?               │
-│     Neue Cross-Source-Validierungen nötig?             │
-│         │                                              │
-│  4. Inanna reviewt: Haben sich Militärdaten geändert? │
-│     Neue Konflikte entstanden?                         │
-│         │                                              │
-│  5. Dione fasst zusammen: Status-Report an Ingo        │
-│     Deep Think Review wenn signifikante Änderungen     │
-│         │                                              │
-│  ← Loop zurück zu 1 (getriggert durch Heartbeat,      │
-│     Cron-Job, oder manuell durch Ingo)                 │
-│                                                        │
-└──────────────────────────────────────────────────────┘
+Step 1: Dione creates Phase 0 + Phase 1 tasks in Neo4j
+    │
+Step 2: Dione starts Archon
+    │   → Archon claims Phase 0 tasks (normalization infra)
+    │   → Phase 0 code already implemented ✅ — Archon verifies + marks complete
+    │
+Step 3: Dione creates Phase 2–7 tasks in Neo4j
+    │
+Step 4: Dione starts Sentinel
+    │   → Sentinel claims Phase 1.1 (Nation Registry)
+    │   → Sentinel generates CIA Factbook ETL script
+    │   → Warden reviews script → APPROVED
+    │   → Script executes → 195 nations loaded
+    │   → Sentinel claims 1.2 + 1.3 (Crosswalk + Borders)
+    │
+Step 5: Phase 1 complete → Dione starts Sentinel + Archon in parallel
+    │   → Sentinel: Phase 2 (Economics), Phase 3 (Military)
+    │   → Archon: Phase 4.2 (Faction derivation)
+    │   → All scripts reviewed by Warden before execution
+    │
+Step 6: Per-phase completion → Dione triggers Deep Think review
+    │
+Step 7: Phase 8 (Validation) → Archon runs topology + completeness tests
+    │
+Step 8: Dione reports to Ingo:
+    │   "Database initially populated. X nations, Y% completeness,
+    │    Z data conflicts. Ready for Game Engine integration."
+    │
+    └── Continuous Improvement Loop begins
 ```
 
-**Fehlertoleranz:**
-- Ein Agent crasht → Dione startet ihn neu, Tasks werden recovered
-- Eine API ist down → Tasks warten, andere Phasen laufen weiter
-- Daten sind falsch → Sanity Bounds fangen es ab, Task wird blocked
-- Gemini hat Outage → Agents pausieren, Neo4j-Daten bleiben sicher
-- Alles crasht → Neo4j ist persistent, Dione liest Status aus DB beim Neustart
+---
 
-**Das System kann nicht "kaputt gehen"** — es kann nur pausieren.
-Jeder Zustand ist in Neo4j persistiert, jeder Agent ist stateless (nach Memory Reset).
-Beim Neustart ist die einzige Frage: "Welche Tasks sind noch offen?"
+## 9. Continuous Improvement Loop
+
+After initial population, the system runs in an ongoing cycle:
+
+```
+┌────────────────────────────────────────────────────────────┐
+│                    IMPROVEMENT LOOP                          │
+│                                                              │
+│  1. Sentinel checks: Any new data at sources?                │
+│     (World Bank annual update, ACLED weekly, SIPRI annual)   │
+│         │                                                    │
+│  2. If yes: Sentinel creates + executes update tasks         │
+│     (idempotent, MERGE not CREATE)                           │
+│     All scripts reviewed by Warden ← GUARANTEED              │
+│         │                                                    │
+│  3. Archon checks: Any DataConflicts? New cross-validations? │
+│         │                                                    │
+│  4. Inanna reviews: Military data changed? New conflicts?    │
+│         │                                                    │
+│  5. Dione summarizes: Status report to Ingo                  │
+│     Deep Think review if significant changes                 │
+│         │                                                    │
+│  ← Loop back to 1 (triggered by heartbeat, cron, or Ingo)   │
+│                                                              │
+└────────────────────────────────────────────────────────────┘
+```
+
+**Fault tolerance:**
+- An agent crashes → Dione restarts it, tasks are recovered from Neo4j
+- An API is down → Tasks wait, other phases continue
+- Data is wrong → Sanity bounds catch it, task is blocked
+- Script has a bug → Warden catches it before execution
+- Gemini has an outage → Agents pause, Neo4j data stays safe
+- Everything crashes → Neo4j is persistent, Dione reads state from DB on restart
+
+**The system cannot "break" — it can only pause.**
+Every state is persisted in Neo4j, every agent is stateless (after memory reset).
+On restart, the only question is: "Which tasks are still open?"
+
+---
+
+## 10. Key Design Insight: Defense in Depth
+
+The system has **four layers of data quality protection**:
+
+```
+Layer 1: WARDEN (Codex)     — Reviews code BEFORE execution
+Layer 2: SANITY BOUNDS      — Validates data DURING import
+Layer 3: INANNA             — Reviews data AFTER import (military domain)
+Layer 4: DEEP THINK         — Reviews entire schema/data AFTER phase completion
+```
+
+No single point of failure. A bug that passes Warden will be caught by sanity bounds.
+A valid-looking but implausible value that passes bounds will be caught by Inanna.
+A systemic design issue that passes all agents will be caught by Deep Think review.
 
 ---
 
