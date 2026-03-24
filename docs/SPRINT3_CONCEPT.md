@@ -213,27 +213,62 @@ Implemented via `BELIEVES` relationships: `(AgentRole)-[:BELIEVES {value, confid
 
 ---
 
-## Part E: Visual Identity & Assets (Ingo, 2026-03-24)
+## Part E: Game Branding & Logo (Ingo, 2026-03-24)
 
-### E1. Game Logo & Branding
-- Logo for "Games of World War 3" — must work on dark/light backgrounds
-- Style direction: serious/realistic (not cartoonish), geopolitical/strategic feel
-- Variants: full logo, icon-only, text-only
-- Formats: SVG (web), PNG (social media), WebP (game UI)
-- Could be AI-generated (DALL-E, Midjourney) with manual refinement
+The game itself needs a strong visual identity — separate from the in-game entity assets.
 
-### E2. Nation & Faction Flags
-- Flag images for all ~195 nations (SVG preferred, from flagcdn.com or similar)
-- Custom emblems/icons for alliances (NATO, BRICS, SCO, etc.)
-- Custom icons for non-state actors (generic by type: insurgency, militia, cartel, etc.)
-- Storage: `assets/flags/`, `assets/emblems/`
+### E1. Game Logo
+- Logo for **"Games of World War 3"** — the product identity
+- Must work on dark/light backgrounds, at small (favicon) and large (splash screen) sizes
+- Style direction: serious/realistic, geopolitical/strategic feel (not cartoonish)
+- Variants: full logo (text + icon), icon-only (app icon, favicon), text-only (documents)
+- Formats: SVG (web, scalable), PNG (social media, 1024×1024), WebP (game UI)
+- Generation: AI-generated (DALL-E, Midjourney) with manual refinement by Ingo
 
-### E3. Interactive Globe (3D World Map)
-- Rotatable, zoomable 3D globe showing all nations
-- Color-coded by alliance membership, conflict status, economic tier
-- Click on nation → popup with key stats (GDP, military, stability, etc.)
-- Show active conflicts as animated hotspots
-- Show alliance networks as colored overlays
+### E2. Game Branding
+- Color palette: dark/military tones (navy, charcoal, steel) with accent color (amber/red for conflict)
+- Typography: clean sans-serif for UI, condensed bold for headlines
+- Tone: "CNN war room meets grand strategy" — data-driven, not fantasy
+- Tagline candidates: "Every nation. Every decision. Every consequence." / "The world is your chessboard."
+- Applied to: concept page, Moltbook posts, GitHub README, game UI
+
+---
+
+## Part F: In-Game Entity Assets (Ingo, 2026-03-24)
+
+Visual assets for the entities players interact with inside the game.
+
+### F1. Nation Flags
+- Flag images for all ~195 sovereign nations
+- Source: flagcdn.com, flagpedia.net, or country-flags GitHub repos (SVG, public domain)
+- Formats: SVG (UI), PNG 64×64 (small icons), PNG 256×256 (detail views)
+- Storage: `assets/flags/nations/{iso3}.svg`
+- Automated download script: `scripts/download_flags.sh`
+
+### F2. Alliance & Organization Emblems
+- Official logos/emblems for ~20 alliances (NATO, EU, BRICS, SCO, ASEAN, AU, etc.)
+- Source: Wikimedia Commons (most are public domain or fair use for non-commercial)
+- Custom-designed emblems where official logos have licensing issues
+- Storage: `assets/emblems/alliances/{slug}.svg`
+
+### F3. Non-State Actor Icons
+- Generic icons by NSA type (insurgency, militia, cartel, PMC, terrorist, separatist)
+- Not real logos (legal/ethical issues) — stylized silhouette icons per category
+- Color-coded by threat level (red=high, orange=regional, yellow=local)
+- Storage: `assets/emblems/nsa/{type}.svg`
+
+### F4. Weapon System Icons
+- Silhouette icons per weapon category (fighter, tank, submarine, missile, drone, carrier, etc.)
+- Style: consistent military-technical, monochrome with category color accent
+- Storage: `assets/icons/weapons/{category}.svg`
+
+### F5. Interactive Globe (3D World Map)
+- Rotatable, zoomable 3D globe showing all nations with their flags
+- Color-coded by: alliance membership, conflict status, economic tier
+- Click on nation → popup with key stats (GDP, military, stability, flag)
+- Active conflicts shown as animated hotspots
+- Alliance networks as colored overlays
+- Trade flows as animated arcs (thickness = trade volume)
 - Tech candidates: Deck.gl (React), CesiumJS, Three.js globe, Mapbox GL
 - Must work in browser (WebGL)
 
@@ -462,10 +497,14 @@ The concept page should pull real data from our database:
 6. Derived properties computed for all 195 nations
 7. Weapons database: top 50 weapon systems with OPERATES relationships
 
-### Visual & Branding
-8. Game logo (AI-generated + refined)
-9. Nation flag assets (SVG, automated download)
-10. Interactive globe prototype (Deck.gl or D3.js)
+### Game Branding (Part E)
+8. Game logo + branding guidelines (color palette, typography, tone)
+
+### In-Game Entity Assets (Part F)
+9. Nation flags for 195 nations (SVG, automated download script)
+10. Alliance emblems (~20 organizations)
+11. NSA type icons + weapon category icons
+12. Interactive globe prototype (Deck.gl or D3.js)
 
 ### Marketing & Community
 11. Interactive concept page (single-page HTML)
