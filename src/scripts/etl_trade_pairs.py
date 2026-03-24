@@ -67,25 +67,40 @@ class ImportBatch:
         MATCH (b:ImportBatch) WHERE id(b) = data.batch_id
         MATCH (n_from:Nation {iso3: data.from})
         MATCH (n_to:Nation {iso3: data.to})
-        MERGE (n_from)-[r:TRADES {commodity_type: data.commodity}]->(n_to)
+
+        MERGE (t:Trade {from_iso3: data.from, to_iso3: data.to, commodity_type: data.commodity, year: 2023})
         ON CREATE SET
-            r.value_usd = data.value,
-            r.friction_pct = data.friction,
-            r.year = 2023,
-            r.created_at = datetime()
+            t.value_usd = data.value,
+            t.friction_pct = data.friction,
+            t.created_at = datetime()
         ON MATCH SET
-            r.value_usd = data.value,
-            r.friction_pct = data.friction,
-            r.updated_at = datetime()
-        MERGE (r)-[:PROVENANCE]->(b)
+            t.value_usd = data.value,
+            t.friction_pct = data.friction,
+            t.updated_at = datetime()
+
+        MERGE (n_from)-[:EXPORTED]->(t)
+        MERGE (t)-[:IMPORTED_BY]->(n_to)
+        MERGE (t)-[:PROVENANCE]->(b)
         """
         self.tx.run(query, trade_data=trade_data)
 
 def validate_record(record):
-    if not all(k in record for k in ["from", "to", "value", "commodity", "friction"]):
+    required_keys = ["from", "to", "value", "commodity", "friction"]
+    for key in required_keys:
+        if key not in record or record[key] is None:
+            return False
+    
+    if not isinstance(record["value"], (int, float)) or record["value"] <= 0:
         return False
-    if record["value"] <= 0 or record["friction"] < 0 or record["friction"] > 1:
+    if not isinstance(record["friction"], (int, float)) or not (0 <= record["friction"] <= 1):
         return False
+    if not isinstance(record["from"], str) or not record["from"]:
+        return False
+    if not isinstance(record["to"], str) or not record["to"]:
+        return False
+    if not isinstance(record["commodity"], str) or not record["commodity"]:
+        return False
+        
     return True
 
 def main():
