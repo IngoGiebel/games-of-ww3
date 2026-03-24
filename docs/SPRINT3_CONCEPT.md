@@ -213,4 +213,270 @@ Implemented via `BELIEVES` relationships: `(AgentRole)-[:BELIEVES {value, confid
 
 ---
 
-*This is a living document. We'll refine iteratively before Deep Think review.*
+## Part E: Visual Identity & Assets (Ingo, 2026-03-24)
+
+### E1. Game Logo & Branding
+- Logo for "Games of World War 3" — must work on dark/light backgrounds
+- Style direction: serious/realistic (not cartoonish), geopolitical/strategic feel
+- Variants: full logo, icon-only, text-only
+- Formats: SVG (web), PNG (social media), WebP (game UI)
+- Could be AI-generated (DALL-E, Midjourney) with manual refinement
+
+### E2. Nation & Faction Flags
+- Flag images for all ~195 nations (SVG preferred, from flagcdn.com or similar)
+- Custom emblems/icons for alliances (NATO, BRICS, SCO, etc.)
+- Custom icons for non-state actors (generic by type: insurgency, militia, cartel, etc.)
+- Storage: `assets/flags/`, `assets/emblems/`
+
+### E3. Interactive Globe (3D World Map)
+- Rotatable, zoomable 3D globe showing all nations
+- Color-coded by alliance membership, conflict status, economic tier
+- Click on nation → popup with key stats (GDP, military, stability, etc.)
+- Show active conflicts as animated hotspots
+- Show alliance networks as colored overlays
+- Tech candidates: Deck.gl (React), CesiumJS, Three.js globe, Mapbox GL
+- Must work in browser (WebGL)
+
+---
+
+## Part F: Weapons & Military Systems Database (Ingo, 2026-03-24)
+
+### F1. Scope
+Extend Neo4j with detailed weapons and military system data:
+
+```
+(:WeaponSystem {
+    name: "F-35 Lightning II",
+    type: "fighter",              // fighter | bomber | tank | submarine | missile | drone | ...
+    category: "air",              // air | land | sea | space | cyber
+    manufacturer: "Lockheed Martin",
+    origin_country: "USA",
+    unit_cost_usd: 80000000,
+    annual_maintenance_usd: 5000000,
+    operational_range_km: 2200,
+    max_speed_kmh: 1975,
+    payload_kg: 8160,
+    crew: 1,
+    year_introduced: 2015,
+    generation: "5th",
+    stealth: true,
+    nuclear_capable: false
+})
+
+(:Nation)-[:OPERATES {quantity, variant, year_acquired}]->(:WeaponSystem)
+(:WeaponSystem)-[:EFFECTIVE_AGAINST {effectiveness: 0.0-1.0}]->(:WeaponSystem)
+(:WeaponSystem)-[:COUNTERED_BY {effectiveness}]->(:WeaponSystem)
+```
+
+### F2. Data Sources
+- SIPRI Arms Transfers Database (who bought what from whom)
+- IISS Military Balance (inventory per country)
+- Jane's Defence (paywalled — use open alternatives)
+- Wikipedia military equipment lists (structured, surprisingly good)
+- Global Firepower (aggregate capability data)
+
+### F3. Combat Impact
+Weapon systems feed into combat resolution:
+- Force comparison uses aggregate capability scores, not individual unit counts
+- Technology generation gap matters (5th gen vs 4th gen fighter = massive advantage)
+- Logistics: weapon range limits force projection
+- Cost: expensive weapons drain war economy faster
+
+---
+
+## Part G: Rule-Based Effect System (Ingo, 2026-03-24)
+
+### G1. Design Principles
+1. **Structural simplicity:** Rules must be readable by humans AND parseable by agents
+2. **Verifiable:** Any agent can audit a rule and check if it was applied correctly
+3. **Composable:** Multiple effects at the same time horizon can be combined additively
+4. **Probabilistic:** Effects have a base value ± probability range
+5. **Executable:** The game engine can evaluate all rules deterministically given inputs + RNG seed
+
+### G2. Rule Format (proposed)
+
+```yaml
+rule:
+  id: "sanctions-economic-impact"
+  trigger: "SANCTIONS action by Nation A against Nation B"
+  
+  effects:
+    - target: "B"
+      property: "gdp_nominal"
+      operation: "multiply"
+      value: 0.95          # base: -5% GDP
+      variance: 0.02       # ±2% (so between -3% and -7%)
+      time_horizon: "3_months"
+      
+    - target: "B"
+      property: "inflation_rate"
+      operation: "add"
+      value: 2.0            # base: +2 percentage points
+      variance: 1.0
+      time_horizon: "1_month"
+      
+    - target: "A"
+      property: "gdp_nominal"
+      operation: "multiply"
+      value: 0.99           # counter-impact: -1% GDP
+      variance: 0.005
+      time_horizon: "6_months"
+      
+  conditions:
+    - "trade_volume(A, B) > 0"
+    - "NOT alliance_member(A, B)"
+    
+  modifiers:
+    - if: "B.forex_reserves > 500_000_000_000"
+      then: "effects[0].value += 0.02"  # rich nations absorb better
+      
+  combinability:
+    horizon_group: "economic"
+    method: "multiplicative"   # multiple sanctions multiply, not add
+```
+
+### G3. Time Horizon Composition
+When multiple effects target the same property at the same time horizon:
+
+| Combination Method | Use Case |
+|-------------------|----------|
+| **Additive** | Morale effects (propaganda + victory + economy) |
+| **Multiplicative** | Economic effects (sanctions × trade war × recession) |
+| **Max/Min** | Stability thresholds (worst factor dominates) |
+| **Weighted average** | Diplomatic reputation (multiple signals averaged) |
+
+### G4. Agent Verifiability
+Each rule application is logged as an Event node with full trace:
+```
+(:Event {
+    type: "rule_applied",
+    rule_id: "sanctions-economic-impact",
+    trigger_action: "USA sanctions RUS",
+    computed_effects: [{target: "RUS", property: "gdp_nominal", delta: -0.047}],
+    rng_seed: 42,
+    tick: 15
+})-[:VERIFIED_BY]->(:AgentRole {name: "Economist_USA"})
+```
+
+---
+
+## Part H: Propaganda & Soft Power — AI Jury (Ingo, 2026-03-24)
+
+### H1. Concept
+Propaganda, disinformation, and soft power effects are **not** resolved by simple formulas.
+Instead, a **jury of AI agents** evaluates the effectiveness of propaganda actions.
+
+### H2. Jury Composition
+- 3-5 AI agents evaluate each propaganda action
+- Default jury: 3 game-provided agents (different model families for diversity)
+- Players can **optionally contribute their own AI agent** to the jury for their nation
+  - This creates an incentive: better propaganda AI = better in-game results
+  - Player-provided agents are sandboxed (read-only game state, no cheating)
+
+### H3. Evaluation Protocol
+```
+1. Propaganda action submitted (e.g., "Russia launches disinformation campaign 
+   targeting EU public opinion about energy dependency")
+   
+2. Each jury agent receives:
+   - The action description
+   - Target nation's current state (stability, morale, media freedom)
+   - Source nation's credibility score
+   - Current geopolitical context
+   
+3. Each agent scores:
+   - effectiveness: 0.0 - 1.0 (how impactful is this action?)
+   - credibility_cost: 0.0 - 1.0 (how much does the source lose if exposed?)
+   - detection_probability: 0.0 - 1.0 (how likely is attribution?)
+   
+4. Scores are aggregated (median, to resist outlier manipulation)
+   
+5. Result applied to game state:
+   - target.national_morale -= effectiveness × 10
+   - target.stability_index -= effectiveness × 5
+   - source.credibility -= credibility_cost × detection_probability
+```
+
+### H4. Why AI Jury?
+- Propaganda effectiveness is inherently subjective and context-dependent
+- No simple formula captures "will this narrative resonate with this population?"
+- Multiple AI models provide robustness against any single model's biases
+- Player-contributed agents create a meta-game: who can build the best persuasion AI?
+
+---
+
+## Part I: Interactive Concept Page (Ingo, 2026-03-24)
+
+### I1. Purpose
+An interactive HTML page that:
+- Explains the game concept in an engaging way
+- Demonstrates key mechanics interactively
+- Can be explored by both humans AND AI agents (clean semantic HTML)
+- Will be posted on Moltbook to generate interest
+
+### I2. Content Structure
+```
+Landing: Dramatic globe animation + tagline
+    │
+Section 1: "The World is Your Chessboard"
+    Interactive mini-globe showing 195 nations, click to see stats
+    │
+Section 2: "Every Decision Has Consequences"
+    Interactive demo: choose a sanctions target, see ripple effects
+    │
+Section 3: "Your Cabinet, Your Strategy"  
+    Show the 6 AI advisors, their roles, sample advice
+    │
+Section 4: "AI vs AI: The Ultimate Wargame"
+    Show a simulated 30-second conflict animation
+    │
+Section 5: "Join the Game"
+    Call to action: GitHub link, Moltbook community, Discord
+```
+
+### I3. Technical Requirements
+- Single-page HTML + JS (no build system, deployable anywhere)
+- Mobile-responsive
+- Accessible to screen readers (semantic HTML)
+- AI-readable: clean structure, meta tags, structured data
+- Animations: CSS/JS only (no heavy 3D for the concept page)
+- Globe: lightweight (TopoJSON + D3.js or similar, not full Deck.gl)
+- Hosted on: alpha-auriga.com or GitHub Pages
+
+### I4. Data Integration
+The concept page should pull real data from our database:
+- Actual nation count, GDP ranges, conflict zones
+- "Powered by real data from World Bank, SIPRI, ACLED, V-Dem"
+- This gives credibility and demonstrates the data-driven approach
+
+---
+
+## Sprint 3 Deliverables (Updated)
+
+### Data & Engine
+1. `docs/GAME_ENGINE_ARCHITECTURE.md` — Detailed engine design (Deep Think reviewed)
+2. `src/gww3/engine/rules.py` — Rule-based effect system (YAML-driven)
+3. `src/gww3/engine/combat.py` — Combat resolution with weapon systems
+4. `src/gww3/engine/economy.py` — Economic state transition model
+5. `src/gww3/engine/propaganda.py` — AI jury evaluation protocol
+6. Derived properties computed for all 195 nations
+7. Weapons database: top 50 weapon systems with OPERATES relationships
+
+### Visual & Branding
+8. Game logo (AI-generated + refined)
+9. Nation flag assets (SVG, automated download)
+10. Interactive globe prototype (Deck.gl or D3.js)
+
+### Marketing & Community
+11. Interactive concept page (single-page HTML)
+12. Moltbook announcement post with concept page link
+
+### Tests
+13. `tests/test_rules.py` — Rule parsing + application
+14. `tests/test_combat.py` — Combat resolution
+15. `tests/test_economy.py` — Economic transitions
+16. Pulse Engine integration: 100 ticks, 2 nations, real data
+
+---
+
+*This is a living document. Iterative refinement with Ingo, then Deep Think review.*
