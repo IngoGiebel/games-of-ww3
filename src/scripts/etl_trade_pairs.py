@@ -69,17 +69,24 @@ class ImportBatch:
         MATCH (n_to:Nation {iso3: data.to})
         MERGE (n_from)-[r:TRADES {commodity_type: data.commodity}]->(n_to)
         ON CREATE SET
-            r.value_usd_bln = data.value,
-            r.friction = data.friction,
+            r.value_usd = data.value,
+            r.friction_pct = data.friction,
             r.year = 2023,
             r.created_at = datetime()
         ON MATCH SET
-            r.value_usd_bln = data.value,
-            r.friction = data.friction,
+            r.value_usd = data.value,
+            r.friction_pct = data.friction,
             r.updated_at = datetime()
         MERGE (r)-[:PROVENANCE]->(b)
         """
         self.tx.run(query, trade_data=trade_data)
+
+def validate_record(record):
+    if not all(k in record for k in ["from", "to", "value", "commodity", "friction"]):
+        return False
+    if record["value"] <= 0 or record["friction"] < 0 or record["friction"] > 1:
+        return False
+    return True
 
 def main():
     uri = os.getenv("NEO4J_URI", "bolt://localhost:7687")
@@ -97,7 +104,22 @@ def main():
     try:
         with ImportBatch(driver, script_name, source_name) as batch:
             print(f"INFO: Acquired transaction and ImportBatch ID: {batch.batch_id}")
-            trade_list = [dict(item, batch_id=batch.batch_id) for item in TRADE_DATA]
+            
+            trade_list = []
+            for item in TRADE_DATA:
+                if validate_record(item):
+                    normalized_item = item.copy()
+                    normalized_item["value"] = item["value"] * 1_000_000_000
+                    normalized_item["friction"] = item["friction"] * 100
+                    normalized_item["batch_id"] = batch.batch_id
+                    trade_list.append(normalized_item)
+                else:
+                    print(f"WARNING: Skipping invalid trade record: {item}", file=sys.stderr)
+
+            if not trade_list:
+                print("INFO: No valid trade data to load.")
+                return
+
             batch.load_trades(trade_list)
             print(f"INFO: Staged {len(trade_list)} trade relationships for commit.")
         print("INFO: Transaction committed successfully.")
