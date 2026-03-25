@@ -1,0 +1,5576 @@
+{
+  "files": {
+    "data/timeseries/sipri_milex_historical.json": {
+      "present": true,
+      "property_count": 19
+    },
+    "data/timeseries/vdem_historical.json": {
+      "present": false
+    },
+    "data/timeseries/worldbank_gdp.json": {
+      "present": true,
+      "property_count": 256
+    },
+    "data/timeseries/worldbank_historical.json": {
+      "present": true,
+      "property_count": 1616
+    }
+  },
+  "issue_count": 1749,
+  "issues": [
+    "missing file: data/timeseries/vdem_historical.json"
+  ],
+  "nations": {
+    "ABW": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (4 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (2 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "AFE": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "AFG": {
+      "forex_reserves": [
+        "forex_reserves: sparse series (5 points)"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "AFW": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "AGO": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]",
+        "gdp_nominal: relative jump 64.92% from 2021 to 2022"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ALB": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2022, 2023, 2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2021, 2022, 2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "AND": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (7 points)",
+        "internet_penetration: gap between 2017 and 2019"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ARB": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ARE": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ARG": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (7 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ARM": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2016, 2017, 2018, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ASM": {
+      "gdp_nominal": [
+        "gdp_nominal: sparse series (7 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ATG": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "AUS": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2023, 2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (3 points)",
+        "gini: gap between 2016 and 2018",
+        "gini: gap between 2018 and 2020"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "AUT": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "AZE": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BDI": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]",
+        "forex_reserves: relative jump 194.69% from 2020 to 2021"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BEL": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BEN": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2018 and 2021"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BFA": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2016, 2017, 2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2018 and 2021"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BGD": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2016 and 2022"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BGR": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BHR": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (5 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BHS": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BIH": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BLR": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (4 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2021, 2022, 2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BLZ": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BMU": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (2 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BOL": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BRA": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BRB": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (1 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]",
+        "forex_reserves: relative jump 100.84% from 2017 to 2018"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (6 points)",
+        "inflation_rate: gap between 2019 and 2023"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BRN": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BTN": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (5 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2024, 2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2017 and 2022"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "BWA": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (5 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CAF": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (4 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CAN": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2022, 2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CEB": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CHE": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CHI": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CHL": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (3 points)",
+        "gini: gap between 2017 and 2020",
+        "gini: gap between 2020 and 2022"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CHN": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CIV": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2018 and 2021"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CMR": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "COD": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (1 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]",
+        "forex_reserves: relative jump 363.73% from 2020 to 2021"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (1 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "COG": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]",
+        "forex_reserves: relative jump 133.30% from 2018 to 2019"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (6 points)",
+        "internet_penetration: gap between 2017 and 2020"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "COL": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "COM": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (7 points)",
+        "internet_penetration: gap between 2017 and 2019"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CPV": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CRI": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CSS": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CUB": {
+      "gdp_nominal": [
+        "gdp_nominal: sparse series (5 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CUW": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (4 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (2 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CYM": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2016, 2017, 2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (1 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (2 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CYP": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "CZE": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "DEU": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2021, 2022, 2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "DJI": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "DMA": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (7 points)",
+        "internet_penetration: gap between 2017 and 2019"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "DNK": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "DOM": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "DZA": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "EAP": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "EAR": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "EAS": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ECA": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ECS": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ECU": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]",
+        "forex_reserves: relative jump 142.82% from 2019 to 2020"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "EGY": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (3 points)",
+        "gini: gap between 2017 and 2019",
+        "gini: gap between 2019 and 2021"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "EMU": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ERI": {
+      "forex_reserves": [
+        "forex_reserves: sparse series (4 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ESP": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "EST": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]",
+        "forex_reserves: relative jump 118.82% from 2017 to 2018"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ETH": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (4 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (6 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "EUU": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "FCS": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "FIN": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "FJI": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "FRA": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "FRO": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (2 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "FSM": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (5 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2022, 2023, 2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (7 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (5 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GAB": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GBR": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2022, 2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GEO": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GHA": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]",
+        "internet_penetration: absolute jump 40.44 from 2019 to 2020"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GIB": {
+      "internet_penetration": [
+        "internet_penetration: sparse series (1 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GIN": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GMB": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GNB": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2018 and 2021"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GNQ": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]",
+        "forex_reserves: relative jump 3192.46% from 2021 to 2022"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (7 points)",
+        "internet_penetration: gap between 2017 and 2019"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GRC": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GRD": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GRL": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2024, 2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (2 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GTM": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GUM": {
+      "gdp_nominal": [
+        "gdp_nominal: sparse series (7 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (2 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "GUY": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]",
+        "gdp_nominal: relative jump 83.03% from 2021 to 2022"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "HKG": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "HND": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2020, 2021, 2022, 2025]",
+        "gini: gap between 2019 and 2023"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "HPC": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "HRV": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "HTI": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (4 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "HUN": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2023, 2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "IBD": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "IBT": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "IDA": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "IDB": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "IDN": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "IDX": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "IMN": {
+      "gdp_nominal": [
+        "gdp_nominal: sparse series (7 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "IND": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (3 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (7 points)",
+        "internet_penetration: gap between 2020 and 2022",
+        "internet_penetration: gap between 2022 and 2025"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "IRL": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "IRN": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "IRQ": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (3 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ISL": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2020, 2021, 2022, 2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ISR": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2022, 2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ITA": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "JAM": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (4 points)",
+        "debt_to_gdp: gap between 2017 and 2019"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2018 and 2021"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "JOR": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2018, 2024, 2025]",
+        "debt_to_gdp: gap between 2017 and 2019"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "JPN": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2021, 2022, 2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "KAZ": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2022, 2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "KEN": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (3 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (6 points)",
+        "internet_penetration: gap between 2019 and 2023"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "KGZ": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2024, 2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "KHM": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (3 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (7 points)",
+        "internet_penetration: gap between 2017 and 2019"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "KIR": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (5 points)",
+        "internet_penetration: gap between 2019 and 2023"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "KNA": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2024, 2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "KOR": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2022, 2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "KWT": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LAC": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (5 points)"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LAO": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LBN": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2024, 2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "unemployment": [
+        "unemployment: missing years [2024, 2025]"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LBR": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2023, 2024, 2025]",
+        "forex_reserves: relative jump 105.54% from 2020 to 2021"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LBY": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (4 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LCA": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LCN": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (3 points)"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LDC": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LIE": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2024, 2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (7 points)",
+        "internet_penetration: gap between 2017 and 2019"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LKA": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]",
+        "forex_reserves: relative jump 132.31% from 2022 to 2023"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2016 and 2019"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LMY": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LSO": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (5 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LTE": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LTU": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LUX": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]",
+        "forex_reserves: relative jump 161.00% from 2020 to 2021"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "LVA": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MAC": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]",
+        "gdp_nominal: relative jump 83.02% from 2022 to 2023"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2024, 2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MAF": {
+      "gdp_nominal": [
+        "gdp_nominal: sparse series (2 points)",
+        "gdp_nominal: gap between 2019 and 2021"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MAR": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MCO": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (7 points)",
+        "internet_penetration: gap between 2017 and 2019"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MDA": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MDG": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2024, 2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MDV": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2016 and 2019"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MEA": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MEX": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (5 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2017, 2019, 2021, 2023, 2024, 2025]",
+        "gini: gap between 2016 and 2018",
+        "gini: gap between 2018 and 2020",
+        "gini: gap between 2020 and 2022"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MHL": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (4 points)"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MIC": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MKD": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2020, 2021, 2022, 2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MLI": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2018 and 2021"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MLT": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MMR": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (4 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MNA": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: absolute jump -58.00 from 2024 to 2025"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MNE": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2022, 2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MNG": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (5 points)",
+        "debt_to_gdp: gap between 2021 and 2024"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]",
+        "forex_reserves: relative jump 131.33% from 2016 to 2017"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (3 points)",
+        "gini: gap between 2016 and 2018",
+        "gini: gap between 2018 and 2022"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MNP": {
+      "gdp_nominal": [
+        "gdp_nominal: sparse series (7 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MOZ": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2019 and 2022"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MRT": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2022, 2023, 2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MUS": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (3 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MWI": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (5 points)",
+        "debt_to_gdp: gap between 2019 and 2022"
+      ],
+      "forex_reserves": [
+        "forex_reserves: sparse series (5 points)"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2016 and 2019"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "MYS": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2018 and 2021"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "NAC": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "NAM": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "NCL": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (1 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (1 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "NER": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2018 and 2021"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (7 points)",
+        "internet_penetration: gap between 2017 and 2019"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "NGA": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2018 and 2022"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "NIC": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "NLD": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2022, 2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "NOR": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "NPL": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (3 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "NRU": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (3 points)",
+        "internet_penetration: gap between 2017 and 2019"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "NZL": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "OED": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "OMN": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "OSS": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PAK": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PAN": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]",
+        "forex_reserves: relative jump 180.82% from 2019 to 2020"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2020, 2022, 2025]",
+        "gini: gap between 2019 and 2021",
+        "gini: gap between 2021 and 2023"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PER": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2022, 2023, 2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PHL": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (3 points)",
+        "gini: gap between 2018 and 2021",
+        "gini: gap between 2021 and 2023"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PLW": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (4 points)"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PNG": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (7 points)",
+        "internet_penetration: gap between 2017 and 2019"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "POL": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PRE": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PRI": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (6 points)",
+        "internet_penetration: gap between 2019 and 2021"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PRK": {
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PRT": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PRY": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PSE": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2016 and 2023"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "unemployment": [
+        "unemployment: sparse series (7 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PSS": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PST": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "PYF": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (2 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "QAT": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]",
+        "forex_reserves: relative jump 102.28% from 2017 to 2018"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)",
+        "population: relative jump 10.35% from 2020 to 2021"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ROU": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "RUS": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "RWA": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2016 and 2023"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SAS": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (3 points)"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SAU": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SDN": {
+      "forex_reserves": [
+        "forex_reserves: sparse series (2 points)"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (7 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (5 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "unemployment": [
+        "unemployment: sparse series (7 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SEN": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2018 and 2021"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SGP": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SLB": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2021, 2023, 2024, 2025]",
+        "debt_to_gdp: gap between 2020 and 2022"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SLE": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SLV": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2020, 2024, 2025]",
+        "gini: gap between 2019 and 2021"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SMR": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (6 points)",
+        "internet_penetration: gap between 2017 and 2019"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SOM": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (3 points)",
+        "debt_to_gdp: gap between 2022 and 2024"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (4 points)",
+        "internet_penetration: gap between 2017 and 2020",
+        "internet_penetration: gap between 2020 and 2022"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SRB": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SSA": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SSD": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]",
+        "forex_reserves: relative jump 939.34% from 2018 to 2019"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (5 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "unemployment": [
+        "unemployment: missing years [2024, 2025]"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SSF": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SST": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: absolute jump -72.50 from 2024 to 2025"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "STP": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SUR": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (7 points)",
+        "inflation_rate: gap between 2017 and 2020"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SVK": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SVN": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SWE": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SWZ": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2022, 2023, 2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (4 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SXM": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (2 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SYC": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)",
+        "population: relative jump 20.77% from 2021 to 2022"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "SYR": {
+      "gdp_nominal": [
+        "gdp_nominal: sparse series (7 points)",
+        "gdp_nominal: relative jump 64.58% from 2021 to 2022"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (4 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (4 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TCA": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TCD": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]",
+        "forex_reserves: relative jump 1622.99% from 2017 to 2018",
+        "forex_reserves: relative jump 109.84% from 2018 to 2019",
+        "forex_reserves: relative jump 378.86% from 2021 to 2022"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2018 and 2022"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TEA": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TEC": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TGO": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2018 and 2021"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "THA": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2017, 2025]",
+        "debt_to_gdp: gap between 2016 and 2018"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TJK": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]",
+        "forex_reserves: relative jump 100.38% from 2016 to 2017"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2016, 2017, 2018, 2019, 2020, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (1 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (6 points)",
+        "internet_penetration: gap between 2017 and 2020"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TKM": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (2 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TLA": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (5 points)"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TLS": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]",
+        "gdp_nominal: relative jump 67.62% from 2020 to 2021"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TMN": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TON": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (5 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2024, 2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (5 points)",
+        "internet_penetration: gap between 2017 and 2021"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TSA": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (3 points)"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TSS": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TTO": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TUN": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TUR": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TUV": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2024, 2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "TZA": {
+      "forex_reserves": [
+        "forex_reserves: sparse series (3 points)"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "UGA": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2016, 2017, 2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: sparse series (3 points)"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2016 and 2019"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (6 points)",
+        "internet_penetration: gap between 2016 and 2020"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "UKR": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (5 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2021, 2022, 2023, 2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)",
+        "population: relative jump 8.08% from 2022 to 2023"
+      ],
+      "unemployment": [
+        "unemployment: sparse series (6 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "URY": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "USA": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2024, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "UZB": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2016, 2017, 2018, 2019, 2020, 2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "VCT": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "VEN": {
+      "forex_reserves": [
+        "forex_reserves: sparse series (2 points)"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (1 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (2 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "VGB": {
+      "internet_penetration": [
+        "internet_penetration: sparse series (2 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "VIR": {
+      "gdp_nominal": [
+        "gdp_nominal: sparse series (7 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (2 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "VNM": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2017, 2019, 2021, 2023, 2024, 2025]",
+        "gini: gap between 2016 and 2018",
+        "gini: gap between 2018 and 2020",
+        "gini: gap between 2020 and 2022"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "VUT": {
+      "debt_to_gdp": [
+        "debt_to_gdp: sparse series (3 points)"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2024, 2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "WLD": {
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "WSM": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "XKX": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: missing years [2023, 2024, 2025]",
+        "gini: absolute jump 17.50 from 2016 to 2017",
+        "gini: absolute jump 17.20 from 2019 to 2020",
+        "gini: absolute jump -11.10 from 2021 to 2022"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (2 points)"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "YEM": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2023, 2024, 2025]",
+        "forex_reserves: relative jump 224.06% from 2017 to 2018"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: sparse series (3 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: sparse series (3 points)",
+        "internet_penetration: gap between 2017 and 2020"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ZAF": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "military_spending_abs": [
+        "military_spending_abs: missing years [2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ZMB": {
+      "debt_to_gdp": [
+        "debt_to_gdp: missing years [2022, 2023, 2024, 2025]"
+      ],
+      "forex_reserves": [
+        "forex_reserves: missing years [2024, 2025]",
+        "forex_reserves: relative jump 128.83% from 2020 to 2021"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]"
+      ],
+      "gini": [
+        "gini: sparse series (1 points)"
+      ],
+      "inflation_rate": [
+        "inflation_rate: missing years [2025]"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    },
+    "ZWE": {
+      "forex_reserves": [
+        "forex_reserves: missing years [2025]",
+        "forex_reserves: relative jump 2410.94% from 2020 to 2021",
+        "forex_reserves: relative jump 319.78% from 2023 to 2024"
+      ],
+      "gdp_nominal": [
+        "gdp_nominal: missing years [2025]",
+        "gdp_nominal: relative jump 148.24% from 2016 to 2017"
+      ],
+      "gini": [
+        "gini: sparse series (2 points)",
+        "gini: gap between 2017 and 2019"
+      ],
+      "inflation_rate": [
+        "inflation_rate: sparse series (7 points)"
+      ],
+      "internet_penetration": [
+        "internet_penetration: missing years [2024, 2025]"
+      ],
+      "population": [
+        "population: sparse series (9 points)"
+      ],
+      "urbanization": [
+        "urbanization: missing years [2025]"
+      ]
+    }
+  },
+  "neo4j": {
+    "baseline_complete": 19,
+    "state_at_count": 2105,
+    "tick_count": 120
+  }
+}

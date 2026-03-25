@@ -203,8 +203,7 @@ def load_to_neo4j(payload: dict) -> tuple[int, int, str]:
                         agent: "Codex",
                         method: "api_import",
                         record_count: $record_count,
-                        notes: "World Bank historical indicators 2016-2025 for demographics and "
-                               "macroeconomic data",
+                        notes: "World Bank historical indicators 2016-2025 for demographics and macroeconomic data",
                         confidence: "high",
                         requires_replacement: false
                     })

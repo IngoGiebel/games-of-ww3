@@ -33,7 +33,7 @@ def compute_cagr(series: dict[int | str, float | int | None]) -> float | None:
         return None
     start_year, start_value = points[0]
     end_year, end_value = points[-1]
-    if start_value <= 0 or end_year <= start_year:
+    if start_value <= 0 or end_value <= 0 or end_year <= start_year:
         return None
     return round((((end_value / start_value) ** (1 / (end_year - start_year))) - 1) * 100, 4)
 

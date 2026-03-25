@@ -1,0 +1,555 @@
+{
+  "estimated": true,
+  "generated_at": "2026-03-25T11:25:29.326210+00:00",
+  "nations": {
+    "ARG": {
+      "military_spending_abs": {
+        "latest_value": 5200000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 1.7068,
+          "end_year": 2024,
+          "latest_value": 5200000000.0,
+          "max_abs_yoy_change_pct": 30.3002,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 81185096.6902,
+          "volatility_pct": 17.7298
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 4541549112.97,
+          "2017": 5242870861.93,
+          "2018": 4275080077.48,
+          "2019": 3647321977.28,
+          "2020": 3142166649.36,
+          "2021": 3963455765.55,
+          "2022": 5164388995.66,
+          "2023": 5290387738.15,
+          "2024": 5200000000.0
+        }
+      }
+    },
+    "AUS": {
+      "military_spending_abs": {
+        "latest_value": 35700000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 4.7557,
+          "end_year": 2024,
+          "latest_value": 35700000000.0,
+          "max_abs_yoy_change_pct": 17.046,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 1381537948.8333,
+          "volatility_pct": 6.6935
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 24617611541.51,
+          "2017": 27041653767.73,
+          "2018": 29119306753.12,
+          "2019": 28412318111.58,
+          "2020": 27091350845.32,
+          "2021": 31709352635.15,
+          "2022": 34452549516.11,
+          "2023": 35241388116.56,
+          "2024": 35700000000.0
+        }
+      }
+    },
+    "BRA": {
+      "military_spending_abs": {
+        "latest_value": 32200000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 2.488,
+          "end_year": 2024,
+          "latest_value": 32200000000.0,
+          "max_abs_yoy_change_pct": 21.2023,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 444567294.4305,
+          "volatility_pct": 12.4909
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 26452900763.02,
+          "2017": 30398259167.97,
+          "2018": 28238930398.91,
+          "2019": 27595974604.68,
+          "2020": 21744983096.06,
+          "2021": 24610813223.86,
+          "2022": 28754380497.36,
+          "2023": 32278226468.58,
+          "2024": 32200000000.0
+        }
+      }
+    },
+    "CAN": {
+      "military_spending_abs": {
+        "latest_value": 29900000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 4.9189,
+          "end_year": 2024,
+          "latest_value": 29900000000.0,
+          "max_abs_yoy_change_pct": 22.1476,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 1253499600.1122,
+          "volatility_pct": 7.636
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 20362940312.22,
+          "2017": 21979066387.89,
+          "2018": 22992733160.66,
+          "2019": 23237888758.51,
+          "2020": 22064610831.55,
+          "2021": 26951387078.35,
+          "2022": 29190682965.51,
+          "2023": 28963179496.58,
+          "2024": 29900000000.0
+        }
+      }
+    },
+    "CHN": {
+      "military_spending_abs": {
+        "latest_value": 296000000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 6.3477,
+          "end_year": 2024,
+          "latest_value": 296000000000.0,
+          "max_abs_yoy_change_pct": 21.3737,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 15352092152.3475,
+          "volatility_pct": 6.9868
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 180912224602.66,
+          "2017": 197991701503.34,
+          "2018": 223419902067.42,
+          "2019": 229932496767.13,
+          "2020": 236821660625.23,
+          "2021": 287439148388.86,
+          "2022": 289256262296.8,
+          "2023": 288523386660.34,
+          "2024": 296000000000.0
+        }
+      }
+    },
+    "DEU": {
+      "military_spending_abs": {
+        "latest_value": 98700000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 3.5785,
+          "end_year": 2024,
+          "latest_value": 98700000000.0,
+          "max_abs_yoy_change_pct": 10.5002,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 2693569097.8777,
+          "volatility_pct": 5.0169
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 74500921592.66,
+          "2017": 79315518651.17,
+          "2018": 85425963035.36,
+          "2019": 83413487127.13,
+          "2020": 83023880246.43,
+          "2021": 91741516289.29,
+          "2022": 88492722221.21,
+          "2023": 96100946887.65,
+          "2024": 98700000000.0
+        }
+      }
+    },
+    "FRA": {
+      "military_spending_abs": {
+        "latest_value": 58900000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 3.127,
+          "end_year": 2024,
+          "latest_value": 58900000000.0,
+          "max_abs_yoy_change_pct": 12.0286,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 1376734701.2955,
+          "volatility_pct": 5.9238
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 46040072922.25,
+          "2017": 48247781231.82,
+          "2018": 51839208892.93,
+          "2019": 50743695488.62,
+          "2020": 49348418331.46,
+          "2021": 55284327333.55,
+          "2022": 52085432623.63,
+          "2023": 56958212718.62,
+          "2024": 58900000000.0
+        }
+      }
+    },
+    "GBR": {
+      "military_spending_abs": {
+        "latest_value": 80500000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 3.9352,
+          "end_year": 2024,
+          "latest_value": 80500000000.0,
+          "max_abs_yoy_change_pct": 17.2745,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 2536702147.2765,
+          "volatility_pct": 6.7084
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 59114503233.38,
+          "2017": 58946576875.93,
+          "2018": 63268764002.9,
+          "2019": 62803197542.62,
+          "2020": 59490003577.63,
+          "2021": 69766605889.09,
+          "2022": 69475820515.45,
+          "2023": 74707450342.11,
+          "2024": 80500000000.0
+        }
+      }
+    },
+    "IDN": {
+      "military_spending_abs": {
+        "latest_value": 11200000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 5.1847,
+          "end_year": 2024,
+          "latest_value": 11200000000.0,
+          "max_abs_yoy_change_pct": 12.0348,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 473974176.708,
+          "volatility_pct": 5.3911
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 7474773145.65,
+          "2017": 8146479363.09,
+          "2018": 8360266668.03,
+          "2019": 8976522006.52,
+          "2020": 8494888923.66,
+          "2021": 9517229539.26,
+          "2022": 10580772194.31,
+          "2023": 10998420896.35,
+          "2024": 11200000000.0
+        }
+      }
+    },
+    "IND": {
+      "military_spending_abs": {
+        "latest_value": 98400000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 6.8877,
+          "end_year": 2024,
+          "latest_value": 98400000000.0,
+          "max_abs_yoy_change_pct": 18.4092,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 4630482957.3022,
+          "volatility_pct": 7.0584
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 57753012223.96,
+          "2017": 66729489858.17,
+          "2018": 68024464217.24,
+          "2019": 71363528432.72,
+          "2020": 67317825329.36,
+          "2021": 79710505171.3,
+          "2022": 84211276517.9,
+          "2023": 91569631522.86,
+          "2024": 98400000000.0
+        }
+      }
+    },
+    "ITA": {
+      "military_spending_abs": {
+        "latest_value": 36800000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 2.9476,
+          "end_year": 2024,
+          "latest_value": 36800000000.0,
+          "max_abs_yoy_change_pct": 14.2453,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 819660704.9118,
+          "volatility_pct": 6.6363
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 29168750106.29,
+          "2017": 30461090981.4,
+          "2018": 32450606533.06,
+          "2019": 31216711729.33,
+          "2020": 29483604206.4,
+          "2021": 33683636330.47,
+          "2022": 32522208177.26,
+          "2023": 35809262591.51,
+          "2024": 36800000000.0
+        }
+      }
+    },
+    "JPN": {
+      "military_spending_abs": {
+        "latest_value": 50400000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": -2.6761,
+          "end_year": 2024,
+          "latest_value": 50400000000.0,
+          "max_abs_yoy_change_pct": 15.413,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": -1604462665.7032,
+          "volatility_pct": 5.224
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 62614337940.58,
+          "2017": 61702839460.02,
+          "2018": 63079887664.15,
+          "2019": 64044852715.23,
+          "2020": 63244906170.86,
+          "2021": 63058204357.7,
+          "2022": 53339031509.67,
+          "2023": 52722156955.56,
+          "2024": 50400000000.0
+        }
+      }
+    },
+    "KOR": {
+      "military_spending_abs": {
+        "latest_value": 50400000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 2.1724,
+          "end_year": 2024,
+          "latest_value": 50400000000.0,
+          "max_abs_yoy_change_pct": 11.3667,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 774993525.605,
+          "volatility_pct": 5.8967
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 42438779211.49,
+          "2017": 45960572912.85,
+          "2018": 49025728558.97,
+          "2019": 47058366614.91,
+          "2020": 46870904641.67,
+          "2021": 52198581062.66,
+          "2022": 48356868532.71,
+          "2023": 49577984241.86,
+          "2024": 50400000000.0
+        }
+      }
+    },
+    "MEX": {
+      "military_spending_abs": {
+        "latest_value": 12600000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 6.6126,
+          "end_year": 2024,
+          "latest_value": 12600000000.0,
+          "max_abs_yoy_change_pct": 22.5902,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 591984848.913,
+          "volatility_pct": 10.2507
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 7549235961.85,
+          "2017": 8081969664.68,
+          "2018": 8527082254.94,
+          "2019": 8851563520.72,
+          "2020": 7609177817.71,
+          "2021": 8936157368.88,
+          "2022": 9956754943.71,
+          "2023": 12206001516.84,
+          "2024": 12600000000.0
+        }
+      }
+    },
+    "RUS": {
+      "military_spending_abs": {
+        "latest_value": 136500000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 6.8781,
+          "end_year": 2024,
+          "latest_value": 136500000000.0,
+          "max_abs_yoy_change_pct": 25.2804,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 6786537571.8985,
+          "volatility_pct": 13.675
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 80172263406.64,
+          "2017": 98847489765.64,
+          "2018": 104067371088.09,
+          "2019": 106314468259.47,
+          "2020": 93753566370.99,
+          "2021": 114858714929.48,
+          "2022": 143895437549.68,
+          "2023": 130074465881.4,
+          "2024": 136500000000.0
+        }
+      }
+    },
+    "SAU": {
+      "military_spending_abs": {
+        "latest_value": 82500000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 7.6142,
+          "end_year": 2024,
+          "latest_value": 82500000000.0,
+          "max_abs_yoy_change_pct": 27.9588,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 4916230531.609,
+          "volatility_pct": 13.7734
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 45866549501.24,
+          "2017": 49325885134.15,
+          "2018": 58994457620.95,
+          "2019": 59149191689.79,
+          "2020": 51101582787.14,
+          "2021": 65388967228.6,
+          "2022": 82451468156.16,
+          "2023": 81087962898.24,
+          "2024": 82500000000.0
+        }
+      }
+    },
+    "TUR": {
+      "military_spending_abs": {
+        "latest_value": 26000000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 5.7223,
+          "end_year": 2024,
+          "latest_value": 26000000000.0,
+          "max_abs_yoy_change_pct": 23.2314,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 996319098.1487,
+          "volatility_pct": 11.2347
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 16658724510.48,
+          "2017": 16525895652.43,
+          "2018": 15081247271.99,
+          "2019": 14842049129.92,
+          "2020": 14034288019.48,
+          "2021": 16068003425.6,
+          "2022": 17716219047.13,
+          "2023": 21831944347.39,
+          "2024": 26000000000.0
+        }
+      }
+    },
+    "USA": {
+      "military_spending_abs": {
+        "latest_value": 980000000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 5.5275,
+          "end_year": 2024,
+          "latest_value": 980000000000.0,
+          "max_abs_yoy_change_pct": 10.7054,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 43030835653.9905,
+          "volatility_pct": 3.527
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 637238237986.0,
+          "2017": 663901044933.16,
+          "2018": 699886155933.84,
+          "2019": 728788166255.92,
+          "2020": 717863574584.89,
+          "2021": 794713707777.44,
+          "2022": 872762346245.51,
+          "2023": 930276101279.35,
+          "2024": 980000000000.0
+        }
+      }
+    },
+    "ZAF": {
+      "military_spending_abs": {
+        "latest_value": 3800000000.0,
+        "latest_year": 2024,
+        "metrics": {
+          "cagr_pct": 2.7221,
+          "end_year": 2024,
+          "latest_value": 3800000000.0,
+          "max_abs_yoy_change_pct": 24.2656,
+          "points": 9,
+          "start_year": 2016,
+          "trend_slope": 54554429.1803,
+          "volatility_pct": 11.8427
+        },
+        "source_field": "estimated_from_current_military_share",
+        "timeseries": {
+          "2016": 3065287967.56,
+          "2017": 3613420338.18,
+          "2018": 3838987790.04,
+          "2019": 3688078197.29,
+          "2020": 3201594674.64,
+          "2021": 3978481314.98,
+          "2022": 3861109997.48,
+          "2023": 3613343701.01,
+          "2024": 3800000000.0
+        }
+      }
+    }
+  },
+  "notes": "Deterministic fallback estimate from current military burden and GDP history",
+  "properties": [
+    "military_spending_abs"
+  ],
+  "source": "sipri-milex",
+  "years": [
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ]
+}

@@ -106,8 +106,7 @@ def load_to_neo4j(payload: dict) -> tuple[int, str]:
                         agent: "Codex",
                         method: "derived",
                         record_count: $record_count,
-                        notes: "Derived historical metrics: CAGR, trend slope, "
-                               "volatility, max yearly jump",
+                        notes: "Derived historical metrics: CAGR, trend slope, volatility, max yearly jump",
                         confidence: "high",
                         requires_replacement: false
                     })
