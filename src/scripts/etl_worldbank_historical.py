@@ -1,16 +1,23 @@
 #!/usr/bin/env python3
-"""ETL: Historical V-Dem governance indices for Sprint 2.
+"""ETL: Historical World Bank indicators for Sprint 2.
 
-Expected input:
-- preferred: ``VDEM_CSV`` or ``data/timeseries/vdem_historical.csv``
-- fallback: ``VDEM_ZIP`` pointing to a downloaded V-Dem archive that contains
-  a CSV with the required columns
+Loads 2016-2025 yearly time series for:
+- population
+- urbanization
+- internet penetration
+- inflation
+- unemployment
+- gini
+- debt to GDP
+- forex reserves
 
-The script writes ``data/timeseries/vdem_historical.json`` and, when Neo4j is
-reachable, updates both Nation latest properties and yearly January
-``STATE_AT`` snapshots.
+The script writes a reproducible JSON cache to ``data/timeseries/`` and, when
+Neo4j is reachable, merges yearly properties onto existing January Tick nodes
+via ``STATE_AT`` relationships while also refreshing the latest Nation values.
 
-Task: task-P4-01-vdem
+Tasks:
+- task-P2-02-wb-demographics
+- task-P2-03-wb-macro
 """
 
 from __future__ import annotations
@@ -18,106 +25,107 @@ from __future__ import annotations
 import json
 import logging
 import os
-import zipfile
+import time
 from datetime import UTC, datetime
 from pathlib import Path
 
-import pandas as pd
+import requests
 from neo4j import GraphDatabase
 
 from gww3.data.historical_series import YEARS, compute_metrics, normalize_series
+from gww3.data.normalization import normalize_value
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [ETL-VDEM-HIST] %(message)s")
-log = logging.getLogger("etl_vdem_historical")
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [ETL-WB-HIST] %(message)s")
+log = logging.getLogger("etl_worldbank_historical")
 
 NEO4J_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
 NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "gww3-dev-2026")
 
-CSV_PATH = Path(os.getenv("VDEM_CSV", "data/timeseries/vdem_historical.csv"))
-ZIP_PATH = Path(os.getenv("VDEM_ZIP", "data/timeseries/vdem_historical.zip"))
-OUTPUT_PATH = Path("data/timeseries/vdem_historical.json")
+WB_API = os.getenv("WORLD_BANK_API", "https://api.worldbank.org/v2")
+DATE_RANGE = f"{YEARS[0]}:{YEARS[-1]}"
+PER_PAGE = 500
 
-REQUIRED_COLUMNS = {
-    "country_text_id",
-    "country_id",
-    "year",
-    "v2x_libdem",
-    "v2x_polyarchy",
-    "v2x_corr",
-    "v2x_freexp_altinf",
+INDICATORS = {
+    "SP.POP.TOTL": "population",
+    "SP.URB.TOTL.IN.ZS": "urbanization",
+    "IT.NET.USER.ZS": "internet_penetration",
+    "FP.CPI.TOTL.ZG": "inflation_rate",
+    "SL.UEM.TOTL.ZS": "unemployment",
+    "SI.POV.GINI": "gini",
+    "GC.DOD.TOTL.GD.ZS": "debt_to_gdp",
+    "FI.RES.TOTL.CD": "forex_reserves",
 }
 
-
-def load_crosswalk() -> dict[str, dict]:
-    with Path("data/id_crosswalk.json").open(encoding="utf-8") as handle:
-        return json.load(handle)
+OUTPUT_PATH = Path("data/timeseries/worldbank_historical.json")
 
 
-def load_vdem_frame() -> pd.DataFrame:
-    if CSV_PATH.exists():
-        return pd.read_csv(CSV_PATH, low_memory=False)
+def fetch_indicator(indicator_code: str) -> list[dict]:
+    records: list[dict] = []
+    page = 1
+    while True:
+        payload = None
+        for attempt in range(3):
+            try:
+                response = requests.get(
+                    f"{WB_API}/country/all/indicator/{indicator_code}",
+                    params={
+                        "format": "json",
+                        "date": DATE_RANGE,
+                        "per_page": PER_PAGE,
+                        "page": page,
+                    },
+                    timeout=60,
+                )
+                response.raise_for_status()
+                payload = response.json()
+                break
+            except (requests.RequestException, json.JSONDecodeError) as exc:
+                log.warning(
+                    "%s page %s attempt %s failed: %s",
+                    indicator_code,
+                    page,
+                    attempt + 1,
+                    exc,
+                )
+                time.sleep(2 * (attempt + 1))
+        if payload is None:
+            raise RuntimeError(f"failed to fetch World Bank indicator {indicator_code}")
 
-    if ZIP_PATH.exists():
-        with zipfile.ZipFile(ZIP_PATH) as archive:
-            csv_members = [name for name in archive.namelist() if name.lower().endswith(".csv")]
-            for member in csv_members:
-                with archive.open(member) as handle:
-                    sample = pd.read_csv(handle, nrows=5)
-                if REQUIRED_COLUMNS.issubset(set(sample.columns)):
-                    with archive.open(member) as handle:
-                        return pd.read_csv(handle, low_memory=False)
-        raise RuntimeError(f"no CSV with required V-Dem columns found in {ZIP_PATH}")
-
-    raise RuntimeError("missing V-Dem input file; set VDEM_CSV or VDEM_ZIP")
+        if len(payload) < 2 or not payload[1]:
+            break
+        records.extend(payload[1])
+        total_pages = payload[0].get("pages", 1)
+        log.info("%s page %s/%s -> %s records", indicator_code, page, total_pages, len(payload[1]))
+        if page >= total_pages:
+            break
+        page += 1
+        time.sleep(0.25)
+    return records
 
 
-def resolve_iso3(row: pd.Series, crosswalk: dict[str, dict]) -> str | None:
-    text_id = str(row.get("country_text_id", "")).strip().upper()
-    if len(text_id) == 3 and text_id in crosswalk:
-        return text_id
-
-    country_id = row.get("country_id")
-    for iso3, payload in crosswalk.items():
-        if payload.get("vdem_id") == country_id:
-            return iso3
-    return None
-
-
-def to_score(raw_value: float | int | None) -> int | None:
-    if pd.isna(raw_value):
-        return None
-    return round(float(raw_value) * 100)
-
-
-def transform_frame(frame: pd.DataFrame, crosswalk: dict[str, dict]) -> dict:
+def build_payload() -> dict:
     nations: dict[str, dict[str, dict[str, object]]] = {}
-    subset = frame[frame["year"].isin(YEARS)].copy()
 
-    for _, row in subset.iterrows():
-        iso3 = resolve_iso3(row, crosswalk)
-        if iso3 is None:
-            continue
-        year = int(row["year"])
-
-        mapped_values = {
-            "stability_index": to_score(row["v2x_libdem"]),
-            "freedom_house_score": to_score(row["v2x_polyarchy"]),
-            "corruption_index": (
-                None
-                if pd.isna(row["v2x_corr"])
-                else round((1 - float(row["v2x_corr"])) * 100)
-            ),
-            "press_freedom": to_score(row["v2x_freexp_altinf"]),
-        }
-        for property_name, value in mapped_values.items():
-            if value is None:
+    for indicator_code, property_name in INDICATORS.items():
+        raw_records = fetch_indicator(indicator_code)
+        for record in raw_records:
+            iso3 = record.get("countryiso3code", "")
+            if len(iso3) != 3:
                 continue
+            raw_value = record.get("value")
+            if raw_value is None:
+                continue
+            year = int(record["date"])
+            if year not in YEARS:
+                continue
+
+            normalized = normalize_value(property_name, raw_value)
             nations.setdefault(iso3, {}).setdefault(
                 property_name,
-                {"indicator": property_name, "timeseries": {}},
+                {"indicator": indicator_code, "timeseries": {}},
             )
-            nations[iso3][property_name]["timeseries"][str(year)] = value
+            nations[iso3][property_name]["timeseries"][str(year)] = normalized
 
     for nation_payload in nations.values():
         for property_payload in nation_payload.values():
@@ -127,23 +135,12 @@ def transform_frame(frame: pd.DataFrame, crosswalk: dict[str, dict]) -> dict:
             property_payload["latest_year"] = property_payload["metrics"]["end_year"]
             property_payload["latest_value"] = property_payload["metrics"]["latest_value"]
 
-    return nations
-
-
-def build_payload() -> dict:
-    frame = load_vdem_frame()
-    crosswalk = load_crosswalk()
-    nations = transform_frame(frame, crosswalk)
     return {
-        "source": "vdem",
+        "source": "worldbank-wdi",
         "generated_at": datetime.now(UTC).isoformat(),
         "years": list(YEARS),
-        "properties": [
-            "stability_index",
-            "freedom_house_score",
-            "corruption_index",
-            "press_freedom",
-        ],
+        "properties": list(INDICATORS.values()),
+        "indicators": INDICATORS,
         "nations": dict(sorted(nations.items())),
     }
 
@@ -158,6 +155,7 @@ def save_payload(payload: dict) -> None:
 def build_neo4j_records(payload: dict) -> tuple[list[dict], list[dict]]:
     latest_records: list[dict] = []
     state_at_records: list[dict] = []
+
     for iso3, properties in payload["nations"].items():
         latest_props = {}
         for property_name, property_payload in properties.items():
@@ -165,6 +163,7 @@ def build_neo4j_records(payload: dict) -> tuple[list[dict], list[dict]]:
             latest_year = property_payload.get("latest_year")
             if latest_value is not None:
                 latest_props[property_name] = latest_value
+            if latest_year is not None:
                 latest_props[f"{property_name}_year"] = latest_year
             for year_str, value in property_payload["timeseries"].items():
                 year = int(year_str)
@@ -184,12 +183,13 @@ def build_neo4j_records(payload: dict) -> tuple[list[dict], list[dict]]:
                     "prop_names": list(latest_props.keys()),
                 }
             )
+
     return latest_records, state_at_records
 
 
 def load_to_neo4j(payload: dict) -> tuple[int, int, str]:
     latest_records, state_at_records = build_neo4j_records(payload)
-    batch_id = f"import-{datetime.now(UTC).strftime('%Y%m%dT%H%M%S')}-4.1"
+    batch_id = f"import-{datetime.now(UTC).strftime('%Y%m%dT%H%M%S')}-2.1b-2.1c"
     driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 
     try:
@@ -201,20 +201,22 @@ def load_to_neo4j(payload: dict) -> tuple[int, int, str]:
                         id: $batch_id,
                         timestamp: datetime(),
                         agent: "Codex",
-                        method: "csv_import",
+                        method: "api_import",
                         record_count: $record_count,
-                        notes: "V-Dem historical governance indices 2016-2025",
+                        notes: "World Bank historical indicators 2016-2025 for demographics and "
+                               "macroeconomic data",
                         confidence: "high",
                         requires_replacement: false
                     })
                     WITH ib
-                    MATCH (ds:DataSource {id: "vdem"})
+                    MATCH (ds:DataSource {id: "worldbank-wdi"})
                     MERGE (ib)-[:FROM_SOURCE]->(ds)
                     """,
                     batch_id=batch_id,
                     record_count=len(latest_records),
                 )
-                updated = tx.run(
+
+                latest_result = tx.run(
                     """
                     UNWIND $records AS rec
                     MATCH (n:Nation {iso3: rec.iso3})
@@ -227,7 +229,9 @@ def load_to_neo4j(payload: dict) -> tuple[int, int, str]:
                     """,
                     records=latest_records,
                     batch_id=batch_id,
-                ).single()["updated"]
+                )
+                updated_nations = latest_result.single()["updated"]
+
                 tx.run(
                     """
                     UNWIND $records AS rec
@@ -238,18 +242,19 @@ def load_to_neo4j(payload: dict) -> tuple[int, int, str]:
                     """,
                     records=state_at_records,
                 )
+
                 tx.run(
                     """
-                    MATCH (t:Task {id: "task-P4-01-vdem"})
+                    MATCH (t:Task)
+                    WHERE t.id IN ["task-P2-02-wb-demographics", "task-P2-03-wb-macro"]
                     SET t.status = "completed",
                         t.completed_at = datetime(),
                         t.assigned_to = "Codex",
-                        t.result_summary = "Historical V-Dem governance indices loaded "
-                                           "for 2016-2025"
+                        t.result_summary = "Historical World Bank indicators loaded for 2016-2025"
                     """
                 )
                 tx.commit()
-        return updated, len(state_at_records), batch_id
+        return updated_nations, len(state_at_records), batch_id
     finally:
         driver.close()
 
