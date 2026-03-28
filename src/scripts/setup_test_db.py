@@ -31,11 +31,9 @@ TEST_DB = "gww3test"
 def setup(driver):
     """Create the test graph."""
     with driver.session() as s:
-        # We use the default database (Community Edition).
-        # The test data coexists with production data — test scripts should use
-        # specific iso3 codes (USA, CHN, RUS, DEU, IRN) that already exist.
-        # We just ensure the test relationships exist.
-        log.info("Setting up test data in default database")
+        # Clear and rebuild test data
+        s.run("MATCH (n) DETACH DELETE n")
+        log.info("Cleared test database")
 
         # ── Nations ──
         nations = [
@@ -157,7 +155,6 @@ def setup(driver):
 
 def main():
     driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
-    # Community Edition: use default database
     setup(driver)
     driver.close()
     log.info("Test database setup complete!")
