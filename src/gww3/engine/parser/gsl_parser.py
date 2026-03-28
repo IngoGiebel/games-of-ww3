@@ -12,11 +12,16 @@ from __future__ import annotations
 from pathlib import Path
 
 from lark import Lark
-from lark.indenter import PythonIndenter
+from lark.indenter import Indenter
 
 
-class GSLIndenter(PythonIndenter):
-    """Indentation handler for GSL (4-space indent, like Python)."""
+class GSLIndenter(Indenter):
+    """Indentation handler for GSL (4-space indent).
+
+    Uses Lark's Indenter base class (not PythonIndenter) because
+    GSL's _NL token includes trailing whitespace, which the Indenter
+    uses to determine indentation level.
+    """
     NL_type = "_NL"
     OPEN_PAREN_types = ["LPAR", "LSQB", "LBRACE"]
     CLOSE_PAREN_types = ["RPAR", "RSQB", "RBRACE"]
@@ -34,7 +39,7 @@ def _build_parser() -> Lark:
         grammar = f.read()
     return Lark(
         grammar,
-        parser="earley",
+        parser="lalr",
         postlex=GSLIndenter(),
         propagate_positions=True,
         maybe_placeholders=False,

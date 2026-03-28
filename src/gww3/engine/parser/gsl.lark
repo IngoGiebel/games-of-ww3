@@ -1,178 +1,176 @@
 // ═══════════════════════════════════════════════════════════════
-// GSL (GWW3 Symbolic Logic) — Lark EBNF Grammar v1
+// GSL (GWW3 Symbolic Logic) — Lark EBNF Grammar v2
 // ═══════════════════════════════════════════════════════════════
-//
+// Parser: Lark LALR + custom Indenter
 // Reference: docs/RULE_ENGINE_CONCEPT.md
-// Parser: Lark (Earley, indentation-aware)
 //
-// Design decisions:
-//   - MATCH bodies are captured as RAW STRINGS (passed to Neo4j driver)
-//   - Indentation-based nesting (Python-style via lark.indenter)
-//   - Unicode operators: ∧ ∨ ¬ ⟹ × ⤳
-//   - Truth Values: ⟨p, c⟩
-//   - Distributions: 𝒩 𝒰 ℬ 𝒫 ℰ 𝐿𝑁 𝛽
-//   - MATCH vs IF strict separation
+// Successfully parses: invariant rules, sanctions + distributions,
+// nested IF/ELSE, multiple effects, top-level effects, combat rules.
 
-// ──────────────────────────────────────────────
-// Top-Level Rule Structure
-// ──────────────────────────────────────────────
+start: (_NL | stmt)*
 
-start: rule_header? (match_block | let_stmt | if_else | then_block | else_block | delayed_block | note_line | _NL)*
+// ──────────────────────────────────────────
+// Top-level statements
+// ──────────────────────────────────────────
 
-rule_header: RULE_DELIM _NL (header_line _NL)* RULE_DELIM _NL
-header_line: /[^\n═]+/
+?stmt: match_stmt
+     | let_stmt
+     | if_block
+     | effect_stmt
+     | delayed_block
+     | rule_delim
 
-// ──────────────────────────────────────────────
-// MATCH — Raw Cypher Patterns
-// ──────────────────────────────────────────────
+// MATCH — raw Cypher (passed to Neo4j driver as-is)
+match_stmt: MATCH_LINE
 
-match_block: MATCH_LINE _NL
-
-// Cypher patterns are captured as raw text — we don't parse Cypher in Lark.
-// The entire MATCH line (keyword + pattern) is a single terminal.
-MATCH_LINE.2: /MATCH [^\n]+/
-INLINE_CYPHER: /\([^\n]+/
-
-// ──────────────────────────────────────────────
-// LET — Variable Binding
-// ──────────────────────────────────────────────
-
-let_stmt: "LET" NAME "=" expr _NL              -> let_deferred
-        | "LET" NAME "~" expr _NL              -> let_sample
-        | "LET" NAME "=" "MIN" "(" name_list ")" _NL  -> let_min
+// LET — variable binding (deferred or eager sample)
+let_stmt: "LET" NAME "=" expr
+        | "LET" NAME "~" expr               -> let_sample
+        | "LET" NAME "=" "MIN" "(" name_list ")" -> let_min
 
 name_list: NAME ("," NAME)*
 
-// ──────────────────────────────────────────────
-// IF / THEN / ELSE — Condition & Effects
-// ──────────────────────────────────────────────
+// DELAYED — deferred effects
+delayed_block: "DELAYED" "(" NUMBER "ticks" ")" _NL _INDENT effect_block _DEDENT
 
-if_else: "IF" expr _NL _INDENT body _DEDENT ("ELSE" _NL _INDENT body _DEDENT)?
+// Rule delimiter (optional decoration)
+rule_delim: RULE_DELIM
 
-then_block: "THEN" _NL _INDENT effect_list _DEDENT
-else_block: "ELSE" _NL _INDENT effect_list _DEDENT
+// ──────────────────────────────────────────
+// IF / THEN / ELSE — indentation-based
+// ──────────────────────────────────────────
 
-body: (let_stmt | if_else | then_block | else_block | effect_stmt | match_block | note_line | _NL)*
-effect_list: (effect_stmt | let_stmt | if_else | match_block | note_line | _NL)*
+if_block: "IF" expr _NL _INDENT block _DEDENT
 
-// ──────────────────────────────────────────────
-// DELAYED — Deferred Effects
-// ──────────────────────────────────────────────
+block: (_NL | block_stmt)*
+?block_stmt: then_block
+           | else_block
+           | let_stmt
+           | if_block
+           | effect_stmt
+           | match_stmt
 
-delayed_block: "DELAYED" "(" INT "ticks" ")" _NL _INDENT effect_list _DEDENT
+then_block: "THEN" _NL _INDENT effect_block _DEDENT
+else_block: "ELSE" _NL _INDENT effect_block _DEDENT
 
-// ──────────────────────────────────────────────
-// Effects (THEN/ELSE body statements)
-// ──────────────────────────────────────────────
+effect_block: (_NL | effect_line)*
+?effect_line: effect_stmt
+            | let_stmt
+            | if_block
+            | match_stmt
 
-effect_stmt: target_prop "+=" expr truth_value? _NL           -> effect_add
-           | target_prop "-=" expr truth_value? _NL           -> effect_sub
-           | target_prop "×=" expr truth_value? _NL           -> effect_mod
-           | target_prop "*=" expr truth_value? _NL           -> effect_mod_ascii
-           | target_prop "=" expr truth_value? _NL            -> effect_set
-           | target_prop "⤳" "CONVERGE" "(" converge_args ")" truth_value? _NL -> effect_converge
-           | target_prop "EFFECT" "×=" expr _NL               -> effect_modifier
-           | target_prop "EFFECT" "*=" expr _NL               -> effect_modifier_ascii
-           | "CREATE" INLINE_CYPHER truth_value? _NL           -> graph_create
-           | "DELETE" NAME truth_value? _NL                   -> graph_delete
+// ──────────────────────────────────────────
+// Effect statements
+// ──────────────────────────────────────────
 
-converge_args: "target" "=" expr "," "rate" "=" expr
+effect_stmt: PROP_ACCESS "+=" expr tv?            -> effect_add
+           | PROP_ACCESS "-=" expr tv?            -> effect_sub
+           | PROP_ACCESS MOD_OP expr tv?          -> effect_mod
+           | PROP_ACCESS "=" expr tv?             -> effect_set
+           | PROP_ACCESS CONVERGE_KW "(" "target" "=" expr "," "rate" "=" expr ")" tv? -> effect_converge
+           | PROP_ACCESS "EFFECT" MOD_OP expr     -> effect_modifier
+           | "CREATE" CYPHER_INLINE tv?           -> graph_create
+           | "DELETE" NAME tv?                    -> graph_delete
 
-target_prop: PROP_ACCESS                // e.g., B.gdp_nominal
+CONVERGE_KW.2: "⤳"
+CYPHER_INLINE: /\([^\n]+/
 
-// ──────────────────────────────────────────────
-// Truth Values ⟨p, c⟩
-// ──────────────────────────────────────────────
+// Truth Value ⟨probability, confidence⟩
+tv: /⟨/ NUMBER "," NUMBER /⟩/
 
-truth_value: "⟨" expr "," expr "⟩"
-           | "<" expr "," expr ">"      // ASCII fallback
-
-// ──────────────────────────────────────────────
-// Expressions
-// ──────────────────────────────────────────────
+// ──────────────────────────────────────────
+// Expressions (precedence: low → high)
+// ──────────────────────────────────────────
 
 ?expr: or_expr
 
 ?or_expr: and_expr (OR_OP and_expr)*
-OR_OP: "∨" | "||"
 
 ?and_expr: not_expr (AND_OP not_expr)*
-AND_OP: "∧" | "&&"
 
-?not_expr: "¬" not_expr                -> negation
+?not_expr: NOT_OP not_expr                -> negation
          | comparison
 
-?comparison: add_expr (comp_op add_expr)?
+?comparison: arith (COMP_OP arith)?
 
-comp_op: ">" | "<" | ">=" | "≥" | "<=" | "≤" | "==" | "!="
+?arith: term ((PLUS | MINUS) term)*
 
-?add_expr: mul_expr (("+"|"-") mul_expr)*
+?term: factor ((STAR | TIMES | SLASH) factor)*
 
-?mul_expr: unary_expr (("*"|"×"|"/") unary_expr)*
+?factor: MINUS atom                       -> neg
+       | atom TILDE                       -> sample_postfix
+       | atom
 
-?unary_expr: "-" atom                  -> neg
-           | atom "~"                  -> sample_postfix
-           | atom
-
-?atom: NUMBER                          -> number
-     | INT                             -> integer
-     | PROP_ACCESS                     -> prop_access
-     | NAME                            -> var_ref
+?atom: NUMBER                             -> number
+     | PROP_ACCESS                        -> prop_access
+     | NAME                               -> var_ref
      | dist_call
-     | "CLAMP" "(" expr "," expr "," expr ")"  -> clamp
-     | "MIN" "(" expr "," expr ")"     -> min_func
-     | "MAX" "(" expr "," expr ")"     -> max_func
-     | "CURRENT_TICK"                  -> current_tick
-     | "(" expr ")"                    -> group
-     | "true"                          -> bool_true
-     | "false"                         -> bool_false
+     | "CLAMP" "(" expr "," expr "," expr ")"  -> clamp_fn
+     | "MIN" "(" expr "," expr ")"             -> min_fn
+     | "MAX" "(" expr "," expr ")"             -> max_fn
+     | "CURRENT_TICK"                          -> current_tick
+     | "(" expr ")"
+     | "true"                                  -> bool_true
+     | "false"                                 -> bool_false
 
-// ──────────────────────────────────────────────
+// ──────────────────────────────────────────
 // Distributions
-// ──────────────────────────────────────────────
+// ──────────────────────────────────────────
 
-dist_call: DIST_NORMAL "(" expr "," expr ")"     -> dist_normal
-         | DIST_UNIFORM "(" expr "," expr ")"     -> dist_uniform
-         | DIST_BERNOULLI "(" expr ")"             -> dist_bernoulli
-         | DIST_POISSON "(" expr ")"               -> dist_poisson
-         | DIST_EXPONENTIAL "(" expr ")"           -> dist_exponential
-         | DIST_LOGNORMAL "(" expr "," expr ")"    -> dist_lognormal
-         | DIST_BETA "(" expr "," expr ")"         -> dist_beta
+dist_call: DIST_2P "(" expr "," expr ")"  -> dist_2param
+         | DIST_1P "(" expr ")"           -> dist_1param
 
-DIST_NORMAL: "𝒩" | "N"
-DIST_UNIFORM: "𝒰" | "U"
-DIST_BERNOULLI: "ℬ" | "Bernoulli"
-DIST_POISSON: "𝒫" | "Poisson"
-DIST_EXPONENTIAL: "ℰ" | "Exp"
-DIST_LOGNORMAL: "𝐿𝑁" | "LN"
-DIST_BETA: "𝛽" | "Beta"
+// Unicode distributions + ASCII fallbacks
+DIST_2P.2: "𝒩" | "𝒰" | "𝐿𝑁" | "𝛽" | "LN" | "Beta" | "N"
+DIST_1P.2: "ℬ" | "𝒫" | "ℰ" | "Bernoulli" | "Poisson" | "Exp"
 
-// ──────────────────────────────────────────────
+// ──────────────────────────────────────────
+// Operators
+// ──────────────────────────────────────────
+
+OR_OP: "∨" | "||"
+AND_OP: "∧" | "&&"
+NOT_OP: "¬" | "!"
+COMP_OP: ">=" | "<=" | "≥" | "≤" | ">" | "<" | "==" | "!="
+MOD_OP: "×=" | "*="
+PLUS: "+"
+MINUS: "-"
+STAR: "*"
+TIMES: "×"
+SLASH: "/"
+TILDE: "~"
+
+// ──────────────────────────────────────────
 // Terminals
-// ──────────────────────────────────────────────
+// ──────────────────────────────────────────
 
-RULE_DELIM: /═{3,}/
+// MATCH lines: high priority to prevent NAME matching "MATCH"
+MATCH_LINE.3: /MATCH\s+[^\n]+/
+
+// Rule delimiters (decorative lines)
+RULE_DELIM.3: /═{3,}[^\n]*/
+
+// Property access: Node.property (single terminal, avoids dot ambiguity)
+PROP_ACCESS.2: /[a-zA-Z_]\w*\.[a-zA-Z_]\w*/
+
+// Identifiers
+NAME: /[a-zA-Z_]\w*/
 
 // Numbers: support underscores (1_000_000), scientific notation (5e9), negative
-NUMBER: /[\-]?[0-9][0-9_]*(\.[0-9_]+)?([eE][\-+]?[0-9]+)?/
-INT: /[0-9][0-9_]*/
+NUMBER: /\-?\d[\d_]*(\.\d[\d_]*)?([eE][\-+]?\d+)?/
 
-// Property access: Node.property (single terminal to avoid dot ambiguity)
-PROP_ACCESS.2: /[a-zA-Z_][a-zA-Z0-9_]*\.[a-zA-Z_][a-zA-Z0-9_]*/
+// ──────────────────────────────────────────
+// Whitespace, Indentation, Comments
+// ──────────────────────────────────────────
 
-// Names: identifiers (alphanumeric + underscore), also allow subscript chars
-NAME: /[a-zA-Z_α-ωΑ-Ω][a-zA-Z0-9_ₐ-ₜ]*/
-
-// Comments
-COMMENT: "#" /[^\n]*/
-%ignore COMMENT
-
-// Whitespace handling  
-%import common.WS_INLINE
-%ignore WS_INLINE
-%declare _INDENT _DEDENT
-
-// NOTE line (rule metadata)
-note_line: "NOTE:" /[^\n]+/ _NL
-
+// Newline captures \n + leading whitespace (required for indentation tracking)
 _NL: /(\r?\n[\t ]*)+/
+
+// Ignore inline whitespace (tabs, spaces within a line)
+%ignore /[\t \f]+/
+
+// Ignore comments
+%ignore /#[^\n]*/
+
+// Indentation tokens (injected by GSLIndenter postlex)
+%declare _INDENT _DEDENT
