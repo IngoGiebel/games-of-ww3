@@ -291,13 +291,14 @@ Represents an alternative/critical data source used to challenge or supplement p
 
 ### 3.1 Economic
 ```cypher
-(Nation)-[:TRADES {commodity_type, volume, value, route_via, friction}]->(Nation)
-(Nation)-[:PRODUCES {volume, capacity, pct_global}]->(Commodity)
-(Nation)-[:CONSUMES {volume, dependency_score, import_pct}]->(Commodity)
+(Nation)-[:TRADES {commodity_type, volume, volume_c, value, route_via, friction, friction_c}]->(Nation)
+(Nation)-[:PRODUCES {volume, volume_c, capacity, pct_global}]->(Commodity)
+(Nation)-[:CONSUMES {volume, volume_c, dependency_score, import_pct}]->(Commodity)
 (Nation)-[:SANCTIONS {type, since, severity}]->(Nation)
 ```
 
-`friction` (float, 0.0-1.0) is REQUIRED for APOC shortest-path (sanction evasion routing).
+`friction` (Ratio type, float ∈ [0.0, 1.0]) is REQUIRED for APOC shortest-path (sanction evasion routing).
+Edge properties derived from biased sources (e.g., UN Comtrade → TRADES.volume) carry `{prop}_c` confidence fields, just like Node properties. GSL rules can access them via edge binding: `MATCH (A)─[r:TRADES]→(B) ... r.volume_c`.
 
 ### 3.2 Military & Security
 ```cypher
@@ -366,23 +367,65 @@ Represents an alternative/critical data source used to challenge or supplement p
 }]->(BiasReport)
 ```
 
-### 3.8 STATE_AT — Hot-Path Design (Lean Edge)
+### 3.8 Double-Write Pattern — Live Node + Historical Edge
 
-**Critical Design Decision (Gemini Deep Think 2026-03-28):** Strict Hot-Path / Cold-Path separation. STATE_AT carries ONLY numeric values + confidence floats. All textual bias metadata lives on Correction/BiasReport nodes (Cold Path, queried on demand by UI/agents).
+**Critical Design Decision (Gemini Deep Think 2026-03-28, finalized pass 3):**
+
+GWW3 uses a **Double-Write Pattern** with strict Hot/Cold separation:
+
+#### Live Hot-Path: Nation Node (mutable, queried by GSL every tick)
+
+The Nation node itself holds the current game state. The GSL engine reads and mutates these properties directly. This is the **only** data the physics engine touches during tick evaluation.
 
 ```cypher
-// HOT PATH — queried by GSL Evaluator every tick (floats only, cache-friendly)
-(Nation)-[:STATE_AT {
-    population: 1310000000,       // corrected value (if correction exists) or raw
+(:Nation {
+    iso3: "CHN",
+    // ... identity fields ...
+
+    // Live state (mutable — updated by GSL Intent Reducer every tick)
+    population: 1310000000,
     population_c: 0.55,           // confidence scalar → feeds GSL variance widening
     gdp_nominal: 17700000000000,
     gdp_nominal_c: 0.85,
     stability_index: 65,
     stability_index_c: 0.70,
-    // ... ~100 values + ~100 confidence floats = ~200 keys total
-}]->(Tick)
+    national_morale: 60,
+    national_morale_c: 0.85,
+    war_weariness: 15,
+    war_weariness_c: 0.85,
+    // ... all game-state properties + their _c confidence scalars
+})
+```
 
-// COLD PATH — queried by UI, agents, Moltbook (text-heavy, on demand)
+**GSL rules query the Node directly:**
+```
+MATCH (A:Nation)─[:SANCTIONS]→(B:Nation)
+LET dependency = v / B.gdp_nominal    // reads from Node, not edge
+```
+
+#### Historical Cold-Path: STATE_AT Edge (immutable monthly snapshots)
+
+Once per game-month (on the Economic pulse), a scheduled task copies the Nation node's current properties into an **immutable** `[:STATE_AT]` edge for historical archiving and replay:
+
+```cypher
+// Monthly snapshot (immutable after creation)
+(Nation)-[:STATE_AT {
+    population: 1310000000,
+    population_c: 0.55,
+    gdp_nominal: 17700000000000,
+    gdp_nominal_c: 0.85,
+    // ... snapshot of all properties at this tick
+}]->(Tick)
+```
+
+STATE_AT edges are **never mutated** after creation (forward-only immutability). They exist for:
+- Historical trend analysis (CAGR, slope calculations)
+- Game replay and determinism verification
+- UI dashboards showing time-series data
+
+#### Audit Cold-Path: Correction Nodes (text-heavy, on demand)
+
+```cypher
 (Nation)-[:HAS_CORRECTION]->(Correction {
     property: "population",
     raw_value: 1412000000,
@@ -390,11 +433,16 @@ Represents an alternative/critical data source used to challenge or supplement p
     source: "UN_WPP_2024",
     bias_classes: ["demographic_manipulation"],
     rationale: "Yi Fuxian (2013): 90-130M overcount...",
+    valid_from_tick: -120,
+    valid_until_tick: null,
     ...
 })
 ```
 
-**Rationale:** Neo4j serializes entire relationship property blocks. Reading `gdp_nominal` with 500 keys (including text metadata) forces serialization of all 500 properties. With ~200 float-only keys, the GSL evaluator reads sub-millisecond. Textual audit data is queried separately and only when needed.
+**Why Double-Write?**
+- The GSL engine pulses every 1 minute (Tick), but STATE_AT is only created monthly. Without live state on the Node, the engine cannot read mid-month values.
+- Querying `B.gdp_nominal` against a Node is O(1). Querying the latest STATE_AT edge requires traversing to the most recent Tick.
+- The Intent Reducer writes directly to Node properties; a monthly archival job snapshots them.
 
 **Default confidence:** Properties without explicit corrections carry `{prop}_c: 0.85` (default). Override file `bias_overrides.json` sets reduced confidence for the top critical sources.
 
@@ -563,12 +611,15 @@ China.population ⤳ CONVERGE(target=1_310_000_000, rate=0.05)  ⟨1.00, 1.00⟩
 | 12 | **Entity perspectives are data** | SELF_REPORTS relationship stores how nations view their own numbers |
 | 13 | **Counter-sources supplement, not replace** | Airwars supplements ACLED; both are queryable |
 | 14 | **Community governance of corrections** | BiasReport → discussion → voting → apply/reject |
-| 15 | **Forward-only immutability** | Historical STATE_AT never retroactively modified. Mid-game corrections → Event delta at current tick. Retroactive only in ETL before T=0. |
+| 15 | **Forward-only immutability** | Historical STATE_AT never retroactively modified. Mid-game corrections via ⤳ CONVERGE. Pre-game corrections via Cypher batch with inline re-derivation. |
 | 16 | **Confidence decomposition** | σ_epistemic (rule-authored base variance) × c_source (from DB). Formula: σ_eff = σ_epi × (1 + K(1-c_source)) |
 | 17 | **Weakest-link propagation** | Derived metrics: c_derived = min(c_input1, c_input2, ...) |
 | 18 | **Epistemic meritocracy** | Voting power ≠ 1:1. Scales with historical alignment to accepted CounterSources. Product Owner veto retained. |
 | 19 | **Bipartite Physics/Cognitive boundary** | GSL always uses corrected STATE_AT. Agents query SELF_REPORTS/BELIEVES (may diverge from ground truth). |
 | 20 | **No dynamic bias cascade** | Cascading biases evaluated by humans, assigned flat c_source. No runtime bias multiplication. |
+| 21 | **Double-Write Pattern** | Live state on Nation Node (mutable, GSL reads/writes). Monthly STATE_AT edge for immutable history. GSL queries `B.gdp_nominal` from Node, not edge. |
+| 22 | **Edge confidence fields** | TRADES, BORDERS, PRODUCES, CONSUMES edges carry `{prop}_c` fields for biased inter-entity data (e.g., `volume_c`, `friction_c`). |
+| 23 | **Re-Derive after correction** | ETL Re-Derive step is mandatory. Historical Cypher batch corrections must include inline re-derivation. Derived metrics list in `bias_overrides.json`. |
 
 ---
 

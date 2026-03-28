@@ -340,11 +340,16 @@ STATE_AT carries ONLY numeric values + confidence floats. All textual bias metad
 
 **Temporal scoping:** Corrections carry `valid_from_tick` and `valid_until_tick` directly on the node. For corrections applying to all history, `valid_from_tick = -120` (earliest Tick). No routing through Tick nodes (would create massive edge duplication).
 
-**Pre-game historical corrections:** Applied via fast Cypher batch update after ETL:
+**Pre-game historical corrections:** Applied via Cypher batch update after ETL. Must include inline re-derivation of dependent metrics:
 ```cypher
 MATCH (n:Nation {iso3: 'CHN'})-[r:STATE_AT]->(t:Tick)
 WHERE t.id <= 0
-SET r.population = 1310000000, r.population_c = 0.55
+SET r.population = 1310000000,
+    r.population_c = 0.55,
+    r.gdp_per_capita = r.gdp_nominal / 1310000000,
+    r.military_spending_pct_gdp = r.military_spending_abs / r.gdp_nominal * 100
+// ⚠️ ALL derived metrics that depend on corrected base values MUST be recalculated here.
+// Skipping re-derivation produces silently corrupt historical analytics.
 ```
 Execution time: ~50ms for 120 historical ticks.
 
@@ -437,18 +442,65 @@ When multiple bias classes affect the same data point, do NOT multiply penalties
 
 ---
 
-## 8. Immediate Actions (Sprint Backlog)
+## 8. `bias_overrides.json` — MVP Override File Schema
+
+The Sprint 3 MVP uses a static JSON file (Git-managed) instead of dynamic Moltbook voting. The ETL Bias Tagger and Correction Overlay steps consume this file.
+
+```json
+{
+  "_meta": {
+    "version": "1.0.0",
+    "description": "Hardcoded bias corrections for GWW3 Sprint 3 MVP",
+    "last_updated": "2026-03-28",
+    "updated_by": "Dione + Ingo"
+  },
+  "source_defaults": {
+    "worldbank-wdi": { "c_source": 0.85, "bias_classes": ["self_reporting"] },
+    "freedom-house": { "c_source": 0.65, "bias_classes": ["funding_dependency", "epistemological_hegemony"] },
+    "v-dem": { "c_source": 0.70, "bias_classes": ["expert_subjectivity", "epistemological_hegemony"] },
+    "acled": { "c_source": 0.75, "bias_classes": ["classification_asymmetry", "media_filter"] },
+    "un-wpp": { "c_source": 0.85, "bias_classes": [] }
+  },
+  "entity_overrides": {
+    "CHN": {
+      "population": {
+        "corrected_value": 1310000000,
+        "c_source": 0.55,
+        "bias_classes": ["demographic_manipulation"],
+        "rationale": "Yi Fuxian (2013): 90-130M overcount. Conservative 100M reduction.",
+        "sources": ["Yi_2013", "Goodkind_2017", "Wallace_2016"]
+      }
+    }
+  },
+  "derived_metrics": [
+    "gdp_per_capita = gdp_nominal / population",
+    "military_spending_pct_gdp = military_spending_abs / gdp_nominal * 100",
+    "debt_service_ratio = debt_to_gdp / 100 * gdp_nominal"
+  ]
+}
+```
+
+**Contract:**
+- `source_defaults`: Default c_source for all properties imported from that source (applied globally)
+- `entity_overrides`: Per-entity, per-property corrections (override source_defaults)
+- `derived_metrics`: Explicit list of formulas for the Re-Derive step (DAG-ordered: base metrics first, then dependents)
+- The ETL pipeline reads this file at step 3 (Bias Tag) and step 4 (Correction Overlay)
+
+---
+
+## 9. Immediate Actions (Sprint 3 Backlog)
 
 | # | Task | Priority | Owner |
 |---|------|----------|-------|
-| 1 | Add `:BiasReport` and `:Correction` node types to Neo4j schema | High | Archon |
-| 2 | Add `bias_class`, `confidence`, `corrected` properties to STATE_AT | High | Archon |
-| 3 | Create `bias/registry/` directory with per-source bias profiles | Medium | Dione |
-| 4 | File initial 5 BiasReports (ACLED, FH, V-Dem, CHN population, WB GDP) | Medium | Dione + Sentinel |
-| 5 | Import Airwars + TBIJ data as supplementary conflict source | Medium | Sentinel |
-| 6 | Build auto-tagger for known bias classes in ETL pipeline | Low | Archon |
-| 7 | Create Moltbook discussion thread for community bias review | High | Dione |
-| 8 | Compile BibLaTeX bibliography file from Section 4 sources | Low | Dione |
+| 1 | Implement Double-Write Pattern: live state on Nation Node + monthly STATE_AT snapshot | High | Archon |
+| 2 | Add `{prop}_c` confidence fields to Nation Node + TRADES/BORDERS edges | High | Archon |
+| 3 | Add `:Correction` node type (with `valid_from_tick`, `valid_until_tick`) to schema | High | Archon |
+| 4 | Create `bias_overrides.json` with top 5 corrections | High | Dione |
+| 5 | Wire ETL: Normalize → Bias Tag → Correction Overlay → Re-Derive → Validate → Neo4j | High | Sentinel |
+| 6 | Historical Cypher batch with inline re-derivation | Medium | Sentinel |
+| 7 | Import Airwars + TBIJ as CounterSource nodes | Medium | Sentinel |
+| 8 | Create Moltbook discussion thread for community bias review | Medium | Dione |
+| 9 | Compile BibLaTeX bibliography file from Section 4 sources | Low | Dione |
 
 ---
 

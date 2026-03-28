@@ -243,7 +243,8 @@ IF v > 1_000_000_000
 
     ELSE
         # Sanctions exist but trade volume is low
-        B.diplomatic_trust(A) -= 𝒩(5.0, 2.0)      ⟨0.60, 0.70⟩
+        MATCH (B)─[drel:DIPLOMATIC_RELATION]→(A)
+        drel.trust -= 𝒩(5.0, 2.0)                  ⟨0.60, 0.70⟩
 
 DELAYED (90 ticks)
     B.stability -= 𝒩(5.0, 2.0)                     ⟨0.60, 0.70⟩
@@ -257,35 +258,38 @@ DELAYED (90 ticks)
 ═══════════════════════════════════════════════════════════════
   RULE: combat-resolution (v1)
   CATEGORY: military
+  NOTE: Uses schema entities from DATA_MODEL_COMPLETE.md.
+        Nation properties are live on the Node (Double-Write Pattern).
+        Conflict/INVOLVED_IN edges carry force counts.
 ═══════════════════════════════════════════════════════════════
 
-MATCH (A:Nation)─[:ATTACKS {forces: fₐ}]→(R:Region)
-MATCH (D:Nation)─[:DEFENDS {forces: f_d}]→(R)
+MATCH (A:Nation)─[:INVOLVED_IN {role: "attacker", forces: fₐ}]→(C:Conflict)
+MATCH (D:Nation)─[:INVOLVED_IN {role: "defender", forces: f_d}]→(C)
 
 LET ratio    = fₐ / f_d
-LET terrain  = R.defense_modifier
 LET morale_a = A.national_morale × (1 − A.war_weariness / 100)
 LET morale_d = D.national_morale × (1 − D.war_weariness / 100)
-LET tech_gap = A.military_tech − D.military_tech
-LET logistic = 1 / (1 + A.supply_distance / 1000)
+LET tech_gap = A.military_spending_abs − D.military_spending_abs
+LET c_mil    = MIN(A.manpower_active_c, A.military_spending_abs_c)
 
-LET combat_power = ratio × terrain × logistic
+LET combat_power = ratio
                    × 𝒩(morale_a / morale_d, 0.1)
-                   × (1 + tech_gap × 0.1)
+                   × (1 + tech_gap / 1e11 × 0.1)
 
 IF combat_power ~ 𝒩(combat_power, 0.15) > 1.0
     THEN
         # Attacker wins this tick
-        A.casualties    += fₐ × 𝐿𝑁(−3.9, 0.5)    ⟨0.95, 0.95⟩   # ~2% mean
-        D.casualties    += f_d × 𝐿𝑁(−3.0, 0.4)   ⟨0.95, 0.95⟩   # ~5% mean
+        A.manpower_active -= fₐ × 𝐿𝑁(−3.9, 0.5)   ⟨0.95, c_mil⟩   # ~2% mean
+        D.manpower_active -= f_d × 𝐿𝑁(−3.0, 0.4)   ⟨0.95, c_mil⟩   # ~5% mean
         D.war_weariness += CLAMP(𝒩(2.0, 0.5), 0, 100) ⟨0.90, 0.90⟩
     ELSE
         # Defender holds
-        A.casualties    += fₐ × 𝐿𝑁(−3.0, 0.4)    ⟨0.95, 0.95⟩
+        A.manpower_active -= fₐ × 𝐿𝑁(−3.0, 0.4)   ⟨0.95, c_mil⟩
         A.war_weariness += CLAMP(𝒩(3.0, 1.0), 0, 100) ⟨0.90, 0.90⟩
 
 NOTE: 1 tick = 1 day. Battles span multiple ticks.
       Each day is resolved individually.
+      c_mil propagated via explicit MIN() — no auto dual-number.
 
 ═══════════════════════════════════════════════════════════════
 ```
@@ -360,15 +364,21 @@ GSL can mutate graph **topology**, not just properties:
 
 ```
 # Emergent alliance formation
-IF A.diplomatic_trust(B) > 80 ∧ A.threat_perception(C) > 70 ∧ B.threat_perception(C) > 70
+MATCH (A:Nation)─[dA:DIPLOMATIC_RELATION]→(B:Nation)
+MATCH (A)─[dC:DIPLOMATIC_RELATION]→(C:Nation)
+MATCH (B)─[dBC:DIPLOMATIC_RELATION]→(C)
+IF dA.trust > 80 ∧ dC.trust < 30 ∧ dBC.trust < 30
     THEN
-        CREATE (A)─[:ALLIED_WITH {strength: 0.5, formed_tick: CURRENT_TICK}]→(B)  ⟨0.30, 0.60⟩
+        CREATE (A)─[:MEMBER_OF {role: "ally", since: CURRENT_TICK, commitment_level: 0.5}]→
+              (:Alliance {name: A.name_short + "-" + B.name_short + " Pact", type: "military"})
+        ⟨0.30, 0.60⟩
 
-# Alliance dissolution
-MATCH (A)─[r:ALLIED_WITH]→(B)
-IF A.diplomatic_trust(B) < 20
+# Alliance dissolution (via diplomatic trust collapse)
+MATCH (A:Nation)─[drel:DIPLOMATIC_RELATION]→(B:Nation)
+MATCH (A)─[m:MEMBER_OF]→(alliance:Alliance)←[:MEMBER_OF]─(B)
+IF drel.trust < 20
     THEN
-        DELETE r     ⟨0.50, 0.70⟩
+        DELETE m     ⟨0.50, 0.70⟩
 ```
 
 ---

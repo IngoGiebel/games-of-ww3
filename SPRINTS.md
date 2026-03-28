@@ -180,8 +180,8 @@ Strict Hot-Path / Cold-Path separation. STATE_AT carries only values + confidenc
 - [ ] Distribution classes (𝐿𝑁, 𝛽, 𝒩, 𝒰, ℬ, 𝒫, ℰ)
 - [ ] Mean-preserving confidence adjustment formulas
 - [ ] Deterministic per-effect RNG seeding
-- [ ] **c_source integration:** Read `{prop}_c` from Neo4j, apply to variance widening
-- [ ] **Weakest-link propagation:** `c_derived = min(c_inputs)` for LET bindings
+- [ ] **c_source integration:** Read `{prop}_c` from Neo4j Node properties, apply to variance widening
+- [ ] ~~**Weakest-link propagation:** `c_derived = min(c_inputs)` for LET bindings~~ **REMOVED:** No auto engine-level propagation. Rule authors explicitly pull `{prop}_c` via LET statements.
 
 ### 4.3 Cypher Executor & Evaluator
 - [ ] MATCH → Cypher query with pushdown WHERE

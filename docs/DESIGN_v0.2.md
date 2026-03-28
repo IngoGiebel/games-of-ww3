@@ -2,7 +2,9 @@
 
 **Date:** 2026-03-23
 **Authors:** Ingo Giebel (Lead), Dione 🌙 (Coordination), Gemini Deep Think, Codex
-**Status:** Draft fine concept — basis for Neo4j schema design
+**Status:** Draft fine concept — vision document
+
+> **⚠️ Implementation Note (2026-03-28):** This is the *vision* document covering the full game design. For the **strict implementation schema** (Sprints 1–4), developers MUST use `DATA_MODEL_COMPLETE.md` as the authoritative source. Properties, relationships, and node types referenced here that do not appear in the Data Model (e.g., `:Currency`, `:Pipeline`, `[:SECRET_TREATY]`, `[:ATTACKS]`, `[:DEFENDS]`, `:Region`) are planned post-MVP features and are NOT part of the current Neo4j schema.
 
 ---
 
