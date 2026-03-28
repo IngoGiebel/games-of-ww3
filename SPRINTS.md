@@ -133,7 +133,7 @@ Strict Hot-Path / Cold-Path separation. STATE_AT carries only values + confidenc
   3. V-Dem governance indices (expert_subjectivity → c=0.70 for contested cases)
   4. Freedom House scores (funding_dependency → c=0.65)
   5. World Bank GDP for low-capacity states (self_reporting → c=0.70)
-- [ ] Wire ETL pipeline: Normalizers → **Bias Tagger** → **Correction Overlay** → Validators → Neo4j
+- [ ] Wire ETL pipeline: Normalizers → **Bias Tagger** → **Correction Overlay** → **Re-Derive Computations** → Validators → Neo4j
 - [ ] Import Airwars + TBIJ as CounterSource nodes
 
 ### 3.3 Data Gap Closure
@@ -147,7 +147,7 @@ Strict Hot-Path / Cold-Path separation. STATE_AT carries only values + confidenc
 - [ ] Military force projection: deployment ranges, logistics costs
 - [ ] Diplomatic influence: UN voting patterns, alliance strength scores
 - [ ] Domestic politics: faction dynamics, leader stability
-- [ ] Belief Subgraph foundation: `:SELF_REPORTS` and `:BELIEVES` relationships
+- [ ] ~~Belief Subgraph foundation~~ → **Moved to Sprint 5** (no AI agents to consume it yet)
 
 ### 3.5 Documentation
 - [ ] Update SCHEMA_V2.md → SCHEMA_V3.md (incorporating Hot/Cold + bias nodes)

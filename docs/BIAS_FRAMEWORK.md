@@ -283,45 +283,54 @@ CREATE (:BiasReport {
 ```
 1. IMPORT raw data (as-is, with source tag)
    ↓
-2. AUTO-TAG known bias classes per source (from bias registry)
+2. NORMALIZE (standardize units, currency conversion, ID harmonization)
    ↓
-3. APPLY confidence adjustments (lower c for high-bias data)
+3. BIAS TAG (inject c_source penalties from bias registry / bias_overrides.json)
    ↓
-4. GENERATE correction candidates (counter-source data + entity perspectives)
+4. CORRECTION OVERLAY (apply value corrections from overrides)
    ↓
-5. COMMUNITY REVIEW (Moltbook discussion + voting)
+5. RE-DERIVE COMPUTATIONS (recalculate ALL ratios and derived metrics
+      using corrected base values — e.g., gdp_per_capita from corrected
+      GDP and corrected population. CRITICAL: skipping this step
+      produces mathematically corrupt derived data.)
    ↓
-6. APPLY corrections (stored as correction layer, original preserved)
+6. VALIDATE (sanity bounds, cross-property invariants — runs on corrected+derived values)
    ↓
-7. AUDIT TRAIL (every correction links to rationale, vote, and sources)
+7. NEO4J INGESTION (push to graph)
+   ↓
+8. AUDIT TRAIL (Correction nodes created in Cold Path)
 ```
 
-### 6.2 Neo4j Storage
+**⚠️ The Re-Derive step is mandatory.** If China's population is corrected downward by 100M but `gdp_per_capita` was computed in the Normalization step using raw population, per-capita data will be silently wrong. All ratios, percentages, and derived metrics must be recalculated from corrected base values.
 
-Corrections are stored as a **separate layer** — the original import is never modified:
+### 6.2 Neo4j Storage (Hot/Cold Architecture)
+
+**Critical Design Decision:** Strict Hot-Path / Cold-Path separation (Gemini Deep Think 2026-03-28).
+
+STATE_AT carries ONLY numeric values + confidence floats. All textual bias metadata lives on Correction nodes (Cold Path).
 
 ```cypher
-// Original import (preserved)
-(:Nation {name: "China"})-[:STATE_AT_RAW {population: 1412000000, source: "UN_WPP_2024"}]->(:Tick)
-
-// Corrected layer
+// HOT PATH — GSL Evaluator reads this (floats only, ~200 keys)
 (:Nation {name: "China"})-[:STATE_AT {
-    population: 1310000000,
-    correction_id: "CORR-CHN-POP-001",
-    original_value: 1412000000,
-    confidence: 0.55
+    population: 1310000000,     // corrected value
+    population_c: 0.55          // confidence scalar only
 }]->(:Tick)
 
-// Correction record
-(:Correction {
+// COLD PATH — UI, agents, audits query this on demand
+(:Nation {name: "China"})-[:HAS_CORRECTION]->(:Correction {
     id: "CORR-CHN-POP-001",
-    target: "CHN.population",
-    original: 1412000000,
-    corrected: 1310000000,
-    method: "value_adjustment",
-    rationale: "Yi Fuxian (2013): systematic overcount due to local inflation incentives + One-Child Policy underreporting. Estimate: 90-130M overcount. We use conservative 100M reduction.",
-    sources: ["Yi_2013", "Goodkind_2017", "Wallace_2016"],
+    property: "population",
+    raw_value: 1412000000,
+    corrected_value: 1310000000,
+    correction_type: "value_adjustment",
+    source: "UN_WPP_2024",
+    bias_classes: ["demographic_manipulation"],
+    rationale: "Yi Fuxian (2013): systematic overcount due to local inflation incentives
+                + One-Child Policy underreporting. Conservative 100M reduction.",
+    counter_sources: ["Yi_2013", "Goodkind_2017", "Wallace_2016"],
     entity_view: "CHN NBS maintains 1.41B (2024 census)",
+    valid_from_tick: -120,       // applies to all history
+    valid_until_tick: null,      // ongoing (null = no expiry)
     status: "applied",
     votes_for: 12,
     votes_against: 3,
@@ -329,13 +338,23 @@ Corrections are stored as a **separate layer** — the original import is never 
 })
 ```
 
+**Temporal scoping:** Corrections carry `valid_from_tick` and `valid_until_tick` directly on the node. For corrections applying to all history, `valid_from_tick = -120` (earliest Tick). No routing through Tick nodes (would create massive edge duplication).
+
+**Pre-game historical corrections:** Applied via fast Cypher batch update after ETL:
+```cypher
+MATCH (n:Nation {iso3: 'CHN'})-[r:STATE_AT]->(t:Tick)
+WHERE t.id <= 0
+SET r.population = 1310000000, r.population_c = 0.55
+```
+Execution time: ~50ms for 120 historical ticks.
+
 ### 6.3 GSL Integration
 
-Bias-corrected data feeds into GSL via the `confidence` parameter:
+Bias-corrected data feeds into GSL via the `{prop}_c` confidence field:
 
 ```
 MATCH (N:Nation)
-LET c_pop = N.population_confidence    // 0.55 for China, 0.90 for Germany
+LET c_pop = N.population_c    // 0.55 for China, 0.85 for Germany (lean naming)
 
 // When computing demographic effects:
 IF N.population > 100_000_000
@@ -343,6 +362,25 @@ IF N.population > 100_000_000
         N.draft_pool += N.population × 𝛽(0.02, 0.98)    ⟨0.90, c_pop⟩
         // Low confidence on China → wider variance on draft pool estimate
 ```
+
+**Confidence in derived metrics:** The GSL engine does NOT automatically propagate confidence through arithmetic. Rule authors explicitly pull confidence when needed:
+```
+LET c_combat = MIN(A.morale_c, A.troops_c)   // explicit authorship
+A.casualties += fₐ × 𝐿𝑁(−3.9, 0.5)          ⟨0.95, c_combat⟩  // explicit application
+```
+
+### 6.4 Mid-Game Epistemic Corrections
+
+**Critical rule:** Mid-game data corrections MUST NOT be applied as instant deltas (would trigger cascade: market crash rules, stability collapse, etc.).
+
+When an epistemic correction is approved mid-game, the system spawns a hidden convergence intent:
+```
+// Epistemic revision: China population corrected from 1.41B to 1.31B at Tick 50
+China.population ⤳ CONVERGE(target=1_310_000_000, rate=0.05)    ⟨1.00, 1.00⟩
+// Gradually aligns over ~20 months, avoiding Δ-triggered apocalypse rules
+```
+
+An `(:Event {type: "epistemic_revision"})` node is created for audit purposes, but the actual state change flows through the CONVERGE operator.
 
 ---
 
@@ -360,7 +398,36 @@ The principles by which we assess and correct bias shall be codified and themsel
 6. **Corrections decay.** If new evidence emerges, corrections can be revised or reverted. Nothing is permanent.
 7. **Minority reports.** Dissenting views on corrections are preserved in the audit trail, even if outvoted.
 
-### 7.2 Community Governance
+### 7.2 Penalty Stacking Rubric
+
+When multiple bias classes affect the same data point, do NOT multiply penalties. Use this rubric:
+
+1. **Take the largest single bias penalty** (lowest c_source from any one class)
+2. **Add half of the second-largest penalty** (halved delta from second class)
+3. **Ignore further classes** (diminishing returns; 3+ biases don't stack further)
+
+**Formula:** `c_final = c_worst + 0.5 × (c_second_worst − c_worst)`
+
+**Example:** Gaza civilian casualty count affected by:
+- `access_constraint` → c = 0.40 (worst)
+- `media_filter` → c = 0.55 (second worst)
+- `linguistic_exclusion` → c = 0.70 (ignored for stacking)
+
+`c_final = 0.40 + 0.5 × (0.55 − 0.40) = 0.40 + 0.075 = 0.475`
+
+**Absolute floor:** Official state-level data should rarely drop below **c = 0.35**. Data below that threshold is effectively uniform noise and should be flagged for imputation rather than used with extreme variance.
+
+**Guidance table:**
+
+| Combined Bias Scenario | Recommended c_source Range |
+|------------------------|---------------------------|
+| Single mild bias (e.g., self_reporting alone) | 0.70 – 0.85 |
+| Single severe bias (e.g., demographic_manipulation) | 0.45 – 0.60 |
+| Two overlapping biases | 0.40 – 0.55 |
+| Conflict zone + media filter + access constraint | 0.35 – 0.50 |
+| Data effectively unusable | < 0.35 → impute instead |
+
+### 7.3 Community Governance
 
 - **Bias reports** can be filed by any GWW3 contributor (human or AI)
 - **Discussion** happens on Moltbook (m/wargames) or GitHub Issues

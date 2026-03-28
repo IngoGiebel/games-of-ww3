@@ -259,6 +259,8 @@ Records a specific data correction applied to an entity/property.
   sources: ["Yi_2013", "Goodkind_2017", "Wallace_2016"],
   entity_view: "CHN NBS maintains 1.41B (2024 census)",
   bias_report_id: "BR-005",                        // links to originating BiasReport
+  valid_from_tick: -120,                            // applies from this tick (null = T=0)
+  valid_until_tick: null,                           // ongoing (null = no expiry)
   status: "applied",                                // proposed | discussed | voted | applied | rejected | reverted
   votes_for: 12,
   votes_against: 3,
@@ -434,11 +436,11 @@ Represents an alternative/critical data source used to challenge or supplement p
 
 ## 6. GSL Integration — Confidence ↔ Bias Linkage
 
-Bias-corrected data feeds into GSL via the `confidence` parameter on Truth Values:
+Bias-corrected data feeds into GSL via the `{prop}_c` confidence field on STATE_AT:
 
 ```
 MATCH (N:Nation)
-LET c_pop = N.population_confidence    // 0.55 for China, 0.90 for Germany
+LET c_pop = N.population_c    // 0.55 for China, 0.85 for Germany
 
 IF N.population > 100_000_000
     THEN
@@ -446,30 +448,67 @@ IF N.population > 100_000_000
         // Low confidence on China → wider variance on draft pool estimate
 ```
 
-**Mean-preserving confidence formulas:**
-- Normal/Log-Normal: `σ_eff = σ × (1 + K × (1 − c))` where K=2
-- Beta: `α_eff = c × α, β_eff = c × β`
+**Confidence decomposition:**
+- `σ_epistemic`: Authored by rule designer in the base distribution parameters
+- `c_source`: From Bias Framework, stored as `{prop}_c` in DB
 
-Low-confidence data → noisier outcomes → simulation doesn't pretend to know what it doesn't know.
+**Mean-preserving confidence formulas:**
+- Normal/Log-Normal: `σ_eff = σ_epistemic × (1 + K × (1 − c_source))` where K=2
+- Beta: `α_eff = c_source × α, β_eff = c_source × β` (c only = c_source; epistemic uncertainty is in the authored α,β shape)
+
+**No automatic confidence propagation.** The GSL engine does NOT track confidence through arithmetic. Rule authors explicitly pull `{prop}_c` when needed:
+```
+LET c_combat = MIN(A.morale_c, A.troops_c)    // explicit authorship
+A.casualties += fₐ × 𝐿𝑁(−3.9, 0.5)           ⟨0.95, c_combat⟩  // explicit application
+```
+This avoids building a hidden dual-number system (interval arithmetic) that would destroy evaluator performance.
+
+**Mid-game epistemic corrections** use the ⤳ CONVERGE operator to avoid sudden Δ-triggered cascade effects:
+```
+// Approved correction: China population 1.41B → 1.31B at Tick 50
+China.population ⤳ CONVERGE(target=1_310_000_000, rate=0.05)  ⟨1.00, 1.00⟩
+// Gradual alignment over ~20 months
+```
 
 ---
 
 ## 7. Correction Workflow Pipeline
 
+### 7.1 ETL Pipeline (Automated)
+
 ```
 1. IMPORT raw data (as-is, with source tag)
    ↓
-2. AUTO-TAG known bias classes per source (from bias registry)
+2. NORMALIZE (standardize units, currency conversion, ID harmonization)
    ↓
-3. APPLY confidence adjustments (lower c for high-bias data)
+3. BIAS TAG (inject c_source penalties from bias_overrides.json)
    ↓
-4. GENERATE correction candidates (counter-source data + entity perspectives)
+4. CORRECTION OVERLAY (apply value corrections)
    ↓
-5. COMMUNITY REVIEW (Moltbook discussion + voting)
+5. RE-DERIVE COMPUTATIONS ⚠️ MANDATORY
+   (recalculate ALL ratios and derived metrics from corrected base values:
+    gdp_per_capita, military_spending_pct_gdp, trade dependencies, etc.
+    Skipping this step produces mathematically corrupt derived data.)
    ↓
-6. APPLY corrections (stored as correction layer, original preserved)
+6. VALIDATE (sanity bounds on corrected+derived values)
    ↓
-7. AUDIT TRAIL (every correction links to rationale, vote, and sources)
+7. NEO4J INGESTION
+   ↓
+8. AUDIT TRAIL (Correction nodes in Cold Path)
+```
+
+### 7.2 Community Review (Asynchronous)
+
+```
+1. BIAS REPORT filed (Moltbook / GitHub)
+   ↓
+2. DISCUSSION (community + counter-source evidence)
+   ↓
+3. VOTING (epistemic meritocracy — weighted, not 1:1)
+   ↓
+4. APPLY or REJECT (Product Owner veto available)
+   ↓
+5. Update bias_overrides.json → re-run ETL
 ```
 
 **Critical invariant:** The original raw import is NEVER modified. Corrections are a separate layer. Both raw and corrected values are queryable.

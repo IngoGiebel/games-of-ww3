@@ -187,7 +187,7 @@ GSL enforces a gradual type system tied to the Neo4j schema:
 | Type | Values | Example Properties |
 |------|--------|--------------------|
 | `Currency` | positive float (USD) | `gdp_nominal`, `military_spending_abs` |
-| `Ratio` | float ∈ [0.0, 1.0] | `stability_index` (normalized), `approval_rating` |
+| `Ratio` | float ∈ [0.0, 1.0] | `stability_index` (normalized), `approval_rating`, `friction` (TRADES edge) |
 | `Percent` | float ∈ [0.0, 100.0] | `war_weariness`, `urbanization`, `unemployment` |
 | `Count` | non-negative integer | `population`, `nuclear_warheads`, `manpower_active` |
 | `Index` | float (arbitrary scale) | `v2x_polyarchy`, `press_freedom` |
@@ -702,7 +702,7 @@ CREATE (:Rule {
 
 1. **Distribution calibration** — How do we derive μ and σ from historical data (SIPRI, World Bank, ACLED)?
 2. **Modifier pool edge cases** — Two `×= 0.5` modifiers → `1.0 + (−0.5 + −0.5) = 0.0`. Is zero the right floor, or should it be `max(0.01, ...)`?
-3. **Truth Value propagation** — Should confidence decay along inference chains?
+3. ~~**Truth Value propagation** — Should confidence decay along inference chains?~~ **RESOLVED (v4):** No automatic engine-level propagation. Rule authors explicitly pull `{prop}_c` from the DB and pass it to effects via `LET c_x = MIN(A.prop1_c, A.prop2_c)` → `⟨p, c_x⟩`. Automatic dual-number tracking would destroy evaluator performance and violate "rules are auditable text."
 4. **Self-modification** — Should rules adapt through gameplay (Bayesian update)?
 5. **LET inside THEN** — Allowed (computed only when branch fires)?
 6. **Rule complexity limits** — Max conditions/effects before mandatory decomposition?
@@ -718,6 +718,7 @@ CREATE (:Rule {
 | 2026-03-27 | Dione | English translation, LET/IF/THEN/ELSE, indentation, brackets |
 | 2026-03-28 | Dione + Ingo | v2: Gemini DT v1 feedback — `⟹`, strict brackets, MATCH, operational confidence, 𝐿𝑁/𝛽, types, Intent Accumulator, seeding, DELAYED snapshots, CONVERGE, temporal patterns, graph mutations |
 | 2026-03-28 | Dione + Ingo | v3: Gemini DT v2 feedback — mean-preserving confidence formulas (no div-by-zero), Additive Modifier Pool (commutative), per-property RNG seeding, Scalar type, Distribution[T], Cypher pushdown optimization, Execution Context Mapper, MVP task list |
+| 2026-03-28 | Dione + Ingo | v4: Bias integration verification — `friction` mapped to Ratio type, no automatic c_derived propagation (explicit authorship only), `{prop}_c` lean naming convention, mid-game epistemic corrections via ⤳ CONVERGE |
 
 ---
 
