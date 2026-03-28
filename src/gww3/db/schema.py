@@ -8,11 +8,22 @@ Design Principle: Edges > Properties.
 Power is defined by network position, not isolated attributes.
 
 Temporal Strategy (per Deep Think review):
-- Current state lives directly on Entity nodes as properties.
+- GWW3 uses a Double-Write Pattern with Hot/Cold separation.
+- Live state lives directly on Nation nodes as mutable properties; GSL reads/writes them directly.
 - STATE_AT snapshots are created ONLY on Monthly (Economic) and Epoch (Annual) ticks.
 - Intra-month changes are logged as lightweight (:Event) nodes with deltas.
 - ALL properties use strictly monthly frequency — no mixing.
 - This prevents graph explosion (525,600 Tick nodes/year would OOM).
+
+Bias Infrastructure Strategy (Sprint 3):
+- Historical STATE_AT edges are immutable monthly snapshots for replay and audit.
+- Bias metadata and rationale live on cold-path Correction and BiasReport nodes.
+- References and counter-sources provide auditable evidential chains for source critique and overrides.
+
+Confidence Field Convention:
+- Nation nodes carry a `{prop}_c` float confidence field for every modeled property.
+- TRADES edges carry `volume_c` and `friction_c` for biased inter-entity data.
+- STATE_AT edges mirror value fields together with their `_c` confidence scalars.
 
 ETL Strategy (per Deep Think review):
 - Sentinel agents generate + execute deterministic Python scripts for bulk data.
@@ -78,6 +89,11 @@ NODE_LABELS = [
     # Provenance
     "DataSource",       # External data source registry
     "ImportBatch",      # Tracks each data import operation
+    "BiasReport",       # Documents systematic bias in a source or dataset
+    "Correction",       # Auditable correction layer for entity/property overrides
+    "CounterSource",    # Alternative source used to challenge or supplement imports
+    "Reference",        # Bibliographic evidence node (BibLaTeX-style cite key)
+    "ReferenceCategory",  # Thematic reference classification
 
     # Task Queue (agent coordination)
     "Task",             # Work items for agents, stored in Neo4j
@@ -143,6 +159,14 @@ RELATIONSHIP_TYPES = {
     "PROVENANCE":       "(Entity)-[:PROVENANCE {properties: [...]}]->(ImportBatch)",
     # properties on the EDGE enables O(1) lookup per property per entity
     "FROM_SOURCE":      "(ImportBatch)-[:FROM_SOURCE]->(DataSource)",
+    "HAS_BIAS":         "(DataSource)-[:HAS_BIAS {class, detail, severity, reference}]->(BiasReport)",
+    "HAS_CORRECTION":   "(Nation)-[:HAS_CORRECTION]->(Correction)",
+    "GENERATED":        "(BiasReport)-[:GENERATED]->(Correction)",
+    "BASED_ON":         "(Correction)-[:BASED_ON]->(CounterSource)",
+    "SUPPLEMENTS":      "(CounterSource)-[:SUPPLEMENTS]->(DataSource)",
+    "CITES":            "(BiasReport|Correction)-[:CITES]->(Reference)",
+    "CRITIQUES":        "(Reference)-[:CRITIQUES]->(DataSource)",
+    "CATEGORIZED_AS":   "(Reference)-[:CATEGORIZED_AS]->(ReferenceCategory)",
 
     # Task queue
     "DEPENDS_ON":       "(Task)-[:DEPENDS_ON]->(Task)",
@@ -175,6 +199,11 @@ SCHEMA_CONSTRAINTS = [
     # Uniqueness — Provenance
     "CREATE CONSTRAINT datasource_id IF NOT EXISTS FOR (ds:DataSource) REQUIRE ds.id IS UNIQUE",
     "CREATE CONSTRAINT importbatch_id IF NOT EXISTS FOR (ib:ImportBatch) REQUIRE ib.id IS UNIQUE",
+    "CREATE CONSTRAINT biasreport_id IF NOT EXISTS FOR (br:BiasReport) REQUIRE br.id IS UNIQUE",
+    "CREATE CONSTRAINT correction_id IF NOT EXISTS FOR (c:Correction) REQUIRE c.id IS UNIQUE",
+    "CREATE CONSTRAINT countersource_id IF NOT EXISTS FOR (cs:CounterSource) REQUIRE cs.id IS UNIQUE",
+    "CREATE CONSTRAINT reference_cite_key IF NOT EXISTS FOR (r:Reference) REQUIRE r.cite_key IS UNIQUE",
+    "CREATE CONSTRAINT refcategory_id IF NOT EXISTS FOR (rc:ReferenceCategory) REQUIRE rc.id IS UNIQUE",
 
     # Uniqueness — Task Queue
     "CREATE CONSTRAINT task_id IF NOT EXISTS FOR (t:Task) REQUIRE t.id IS UNIQUE",
@@ -187,6 +216,9 @@ SCHEMA_CONSTRAINTS = [
     "CREATE INDEX event_type IF NOT EXISTS FOR (e:Event) ON (e.type)",
     "CREATE INDEX event_game_tick IF NOT EXISTS FOR (e:Event) ON (e.game_tick)",
     "CREATE INDEX military_unit_nation IF NOT EXISTS FOR (u:MilitaryUnit) ON (u.nation_iso3)",
+    "CREATE INDEX bias_by_source IF NOT EXISTS FOR (br:BiasReport) ON (br.target_source, br.status)",
+    "CREATE INDEX correction_by_entity IF NOT EXISTS FOR (c:Correction) ON (c.target_entity, c.status)",
+    "CREATE INDEX reference_by_year IF NOT EXISTS FOR (r:Reference) ON (r.year)",
 
     # Composite index for agent task queue polling performance
     "CREATE INDEX task_queue IF NOT EXISTS FOR (t:Task) ON (t.status, t.assigned_to)",

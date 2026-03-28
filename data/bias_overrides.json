@@ -1,0 +1,142 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "description": "Hardcoded bias corrections for GWW3 Sprint 3 MVP. Consumed by ETL Bias Tagger + Correction Overlay steps.",
+    "last_updated": "2026-03-28",
+    "updated_by": "Dione + Ingo",
+    "schema_doc": "docs/BIAS_FRAMEWORK.md Section 8"
+  },
+  "source_defaults": {
+    "worldbank-wdi": {
+      "c_source": 0.85,
+      "bias_classes": ["self_reporting"],
+      "note": "Nations self-report to WB/IMF. Default confidence for countries with adequate statistical capacity."
+    },
+    "worldbank-wdi-low-capacity": {
+      "c_source": 0.70,
+      "bias_classes": ["self_reporting"],
+      "note": "Applied to nations with WB Statistical Capacity Score < 60 (Sub-Saharan Africa, fragile states). See Jerven 2013.",
+      "applies_to_iso3": [
+        "AFG", "BDI", "CAF", "TCD", "COD", "ERI", "GNB", "HTI", "LBY",
+        "MLI", "NER", "SOM", "SSD", "SDN", "SYR", "YEM", "PRK"
+      ]
+    },
+    "freedom-house": {
+      "c_source": 0.65,
+      "bias_classes": ["funding_dependency", "epistemological_hegemony"],
+      "note": "86% US government funded (2016). Liberal-democratic conceptual frame as universal standard. Bush 2017."
+    },
+    "v-dem": {
+      "c_source": 0.75,
+      "bias_classes": ["expert_subjectivity", "epistemological_hegemony"],
+      "note": "4000+ experts, documented pessimism bias (Wig et al. 2024). Best available governance source despite limitations."
+    },
+    "v-dem-contested": {
+      "c_source": 0.60,
+      "bias_classes": ["expert_subjectivity", "epistemological_hegemony"],
+      "note": "Applied to nations where V-Dem classification is actively contested (e.g., India as 'electoral autocracy').",
+      "applies_to_iso3": ["IND", "TUR", "HUN", "POL", "MEX", "BRA"]
+    },
+    "acled": {
+      "c_source": 0.75,
+      "bias_classes": ["classification_asymmetry", "media_filter", "access_constraint"],
+      "note": "Terrorism defined exclusively via non-state actors. Media-dependent sourcing. Undercounting in conflict zones."
+    },
+    "acled-conflict-zone": {
+      "c_source": 0.50,
+      "bias_classes": ["classification_asymmetry", "media_filter", "access_constraint"],
+      "note": "Applied per Penalty Stacking Rubric: access_constraint(0.40) + media_filter(0.55) → c=0.475, rounded to 0.50.",
+      "applies_to_iso3": ["SDN", "SOM", "SYR", "YEM", "MMR", "ETH", "PSE", "LBY"]
+    },
+    "un-wpp": {
+      "c_source": 0.85,
+      "bias_classes": [],
+      "note": "Generally reliable demographic source. Country-specific overrides below for known issues."
+    },
+    "sipri-milex": {
+      "c_source": 0.80,
+      "bias_classes": ["self_reporting"],
+      "note": "Nations self-report defense spending. Some states (e.g., CHN, SAU) may underreport."
+    },
+    "global-firepower": {
+      "c_source": 0.65,
+      "bias_classes": ["self_reporting", "aggregation_distortion"],
+      "note": "Web-scraped composite index. No peer review. Useful for force structure, not for precision."
+    }
+  },
+  "entity_overrides": {
+    "CHN": {
+      "population": {
+        "corrected_value": 1310000000,
+        "c_source": 0.55,
+        "bias_classes": ["demographic_manipulation"],
+        "rationale": "Yi Fuxian (2013): systematic overcount of 90-130M due to local incentive inflation + One-Child Policy underreporting. Conservative 100M reduction applied.",
+        "sources": ["Yi_2013", "Goodkind_2017", "Wallace_2016"]
+      },
+      "gdp_nominal": {
+        "corrected_value": null,
+        "c_source": 0.70,
+        "bias_classes": ["self_reporting"],
+        "rationale": "China's NBS has documented history of adjusting GDP figures. Night-light proxies suggest ~12% overcount (Martinez 2022). No value correction applied yet — confidence downgrade only.",
+        "sources": ["Wallace_2016"]
+      },
+      "military_spending_abs": {
+        "corrected_value": null,
+        "c_source": 0.60,
+        "bias_classes": ["self_reporting", "omission"],
+        "rationale": "SIPRI estimates CHN spending at 1.5-2x official figures. Significant off-budget items (R&D, paramilitary, space). Confidence downgrade only.",
+        "sources": []
+      }
+    },
+    "PRK": {
+      "gdp_nominal": {
+        "corrected_value": null,
+        "c_source": 0.40,
+        "bias_classes": ["self_reporting", "access_constraint"],
+        "rationale": "No reliable GDP data exists. All figures are estimates by external agencies (CIA, Bank of Korea). Near uniform noise.",
+        "sources": ["Jerven_2013"]
+      }
+    },
+    "RUS": {
+      "military_spending_abs": {
+        "corrected_value": null,
+        "c_source": 0.65,
+        "bias_classes": ["self_reporting"],
+        "rationale": "Wartime spending since 2022 partially classified. SIPRI revises upward. Confidence downgrade only.",
+        "sources": []
+      }
+    },
+    "SAU": {
+      "military_spending_abs": {
+        "corrected_value": null,
+        "c_source": 0.65,
+        "bias_classes": ["self_reporting"],
+        "rationale": "Saudi defense procurement often off-budget. SIPRI methodology note.",
+        "sources": []
+      }
+    }
+  },
+  "derived_metrics": {
+    "_doc": "Ordered list of derived metrics for the Re-Derive step. Process sequentially (DAG order: base metrics first).",
+    "formulas": [
+      {
+        "property": "gdp_per_capita",
+        "formula": "gdp_nominal / population",
+        "depends_on": ["gdp_nominal", "population"],
+        "c_rule": "min(gdp_nominal_c, population_c)"
+      },
+      {
+        "property": "military_spending_pct_gdp",
+        "formula": "military_spending_abs / gdp_nominal * 100",
+        "depends_on": ["military_spending_abs", "gdp_nominal"],
+        "c_rule": "min(military_spending_abs_c, gdp_nominal_c)"
+      },
+      {
+        "property": "gdp_10yr_cagr",
+        "formula": "(gdp_nominal_latest / gdp_nominal_10yr_ago) ^ (1/10) - 1",
+        "depends_on": ["gdp_nominal"],
+        "c_rule": "gdp_nominal_c"
+      }
+    ]
+  }
+}
