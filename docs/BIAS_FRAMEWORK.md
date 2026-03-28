@@ -108,6 +108,9 @@ CREATE (:BiasReport {
 | `self_reporting` | States report their own data (incentive to distort) | World Bank (GDP), SIPRI (defense spending), FAO |
 | `temporal_lag` | Data is years old, conditions have changed | Polity5 (ends 2018), many WB indicators |
 | `aggregation_distortion` | Aggregation hides regional/sub-national variation | National-level indices masking internal diversity |
+| `access_constraint` | Conflict zones too dangerous for reporters; systematic undercounting | ACLED/UCDP in Sudan, Gaza, Tigray vs. safe regions |
+| `linguistic_exclusion` | NLP underperforms on non-Western languages; events mischaracterized or missed | GDELT, ACLED (Pashto, Amharic, regional Chinese dialects) |
+| `proxy_fallacy` | Using GDP as welfare proxy erases informal economy; disaster cleanup = "growth" | World Bank GDP, all GDP-derived indices |
 
 ### 3.5 Correction Types
 

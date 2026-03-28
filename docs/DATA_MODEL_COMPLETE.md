@@ -364,40 +364,41 @@ Represents an alternative/critical data source used to challenge or supplement p
 }]->(BiasReport)
 ```
 
-### 3.8 Bias-Extended STATE_AT Properties
+### 3.8 STATE_AT — Hot-Path Design (Lean Edge)
 
-The STATE_AT relationship gains optional bias metadata per property:
+**Critical Design Decision (Gemini Deep Think 2026-03-28):** Strict Hot-Path / Cold-Path separation. STATE_AT carries ONLY numeric values + confidence floats. All textual bias metadata lives on Correction/BiasReport nodes (Cold Path, queried on demand by UI/agents).
 
 ```cypher
+// HOT PATH — queried by GSL Evaluator every tick (floats only, cache-friendly)
 (Nation)-[:STATE_AT {
-    // Standard properties
-    population: 1310000000,                      // corrected value used by game engine
+    population: 1310000000,       // corrected value (if correction exists) or raw
+    population_c: 0.55,           // confidence scalar → feeds GSL variance widening
     gdp_nominal: 17700000000000,
+    gdp_nominal_c: 0.85,
     stability_index: 65,
-
-    // Bias metadata (per property, optional — only where bias is documented)
-    population_raw: 1412000000,                  // original imported value
-    population_source: "UN_WPP_2024",
-    population_bias_class: "demographic_manipulation",
-    population_bias_severity: "high",
-    population_confidence: 0.55,                 // feeds into GSL Truth Value confidence
-    population_correction_id: "CORR-CHN-POP-001",
-
-    stability_index_raw: 72,
-    stability_index_source: "V-Dem_v14",
-    stability_index_bias_class: "expert_subjectivity",
-    stability_index_confidence: 0.70,
-
-    // Properties without documented bias carry default confidence
-    gdp_nominal_confidence: 0.85                 // default for WB self-reported data
+    stability_index_c: 0.70,
+    // ... ~100 values + ~100 confidence floats = ~200 keys total
 }]->(Tick)
+
+// COLD PATH — queried by UI, agents, Moltbook (text-heavy, on demand)
+(Nation)-[:HAS_CORRECTION]->(Correction {
+    property: "population",
+    raw_value: 1412000000,
+    corrected_value: 1310000000,
+    source: "UN_WPP_2024",
+    bias_classes: ["demographic_manipulation"],
+    rationale: "Yi Fuxian (2013): 90-130M overcount...",
+    ...
+})
 ```
 
-**Design Decision:** Bias metadata uses a `{property}_*` suffix convention rather than nested objects, because Neo4j properties are flat key-value pairs. This keeps everything on the same relationship without sub-nodes.
+**Rationale:** Neo4j serializes entire relationship property blocks. Reading `gdp_nominal` with 500 keys (including text metadata) forces serialization of all 500 properties. With ~200 float-only keys, the GSL evaluator reads sub-millisecond. Textual audit data is queried separately and only when needed.
+
+**Default confidence:** Properties without explicit corrections carry `{prop}_c: 0.85` (default). Override file `bias_overrides.json` sets reduced confidence for the top critical sources.
 
 ---
 
-## 4. Bias Taxonomy (11 Classes)
+## 4. Bias Taxonomy (14 Classes)
 
 | Bias Class | Description | Affected Sources |
 |-----------|-------------|-----------------|
@@ -412,6 +413,9 @@ The STATE_AT relationship gains optional bias metadata per property:
 | `self_reporting` | States report their own data (incentive to distort) | World Bank (GDP), SIPRI (defense spending), FAO |
 | `temporal_lag` | Data is years old, conditions have changed | Polity5 (ends 2018), many WB indicators |
 | `aggregation_distortion` | Aggregation hides regional/sub-national variation | National-level indices masking internal diversity |
+| `access_constraint` | Conflict zones too dangerous for reporters; systematic undercounting | ACLED/UCDP in Sudan, Gaza, Tigray vs. safe regions |
+| `linguistic_exclusion` | NLP underperforms on non-Western languages; events mischaracterized | GDELT, ACLED scraping of Pashto, Amharic, regional Chinese media |
+| `proxy_fallacy` | Using GDP as welfare proxy erases informal economy; disaster cleanup = "growth" | World Bank GDP, all GDP-derived indices |
 
 ---
 
@@ -514,30 +518,35 @@ Low-confidence data → noisier outcomes → simulation doesn't pretend to know 
 | 6 | TRADES includes friction | APOC pathfinding for sanction evasion |
 | 7 | Impute missing data, never null | Game engine math crashes on None |
 | 8 | Sanity bounds on all imports | 10M < GDP < 50T, mil_spend < GDP, pop > 1000 |
-| 9 | **Bias metadata via suffix convention** | `{prop}_source`, `{prop}_confidence`, `{prop}_bias_class` on STATE_AT |
+| 9 | **Hot/Cold separation** | STATE_AT carries only `{prop}` + `{prop}_c` (floats). All text metadata on Correction nodes (Cold Path). |
 | 10 | **Raw + corrected dual layer** | Original import preserved; corrections as separate Correction nodes |
 | 11 | **Confidence feeds GSL variance** | Bias-tagged properties get lower c → wider distribution in game rules |
 | 12 | **Entity perspectives are data** | SELF_REPORTS relationship stores how nations view their own numbers |
 | 13 | **Counter-sources supplement, not replace** | Airwars supplements ACLED; both are queryable |
 | 14 | **Community governance of corrections** | BiasReport → discussion → voting → apply/reject |
+| 15 | **Forward-only immutability** | Historical STATE_AT never retroactively modified. Mid-game corrections → Event delta at current tick. Retroactive only in ETL before T=0. |
+| 16 | **Confidence decomposition** | σ_epistemic (rule-authored base variance) × c_source (from DB). Formula: σ_eff = σ_epi × (1 + K(1-c_source)) |
+| 17 | **Weakest-link propagation** | Derived metrics: c_derived = min(c_input1, c_input2, ...) |
+| 18 | **Epistemic meritocracy** | Voting power ≠ 1:1. Scales with historical alignment to accepted CounterSources. Product Owner veto retained. |
+| 19 | **Bipartite Physics/Cognitive boundary** | GSL always uses corrected STATE_AT. Agents query SELF_REPORTS/BELIEVES (may diverge from ground truth). |
+| 20 | **No dynamic bias cascade** | Cascading biases evaluated by humans, assigned flat c_source. No runtime bias multiplication. |
 
 ---
 
-## 10. Open Questions for Review
+## 10. Open Questions (Status After Deep Think Review)
 
-1. **Suffix convention scalability:** With 100+ properties and bias metadata per property, STATE_AT relationships could have 300-500 keys. Is this performant in Neo4j, or should bias metadata move to separate `:BiasAnnotation` nodes linked per (entity, property, tick)?
-
-2. **Confidence vs. epistemic uncertainty:** The confidence parameter in GSL currently conflates two things: (a) data quality uncertainty (source reliability) and (b) epistemic uncertainty (we don't know what we don't know). Should these be separated into two distinct parameters?
-
-3. **Correction versioning:** When a correction is revised (new evidence), should the old correction be soft-deleted or maintained as a version chain? Currently `status: "reverted"` but no link to the superseding correction.
-
-4. **Entity perspective conflicts:** When China claims 1.41B population and Yi Fuxian estimates 1.31B, which value does the game engine use? Currently: corrected value (1.31B) for game mechanics, both values queryable. Is this the right default?
-
-5. **Bias auto-tagging granularity:** Should auto-tagging apply per-source (all Freedom House data gets `funding_dependency`) or per-property (only FH political_rights, not FH internet_freedom)?
-
-6. **Counter-source reliability:** Who validates counter-sources? Airwars is widely respected, but TeleSUR is Venezuelan state media. Should there be a reliability tier system for counter-sources?
-
-7. **GSL rule auditing:** When a GSL rule uses a bias-corrected value, should the rule evaluation log include the correction chain for full transparency?
+| # | Question | Status | Resolution |
+|---|----------|--------|------------|
+| 1 | Suffix convention scalability (300-500 keys) | ✅ RESOLVED | Hot/Cold separation. STATE_AT carries only value + `_c` floats (~200 keys). Text metadata on Correction nodes. |
+| 2 | Confidence vs. epistemic uncertainty | ✅ RESOLVED | Decomposed: σ_epistemic (rule-authored) × c_source (from DB). Formula: σ_eff = σ_epi × (1 + K(1-c_source)) |
+| 3 | Correction versioning | ⏳ DEFERRED | Soft-delete + superseding link. Low priority for Sprint 3 MVP (hardcoded overrides only). |
+| 4 | Entity perspective conflicts | ✅ RESOLVED | Physics layer uses corrected value. Cognitive layer (Belief Subgraph) uses entity self-reports. Both queryable. |
+| 5 | Bias auto-tagging granularity | ⏳ DEFERRED | Sprint 3 MVP uses hardcoded `bias_overrides.json` per-source. Per-property granularity deferred. |
+| 6 | Counter-source reliability tiers | ⏳ OPEN | Reliability field on CounterSource exists (`high/medium/low/contested`). Governance TBD. |
+| 7 | GSL rule auditing with correction chains | ⏳ DEFERRED | Deferred to Sprint 4+. Not needed until rules engine runs. |
+| 8 | Bias propagation through derived metrics | ✅ RESOLVED | Weakest-link: c_derived = min(c_inputs). |
+| 9 | Temporal correction handling | ✅ RESOLVED | Forward-only immutability. No retroactive recalculation. Corrections apply as Event deltas at current tick. |
+| 10 | Anti-brigading in community voting | ✅ RESOLVED (design) | Epistemic meritocracy + CounterSource gate + Product Owner veto. Implementation deferred. |
 
 ---
 
