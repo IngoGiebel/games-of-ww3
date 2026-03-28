@@ -1,0 +1,31 @@
+Sprint 3 Phase C — Applied to Neo4j 2026-03-28 14:30 CET
+
+SIPRI MILEX Consolidation:
+  - 49 nations: existing military_spending_abs, c=0.80
+  - 141 nations: imputed from 2% GDP (global average), c=0.50
+  - 190 nations: military_spending_pct_gdp computed
+  - 5 nations: no GDP data, no military spending
+
+Confidence Fields Applied (20 property types):
+  - gdp_nominal_c: 190 nations (0.85 default, 0.70 low-capacity, 0.70 CHN, 0.40 PRK)
+  - population_c: 195 nations (0.85 default, 0.70 low-capacity, 0.55 CHN)
+  - military_spending_abs_c: 190 nations (0.80 SIPRI, 0.50 imputed, 0.60 CHN, 0.65 RUS/SAU)
+  - stability_index_c: 109 nations (0.75 V-Dem, 0.60 contested: IND/TUR/HUN/POL/MEX/BRA)
+  - freedom_house_score_c: 109 nations (0.65)
+  - corruption_index_c: 109 nations (0.80)
+  - press_freedom_c: 109 nations (0.75 V-Dem, 0.60 contested)
+  - Plus: gdp_growth, gdp_per_capita, urbanization, internet_penetration, inflation_rate,
+    unemployment, gini, debt_to_gdp, forex_reserves, national_morale, war_weariness,
+    nuclear_warheads, manpower_active, manpower_reserve
+
+Entity Overrides Applied:
+  - CHN: population=1,310,000,000 (c=0.55), gdp_nominal_c=0.70, military_spending_abs_c=0.60
+  - PRK: gdp_nominal_c=0.40
+  - RUS: military_spending_abs_c=0.65
+  - SAU: military_spending_abs_c=0.65
+
+Re-Derive:
+  - gdp_per_capita recomputed for 190 nations (from corrected population)
+
+Trade Edges: 373 (320 TRADES_WITH + 53 TRADES) — exceeds 200+ target
+V-Dem Historical: 1376 STATE_AT edges with polyarchy across 172 nations
