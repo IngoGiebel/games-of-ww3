@@ -509,8 +509,8 @@ The Sprint 3 MVP uses a static JSON file (Git-managed) instead of dynamic Moltbo
 | 1 | Implement Double-Write Pattern: live state on Nation Node + monthly STATE_AT snapshot | High | Archon |
 | 2 | Add `{prop}_c` confidence fields to Nation Node + TRADES/BORDERS edges | High | Archon |
 | 3 | Add `:Correction` node type (with `valid_from_tick`, `valid_until_tick`) to schema | High | Archon |
-| 3b | Add `:Reference` node type (BibLaTeX-analog) + `:CITES`/`:CRITIQUES` relationships | High | Archon |
-| 3c | Import 54 bibliography sources from Section 4 as Reference nodes | High | Dione + Sentinel |
+| 3b | Add `:Reference` + `:ReferenceCategory` node types + `[:CITES]`/`[:CRITIQUES]`/`[:CATEGORIZED_AS]` | High | Archon |
+| 3c | Import 7 ReferenceCategory nodes + 54 Reference nodes from Section 4 + wire all edges | High | Dione + Sentinel |
 | 4 | Create `bias_overrides.json` with top 5 corrections | High | Dione |
 | 5 | Wire ETL: Normalize → Bias Tag → Correction Overlay → Re-Derive → Validate → Neo4j | High | Sentinel |
 | 6 | Historical Cypher batch with inline re-derivation | Medium | Sentinel |

@@ -308,15 +308,67 @@ Academic sources, reports, and publications that form the evidential basis for b
   url: null,
   isbn: null,
 
-  // GWW3-specific extensions
-  category: "democratic_deficit",          // democratic_deficit | data_source_critique | conflict_data |
-                                           // world_systems | demographic_reliability | international_law |
-                                           // counter_hegemonic_source
+  // GWW3-specific extensions (category is a relationship, not a property — see ReferenceCategory)
   key_contribution: "1,779 policy issues: average citizens have near-zero influence on policy",
   language: "en",                          // ISO 639-1
   open_access: true,                       // can anyone read it?
   reliability: "high"                      // high | medium | low | contested
 })
+```
+
+#### ReferenceCategory
+Thematic classification of references. Each Reference can belong to multiple categories (n:n).
+```cypher
+(:ReferenceCategory {
+  id: "democratic_deficit",                     // PRIMARY KEY (slug)
+  name: "Democratic Deficit & Elite Control",   // display name
+  description: "Studies demonstrating that representative democracies
+                systematically fail to represent citizen preferences,
+                and that political power concentrates in economic elites.",
+  section: "4.1"                                // BIAS_FRAMEWORK.md section reference
+})
+```
+
+**Pre-seeded categories (from BIAS_FRAMEWORK.md Section 4):**
+
+| id | name | Section | # Sources |
+|----|------|---------|-----------|
+| `democratic_deficit` | Democratic Deficit & Elite Control | 4.1 | 10 |
+| `data_source_critique` | Data Source Bias Critique | 4.2 | 6 |
+| `conflict_data` | Conflict Data & State Violence | 4.3 | 8 |
+| `world_systems` | World-Systems & Structural Critique | 4.4 | 7 |
+| `demographic_reliability` | Demographic Data Reliability | 4.5 | 5 |
+| `international_law` | International Law & State Terrorism | 4.6 | 6 |
+| `counter_hegemonic_source` | Alternative & Counter-Hegemonic Data Sources | 4.7 | 12 |
+
+**Relationship:**
+```cypher
+// n:n — a reference can belong to multiple categories
+(Reference)-[:CATEGORIZED_AS]->(ReferenceCategory)
+
+// Examples:
+(:Reference {cite_key: "Chomsky_Herman_1988"})-[:CATEGORIZED_AS]->(:ReferenceCategory {id: "democratic_deficit"})
+(:Reference {cite_key: "Chomsky_Herman_1988"})-[:CATEGORIZED_AS]->(:ReferenceCategory {id: "data_source_critique"})
+// ^ Manufacturing Consent is both a democratic deficit AND a data source critique work
+```
+
+**Graph queries enabled:**
+```cypher
+// All references in a category
+MATCH (r:Reference)-[:CATEGORIZED_AS]->(cat:ReferenceCategory {id: "conflict_data"})
+RETURN r.cite_key, r.author, r.year ORDER BY r.year
+
+// Which categories does a reference belong to?
+MATCH (r:Reference {cite_key: "Chomsky_Herman_1988"})-[:CATEGORIZED_AS]->(cat)
+RETURN cat.name
+
+// All categories with their reference count
+MATCH (cat:ReferenceCategory)<-[:CATEGORIZED_AS]-(r:Reference)
+RETURN cat.name, count(r) AS sources ORDER BY sources DESC
+
+// Full evidential chain: DataSource ← critiqued by References in category
+MATCH (ds:DataSource {id: "acled"})<-[:CRITIQUES]-(r:Reference)-[:CATEGORIZED_AS]->(cat)
+RETURN cat.name, r.cite_key, r.key_contribution
 ```
 
 **BibLaTeX entry_type mapping:**
@@ -412,20 +464,10 @@ Edge properties derived from biased sources (e.g., UN Comtrade → TRADES.volume
 }]->(BiasReport)
 
 // References form the evidential backbone
-(BiasReport)-[:CITES]->(Reference)          // BiasReport is supported by these references
-(Correction)-[:CITES]->(Reference)          // Correction rationale cites these references
-(Reference)-[:CRITIQUES]->(DataSource)      // Reference critiques a data source's methodology
-(Reference)-[:CATEGORY_OF {                 // Reference belongs to a bibliography category
-    category: "democratic_deficit"
-}]->(Reference)                             // (self-referential for category grouping — OR use a label)
-```
-
-**Alternative for categories:** Rather than self-referential edges, use Neo4j labels:
-```cypher
-// Each Reference can have category labels
-(:Reference:DemocraticDeficit { cite_key: "Gilens_Page_2014", ... })
-(:Reference:ConflictData { cite_key: "Airwars_2014", ... })
-(:Reference:WorldSystems { cite_key: "Wallerstein_2004", ... })
+(BiasReport)-[:CITES]->(Reference)              // BiasReport is supported by these references
+(Correction)-[:CITES]->(Reference)              // Correction rationale cites these references
+(Reference)-[:CRITIQUES]->(DataSource)          // Reference critiques a data source's methodology
+(Reference)-[:CATEGORIZED_AS]->(ReferenceCategory)  // n:n thematic classification
 ```
 ```
 
@@ -643,6 +685,7 @@ China.population ⤳ CONVERGE(target=1_310_000_000, rate=0.05)  ⟨1.00, 1.00⟩
 | correction_id | Correction | id |
 | countersource_id | CounterSource | id |
 | reference_cite_key | Reference | cite_key |
+| refcategory_id | ReferenceCategory | id |
 
 **Composite Indexes:**
 | Index | Label | Properties | Purpose |
@@ -653,7 +696,7 @@ China.population ⤳ CONVERGE(target=1_310_000_000, rate=0.05)  ⟨1.00, 1.00⟩
 | bias_by_source | BiasReport | (target_source, status) | Bias lookup per source |
 | correction_by_entity | Correction | (target_entity, status) | Corrections per nation |
 | correction_by_property | Correction | (target_property, status) | Corrections per property |
-| reference_by_category | Reference | (category, year) | Bibliography by category + year |
+| reference_by_year | Reference | (year) | Bibliography chronological queries |
 
 ---
 
@@ -684,7 +727,7 @@ China.population ⤳ CONVERGE(target=1_310_000_000, rate=0.05)  ⟨1.00, 1.00⟩
 | 21 | **Double-Write Pattern** | Live state on Nation Node (mutable, GSL reads/writes). Monthly STATE_AT edge for immutable history. GSL queries `B.gdp_nominal` from Node, not edge. |
 | 22 | **Edge confidence fields** | TRADES, BORDERS, PRODUCES, CONSUMES edges carry `{prop}_c` fields for biased inter-entity data (e.g., `volume_c`, `friction_c`). |
 | 23 | **Re-Derive after correction** | ETL Re-Derive step is mandatory. Historical Cypher batch corrections must include inline re-derivation. Derived metrics list in `bias_overrides.json`. |
-| 24 | **References as graph nodes** | All bibliography sources stored as `:Reference` nodes (BibLaTeX-analog). Connected via `:CITES` to BiasReports/Corrections, via `:CRITIQUES` to DataSources. Enables graph queries: "which sources critique Freedom House?" |
+| 24 | **References as graph nodes** | All bibliography sources as `:Reference` nodes (BibLaTeX-analog), classified via n:n `[:CATEGORIZED_AS]→(:ReferenceCategory)`. Connected via `:CITES` to BiasReports/Corrections, via `:CRITIQUES` to DataSources. |
 
 ---
 
