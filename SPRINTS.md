@@ -110,7 +110,7 @@
 
 ---
 
-## Sprint 3: Complete Data Model + Bias Infrastructure ⏳ NEXT
+## Sprint 3: Complete Data Model + Bias Infrastructure ✅ COMPLETE
 
 **Goal:** Finalize the complete data model (including bias/correction infrastructure), fill data gaps, and prepare the lean schema that the Rules Engine (Sprint 4) will consume.
 
@@ -167,6 +167,34 @@ Strict Hot-Path / Cold-Path separation. STATE_AT carries only values + confidenc
 - V-Dem historical loaded
 - Deep Think review of final schema (SCHEMA_V3) passed
 - DATA_MODEL_COMPLETE.md is the single source of truth
+
+---
+
+### Sprint 3 Final Stats (Neo4j)
+| Metric | Count |
+|--------|-------|
+| Total nodes | 1,772 |
+| Total relationships | 8,777 |
+| Reference nodes | 52 |
+| ReferenceCategory nodes | 7 |
+| CATEGORIZED_AS edges | 60 |
+| CRITIQUES edges | 7 |
+| DataSource nodes | 16 |
+| Nations with population_c | 195/195 |
+| Nations with gdp_nominal_c | 191/195 |
+| Nations with military_spending_abs | 190/195 |
+| TRADES + TRADES_WITH edges | 373 |
+| V-Dem STATE_AT edges | 1,376 |
+| CHN population | 1,310,000,000 (c=0.55) |
+
+### Sprint 3 Deliverables
+- `schema.py` v3 — 5 new node types, 8 new relationships, 5 constraints, 3 indexes
+- `bias_overrides.json` — 10 source defaults, 4 entity overrides, 3 derived metrics
+- `bias_tagger.py` — ETL bias tagging module
+- `rederive.py` — ETL re-derivation module
+- `etl_references.py` — 52 Reference + 7 ReferenceCategory import
+- All confidence fields deployed to Neo4j
+- All acceptance criteria passed (22/22)
 
 ---
 

@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import os
 
 from neo4j import AsyncGraphDatabase
 
@@ -19,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 NEO4J_URI = "bolt://localhost:7687"
 NEO4J_USER = "neo4j"
-NEO4J_PASSWORD = "gww3-dev"  # TODO: env var
+NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "gww3-dev-2026")
 
 # ──────────────────────────────────────────────
 # Reference Categories (7)
