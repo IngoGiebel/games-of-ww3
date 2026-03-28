@@ -127,6 +127,20 @@ CREATE (:BiasReport {
 
 ## 4. Critical Source Bibliography
 
+All sources below are stored as `:Reference` nodes in Neo4j (BibLaTeX-analog schema, see DATA_MODEL_COMPLETE.md). Each Reference is linked to the BiasReports and Corrections it supports via `[:CITES]` edges, and to DataSources it critiques via `[:CRITIQUES]` edges. The `cite_key` column is the primary key used in graph relationships and in `bias_overrides.json`.
+
+**Graph query example:**
+```cypher
+// Find all references that critique Freedom House
+MATCH (r:Reference)-[:CRITIQUES]->(ds:DataSource {id: "freedom-house"})
+RETURN r.cite_key, r.author, r.year, r.key_contribution
+ORDER BY r.year
+
+// Find all references cited by the China population correction
+MATCH (c:Correction {id: "CORR-CHN-POP-001"})-[:CITES]->(r:Reference)
+RETURN r.cite_key, r.title
+```
+
 ### 4.1 Democratic Deficit & Elite Control
 
 | # | Author(s) | Title | Year | Key Contribution | BibTeX Key |
@@ -495,6 +509,8 @@ The Sprint 3 MVP uses a static JSON file (Git-managed) instead of dynamic Moltbo
 | 1 | Implement Double-Write Pattern: live state on Nation Node + monthly STATE_AT snapshot | High | Archon |
 | 2 | Add `{prop}_c` confidence fields to Nation Node + TRADES/BORDERS edges | High | Archon |
 | 3 | Add `:Correction` node type (with `valid_from_tick`, `valid_until_tick`) to schema | High | Archon |
+| 3b | Add `:Reference` node type (BibLaTeX-analog) + `:CITES`/`:CRITIQUES` relationships | High | Archon |
+| 3c | Import 54 bibliography sources from Section 4 as Reference nodes | High | Dione + Sentinel |
 | 4 | Create `bias_overrides.json` with top 5 corrections | High | Dione |
 | 5 | Wire ETL: Normalize → Bias Tag → Correction Overlay → Re-Derive → Validate → Neo4j | High | Sentinel |
 | 6 | Historical Cypher batch with inline re-derivation | Medium | Sentinel |

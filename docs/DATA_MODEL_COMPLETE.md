@@ -285,6 +285,51 @@ Represents an alternative/critical data source used to challenge or supplement p
 })
 ```
 
+#### Reference (BibLaTeX-analog)
+Academic sources, reports, and publications that form the evidential basis for bias assessments and corrections. Schema mirrors BibLaTeX entry types and fields.
+```cypher
+(:Reference {
+  // Identity
+  cite_key: "Gilens_Page_2014",           // PRIMARY KEY (BibLaTeX cite key)
+  entry_type: "article",                   // article | book | incollection | report | online | misc
+
+  // Core BibLaTeX fields
+  author: "Gilens, Martin and Page, Benjamin I.",
+  title: "Testing Theories of American Politics: Elites, Interest Groups, and Average Citizens",
+  year: 2014,
+  journal: "Perspectives on Politics",     // for article
+  volume: "12",
+  number: "3",
+  pages: "564-581",
+  publisher: null,                         // for book
+  booktitle: null,                         // for incollection
+  institution: null,                       // for report (e.g., "UN Human Rights Council")
+  doi: "10.1017/S1537592714001595",
+  url: null,
+  isbn: null,
+
+  // GWW3-specific extensions
+  category: "democratic_deficit",          // democratic_deficit | data_source_critique | conflict_data |
+                                           // world_systems | demographic_reliability | international_law |
+                                           // counter_hegemonic_source
+  key_contribution: "1,779 policy issues: average citizens have near-zero influence on policy",
+  language: "en",                          // ISO 639-1
+  open_access: true,                       // can anyone read it?
+  reliability: "high"                      // high | medium | low | contested
+})
+```
+
+**BibLaTeX entry_type mapping:**
+
+| entry_type | Use for | Example |
+|-----------|---------|---------|
+| `article` | Journal papers | Gilens & Page (2014) in Perspectives on Politics |
+| `book` | Monographs | Chomsky & Herman (1988), Piketty (2014) |
+| `incollection` | Book chapters | Quijano (2000) in edited volume |
+| `report` | Institutional reports | UN Special Rapporteur reports (Alston 2010, Emmerson 2013) |
+| `online` | Websites, databases, ongoing projects | Airwars, TBIJ Drone Wars, GDELT |
+| `misc` | Everything else | News investigations, datasets |
+
 ---
 
 ## 3. Relationship Types
@@ -365,6 +410,23 @@ Edge properties derived from biased sources (e.g., UN Comtrade → TRADES.volume
     source: "National Bureau of Statistics census 2024",
     plausibility: "contested"   // accepted | contested | rejected
 }]->(BiasReport)
+
+// References form the evidential backbone
+(BiasReport)-[:CITES]->(Reference)          // BiasReport is supported by these references
+(Correction)-[:CITES]->(Reference)          // Correction rationale cites these references
+(Reference)-[:CRITIQUES]->(DataSource)      // Reference critiques a data source's methodology
+(Reference)-[:CATEGORY_OF {                 // Reference belongs to a bibliography category
+    category: "democratic_deficit"
+}]->(Reference)                             // (self-referential for category grouping — OR use a label)
+```
+
+**Alternative for categories:** Rather than self-referential edges, use Neo4j labels:
+```cypher
+// Each Reference can have category labels
+(:Reference:DemocraticDeficit { cite_key: "Gilens_Page_2014", ... })
+(:Reference:ConflictData { cite_key: "Airwars_2014", ... })
+(:Reference:WorldSystems { cite_key: "Wallerstein_2004", ... })
+```
 ```
 
 ### 3.8 Double-Write Pattern — Live Node + Historical Edge
@@ -580,6 +642,7 @@ China.population ⤳ CONVERGE(target=1_310_000_000, rate=0.05)  ⟨1.00, 1.00⟩
 | biasreport_id | BiasReport | id |
 | correction_id | Correction | id |
 | countersource_id | CounterSource | id |
+| reference_cite_key | Reference | cite_key |
 
 **Composite Indexes:**
 | Index | Label | Properties | Purpose |
@@ -590,6 +653,7 @@ China.population ⤳ CONVERGE(target=1_310_000_000, rate=0.05)  ⟨1.00, 1.00⟩
 | bias_by_source | BiasReport | (target_source, status) | Bias lookup per source |
 | correction_by_entity | Correction | (target_entity, status) | Corrections per nation |
 | correction_by_property | Correction | (target_property, status) | Corrections per property |
+| reference_by_category | Reference | (category, year) | Bibliography by category + year |
 
 ---
 
@@ -620,6 +684,7 @@ China.population ⤳ CONVERGE(target=1_310_000_000, rate=0.05)  ⟨1.00, 1.00⟩
 | 21 | **Double-Write Pattern** | Live state on Nation Node (mutable, GSL reads/writes). Monthly STATE_AT edge for immutable history. GSL queries `B.gdp_nominal` from Node, not edge. |
 | 22 | **Edge confidence fields** | TRADES, BORDERS, PRODUCES, CONSUMES edges carry `{prop}_c` fields for biased inter-entity data (e.g., `volume_c`, `friction_c`). |
 | 23 | **Re-Derive after correction** | ETL Re-Derive step is mandatory. Historical Cypher batch corrections must include inline re-derivation. Derived metrics list in `bias_overrides.json`. |
+| 24 | **References as graph nodes** | All bibliography sources stored as `:Reference` nodes (BibLaTeX-analog). Connected via `:CITES` to BiasReports/Corrections, via `:CRITIQUES` to DataSources. Enables graph queries: "which sources critique Freedom House?" |
 
 ---
 

@@ -123,7 +123,9 @@ Strict Hot-Path / Cold-Path separation. STATE_AT carries only values + confidenc
 - [ ] Strip all textual bias metadata from STATE_AT design
 - [ ] Add `{prop}_c` (confidence float) fields to STATE_AT for all properties
 - [ ] Define `:BiasReport`, `:Correction`, `:CounterSource` node types in schema.py
-- [ ] Define new relationships: `HAS_BIAS`, `HAS_CORRECTION`, `GENERATED`, `BASED_ON`, `SUPPLEMENTS`, `SELF_REPORTS`
+- [ ] Define new relationships: `HAS_BIAS`, `HAS_CORRECTION`, `GENERATED`, `BASED_ON`, `SUPPLEMENTS`, `SELF_REPORTS`, `CITES`, `CRITIQUES`
+- [ ] Add `:Reference` node type (BibLaTeX-analog) to schema
+- [ ] Import 54 bibliography sources from BIAS_FRAMEWORK.md Section 4 as Reference nodes
 - [ ] Add constraints/indexes for new node types
 
 ### 3.2 Bias Infrastructure MVP
