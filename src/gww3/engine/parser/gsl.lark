@@ -1,0 +1,178 @@
+// ═══════════════════════════════════════════════════════════════
+// GSL (GWW3 Symbolic Logic) — Lark EBNF Grammar v1
+// ═══════════════════════════════════════════════════════════════
+//
+// Reference: docs/RULE_ENGINE_CONCEPT.md
+// Parser: Lark (Earley, indentation-aware)
+//
+// Design decisions:
+//   - MATCH bodies are captured as RAW STRINGS (passed to Neo4j driver)
+//   - Indentation-based nesting (Python-style via lark.indenter)
+//   - Unicode operators: ∧ ∨ ¬ ⟹ × ⤳
+//   - Truth Values: ⟨p, c⟩
+//   - Distributions: 𝒩 𝒰 ℬ 𝒫 ℰ 𝐿𝑁 𝛽
+//   - MATCH vs IF strict separation
+
+// ──────────────────────────────────────────────
+// Top-Level Rule Structure
+// ──────────────────────────────────────────────
+
+start: rule_header? (match_block | let_stmt | if_else | then_block | else_block | delayed_block | note_line | _NL)*
+
+rule_header: RULE_DELIM _NL (header_line _NL)* RULE_DELIM _NL
+header_line: /[^\n═]+/
+
+// ──────────────────────────────────────────────
+// MATCH — Raw Cypher Patterns
+// ──────────────────────────────────────────────
+
+match_block: MATCH_LINE _NL
+
+// Cypher patterns are captured as raw text — we don't parse Cypher in Lark.
+// The entire MATCH line (keyword + pattern) is a single terminal.
+MATCH_LINE.2: /MATCH [^\n]+/
+INLINE_CYPHER: /\([^\n]+/
+
+// ──────────────────────────────────────────────
+// LET — Variable Binding
+// ──────────────────────────────────────────────
+
+let_stmt: "LET" NAME "=" expr _NL              -> let_deferred
+        | "LET" NAME "~" expr _NL              -> let_sample
+        | "LET" NAME "=" "MIN" "(" name_list ")" _NL  -> let_min
+
+name_list: NAME ("," NAME)*
+
+// ──────────────────────────────────────────────
+// IF / THEN / ELSE — Condition & Effects
+// ──────────────────────────────────────────────
+
+if_else: "IF" expr _NL _INDENT body _DEDENT ("ELSE" _NL _INDENT body _DEDENT)?
+
+then_block: "THEN" _NL _INDENT effect_list _DEDENT
+else_block: "ELSE" _NL _INDENT effect_list _DEDENT
+
+body: (let_stmt | if_else | then_block | else_block | effect_stmt | match_block | note_line | _NL)*
+effect_list: (effect_stmt | let_stmt | if_else | match_block | note_line | _NL)*
+
+// ──────────────────────────────────────────────
+// DELAYED — Deferred Effects
+// ──────────────────────────────────────────────
+
+delayed_block: "DELAYED" "(" INT "ticks" ")" _NL _INDENT effect_list _DEDENT
+
+// ──────────────────────────────────────────────
+// Effects (THEN/ELSE body statements)
+// ──────────────────────────────────────────────
+
+effect_stmt: target_prop "+=" expr truth_value? _NL           -> effect_add
+           | target_prop "-=" expr truth_value? _NL           -> effect_sub
+           | target_prop "×=" expr truth_value? _NL           -> effect_mod
+           | target_prop "*=" expr truth_value? _NL           -> effect_mod_ascii
+           | target_prop "=" expr truth_value? _NL            -> effect_set
+           | target_prop "⤳" "CONVERGE" "(" converge_args ")" truth_value? _NL -> effect_converge
+           | target_prop "EFFECT" "×=" expr _NL               -> effect_modifier
+           | target_prop "EFFECT" "*=" expr _NL               -> effect_modifier_ascii
+           | "CREATE" INLINE_CYPHER truth_value? _NL           -> graph_create
+           | "DELETE" NAME truth_value? _NL                   -> graph_delete
+
+converge_args: "target" "=" expr "," "rate" "=" expr
+
+target_prop: PROP_ACCESS                // e.g., B.gdp_nominal
+
+// ──────────────────────────────────────────────
+// Truth Values ⟨p, c⟩
+// ──────────────────────────────────────────────
+
+truth_value: "⟨" expr "," expr "⟩"
+           | "<" expr "," expr ">"      // ASCII fallback
+
+// ──────────────────────────────────────────────
+// Expressions
+// ──────────────────────────────────────────────
+
+?expr: or_expr
+
+?or_expr: and_expr (OR_OP and_expr)*
+OR_OP: "∨" | "||"
+
+?and_expr: not_expr (AND_OP not_expr)*
+AND_OP: "∧" | "&&"
+
+?not_expr: "¬" not_expr                -> negation
+         | comparison
+
+?comparison: add_expr (comp_op add_expr)?
+
+comp_op: ">" | "<" | ">=" | "≥" | "<=" | "≤" | "==" | "!="
+
+?add_expr: mul_expr (("+"|"-") mul_expr)*
+
+?mul_expr: unary_expr (("*"|"×"|"/") unary_expr)*
+
+?unary_expr: "-" atom                  -> neg
+           | atom "~"                  -> sample_postfix
+           | atom
+
+?atom: NUMBER                          -> number
+     | INT                             -> integer
+     | PROP_ACCESS                     -> prop_access
+     | NAME                            -> var_ref
+     | dist_call
+     | "CLAMP" "(" expr "," expr "," expr ")"  -> clamp
+     | "MIN" "(" expr "," expr ")"     -> min_func
+     | "MAX" "(" expr "," expr ")"     -> max_func
+     | "CURRENT_TICK"                  -> current_tick
+     | "(" expr ")"                    -> group
+     | "true"                          -> bool_true
+     | "false"                         -> bool_false
+
+// ──────────────────────────────────────────────
+// Distributions
+// ──────────────────────────────────────────────
+
+dist_call: DIST_NORMAL "(" expr "," expr ")"     -> dist_normal
+         | DIST_UNIFORM "(" expr "," expr ")"     -> dist_uniform
+         | DIST_BERNOULLI "(" expr ")"             -> dist_bernoulli
+         | DIST_POISSON "(" expr ")"               -> dist_poisson
+         | DIST_EXPONENTIAL "(" expr ")"           -> dist_exponential
+         | DIST_LOGNORMAL "(" expr "," expr ")"    -> dist_lognormal
+         | DIST_BETA "(" expr "," expr ")"         -> dist_beta
+
+DIST_NORMAL: "𝒩" | "N"
+DIST_UNIFORM: "𝒰" | "U"
+DIST_BERNOULLI: "ℬ" | "Bernoulli"
+DIST_POISSON: "𝒫" | "Poisson"
+DIST_EXPONENTIAL: "ℰ" | "Exp"
+DIST_LOGNORMAL: "𝐿𝑁" | "LN"
+DIST_BETA: "𝛽" | "Beta"
+
+// ──────────────────────────────────────────────
+// Terminals
+// ──────────────────────────────────────────────
+
+RULE_DELIM: /═{3,}/
+
+// Numbers: support underscores (1_000_000), scientific notation (5e9), negative
+NUMBER: /[\-]?[0-9][0-9_]*(\.[0-9_]+)?([eE][\-+]?[0-9]+)?/
+INT: /[0-9][0-9_]*/
+
+// Property access: Node.property (single terminal to avoid dot ambiguity)
+PROP_ACCESS.2: /[a-zA-Z_][a-zA-Z0-9_]*\.[a-zA-Z_][a-zA-Z0-9_]*/
+
+// Names: identifiers (alphanumeric + underscore), also allow subscript chars
+NAME: /[a-zA-Z_α-ωΑ-Ω][a-zA-Z0-9_ₐ-ₜ]*/
+
+// Comments
+COMMENT: "#" /[^\n]*/
+%ignore COMMENT
+
+// Whitespace handling  
+%import common.WS_INLINE
+%ignore WS_INLINE
+%declare _INDENT _DEDENT
+
+// NOTE line (rule metadata)
+note_line: "NOTE:" /[^\n]+/ _NL
+
+_NL: /(\r?\n[\t ]*)+/
